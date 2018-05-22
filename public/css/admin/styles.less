@@ -987,3 +987,44 @@ h1.page-header {
 .attachment:hover span{
     display: block;
 }
+
+//huyue
+.pu(@size,@color){
+  font-size:@size;
+  color:@color;
+  text-align: center;
+  display: block;
+}
+.in_box{
+  margin-top: 20px;
+  .in_pry1_item{
+    padding: 20px 0;
+    cursor: pointer;
+    u{
+      .pu(54px,#0099ff);
+    }
+    p{
+      .pu(20px,#333);
+    }
+  }
+  .in_box_item_a{
+    margin-left: 20px;
+    display: inline-block;
+  }
+  .alert{
+    background: #fff;
+  }
+  .message_list{
+    p{
+      float: left;
+      margin-left: 20px;
+    }
+    .message_list_p{
+      line-height: 34px;
+      color: #333333;
+    }
+    .btn-fff{
+      background: #fff;
+    }
+  }
+}

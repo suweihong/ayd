@@ -25,7 +25,7 @@ Route::any('login','LoginController@login')->name('login');
 Route::get('logout','LoginController@logout');
 
 
-Route::get('/','LoginController@index')->middleware('auth');//首页
+Route::get('/','LoginController@index');//首页
 Route::resource('advertisements','AdvertisementController'); //广告
 Route::resource('bills','BillController');//账单
 Route::resource('complaints','ComplaintController');//反馈
