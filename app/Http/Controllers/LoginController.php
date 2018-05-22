@@ -62,7 +62,7 @@ class LoginController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $last_time = $user->last_time;
-        return view('index',compact('last_time'));
+        // $last_time = $user->last_time;
+        return view('index');
     }
 }
