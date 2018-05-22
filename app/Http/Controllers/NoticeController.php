@@ -13,7 +13,7 @@ class NoticeController extends Controller
      */
     public function index()
     {
-        //
+        dump(66);
     }
 
     /**

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Forms</title>
+<title>登录</title>
 
 <link href="css/admin/bootstrap.min.css" rel="stylesheet">
 <link href="css/admin/datepicker3.css" rel="stylesheet">
@@ -51,7 +51,7 @@
 								</label> -->
 							</div>
 							<!-- <a href="" class="btn btn-primary">登录</a> -->
-							<button class="btn btn-primary"  type="submit">登录</button>
+							<button class="btn btn-primary"  type="submit" >登录</button>
 						</fieldset>
 					</form>
 				</div>

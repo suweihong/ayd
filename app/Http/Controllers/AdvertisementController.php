@@ -17,7 +17,7 @@ class AdvertisementController extends Controller
     public function index()
     {
         $advertisements = Advertisement::orderBy('created_at','desc')->get();
-        return $advertisements;
+        return view('advertisements');
     }
 
     /**

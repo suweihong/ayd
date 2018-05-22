@@ -13,7 +13,7 @@ class BillController extends Controller
      */
     public function index()
     {
-        //
+        dump(44);
     }
 
     /**

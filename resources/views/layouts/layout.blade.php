@@ -32,7 +32,7 @@
 				<a class="navbar-brand" href="/"><span>奥运动管理员平台</span></a>
 				<ul class="user-menu">
 					<li class="dropdown pull-right">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"></svg> 上次登录时间 {{ $last_time }} </a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"></svg> 上次登录：{{ $last_time }} </a>
 						<a href="/logout" class="dropdown-toggle" ><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> 退出登录</a>
 					</li>
 				</ul>
@@ -56,27 +56,32 @@
 				</a>
 				<ul class="children collapse" id="sub-item-1">
 					<li>
-						<a class="" href="#">
+						<a class="" href="{{route('advertisements.index')}}">
 							<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> 广告管理
 						</a>
 					</li>
 					<li>
-						<a class="" href="#">
+						<a class="" href="{{ route('types.index')}}">
 							<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> 运动品类
 						</a>
 					</li>
 					<li>
-						<a class="" href="#">
+						<a class="" href="{{ route('stores.index')}}">
 							<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> 商家管理
 						</a>
 					</li>
 				</ul>
 			</li>
 			<li class="parent ">
-				<a href="#">
+				<a href="">
 					<span data-toggle="collapse" href="#sub-item-2"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> 订单查询 
 				</a>
 				<ul class="children collapse" id="sub-item-2">
+					<li>
+						<a class="" href="{{route('orders.index')}}">
+							<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> 所有订单
+						</a>
+					</li>
 					<li>
 						<a class="" href="#">
 							<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> 按商家
@@ -90,7 +95,7 @@
 				</ul>
 			</li>
 			<li class="parent ">
-				<a href="#">
+				<a href="{{ route('bills.index')}}">
 					<span data-toggle="collapse" href="#sub-item-3"><svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg></span> 财务对账 
 				</a>
 			</li>
@@ -100,13 +105,18 @@
 				</a>
 				<ul class="children collapse" id="sub-item-4">
 					<li>
-						<a class="" href="#">
+						<a class="" href="{{route('messages.index')}}">
 							<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> 商家反馈
 						</a>
 					</li>
 					<li>
-						<a class="" href="#">
+						<a class="" href="{{ route('messages.index')}}">
 							<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> 用户投诉
+						</a>
+					</li>
+					<li>
+						<a class="" href="{{ route('notices.index')}}">
+							<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> 公告
 						</a>
 					</li>
 				</ul>
@@ -122,7 +132,8 @@
 	</div><!--/.sidebar-->
 		
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-		@yield('content');
+		@yield('content')
+		
 	
 	</div><!--/.main-->			
 	

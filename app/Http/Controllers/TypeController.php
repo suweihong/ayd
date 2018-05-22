@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Type;
+
 class TypeController extends Controller
 {
     /**
@@ -13,7 +15,7 @@ class TypeController extends Controller
      */
     public function index()
     {
-        //
+        $types = Type::all();
     }
 
     /**
@@ -23,7 +25,7 @@ class TypeController extends Controller
      */
     public function create()
     {
-        //
+        dump(333);
     }
 
     /**
