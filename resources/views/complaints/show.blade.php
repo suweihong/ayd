@@ -4,20 +4,20 @@
 
 	<div class="row">
 		@include('_messages')
-			
-			<div class="col-lg-12">
-				<h2>{{$complaint->store->title}}</h2>
-				<h3>反馈类型：{{$complaint->kind->name}}</h3>
-				<h3>反馈内容：{{$complaint->content}}</h3>
-			</div>
-			<div class="col-md-6">
-				<div class="panel panel-teal">
-					<div class="panel-heading dark-overlay">Teal Panel</div>
-					<div class="panel-body">
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut ante in sapien blandit luctus sed ut lacus. Phasellus urna est, faucibus nec ultrices placerat, feugiat et ligula. Donec vestibulum magna a dui pharetra molestie. Fusce et dui urna.</p>
-					</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<h3 class="page-header">商家反馈</h3>
 				</div>
-			</div><!--/.col-->
+			</div><!--/.row-->
+
+			<div class="col-lg-12">
+				<h3><font color="#c2c2c2">反馈商家：{{$complaint->store->title}}</font></h3>
+				<h3><font color="#c2c2c2">反馈类型：{{$complaint->kind->name}}</font></h3>
+				<h3><font color="#c2c2c2">反馈内容：{{$complaint->content}}</font></h3>
+			</div>
+
+			
+			
 	</div>
 
 @stop
