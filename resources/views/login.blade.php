@@ -20,15 +20,7 @@
 	
 	<div class="row">
 @include('_messages')
-<!-- 	@foreach (['danger', 'warning', 'success', 'info'] as $msg)
-  @if(session()->has($msg))
-    <div class="flash-message">
-      <p class="alert alert-{{ $msg }}">
-        {{ session()->get($msg) }}
-      </p>
-    </div>
-  @endif
-@endforeach -->
+
 
 
 		<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">

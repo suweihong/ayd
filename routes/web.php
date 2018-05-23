@@ -28,7 +28,7 @@ Route::get('logout','LoginController@logout');
 Route::get('/','LoginController@index');//首页
 Route::resource('advertisements','AdvertisementController'); //广告
 Route::resource('bills','BillController');//账单
-Route::resource('complaints','ComplaintController');//反馈
+Route::resource('types/{types}/complaints','ComplaintController');//反馈
 Route::resource('messages','MessageController');//私信
 Route::resource('notices','NoticeController');//公告
 Route::resource('orders','OrderController');//订单

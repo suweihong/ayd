@@ -29,6 +29,7 @@ class LoginController extends Controller
                   $user->this_time = $this_time;
                   $user->save();
 
+
                    session()->flash('success','登录成功');
                     return redirect('/');
             }else{
@@ -62,7 +63,9 @@ class LoginController extends Controller
     public function index()
     {
         $user = Auth::user();
-        // $last_time = $user->last_time;
+        $last_time = $user->last_time;
+        session(['last_time' => $last_time]);
+
         return view('index');
     }
 }

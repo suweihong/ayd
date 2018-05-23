@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Complaint;
+
 class ComplaintController extends Controller
 {
     /**
@@ -11,9 +13,14 @@ class ComplaintController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($type)
     {
-        //
+       if($type == 1){
+        $complaints = Complaint::where('client_id',null)->paginate(10);
+       }else{
+        $complaints = Complaint::where('mp_user_id',null)->paginate(10);
+       }
+       return view('complaints.index',compact('complaints','type'));
     }
 
     /**
@@ -45,7 +52,8 @@ class ComplaintController extends Controller
      */
     public function show($id)
     {
-        //
+        $complaint = Complaint::find($id);
+        return view('complaints.show',compact('complaint'));
     }
 
     /**

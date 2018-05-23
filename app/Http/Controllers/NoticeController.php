@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Message;
+
 class NoticeController extends Controller
 {
     /**
@@ -13,7 +15,8 @@ class NoticeController extends Controller
      */
     public function index()
     {
-        dump(66);
+        $notices = Message::where('mp_user_id','0')->paginate(10);
+        return view('notice.index',compact('notices'));
     }
 
     /**
@@ -23,7 +26,7 @@ class NoticeController extends Controller
      */
     public function create()
     {
-        //
+        return view('notice.create');
     }
 
     /**
@@ -34,7 +37,21 @@ class NoticeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       if( $request->title == '' || $request->content == '<p></p><p><br></p>' ){
+       
+            session()->flash('warning','请填写完整内容');
+            return redirect("/notices/create");
+       }else{
+            $notice = message::create([
+            'mp_user_id' => '0',
+            'title' => $request->title,
+            'content' => $request->content,
+        ]);
+            session()->flash('success','添加成功');
+            return redirect("/notices");
+
+       }
+
     }
 
     /**
@@ -45,7 +62,7 @@ class NoticeController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -54,9 +71,9 @@ class NoticeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Message $notice)
     {
-        //
+        return view('notice.edit',compact('notice'));
     }
 
     /**
@@ -66,9 +83,23 @@ class NoticeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Message $notice)
     {
-        //
+
+        if( $request->title == '' || $request->content == '<p></p><p><br></p>' ){
+                
+            session()->flash('warning','请填写完整内容');
+            return redirect("/notices/".$notice->id."/edit");
+       }else{
+            $notice = $notice->update([
+        
+            'title' => $request->title,
+            'content' => $request->content,
+        ]);
+            session()->flash('success','添加成功');
+            return redirect("/notices");
+
+       }
     }
 
     /**
@@ -77,8 +108,11 @@ class NoticeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Message $notice)
     {
-        //
+        dd(55555);
+        $notice -> delete();
+        session()->flash('success','删除成功');
+        return 1;
     }
 }

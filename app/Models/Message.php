@@ -10,6 +10,8 @@ class Message extends Model
 {
     use SoftDeletes;
 
+     protected $fillable =['mp_user_id','title','content'];
+
     //私信所属商户
     public function mp_user()
     {

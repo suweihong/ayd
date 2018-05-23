@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Complaint extends Model
 {
 		use SoftDeletes;
+        protected $fillable = ['kind_id','store_id','client_id','mp_user_id','check_id','environment','service','average'];
 
     /**
      * 该投诉所属用户。（反向关联）

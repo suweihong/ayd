@@ -1,21 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>@yield('title')</title>
-
-<link href="css/admin/bootstrap.min.css" rel="stylesheet">
-<link href="css/admin/datepicker3.css" rel="stylesheet">
-<link href="css/admin/styles.css" rel="stylesheet">
+	{!! we_css() !!}
+    {!! we_js() !!}
+<link href="/css/admin/bootstrap.min.css" rel="stylesheet">
+<link href="/css/admin/datepicker3.css" rel="stylesheet">
+<link href="/css/admin/styles.css" rel="stylesheet">
 
 <!--Icons-->
-<script src="js/admin/lumino.glyphs.js"></script>
+<script src="/js/admin/lumino.glyphs.js"></script>
 
 <!--[if lt IE 9]>
 <script src="js/admin/html5shiv.js"></script>
 <script src="js/admin/respond.min.js"></script>
 <![endif]-->
+
+<script src="/js/admin/jquery-1.11.1.min.js"></script>
+<script src="/js/admin/bootstrap.min.js"></script>
+<script src="/js/admin/chart.min.js"></script>
+{{-- <script src="js/admin/chart-data.js"></script> --}}
+<script src="/js/admin/easypiechart.js"></script>
+{{-- <script src="js/admin/easypiechart-data.js"></script> --}}
+<script src="/js/admin/bootstrap-datepicker.js"></script>
 
 </head>
 
@@ -33,7 +42,7 @@
 				<ul class="user-menu">
 					<li class="dropdown pull-right">
 
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"></svg> 上次登录：{{ $last_time }} </a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"></svg> 上次登录： {{ Session::get('last_time') }}</a>
 
 					
 						<a href="/logout" class="dropdown-toggle" ><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> 退出登录</a>
@@ -108,12 +117,12 @@
 				</a>
 				<ul class="children collapse" id="sub-item-4">
 					<li>
-						<a class="" href="{{route('messages.index')}}">
+						<a class="" href="{{route('complaints.index',1)}}">
 							<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> 商家反馈
 						</a>
 					</li>
 					<li>
-						<a class="" href="{{ route('messages.index')}}">
+						<a class="" href="{{ route('complaints.index',2)}}">
 							<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> 用户投诉
 						</a>
 					</li>
@@ -140,13 +149,7 @@
 	
 	</div><!--/.main-->			
 	
-	<script src="js/admin/jquery-1.11.1.min.js"></script>
-	<script src="js/admin/bootstrap.min.js"></script>
-	<script src="js/admin/chart.min.js"></script>
-	{{-- <script src="js/admin/chart-data.js"></script> --}}
-	<script src="js/admin/easypiechart.js"></script>
-	{{-- <script src="js/admin/easypiechart-data.js"></script> --}}
-	<script src="js/admin/bootstrap-datepicker.js"></script>
+	
 
 	<script>
 		// $('#calendar').datepicker({
