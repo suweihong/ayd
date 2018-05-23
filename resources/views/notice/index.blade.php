@@ -46,7 +46,7 @@
 				</div>
 			</div>
 	</div><!--/.row-->	
-		{{!! $notices->render() !!}}
+		{!! $notices->render() !!}
 
 </div><!--/.row-->
 

@@ -25,6 +25,9 @@
 						    <tr height='40'>
 						        <th  width='200' style="text-align:center;" >编号</th>
 						        <th data-field="id" data-sortable="true" width='200' style="text-align:center;">用户名</th>
+						        @if($type == 2)
+						        	<th width='200' style="text-align:center;">举报场馆</th>
+						        @endif
 						        <th data-field="name"  data-sortable="true" width='200' style="text-align:center;">类型</th>
 						         <th data-field="id" data-sortable="true" width='200' style="text-align:center;">处理状态</th>
 						        <th data-field="name"  data-sortable="true" width='200' style="text-align:center;">反馈情况</th>
@@ -33,9 +36,16 @@
 						    </thead>
 						     <tbody>
 						    	@foreach($complaints as $complaint)
-						    		<tr height='10'>
+						    		<tr height='55'>
 						    			<td>{{$complaint->id}}</td>
-						    			<td>{{$complaint->store->title}}</td>
+						    			@if($type == 1)
+						    				<td>{{$complaint->store->title}}</td>
+						    			@else
+						    				<td>{{$complaint->client->nick_name}}</td>
+						    				<td>{{$complaint->store->title}}</td>
+						    			@endif
+						    			
+						    			
 						    			<td>{{$complaint->kind->name}}</td>
 						    			<td>{{$complaint->check->name}}</td>
 						    			<td>
@@ -54,5 +64,14 @@
 		{!! $complaints->render() !!}
 
 </div><!--/.row-->
+
+<script type="text/javascript">
+		$('td').each(function(){
+			if($(this).html()=='未处理'){
+				$(this).addClass('passtd')
+			}
+		})
+		
+</script>
 
 @stop

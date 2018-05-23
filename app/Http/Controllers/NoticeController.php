@@ -37,7 +37,7 @@ class NoticeController extends Controller
      */
     public function store(Request $request)
     {
-       if( $request->title == '' || $request->content == '<p></p><p><br></p>' ){
+       if( $request->title == '' || $request->content == '<p><br></p>' ){
        
             session()->flash('warning','请填写完整内容');
             return redirect("/notices/create");
@@ -86,7 +86,7 @@ class NoticeController extends Controller
     public function update(Request $request, Message $notice)
     {
 
-        if( $request->title == '' || $request->content == '<p></p><p><br></p>' ){
+        if( $request->title == '' || $request->content == '<p><br></p>' ){
                 
             session()->flash('warning','请填写完整内容');
             return redirect("/notices/".$notice->id."/edit");
@@ -110,7 +110,7 @@ class NoticeController extends Controller
      */
     public function destroy(Message $notice)
     {
-        dd(55555);
+
         $notice -> delete();
         session()->flash('success','删除成功');
         return 1;
