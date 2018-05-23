@@ -9,27 +9,27 @@
 					<span class="in_title">今日订单概览</span>
 				</div>
 				<div class="col-xs-4 in_pry1_item">
-					<u>565</u>
-					<p>下单数量</p>
+					<u class="in_pry1_item_u">565</u>
+					<p class="in_pry1_item_p">下单数量</p>
 				</div>
 				<div class="col-xs-4 in_pry1_item">
-					<u>332</u>
-					<p>核销数量</p>
+					<u class="in_pry1_item_u">332</u>
+					<p class="in_pry1_item_p">核销数量</p>
 				</div>
 				<div class="col-xs-4 in_pry1_item">
-					<u>0</u>
-					<p>退单数量</p>
+					<u class="in_pry1_item_u">0</u>
+					<p class="in_pry1_item_p">退单数量</p>
 				</div>
 			</div>
 			<div class="col-xs-12 in_box">
 				<p class="alert" role="alert">财务概况  <a href="" class="in_box_item_a">今日</a>  <a href="" class="in_box_item_a">昨日</a>  <a href="" class="in_box_item_a">本月</a></p>
 				<div class="col-xs-6 in_pry1_item">
-					<u>8000</u>
-					<p>销售总额</p>
+					<u class="in_pry1_item_u">8000</u>
+					<p class="in_pry1_item_p">销售总额</p>
 				</div>
 				<div class="col-xs-6 in_pry1_item">
-					<u>80</u>
-					<p>平均单价</p>
+					<u class="in_pry1_item_u">80</u>
+					<p class="in_pry1_item_p">平均单价</p>
 				</div>
 			</div>
 			<div class="col-xs-12 in_box">

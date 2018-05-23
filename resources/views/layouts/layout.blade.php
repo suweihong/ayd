@@ -42,7 +42,10 @@
 				<ul class="user-menu">
 					<li class="dropdown pull-right">
 
+
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"></svg> 上次登录： {{ Session::get('last_time') }}</a>
+
+						
 
 					
 						<a href="/logout" class="dropdown-toggle" ><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> 退出登录</a>

@@ -468,10 +468,6 @@ a.bg-danger:hover {
   border: 0;
   padding: 7px 15px;
 }
-.nav-pills li.active a,
-.nav-pills li.active a:hover {
-  background: #30a5ff;
-}
 .tab-content {
   padding: 15px;
 }
@@ -907,17 +903,79 @@ a.todo-list-item:focus {
 .in_box {
   margin-top: 20px;
 }
+.in_box .nav-pills > li > a {
+  border-radius: 0px;
+  width: 100px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+.in_box .advertisement {
+  width: 90px;
+  height: 26px;
+  border: 1px solid #797979;
+  background: #fff;
+  color: #797979;
+  display: inline-block;
+  text-align: center;
+  line-height: 26px;
+  margin-top: 20px;
+  text-decoration-line: none;
+}
+.in_box .click {
+  border: 1px solid  #d7d7d7!important;
+  background: #d7d7d7!important;
+  margin-top: -1px !important;
+}
+.in_box .click2 {
+  margin-left: -4px;
+}
 .in_box .in_pry1_item {
   padding: 20px 0;
   cursor: pointer;
 }
-.in_box .in_pry1_item u {
+.in_box .in_pry1_item .address_big {
+  width: 300px;
+  margin-left: 15px;
+  margin-top: 10px;
+}
+.in_box .in_pry1_item .btn_wh_big {
+  width: 110px;
+  margin-left: 15px;
+}
+.in_box .in_pry1_item .pic_pic_big {
+  width: 300px;
+  margin-left: 15px;
+}
+.in_box .in_pry1_item .pic_pic {
+  width: 200px;
+  height: 114px;
+  margin: 0 auto;
+}
+.in_box .in_pry1_item .pic_pic img {
+  width: 100%;
+  height: 100%;
+}
+.in_box .in_pry1_item .btn_wh {
+  width: 200px;
+  margin: 0 auto;
+  height: 26px;
+  line-height: 10px;
+  margin-top: 10px;
+  display: block;
+}
+.in_box .in_pry1_item .address {
+  width: 200px;
+  margin: 0 auto;
+  margin-top: 10px;
+  display: block;
+}
+.in_box .in_pry1_item .in_pry1_item_u {
   font-size: 54px;
   color: #0099ff;
   text-align: center;
   display: block;
 }
-.in_box .in_pry1_item p {
+.in_box .in_pry1_item .in_pry1_item_p {
   font-size: 20px;
   color: #333333;
   text-align: center;
@@ -940,4 +998,10 @@ a.todo-list-item:focus {
 }
 .in_box .message_list .btn-fff {
   background: #fff;
+}
+.in_box .title {
+  font-size: 20px;
+  margin-left: 20px;
+  width: 100%;
+  height: 24px;
 }

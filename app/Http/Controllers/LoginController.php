@@ -67,5 +67,6 @@ class LoginController extends Controller
         session(['last_time' => $last_time]);
 
         return view('index');
+
     }
 }
