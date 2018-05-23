@@ -20,11 +20,11 @@
 		
 					{{-- <h2>wangEditor example</h2> --}}
 			<h3 class="page-header">公告内容：</h3>
-			{!! we_field('wangeditor', 'content', '<p></p>') !!}
+			{!! we_field('wangeditor', 'content', '') !!}
 			{!! we_config('wangeditor') !!}
 
 
-		<button class="btn btn-primary" type="submit">提交</button>
+		<button class="btn btn-primary" type="submit" style="margin-top: 30px;margin-left: 600px;">提交</button>
 	</form>
 </div><!--/.row-->
 @stop

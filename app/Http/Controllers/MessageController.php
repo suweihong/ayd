@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Message;
+use App\Models\Complaint;
 
 class MessageController extends Controller
 {
@@ -34,7 +36,28 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->reply_content == ''){
+
+            session()->flash('warning','请填写完整内容');
+            return redirect('/types/1/complaints/'.$request->id);
+        }else{
+            Message::create([
+                'mp_user_id' => $request->mp_user_id,
+                'complaint_id' => $request->id,
+                'title' => '回复商家反馈',
+                'content' => $request->reply_content,             
+                'read' => '0',
+            ]);
+
+            //修改反馈的处理状态
+            $complaint = Complaint::find($request->id);
+            $complaint-> update([
+                'check_id' => '1',
+            ]);
+
+            session()->flash('success','回复成功');
+            return redirect('/types/1/complaints');
+        }
     }
 
     /**

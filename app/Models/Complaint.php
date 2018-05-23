@@ -14,7 +14,7 @@ class Complaint extends Model
     /**
      * 该投诉所属用户。（反向关联）
      */
-    public function Client()
+    public function client()
     {
         return $this->belongsTo('App\Models\Client');
     }

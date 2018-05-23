@@ -50,10 +50,12 @@ class ComplaintController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($type,$id)
     {
+
         $complaint = Complaint::find($id);
-        return view('complaints.show',compact('complaint'));
+        $message = $complaint->messages()->orderBy('created_at','desc')->first();
+        return view('complaints.show',compact('complaint','type','message'));
     }
 
     /**
