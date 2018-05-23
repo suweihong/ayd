@@ -25,7 +25,7 @@ class TypeController extends Controller
      */
     public function create()
     {
-        dump(333);
+        return view('type.create');
     }
 
     /**

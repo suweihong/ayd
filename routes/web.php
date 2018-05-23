@@ -13,7 +13,7 @@
 
 
 Route::get('/aa',function(){
-	return view('layout');
+	dump(333);
 });
 
 // Auth::routes();
