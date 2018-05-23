@@ -903,11 +903,50 @@ a.todo-list-item:focus {
 .in_box {
   margin-top: 20px;
 }
+.in_box .form-control_ipt {
+  margin-top: 24px!important;
+  margin-left: 124px!important;
+}
+.in_box .form-inline-g {
+  margin-top: 20px;
+}
+.in_box .form-inline-g input,
+.in_box .form-inline-g textarea {
+  width: 360px;
+  margin-left: 20px;
+  font-weight: 500;
+}
+.in_box .form-inline-g textarea {
+  height: 120px;
+  resize: none;
+}
+.in_box .form-inline-g span {
+  width: 100px;
+  text-align: right;
+  display: inline-block;
+  font-weight: 500;
+}
+.in_box .form-inline-g .form-group {
+  margin-left: 20px;
+  font-weight: 500;
+  width: 110px;
+}
 .in_box .nav-pills > li > a {
   border-radius: 0px;
   width: 100px;
   text-align: center;
   border: 1px solid #ccc;
+}
+.in_box .type_con {
+  margin: 30px 40px;
+}
+.in_box .type_title {
+  float: left;
+  margin: 6px;
+  font-size: 16px;
+}
+.in_box .type_add {
+  margin-left: 60px;
 }
 .in_box .advertisement {
   width: 90px;
@@ -925,6 +964,11 @@ a.todo-list-item:focus {
   border: 1px solid  #d7d7d7!important;
   background: #d7d7d7!important;
   margin-top: -1px !important;
+}
+.in_box .clickt {
+  border: 1px solid  #d7d7d7!important;
+  background: #fff!important;
+  margin-left: 14px;
 }
 .in_box .click2 {
   margin-left: -4px;

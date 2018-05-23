@@ -17,8 +17,7 @@ class StoreController extends Controller
      */
     public function index()
     {
-        $stores = Store::orderBy('created_at','desc')->paginate(5);
-        return $stores;
+        return view('store.index');
     }
 
     /**
@@ -28,7 +27,7 @@ class StoreController extends Controller
      */
     public function create()
     {
-        //
+       return view('store.create');
     }
 
     /**
