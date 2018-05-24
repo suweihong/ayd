@@ -15,7 +15,8 @@ class TypeController extends Controller
      */
     public function index()
     {
-       return view('type.index');
+        $types = Type::orderBy('created_at','asc')->paginate(2);
+       return view('type.index',compact('types'));
     }
 
     /**
@@ -36,7 +37,27 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        if($request->type == null){
+            session()->flash('warning','请填写完整内容');
+            return redirect('/types/create');
+        }else{
+            
+            $types = Type::pluck('name')->toArray();
+
+            if(in_array($request->type, $types)){
+                session()->flash('warning','该运动品类已被添加');
+                return redirect('/types/create');
+            }else{
+               
+                Type::create([
+                'name' => $request->type,
+            ]);
+                session()->flash('success','添加成功');
+                return redirect('/types');
+            }
+            
+        }
     }
 
     /**

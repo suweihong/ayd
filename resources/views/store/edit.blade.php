@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @extends('layouts.layout')
 
 @section('title','商家管理')
@@ -17,3 +18,6 @@
 		</div>
 	</div>		
 @stop
+=======
+{{-- 编辑基础信息     基础信息管理 --}}
+>>>>>>> 7d871fadbba4a64350a793c95e07c3a1e23043aa
