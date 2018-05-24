@@ -1,1 +1,11 @@
-{{-- 继承 基础信息 销售 订单 评价 --}}
+
+@extends('layouts.layout')
+
+@section('title','商家管理')
+
+@section('content')
+	
+	<div class="row col-sm-12">
+		@yield('substance')
+	</div>
+@stop

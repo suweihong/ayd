@@ -3,6 +3,7 @@
 @section('title','商家管理')
 
 @section('content')
+
 	<div class="row">
 		<div class="col-xs-12 in_box">
 			<div class="alert" role="alert">

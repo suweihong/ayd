@@ -59,7 +59,7 @@
 			</div>
 
 	</div><!--/.row-->	
-	<div class="row">
+	<div class="row col-xs-12">
 			{{ $types->render()}}		
 	</div>
 
