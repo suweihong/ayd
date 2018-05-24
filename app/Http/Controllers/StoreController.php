@@ -15,8 +15,10 @@ class StoreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        dump($request->search_name);
+        dump($request->store_type);
         $stores = Store::orderBy('created_at','asc')->paginate(10);
         return view('store.index',compact('stores'));
     }
