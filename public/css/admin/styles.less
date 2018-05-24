@@ -995,11 +995,36 @@ h1.page-header {
   text-align: center;
   display: block;
 }
+.modell{
+  display: none;
+  background: #ccc;
+  position: absolute;
+  z-index: 1;
+  top: 60px;
+  left: 28%;
+  padding: 10px 0;
+  img{
+    width:50%;margin:6% 25%;
+  }
+  label{
+    text-align: center;
+    font-size: 18px;
+  }
+  button{
+    margin:5% 40%;
+    width: 20%;
+    text-align: center;
+  }
+}
+
 .in_box{
   margin-top: 20px;
   .form-control_ipt{
     margin-top: 24px!important;
-    margin-left: 124px!important;
+    margin-left: 120px!important;
+  }
+  .statf_pic{
+    margin:10px 38px;
   }
   .form-inline-g{
     margin-top: 20px;
@@ -1008,12 +1033,18 @@ h1.page-header {
       margin-left: 20px;
       font-weight: 500;
     }
+    .pic_pic{
+      margin-left: 6px;
+      img{
+        width: 200px;
+      }
+    }
     textarea{
       height: 120px;
       resize:none;
     }
     .form-inline-g-ap{
-      margin-bottom: 100px;
+      margin-bottom: 130px;
     }
     span{
       width: 100px;
@@ -1150,7 +1181,9 @@ h1.page-header {
     a{
       color: #333333;
       font-size: 16px;
-      font-weight: 800;
     }
+  }
+  .active{
+    font-weight: 800;
   }
 }

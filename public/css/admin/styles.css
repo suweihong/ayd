@@ -900,12 +900,37 @@ a.todo-list-item:focus {
 .attachment:hover span {
   display: block;
 }
+.modell {
+  display: none;
+  background: #ccc;
+  position: absolute;
+  z-index: 1;
+  top: 60px;
+  left: 28%;
+  padding: 10px 0;
+}
+.modell img {
+  width: 50%;
+  margin: 6% 25%;
+}
+.modell label {
+  text-align: center;
+  font-size: 18px;
+}
+.modell button {
+  margin: 5% 40%;
+  width: 20%;
+  text-align: center;
+}
 .in_box {
   margin-top: 20px;
 }
 .in_box .form-control_ipt {
   margin-top: 24px!important;
-  margin-left: 124px!important;
+  margin-left: 120px!important;
+}
+.in_box .statf_pic {
+  margin: 10px 38px;
 }
 .in_box .form-inline-g {
   margin-top: 20px;
@@ -916,12 +941,18 @@ a.todo-list-item:focus {
   margin-left: 20px;
   font-weight: 500;
 }
+.in_box .form-inline-g .pic_pic {
+  margin-left: 6px;
+}
+.in_box .form-inline-g .pic_pic img {
+  width: 200px;
+}
 .in_box .form-inline-g textarea {
   height: 120px;
   resize: none;
 }
 .in_box .form-inline-g .form-inline-g-ap {
-  margin-bottom: 100px;
+  margin-bottom: 130px;
 }
 .in_box .form-inline-g span {
   width: 100px;
@@ -1060,5 +1091,7 @@ a.todo-list-item:focus {
 #store_menu1 li a {
   color: #333333;
   font-size: 16px;
+}
+#store_menu1 .active {
   font-weight: 800;
 }

@@ -20,11 +20,11 @@
 
 <script src="/js/admin/jquery-1.11.1.min.js"></script>
 <script src="/js/admin/bootstrap.min.js"></script>
-<script src="/js/admin/chart.min.js"></script>
-{{-- <script src="js/admin/chart-data.js"></script> --}}
 <script src="/js/admin/easypiechart.js"></script>
-{{-- <script src="js/admin/easypiechart-data.js"></script> --}}
 <script src="/js/admin/bootstrap-datepicker.js"></script>
+<!-- <script src="/js/admin/chart.min.js"></script>
+<script src="js/admin/easypiechart-data.js"></script>
+<script src="js/admin/chart-data.js"></script> -->
 
 </head>
 
@@ -171,6 +171,15 @@
 		$(window).on('resize', function () {
 		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
 		})
+		$("#stuffAdd").click(function(){
+			$("#model").fadeIn(500)
+		})
+		$("#modelBtn").click(function(){
+			$("#model").fadeOut(500)
+		})
+		// $(".menu_list").click(function(){
+		// 	$(this).addClass("active")
+		// })
 		
 
 	</script>

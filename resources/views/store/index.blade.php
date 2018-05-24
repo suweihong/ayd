@@ -3,7 +3,6 @@
 @section('title','商家管理')
 
 @section('content')
-
 	<div class="row">
 
 
