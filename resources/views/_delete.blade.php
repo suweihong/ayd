@@ -5,9 +5,9 @@
 		      </div>
      		 <div class="modal-footer" >
 
-			 <button type="button" class="btn btn-default message_del" data-dismiss="modal">确定</button>	 
+			 <button type="button" class="btn btn-primary message_del" data-dismiss="modal">确定</button>	 
 		
-	        <button type="button" class="btn btn-primary del_cancle">取消</button>
+	        <button type="button" class="btn btn-default del_cancle">取消</button>
       	</div>
     </div>
 </div>

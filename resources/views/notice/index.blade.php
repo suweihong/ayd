@@ -3,10 +3,10 @@
 @section('content')
 
 <div class="row">
-			@include('_messages')
-
-		
+	
+		@include('_messages')
 		@include('_delete')
+
 		<div class="row">
 			<div class="col-lg-12">
 				<h3 class="page-header"><a href="{{route('notices.create')}}"><button class="btn btn-primary">添加公告</button></a></h3>
