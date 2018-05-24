@@ -11,11 +11,11 @@
 			<label class="title">基础信息</label>
 			<div class="col-xs-12">
 				<label class="form-inline col-xs-12 form-inline-g">
-					<span>名称 </span>
-					<input type="text" class="form-control" placeholder="按名称检索"/>
+					<span class="col-xs-1">名称 </span>
+					<input type="text" class="form-control col-xs-6" placeholder="按名称检索"/>
 				</label> 
 				<label class="form-inline col-xs-12 form-inline-g">
-					<span>商家位置 </span>
+					<span  class="col-xs-1">商家位置 </span>
 					<div class="form-group">
 						<select class="form-control">
 						    <option>吉林省</option>
@@ -45,19 +45,11 @@
 					<input type="text" class="form-control" placeholder="按名称检索"/>
 				</label>
 				<label class="form-inline col-xs-12 form-inline-g">
-					<span>场馆简介 </span>
+					<span class="form-inline-g-ap">场馆简介 </span>
 					 <textarea rows="3" cols="20" class="form-control" placeholder="场馆简介"> </textarea>
 				</label>  
-				<!-- <label for="name">名称</label>
-				<input type="text" class="col-xs-3 btn name" id="name"> -->
-				<!-- <div class="form-group col-xs-3">
-					<select class="form-control">
-					    <option>签约商家</option>
-					    <option>锁定商家</option>
-					</select>  
-				</div>
-				<a href="{{ route('types.create')}}" class="btn btn-info col-xs-1">检索</a>
-				<a href="{{ route('types.create')}}" class="btn clickt col-xs-1">新增</a> -->
+				<a href="{{ route('stores.index')}}" class="btn btn-info col-xs-1">新增</a>
+				<a href="{{ route('stores.index')}}" class="btn clickt col-xs-1">返回</a>
 			</div>
 		</div>
 	</div>		

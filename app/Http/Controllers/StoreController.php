@@ -75,7 +75,7 @@ class StoreController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('store.edit');
     }
 
     /**

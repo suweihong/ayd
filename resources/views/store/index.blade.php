@@ -18,6 +18,7 @@
 				</div>
 				<a href="{{route('stores.index')}}" class="btn btn-info col-xs-1">检索</a>
 				<a href="{{route('stores.create')}}" class="btn clickt col-xs-1">新增</a>
+				<a href="{{route('stores.edit',1)}}" class="btn clickt col-xs-1">管理商家</a>
 			</div>
 		</div>
 	</div>		
