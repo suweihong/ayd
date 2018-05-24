@@ -28,7 +28,7 @@ class MpuserController extends Controller
      */
     public function create()
     {
-        //
+        return view('store.admin');
     }
 
     /**
