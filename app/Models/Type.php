@@ -17,7 +17,7 @@ class Type extends Model
      */
     public function stores()
     {
-        return $this->belongsToMang('App\Models\Store');
+        return $this->belongsToMany('App\Models\Store');
     }
 
     

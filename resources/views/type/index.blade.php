@@ -47,7 +47,7 @@
 						   
 											<a href="">关联商家</a>
 											<button class="btn btn-info btn-sm" onclick="btnClick()">编辑</button>
-											<button class="btn btn-danger btn-sm" onclick="btnClick()">删除</button>
+											<button class="btn btn-danger btn-sm" onclick="btnClick({{$type->id}})">删除</button>
 											
 						    			</td>
 						    		</tr>

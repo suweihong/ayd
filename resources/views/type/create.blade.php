@@ -15,16 +15,7 @@
 					<input type="hidden" name="_token" value="{{ csrf_token()}}">
 					  <div class="form-group">
 					  	<input type="text" name="type" value="" class="form-control">  
-					    {{-- <select class="form-control">
-					        <option>踢足球</option>
-					        <option>游泳</option>
-					        <option>慢跑</option>
-					        <option>篮球</option>
-					        <option>羽毛球</option>
-					        <option>乒乓球</option>
-					        <option>跳舞</option>
-					        <option>跳舞</option>
-					    </select>   --}}
+					
 					  </div>
 					 
 					  <button type="submit" class="btn btn-info type_add" style="margin-left: -1px;">　　新增　　</button>

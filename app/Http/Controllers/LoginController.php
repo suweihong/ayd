@@ -63,7 +63,7 @@ class LoginController extends Controller
     {
         $user = Auth::user();
         $last_time = $user->last_time;
-        session(['last_time',$last_time]);
+        session(['last_time'=>$last_time]);
 
         return view('index');
     }

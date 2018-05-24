@@ -13,9 +13,9 @@ class TypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $types = Type::orderBy('created_at','asc')->paginate(2);
+        $types = Type::orderBy('created_at','asc')->paginate(10);
        return view('type.index',compact('types'));
     }
 
@@ -100,8 +100,11 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Type $type)
     {
-        //
+        $type->delete();
+
+        session()->flash('success','删除成功');
+        return 1;
     }
 }
