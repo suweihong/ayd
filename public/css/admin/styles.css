@@ -900,6 +900,34 @@ a.todo-list-item:focus {
 .attachment:hover span {
   display: block;
 }
+.evaluate {
+  margin-left: 55px!important;
+}
+.evaluate h4,
+.evaluate h3 {
+  font-weight: bold;
+  color: #333;
+}
+.evaluate .eavbox {
+  width: 96%;
+  border: 1px solid #333;
+  padding: 4px 0;
+  margin-top: 20px;
+}
+.evaluate .eavbox span {
+  margin: 10px 20px;
+  display: inline-block;
+}
+.evaluate .eavbox .evalua {
+  margin: 10px 20px;
+}
+.evaluate .eavbox .evatime {
+  text-align: right;
+  margin-right: 20px;
+}
+.evaluate h3 {
+  margin: 30px 0;
+}
 .modell {
   display: none;
   background: #ccc;
