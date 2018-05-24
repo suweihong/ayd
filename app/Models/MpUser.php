@@ -17,7 +17,7 @@ class MpUser extends Model
     // 该店主的 店铺
     public function store()
     {
-    	return $this->hasOne('App\Models\Store');
+    	return $this->belongsTo('App\Models\Store');
     }
 
     //该店主的消息

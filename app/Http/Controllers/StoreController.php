@@ -17,7 +17,8 @@ class StoreController extends Controller
      */
     public function index()
     {
-        return view('store.index');
+        $stores = Store::orderBy('created_at','asc')->paginate(10);
+        return view('store.index',compact('stores'));
     }
 
     /**

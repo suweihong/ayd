@@ -45,10 +45,11 @@ class Store extends Model
     }
 
 
-    // 该店的店主
+    // 该店的管理员
+
     public function mp_user()
     {
-    	return $this->belongsTo('App\Models\MpUser');
+        return $this->hasOne('App\Models\MpUser');
     }
 
     //该店的账单
@@ -67,6 +68,6 @@ class Store extends Model
     //该店拥有的体育品类
     public function types()
     {
-        return $this->hasMany('App\Models\Type');
+        return $this->belongsToMany('App\Models\Type');
     }
 }

@@ -12,9 +12,6 @@
 */
 
 
-Route::get('/aa',function(){
-	dump(333);
-});
 
 // Auth::routes();
 
