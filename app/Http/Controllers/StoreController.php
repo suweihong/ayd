@@ -17,9 +17,21 @@ class StoreController extends Controller
      */
     public function index(Request $request)
     {
-        dump($request->search_name);
-        dump($request->store_type);
-        $stores = Store::orderBy('created_at','asc')->paginate(10);
+        $search_name = $request->search_name;
+        $store_type = $request->store_type;
+       
+        if($store_type == 1 || $store_type == 0){
+            if($search_name){
+                
+                $stores = Store::where('title',$search_name)->orderBy('created_at','desc')->paginate(10);
+            }else{
+                $stores = Store::where('switch',$store_type)->orderBy('created_at','desc')->paginate(10);
+
+            }
+        }else{
+            $stores = Store::orderBy('created_at','asc')->paginate(10);
+        }
+        // dump($stores);
         return view('store.index',compact('stores'));
     }
 

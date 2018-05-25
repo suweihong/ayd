@@ -11,17 +11,18 @@
 			</div>
 			<div class="col-xs-12">
 				<form action="{{route('stores.index')}}" method="get">
-					<input type="text" class="col-xs-3  btn " placeholder="按名称检索" name="search_name">
+					<input type="text" class="col-xs-3  btn " name="search_name" placeholder="按名称检索"  value="{{ old('search_name') }}">
 					<div class="form-group col-xs-3">
 						<select class="form-control " name="store_type" >
 						    <option value="1">签约商家</option>
-						    <option value="2">锁定商家</option>
+						    <option value="0">锁定商家</option>
 						</select>  
 					</div>
 					<button class="btn btn-info col-xs-1 " >检索</button>
+					<a href="{{route('stores.create')}}" class="btn clickt col-xs-1">新增</a>
 				</form>
 				
-				<a href="{{route('stores.create')}}" class="btn clickt col-xs-1">新增</a>
+				
 				
 			</div>
 		</div>

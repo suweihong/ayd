@@ -21,9 +21,10 @@ class ItemsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //价格配置页
     public function create()
     {
-        //
+        return view('sale.price');
     }
 
     /**
@@ -45,7 +46,7 @@ class ItemsController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('sale.switch');
     }
 
     /**
