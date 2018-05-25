@@ -4,6 +4,8 @@
 
 @section('content')
 	<div class="row">
+		
+		@include('_messages')
 
 		<div class="col-xs-12 in_box">
 			<div class="alert" role="alert">
@@ -15,7 +17,7 @@
 					<div class="form-group col-xs-3">
 						<select class="form-control " name="store_type" >
 						    <option value="1">签约商家</option>
-						    <option value="0">锁定商家</option>
+						    <option value="2">锁定商家</option>
 						</select>  
 					</div>
 					<button class="btn btn-info col-xs-1 " >检索</button>
