@@ -1,10 +1,10 @@
-@extends('store._third')
-	@section('subject')
+@extends('store._fourth')
+	@section('part')
 	<!-- <h1>场地价格</h1> -->
-		<ul class="nav nav-pills" id="store_menu2">
+		{{-- <ul class="nav nav-pills" id="store_menu2">
 			<li class="active btn"><a href="{{route('fields.create')}}" data-toggle="tab" class="btnt">按星期</a></li>
 			<li class="btn"><a href="/price/date" data-toggle="tab" class="btnt">按日期</a></li>
-		</ul>
+		</ul> --}}
 		<div class="tab-pane fade in active saletab" id="saletab1">
 			<ul class="nav nav-pills">
 				<li class="active btn btnt btnt0" data-toggle="tab"><a>星期一</a></li>
