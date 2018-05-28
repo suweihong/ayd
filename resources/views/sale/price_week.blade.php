@@ -2,8 +2,8 @@
 	@section('subject')
 	<!-- <h1>场地价格</h1> -->
 		<ul class="nav nav-pills" id="store_menu2">
-			<li class="active btn"><a href="#saletab1" data-toggle="tab" class="btnt">按星期</a></li>
-			<li class="btn"><a href="#saletab2" data-toggle="tab" class="btnt">按日期</a></li>
+			<li class="active btn"><a href="{{route('fields.create')}}" data-toggle="tab" class="btnt">按星期</a></li>
+			<li class="btn"><a href="/price/date" data-toggle="tab" class="btnt">按日期</a></li>
 		</ul>
 		<div class="tab-pane fade in active saletab" id="saletab1">
 			<ul class="nav nav-pills">
