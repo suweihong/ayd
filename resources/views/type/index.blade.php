@@ -43,10 +43,9 @@
 						    		
 						    			<td>{{$type->created_at}}</td>
 						    			
-						    			<td>
-						   
-											<a href="">关联商家</a>
-											<button class="btn btn-info btn-sm" onclick="btnClick()">编辑</button>
+						    			<td>	
+						   					<a href="{{route('stores.index')}}?type_id={{$type->id}}" >关联商家</a>
+											<button class="btn btn-info btn-sm" >编辑</button>
 											<button class="btn btn-danger btn-sm" onclick="btnClick({{$type->id}})">删除</button>
 											
 						    			</td>
@@ -71,7 +70,7 @@
 				$('.del_prompt').css('display','none') ;
 			})
 	};
-
+		//删除运动品类
 	$('.message_del').click(function(){
 				$('.del_prompt').css('display','none') ;
 				$.ajax({
@@ -87,6 +86,7 @@
 					}
 				})
 		})
+
 </script>
 
 @stop

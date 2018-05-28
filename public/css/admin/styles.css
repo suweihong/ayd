@@ -992,6 +992,11 @@ a.todo-list-item:focus {
   text-align: center;
   margin-left: 20px;
 }
+#store_menu2 .btn_add a {
+  display: inline-block;
+  line-height: 12px;
+  width: 98px;
+}
 #store_menu2 .btn {
   width: 100px;
   margin-bottom: 24px;

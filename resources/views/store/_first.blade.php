@@ -11,7 +11,7 @@
 			</div>
 			<ul id="store_menu1" class="col-xs-12">
 				<li class="active"><a href="{{route('stores.edit',1)}}">基础信息</a></li>
-				<li><a href="{{route('items.index')}}">销售</a></li>
+				<li><a href="{{route('fields.index')}}">销售</a></li>
 				<li><a href="{{route('orders.index')}}">订单</a></li>
 				<li><a href="{{route('estimates.index')}}">评价</a></li>
 			</ul>

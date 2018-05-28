@@ -4,38 +4,42 @@
 	<!-- <h1>基础信息管理页</h1> -->
 
 	<div class="row">
-		<div class="col-xs-12 in_box">
-			<div class="col-xs-12">
-				<label class="form-inline col-xs-12 form-inline-g">
-					<span class="col-xs-1">名称 </span>
-					<input type="text" class="form-control col-xs-6" placeholder="澳方体育馆"/>
-				</label> 
-				<label class="form-inline col-xs-12 form-inline-g">
-					<span  class="col-xs-1">商家位置 </span>
-					<div class="form-group">
-						<select class="form-control">
-						    <option>吉林省</option>
-						    <option>吉林省</option>
-						</select>  
-					</div>
-					<div class="form-group">
-						<select class="form-control">
-						    <option>长春市</option>
-						    <option>长春市</option>
-						</select>  
-					</div>
-					<div class="form-group">
-						<select class="form-control">
-						    <option>净月区</option>
-						    <option>净月区</option>
-						</select>  
-					</div>
-					<br>
-					<input type="text" class="form-control form-control_ipt" placeholder="如xx街道xx号"/>
-					<br>
-					<input type="text" class="form-control form-control_ipt" placeholder="地图名片地址"/>
-					<br>
-				</label> 
+		<form action="{{route('stores.update',$store->id)}}" method="post">
+			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+			<input type="hidden" name="_method" value="PATCH">
+			<div class="col-xs-12 in_box">
+				<div class="col-xs-12">
+					<label class="form-inline col-xs-12 form-inline-g">
+						<span class="col-xs-1">名称 </span>
+						<input type="text" class="form-control col-xs-6" name='title' placeholder="{{$store->title}}"/>
+					</label> 
+					<label class="form-inline col-xs-12 form-inline-g">
+						<span  class="col-xs-1">商家位置 </span>
+						<div class="form-group">
+							<select class="form-control" name="province">
+							    <option>吉林省</option>
+							    <option>吉林省</option>
+							</select>  
+						</div>
+						<div class="form-group">
+							<select class="form-control" name="city">
+							    <option>长春市</option>
+							    <option>长春市</option>
+							</select>  
+						</div>
+						<div class="form-group">
+							<select class="form-control" name="area">
+							    <option>净月区</option>
+							    <option>净月区</option>
+							</select>  
+						</div>
+						<br>
+						<input type="text" class="form-control form-control_ipt" name='address' placeholder="{{$store->address}}"/>
+						<br>
+						<input type="text" class="form-control form-control_ipt" name="map" placeholder="{{$store->map_url}}"/>
+						<br>
+					</label> 
+
 
 				<label class="form-inline col-xs-12 form-inline-g">
 					<span class="col-xs-1">场馆封面图 </span>
@@ -65,8 +69,10 @@
 				</label>  
 				<a href="{{ route('stores.index')}}" class="btn btn-info btn-info-botm">更新场地信息</a>
 				<a href="{{ route('stores.index')}}" class="btn clickt btn-info-botm">返回</a>
+				</div>
 			</div>
-		</div>
+		</form>
+		
 	</div>			
 @stop
 	

@@ -35,3 +35,5 @@ Route::resource('staffs','StaffController');//店铺员工
 Route::resource('types','TypeController');//体育品类
 Route::resource('items','ItemsController');//添加运动场地和品类
 Route::resource('estimates','EstimatesController');//评价
+Route::resource('fields','FieldsController');//场地
+Route::get('/price/date','FieldsController@price_date'); //按日期配置价格的页面

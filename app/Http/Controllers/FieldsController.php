@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ItemsController extends Controller
+class FieldsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class ItemsController extends Controller
      */
     public function index()
     {
-        
+        return view('sale.index');
     }
 
     /**
@@ -21,12 +21,18 @@ class ItemsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-   
+     //价格配置页 按星期
     public function create()
     {
-        return view('sale.create');
+        return view('sale.price_week');
     }
 
+
+     //价格配置页 按日期
+    public function price_date()
+    {
+        return view('sale.price_date');
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -46,7 +52,7 @@ class ItemsController extends Controller
      */
     public function show($id)
     {
-        
+        return view('sale.switch');
     }
 
     /**

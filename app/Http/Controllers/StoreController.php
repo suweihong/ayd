@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Store;
 use App\Models\Store_img;
+use App\Models\Type;
 
 
 class StoreController extends Controller
@@ -17,22 +18,33 @@ class StoreController extends Controller
      */
     public function index(Request $request)
     {
-        $search_name = $request->search_name;
-        $store_type = $request->store_type;
-       
-        if($store_type == 1 || $store_type == 0){
-            if($search_name){
-                
-                $stores = Store::where('title',$search_name)->orderBy('created_at','desc')->paginate(10);
+
+        $type_id = $request->type_id;//运动品类
+        $search_name = $request->search_name; //搜索的名称
+        $store_type = $request->store_type; //店铺 锁定 或 正常
+
+        if($store_type){
+            if($search_name){               
+                $type = Type::where('name',$search_name)->first(); 
+                if($type){            
+                    $stores = $type->stores()->paginate(10);
+                }else{
+                     session()->flash('warning','没有该运动品类');
+                    return redirect('/stores');                   
+                }
+               
             }else{
                 $stores = Store::where('switch',$store_type)->orderBy('created_at','desc')->paginate(10);
-
             }
-        }else{
+        }elseif($type_id){
+             $type = Type::find($type_id);
+            $stores = $type->stores()->paginate(10);
+        }
+        else{
             $stores = Store::orderBy('created_at','asc')->paginate(10);
         }
-        // dump($stores);
         return view('store.index',compact('stores'));
+     
     }
 
     /**
@@ -53,22 +65,30 @@ class StoreController extends Controller
      */
     public function store(Request $request)
     {
-        //添加店铺
-        $store = Store::create([
-            'neighbourhood_id' => $request->neighbourhood_id,
+        
+        if(!$request->title || !$request->address || !$request->map || !$request->phone || $request->introduce){
+            session()->flash('warning','请填写完整内容');
+            return redirect(route("stores.create"));
+
+        }else{
+            //添加店铺
+             $store = Store::create([
+            // 'neighbourhood_id' => $request->neighbourhood_id,
             'title' => $request->title,
             'address' => $request->address,
-            'map_url' => $request->map_url,
+            'map_url' => $request->map,
             'phone' => $request->phone,
-            'name' => $request->name,
             'introduction' => $request->introduction,
             ]);
-
-        if($store){
-            return 1;
-        }else{
-            return 2;
         }
+        if($store){
+            session()->flash('success','添加成功');
+            return redirect(route("stores.index"));
+        }else{
+            session()->flash('warning','请填写完整内容');
+            return redirect(route("stores.create"));
+        }
+        
     }
 
     /**
@@ -88,9 +108,9 @@ class StoreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Store $store)
     {
-        return view('store.edit');
+        return view('store.edit',compact('store'));
     }
 
     /**
@@ -102,6 +122,7 @@ class StoreController extends Controller
      */
     public function update(Request $request, Store $store)
     {
+        
         $time = now();
         $store_imgs = [];
         $imgs = $request->imgs;
@@ -124,10 +145,13 @@ class StoreController extends Controller
            $store_imgs[$key]['created_at'] = $time;
         }
         $store_imgs = Store_img::insert($store_imgs);
+
         if($store_imgs){
-            return 1;
+           session()->flash('success','修改成功');
+           return redirect(route('stores.index'));
         }else{
-            return 2;
+           session()->flash('warning','修改失败');
+           return redirect(route('stores.edit',$store->id));
         }
 
     }
