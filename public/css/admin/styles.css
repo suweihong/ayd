@@ -980,6 +980,9 @@ a.todo-list-item:focus {
   background-color: #fff;
   border: 1px solid #333;
 }
+.btn-info-botm {
+  margin-bottom: 40px;
+}
 #store_menu2 .btn_add {
   border: 1px solid #333;
   background: #fff;
@@ -1166,6 +1169,7 @@ a.todo-list-item:focus {
 .in_box .in_pry1_item .btn_wh_big {
   width: 110px;
   margin-left: 15px;
+  margin-bottom: 40px;
 }
 .in_box .in_pry1_item .pic_pic_big {
   width: 300px;

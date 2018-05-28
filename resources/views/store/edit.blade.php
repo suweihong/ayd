@@ -63,8 +63,8 @@
 					<span class="form-inline-g-ap col-xs-1">场馆简介 </span>
 					 <textarea rows="3" cols="20" class="form-control" placeholder="场馆简介"> </textarea>
 				</label>  
-				<a href="{{ route('stores.index')}}" class="btn btn-info">更新场地信息</a>
-				<a href="{{ route('stores.index')}}" class="btn clickt">返回</a>
+				<a href="{{ route('stores.index')}}" class="btn btn-info btn-info-botm">更新场地信息</a>
+				<a href="{{ route('stores.index')}}" class="btn clickt btn-info-botm">返回</a>
 			</div>
 		</div>
 	</div>			
