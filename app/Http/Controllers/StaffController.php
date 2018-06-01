@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Store;
 
 class StaffController extends Controller
 {
@@ -11,9 +12,12 @@ class StaffController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('store.staff');
+        session_start();
+        $store_id = $_SESSION['store_id'];
+        $store = Store::find($store_id);
+        return view('store.staff',compact('store'));
     }
 
     /**

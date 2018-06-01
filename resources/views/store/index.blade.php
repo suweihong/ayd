@@ -86,4 +86,13 @@
 
 	</div>
 
+	<script type="text/javascript">
+		$('td').each(function(){
+			if($(this).html()=='锁定'){
+				$(this).css('color','red');
+			}
+		})
+		
+</script>
+
 @stop

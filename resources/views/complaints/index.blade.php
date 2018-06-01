@@ -3,22 +3,20 @@
 @section('content')
 
 <div class="row">
-			@include('_messages')
 
-		
-		@include('_delete')
-	{{-- 	<div class="row">
-			<div class="col-lg-12">
-				<h3 class="page-header"><a href="{{route('complaints.create')}}"><button class="btn btn-primary">添加公告</button></a></h3>
-			</div>
-		</div><!--/.row--> --}}
-				
+		@include('_messages')
 	
+		@include('_delete')
+				
 
 	<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading">商家反馈</div>
+					@if($type == 2)
+						<div class="panel-heading">用户投诉</div>
+					@else
+						<div class="panel-heading">商家反馈</div>
+					@endif
 					<div class="panel-body">
 						<table   border='1' height='150' style="margin:auto;text-align:center;">
 						    <thead>
@@ -68,7 +66,7 @@
 <script type="text/javascript">
 		$('td').each(function(){
 			if($(this).html()=='未处理'){
-				$(this).addClass('passtd')
+				$(this).css('color','red');
 			}
 		})
 		

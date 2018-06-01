@@ -20,5 +20,10 @@ class Type extends Model
         return $this->belongsToMany('App\Models\Store');
     }
 
+    //该类型拥有的 场地
+    public function places()
+    {
+    	return $this->hasMany('App\Models\Place');
+    }
     
 }

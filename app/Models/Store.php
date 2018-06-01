@@ -14,7 +14,7 @@ class Store extends Model
         protected $fillable = ['id', 'neighbourhood_id','mp_user_id','balance','title','name','address','map_url','phone','switch','check_id','logo','introduction'];
 
 
-    //该商店拥有的所有 场地 和 票卡      商品
+    //该商店拥有的所有       商品
     public function fields()
     {
     	return $this->hasMany('App\Models\Field');
@@ -69,5 +69,17 @@ class Store extends Model
     public function types()
     {
         return $this->belongsToMany('App\Models\Type');
+    }
+
+    //该商店拥有的 场地
+    public function places()
+    {
+        return $this->hasMany('App\Models\Place');
+    }
+
+    //该店铺拥有的评论
+    public function estimates()
+    {
+        return $this->hasMany('App\Models\Estimate');
     }
 }

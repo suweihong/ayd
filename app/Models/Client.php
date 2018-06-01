@@ -11,4 +11,10 @@ class Client extends Model
     {
     	return $this->hasMany('App\Models\Order');
     }
+
+    //该用户拥有的评论
+    public function estimates()
+    {
+    	return $this->hasMany('App\Models\Estimate');
+    }
 }

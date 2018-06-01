@@ -15,6 +15,7 @@ class NoticeController extends Controller
      */
     public function index()
     {
+        session_start();
         $notices = Message::where('mp_user_id','0')->paginate(10);
         return view('notice.index',compact('notices'));
     }
@@ -26,6 +27,7 @@ class NoticeController extends Controller
      */
     public function create()
     {
+        session_start();
         return view('notice.create');
     }
 
@@ -73,6 +75,7 @@ class NoticeController extends Controller
      */
     public function edit(Message $notice)
     {
+        session_start();
         return view('notice.edit',compact('notice'));
     }
 
@@ -96,7 +99,7 @@ class NoticeController extends Controller
             'title' => $request->title,
             'content' => $request->content,
         ]);
-            session()->flash('success','添加成功');
+            session()->flash('success','修改成功');
             return redirect("/notices");
 
        }
@@ -110,7 +113,7 @@ class NoticeController extends Controller
      */
     public function destroy(Message $notice)
     {
-
+        session_start();
         $notice -> delete();
         session()->flash('success','删除成功');
         return 1;

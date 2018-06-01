@@ -6,19 +6,15 @@
 	
 		@include('_messages')
 		@include('_delete')
-
-		<div class="row">
-			<div class="col-lg-12">
-				<h3 class="page-header"><a href="{{route('notices.create')}}"><button class="btn btn-primary">添加公告</button></a></h3>
-			</div>
-		</div><!--/.row-->
 				
-	
 
 	<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">公告列表</div>
+					<div class="col-lg-12">
+				<h3><a href="{{route('notices.create')}}"><button class="btn btn-primary">添加公告</button></a></h3>
+			</div>
 					<div class="panel-body">
 						<table  width='600' border='1' height='150' style="margin:auto;text-align:center;">
 						    <thead>

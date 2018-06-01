@@ -17,14 +17,16 @@
 			</div>
 		</div><!--/.row-->
 
-		
-					{{-- <h2>wangEditor example</h2> --}}
+		<div class="content" style="width:800px;">
+								{{-- <h2>wangEditor example</h2> --}}
 			<h3 class="page-header">公告内容：</h3>
 			{!! we_field('wangeditor', 'content',$notice->content) !!}
 			{!! we_config('wangeditor') !!}
+		</div>
+
 
 		<div style="margin-top: 50px;">
-			<button class="btn btn-primary" type="submit">提交</button>
+			<button class="btn btn-primary" type="submit" style="margin-top: 20px;margin-left: 400px;">提交</button>
 			
 		</div>
 	</form>

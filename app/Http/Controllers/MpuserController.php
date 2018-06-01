@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 
 use App\Models\MpUser;
+use App\Models\Store;
 
 class MpuserController extends Controller
 {
@@ -26,9 +27,12 @@ class MpuserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('store.admin');
+        session_start();
+        $store_id = $_SESSION['store_id'];
+       $store = Store::find($store_id);
+        return view('store.admin',compact('store'));
     }
 
     /**
@@ -39,21 +43,26 @@ class MpuserController extends Controller
      */
     public function store(Request $request)
     {
-        // $mp_user = new MpUser;
-        // $mp_user->store_id = $request->store_id;
-        // $mp_user->account = $request->account;
-        // $mp_user->password = Crypt::encrypt($request->password);
-        // $res = $mp_user->save();
-        $mp_user = MpUser::create([
-            'store_id' => $request->store_id,
-            'account' => $request->account,
-            'password' => Crypt::encrypt($request->password),
-            ]);
-        if($mp_user){
-            return 1;
+
+        if(!$request->account || !$request->password){
+        
+            // session()->flash('warning','请填写完整内容');
+            // return redirect('mpusers/create?store_id='.$store_id);
+            return back()->withInput()->with('warning','请填写完整内容');
         }else{
-            return 2;
+
+            $mp_user = MpUser::create([
+                'store_id' => $request->store_id,
+                'account' => $request->account,
+                'password' => Crypt::encrypt($request->password),
+                ]);
+            if($mp_user){             
+                 return back()->withInput()->with('warning','管理员设置成功');
+            }else{
+                 return back()->withInput()->with('warning','管理员设置成功');
+            }
         }
+        
     }
 
     /**
@@ -87,19 +96,18 @@ class MpuserController extends Controller
      */
     public function update(Request $request,$id)
     {
+
         //重置密码为12345
         
         $mp_user = MpUser::find($id);
-        $request->password = '12345';
-        // $de = Crypt::decrypt($mp_user->password);
-        // return $de;
+        $request->password = '123456';
         $res = $mp_user-> update([
                 'password' => Crypt::encrypt($request->password),
             ]);
         if($res){
-            return 1;
+            return back()->with('success','管理员密码重置成功');
         }else{
-            return 2;
+            return back()->with('success','管理员密码重置失败');
         }
     }
 

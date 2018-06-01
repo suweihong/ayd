@@ -18,7 +18,7 @@ class StoreController extends Controller
      */
     public function index(Request $request)
     {
-
+        session_start();
         $type_id = $request->type_id;//运动品类
         $search_name = $request->search_name; //搜索的名称
         $store_type = $request->store_type; //店铺 锁定 或 正常
@@ -54,6 +54,7 @@ class StoreController extends Controller
      */
     public function create()
     {
+        session_start();
        return view('store.create');
     }
 
@@ -66,9 +67,8 @@ class StoreController extends Controller
     public function store(Request $request)
     {
         
-        if(!$request->title || !$request->address || !$request->map || !$request->phone || $request->introduce){
-            session()->flash('warning','请填写完整内容');
-            return redirect(route("stores.create"));
+        if(!$request->title || !$request->address || !$request->map || !$request->phone || $request->introduction){
+            return back()->withInput()->with('warning','请填写完整内容');
 
         }else{
             //添加店铺
@@ -110,6 +110,11 @@ class StoreController extends Controller
      */
     public function edit(Store $store)
     {
+        session_start();
+        // session(['store_id'=>$store->id]);
+        $time=1*51840000;
+        setcookie(session_name(),session_id(),time()+$time,"/");
+        $_SESSION['store_id']=$store->id;
         return view('store.edit',compact('store'));
     }
 
@@ -125,14 +130,18 @@ class StoreController extends Controller
         
         $time = now();
         $store_imgs = [];
-        $imgs = $request->imgs;
+        $imgs = ['1223','43423','34534'];
 
-        //修改店铺基本信息
+        if(!$request->title || !$request->address || !$request->map || !$request->phone || $request->introduce){
+            return back()->withInput()->with('warning','请填写完整内容');
+
+        }else{
+             //修改店铺基本信息
         $store->update([
-            'neighbourhood_id' => $request->neighbourhood_id,
+            // 'neighbourhood_id' => $request->neighbourhood_id,
             'title' => $request->title,
             'address' => $request->address,
-            'map_url' => $request->map_url,
+            'map_url' => $request->map,
             'phone' => $request->phone,
             'logo' => $request->logo,
             'introduction' => $request->introduction,
@@ -153,6 +162,9 @@ class StoreController extends Controller
            session()->flash('warning','修改失败');
            return redirect(route('stores.edit',$store->id));
         }
+        }
+
+       
 
     }
 
@@ -164,7 +176,6 @@ class StoreController extends Controller
      */
     public function destroy(Store $store)
     {
-        $store -> delete();
-        return 1;
+       
     }
 }

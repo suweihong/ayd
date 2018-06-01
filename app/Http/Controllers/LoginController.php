@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
+use App\Models\Complaint;
 
 
 
@@ -20,6 +21,7 @@ class LoginController extends Controller
         $password = $request->input('password');
          if($password == ''){
            session()->flash('warning','密码不能为空');
+
             return redirect('/login');
         }else{
             if(Auth::attempt(['name' => $name, 'password' => $password], 1)){
@@ -63,8 +65,19 @@ class LoginController extends Controller
     {
         $user = Auth::user();
         $last_time = $user->last_time;
-        session(['last_time'=>$last_time]);
+        // session(['last_time'=>$last_time]);
+           session_start();
+           $time=1*51840000;
+          setcookie(session_name(),session_id(),time()+$time,"/");
+          $_SESSION['last_time']=$last_time;
 
-        return view('index');
+          //消息动态
+          $today = date('Y-m-d H:i:s');
+          $date = date('Y-m-d H:i:s',strtotime('today') - 2592000);
+          $complaints = Complaint::whereBetween('created_at',[$date,$today])
+                                    ->orderBy('created_at','desc')
+                                    ->get();
+
+        return view('index',compact('complaints'));
     }
 }

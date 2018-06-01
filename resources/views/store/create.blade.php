@@ -51,7 +51,7 @@
 						<input type="text" class="form-control" placeholder="" name="phone" value="{{ old('phone') }}" />
 					</label>
 					<label class="form-inline col-xs-12 form-inline-g">
-						<span class="form-inline-g-ap">场馆简介 </span>s
+						<span class="form-inline-g-ap">场馆简介 </span>
 						 <textarea rows="3" cols="20" class="form-control" name="introduction" value="{{ old('introduction') }}"></textarea>
 					</label>  
 					 <button class="btn btn-info col-xs-1" type="submit">新增</button>

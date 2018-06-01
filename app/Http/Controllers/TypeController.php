@@ -15,6 +15,7 @@ class TypeController extends Controller
      */
     public function index(Request $request)
     {
+        session_start();
         $types = Type::orderBy('created_at','asc')->paginate(10);
        return view('type.index',compact('types'));
     }
@@ -26,6 +27,7 @@ class TypeController extends Controller
      */
     public function create()
     {
+        session_start();
         return view('type.create');
     }
 

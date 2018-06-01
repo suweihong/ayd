@@ -15,6 +15,7 @@ class ComplaintController extends Controller
      */
     public function index($type)
     {
+        session_start();
        if($type == 1){
         $complaints = Complaint::where('client_id',null)->paginate(10);
        }else{
@@ -52,7 +53,7 @@ class ComplaintController extends Controller
      */
     public function show($type,$id)
     {
-
+        session_start();
         $complaint = Complaint::find($id);
         $message = $complaint->messages()->orderBy('created_at','desc')->first();
         return view('complaints.show',compact('complaint','type','message'));

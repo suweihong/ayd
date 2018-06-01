@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Store;
+use App\Models\Estimate;
 
 class EstimatesController extends Controller
 {
@@ -13,7 +15,19 @@ class EstimatesController extends Controller
      */
     public function index()
     {
-        return view('estimates.index');
+        session_start();
+        $store_id = $_SESSION['store_id'];
+        $store = Store::find($store_id);
+
+        $estimates = $store->estimates()->orderBy('created_at','desc')->paginate(2);
+
+       $environments = $store->estimates()->pluck('environment')->toArray();
+
+       $environment = array_sum($environments) / count($environments);
+      
+
+       
+        return view('estimates.index',compact('store','estimates'));
     }
 
     /**

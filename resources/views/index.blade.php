@@ -34,21 +34,16 @@
 			</div>
 			<div class="col-xs-12 in_box">
 				<p class="alert" role="alert">销售动态</p>
-				<div class="col-xs-12 message_list">
-					<p class="btn btn-info">未读</p>
-					<p class="message_list_p">为什么我家订单这么少？</p>
-					<p class="message_list_p">5分钟前</p>
-				</div>
-				<div class="col-xs-12 message_list">
-					<p class="btn btn-fff">已读</p>
-					<p class="message_list_p">为什么我家订单这么少？</p>
-					<p class="message_list_p">5分钟前</p>
-				</div>
-				<div class="col-xs-12 message_list">
-					<p class="btn btn-warning">投诉</p>
-					<p class="message_list_p">为什么我家订单这么少？</p>
-					<p class="message_list_p">5分钟前</p>
-				</div>
+				@foreach($complaints as $complaint)
+					<div class="col-xs-12 message_list">
+						@if($complaint->check_id == 1)<p class="btn btn-fff">已读</p>
+						@elseif($complaint->check_id == 2 && $complaint->client_id == '') <p class="btn btn-info">未读</p>
+						@else<p class="btn btn-warning">投诉</p>
+						@endif
+						<p class="message_list_p">{{str_limit($complaint->content,$limit = 60, $end = '......')}}</p>
+						<p class="message_list_p">{{$complaint->created_at->diffForHumans()}}</p>
+					</div>
+				@endforeach
 			</div>
 		</div>	
 @endsection
