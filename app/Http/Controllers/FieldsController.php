@@ -50,10 +50,21 @@ class FieldsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+   //按星期开关场地
     public function show($id)
     {
-        return view('sale.switch');
+        
+        return view('sale.switch_week');
     }
+
+    //按日期开关场地
+    public function switch_date()
+    {
+        
+
+        return view('sale.switch_date');
+    }
+
 
     /**
      * Show the form for editing the specified resource.

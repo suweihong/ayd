@@ -37,3 +37,5 @@ Route::resource('items','ItemsController');//添加运动场地和品类
 Route::resource('estimates','EstimatesController');//评价
 Route::resource('fields','FieldsController');//场地
 Route::get('/price/date','FieldsController@price_date'); //按日期配置价格的页面
+Route::get('/switch/date','FieldsController@switch_date'); //按日期开关场地的页面
+
