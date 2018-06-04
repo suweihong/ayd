@@ -13,8 +13,10 @@ class OrderController extends Controller
      */
     public function index()
     {
+        session_start();
         return view('orders.index');
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -23,7 +25,8 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        session_start();
+        return view('orders.store');
     }
 
     /**
@@ -34,7 +37,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -45,7 +48,8 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        session_start();
+        return view('orders.client');
     }
 
     /**

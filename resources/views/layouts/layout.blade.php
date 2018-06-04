@@ -99,12 +99,12 @@
 						</a>
 					</li>
 					<li>
-						<a class="" href="#">
+						<a class="" href="{{route('orders.create')}}">
 							<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> 按商家
 						</a>
 					</li>
 					<li>
-						<a class="" href="#">
+						<a class="" href="{{route('orders.show',1)}}">
 							<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> 按用户
 						</a>
 					</li>
@@ -179,19 +179,12 @@
 			$("#model").fadeOut(500)
 		})
 		laydate.render({
-		  elem: '#test1' //指定元素
-		});	
-		// var data=$('.layui-this').attr("lay-ymd")
-		//  $("#test1").val(data)	
-		//  alert(data)
-		// $(".menu_list").click(function(){
-		// 	$(this).addClass("active")
-		// })
-		// if($('#text1').val()=="" || $('#text1').val()==undefined){
-		// 	$('#text1').hide()
-		// }else{
-		// 	$('#text1').show()
-		// }
+			elem: '#test1',
+			done: function(value, date, endDate){
+		    	console.log(value); //2017-08-18
+		    	console.log(date); //{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+			}
+		});
 		
 
 	</script>
