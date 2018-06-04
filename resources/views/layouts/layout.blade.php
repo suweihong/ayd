@@ -104,8 +104,13 @@
 						</a>
 					</li>
 					<li>
-						<a class="" href="{{route('orders.show',1)}}">
+						<a class="" href="{{route('orders.edit',1)}}">
 							<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> 按用户
+						</a>
+					</li>
+					<li>
+						<a class="" href="{{route('orders.show',1)}}">
+							<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> 订单详情
 						</a>
 					</li>
 				</ul>

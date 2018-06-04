@@ -46,10 +46,11 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //订单详情
     public function show($id)
     {
         session_start();
-        return view('orders.client');
+        return view('orders.show');
     }
 
     /**
@@ -60,7 +61,8 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        //
+         session_start();
+        return view('orders.client');
     }
 
     /**
