@@ -49,6 +49,7 @@
 						<br>
 					</label> 
 
+
 					<label class="form-inline col-xs-12 form-inline-g">
 						<span class="col-xs-1">场馆封面图 </span>
 						<div class="pic_pic col-xs-3" >
@@ -84,6 +85,7 @@
 					</label>  
 					<button class="btn btn-info" type="submit">更新场地信息</button>
 					<a href="{{ route('stores.index')}}" class="btn clickt">返回</a>
+
 				</div>
 			</div>
 		</form>

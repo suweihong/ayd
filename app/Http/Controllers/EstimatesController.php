@@ -19,15 +19,19 @@ class EstimatesController extends Controller
         $store_id = $_SESSION['store_id'];
         $store = Store::find($store_id);
 
-        $estimates = $store->estimates()->orderBy('created_at','desc')->paginate(2);
+        $estimate_list = $store->estimates();
+        $estimates = $estimate_list->orderBy('created_at','desc')->paginate(2);
 
-       $environments = $store->estimates()->pluck('environment')->toArray();
-
-       $environment = array_sum($environments) / count($environments);
+       $environments = $estimate_list->pluck('environment')->toArray();
+       $environment = array_sum($environments) / (count($environments)==0 ? 1 : count($environments));
       
+       $services = $estimate_list->pluck('service')->toArray();
+       $service = array_sum($services) / (count($services)==0 ? 1 : count($services) );
 
+       $averages = $estimate_list->pluck('average')->toArray();
+       $average = array_sum($averages) / (count($averages)==0 ? 1 : count($averages));
        
-        return view('estimates.index',compact('store','estimates'));
+        return view('estimates.index',compact('store','estimates','environment','service','average'));
     }
 
     /**

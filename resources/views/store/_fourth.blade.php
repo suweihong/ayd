@@ -1,24 +1,29 @@
 
 @if($switch == 0)
-	<div class="row">
-		<div class="col-xs-12 in_box">
-			
-			<ul id="store_menu1" class="col-xs-12">
-				<li @if($shadow == 1) class="active" @endif><a href="{{route('fields.create')}}">按星期</a></li>
-				<li @if($shadow == 2) class="active" @endif><a href="/price/date">按日期</a></li>
-				
-			</ul>
-		</div>
-	</div>
+	<ul class="nav nav-pills" id="store_menu2">
+		<li class="active btn"><a href="{{route('fields.create')}}" class="btnt">按星期</a></li>
+		<li class="btn">
+		<!-- <a href="/price/date" class="btnt" style="position: absolute;z-index: 9">按日期</a> -->
+
+			<a href="javascript:void(0);" class="btnt btn_date" style="position: absolute;z-index: 9">按日期</a>
+				<input type="text" class="demo-input" id="test1" value="{{$now}}">
+
+		</li>
+	</ul>
 @else
-		<div class="row">
-		<div class="col-xs-12 in_box">
-			
-			<ul id="store_menu1" class="col-xs-12">
-				<li @if($shadow == 1) class="active" @endif><a href="{{route('fields.show',1)}}">按星期</a></li>
-				<li @if($shadow == 2) class="active" @endif><a href="/switch/date">按日期</a></li>
-				
-			</ul>
-		</div>
-	</div>
+	<ul class="nav nav-pills" id="store_menu2">
+		<li class="active btn"><a href="{{route('fields.show',1)}}" class="btnt">按星期</a></li>
+		<li class="btn">
+			<a href="/switch/date" class="btnt" style="position: absolute;z-index: 9">按日期</a>
+			<input type="text" class="demo-input" id="test1" value="{{$now}}">
+		</li>
+	</ul>
 @endif
+
+<script type="text/javascript">
+	var day = $('.layui-this').attr('lay-ymd');
+	var aa = 333;
+	$('.btn_date').click(function(){
+			alert(day);
+	})
+</script>

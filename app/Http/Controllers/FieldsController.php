@@ -74,6 +74,9 @@ class FieldsController extends Controller
         $type_id = $request->type_id;
         $item_id = $request->item_id ?? 1;
         $types = $store->types()->where('item_id',$item_id)->get();
+        $week = $request->week ?? 1;
+        $now = date('Y-m-d',time());
+    
         
         if(!$type_id){
             if(!$store->types()->get()->isEmpty()){
@@ -84,13 +87,16 @@ class FieldsController extends Controller
             }
         }
         $type = Type::find($type_id);
+
        if($type == null){
             $places = [];
         }else{
-             $places = $type->places()->where('store_id',$store_id)->get();
+             $places = $type->places()->where('store_id',$store_id)->orderBy('created_at','asc')->get();
         }
+
        
-        return view('sale.price_week',compact('store','type_id','places','types'));
+
+        return view('sale.price_week',compact('store','type_id','places','types','week','now'));
     }
 
 
@@ -104,6 +110,8 @@ class FieldsController extends Controller
         $type_id = $request->type_id;
         $item_id = $request->item_id ?? 1;
         $types = $store->types()->where('item_id',$item_id)->get();
+        $now = date('Y-m-d',time());
+         
         
         if(!$type_id){
             if(!$store->types()->get()->isEmpty()){
@@ -120,7 +128,7 @@ class FieldsController extends Controller
              $places = $type->places()->where('store_id',$store_id)->get();
         }
 
-        return view('sale.price_date',compact('store','type_id','places','types'));
+        return view('sale.price_date',compact('store','type_id','places','types','now'));
     }
     /**
      * Store a newly created resource in storage.
@@ -148,6 +156,7 @@ class FieldsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     //按星期开关场地
     public function show(Request $request,$id)
     {
@@ -159,6 +168,8 @@ class FieldsController extends Controller
          $type_id = $request->type_id;
         $item_id = $request->item_id ?? 1;
         $types = $store->types()->where('item_id',$item_id)->get();
+        $week = $request->week ?? 1;
+        $now = date('Y-m-d',time());
         
         if(!$type_id){
             if(!$store->types()->get()->isEmpty()){
@@ -175,7 +186,7 @@ class FieldsController extends Controller
              $places = $type->places()->where('store_id',$store_id)->get();
         }
 
-        return view('sale.switch_week',compact('store','type_id','places','types'));
+        return view('sale.switch_week',compact('store','type_id','places','types','week','now'));
     }
 
     //按日期开关场地
@@ -190,6 +201,7 @@ class FieldsController extends Controller
          $type_id = $request->type_id;
         $item_id = $request->item_id ?? 1;
         $types = $store->types()->where('item_id',$item_id)->get();
+        $now = date('Y-m-d',time());
         
         if(!$type_id){
             if(!$store->types()->get()->isEmpty()){
@@ -205,7 +217,7 @@ class FieldsController extends Controller
         }else{
              $places = $type->places()->where('store_id',$store_id)->get();
         }
-        return view('sale.switch_date',compact('store','type_id','places','types'));
+        return view('sale.switch_date',compact('store','type_id','places','types','now'));
     }
 
     /**

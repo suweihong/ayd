@@ -19,6 +19,7 @@
 <![endif]-->
 
 <script src="/js/admin/jquery-1.11.1.min.js"></script>
+<script src="/js/laydate/laydate.js"></script>
 <script src="/js/admin/bootstrap.min.js"></script>
 <script src="/js/admin/easypiechart.js"></script>
 <script src="/js/admin/bootstrap-datepicker.js"></script>
@@ -177,9 +178,20 @@
 		$("#modelBtn").click(function(){
 			$("#model").fadeOut(500)
 		})
+		laydate.render({
+		  elem: '#test1' //指定元素
+		});	
+		// var data=$('.layui-this').attr("lay-ymd")
+		//  $("#test1").val(data)	
+		//  alert(data)
 		// $(".menu_list").click(function(){
 		// 	$(this).addClass("active")
 		// })
+		// if($('#text1').val()=="" || $('#text1').val()==undefined){
+		// 	$('#text1').hide()
+		// }else{
+		// 	$('#text1').show()
+		// }
 		
 
 	</script>
