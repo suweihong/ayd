@@ -25,13 +25,17 @@ class ItemsController extends Controller
                                     ->where('type_id',$request->type_id)
                                     ->where('item_id',1)
                                     ->first();
-            $hours = $request->start_time . '-' . $request->end_time;
-            $store_type->hours = $hours;
-            $store_type->save();
-          
-           return back()->withInput()->with('success','营业时间设置成功');
+            if($store_type){
+                $hours = $request->start_time . '-' . $request->end_time;
+                $store_type->hours = $hours;
+                $store_type->save();
+                return back()->withInput()->with('success','营业时间设置成功');
+            }else{
+                 return back()->withInput()->with('warning','请先设置运动品类');
+            }
+
         }
-        
+
     }
 
     /**
@@ -39,11 +43,13 @@ class ItemsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-   //添加销售项目
+   //添加销售项目的页面
     public function create(Request $request)
     {
+        session_start();
         $store_id = $request->store_id;
-        return view('sale.create',compact('store_id'));
+        $types = Type::all();
+        return view('sale.create',compact('store_id','types'));
     }
 
     /**
@@ -52,19 +58,15 @@ class ItemsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //添加销售项目的操作
     public function store(Request $request)
     {
-        // $request->store_id = 1;
-        // $request->type_id= 3;
-        // $request->name= 333;
-        // $request->rule= 13333;
-        // $request->item_id= 1;
-       //新增销售项目  
+       //新增销售项目
         ItemType::create([
             'store_id' => $request->store_id,
             'item_id' => $request->item_id,
             'type_id' => $request->type_id,
-            'name' => $request->name,
+            'name' => $request->name ?? '',
             'rule' => $request->rule,
         ]);
 
@@ -76,12 +78,10 @@ class ItemsController extends Controller
                 'type_id' => $request->type_id,
                 'item_id' => $request->item_id,
              ]);
-             
-       }
-        
-         return back()->with('success','添加成功');
 
-       
+       }
+
+         return back()->with('success','销售项目添加成功');
 
     }
 

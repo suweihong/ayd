@@ -1,9 +1,5 @@
 
-{{-- @extends('layouts.layout')
 
-@section('title','商家管理')
-
-@section('content') --}}
 	<div class="row">
 		<div class="col-xs-12 in_box">
 			<div class="alert" role="alert">
@@ -17,7 +13,3 @@
 			</ul>
 		</div>
 	</div>
-{{-- 	<div class="row col-sm-12">
-		@yield('substance')
-	</div>
-@stop --}}

@@ -104,6 +104,7 @@ class FieldsController extends Controller
     public function price_date(Request $request)
     {
         session_start();
+
         $store_id = $_SESSION['store_id'];
         $store = Store::find($store_id);
   
@@ -111,7 +112,12 @@ class FieldsController extends Controller
         $item_id = $request->item_id ?? 1;
         $types = $store->types()->where('item_id',$item_id)->get();
         $now = date('Y-m-d',time());
-         
+        //要查询的日期
+        $date = $request->date ?? $now;
+        $time = strtotime($date);
+        //要查询的那天是 周几
+        $week = date('N',$time);
+     
         
         if(!$type_id){
             if(!$store->types()->get()->isEmpty()){
@@ -127,6 +133,8 @@ class FieldsController extends Controller
         }else{
              $places = $type->places()->where('store_id',$store_id)->get();
         }
+
+
 
         return view('sale.price_date',compact('store','type_id','places','types','now'));
     }
