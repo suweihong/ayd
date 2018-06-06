@@ -44,8 +44,7 @@
 						         <th data-field="name"  data-sortable="true" width='200' style="text-align:center;">管理员</th>
 						          <th data-field="name"  data-sortable="true" width='200' style="text-align:center;">创建时间</th>
 						           <th data-field="name"  data-sortable="true" width='200' style="text-align:center;">操作</th>
-						           
-						       
+
 						    </tr>
 						    </thead>
 						     <tbody>
@@ -54,16 +53,19 @@
 						    			<td>{{$store->id}}</td>
 						    			<td>{{$store->title}}</td>
 						    			@if($store->switch == 1)
-						    			<td>正常</td>
+						    				<td>正常</td>
 						    			@else
-						    			<td>锁定</td>
+						    				<td>锁定</td>
 						    			@endif
-						    			
 						    			<td>
-						    				@foreach($store->types as $type)
-						    				 {{$type->name}} 
-						    				@endforeach
-						    			</td>
+						    			<?php foreach ($types_stores as $key => $types_store): ?>
+						    				@if($key+1 == $store->id)
+						    				<?php foreach ($types_store as $k => $type): ?>
+						    					{{$type->name}}
+						    				<?php endforeach ?>
+						    				@endif
+						    			<?php endforeach ?>
+										</td>
 										@if($store->mp_user)
 											<td>{{$store->mp_user->account}}</td>
 										@else
@@ -71,7 +73,7 @@
 										@endif
 										<td>{{$store->created_at}}</td>	
 						    			<td>
-						    				
+
 											<a href="{{route('stores.edit',$store->id)}}">管理商家</a>
 						    			</td>
 						    		</tr>

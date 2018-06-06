@@ -22,29 +22,34 @@ class StoreController extends Controller
         $type_id = $request->type_id;//运动品类
         $search_name = $request->search_name; //搜索的名称
         $store_type = $request->store_type; //店铺 锁定 或 正常
+        $types_stores = [];//所有店铺的 运动品类
 
         if($store_type){
-            if($search_name){               
-                $type = Type::where('name',$search_name)->first(); 
-                if($type){            
-                    $stores = $type->stores()->paginate(10);
+            if($search_name){
+                $type = Type::where('name',$search_name)->first();
+                if($type){
+                    $stores = $type->stores()->distinct('store_id')->paginate(10);
                 }else{
                      session()->flash('warning','没有该运动品类');
-                    return redirect('/stores');                   
+                    return redirect('/stores');
                 }
-               
+
             }else{
                 $stores = Store::where('switch',$store_type)->orderBy('created_at','desc')->paginate(10);
             }
         }elseif($type_id){
-             $type = Type::find($type_id);
+            $type = Type::find($type_id);
             $stores = $type->stores()->paginate(10);
-        }
-        else{
+        }else{
             $stores = Store::orderBy('created_at','asc')->paginate(10);
+
         }
-        return view('store.index',compact('stores'));
-     
+         foreach ($stores as $key => $store) {
+                    $types = $store->types()->distinct('type_id')->get();
+                    $types_stores[$key] = $types;
+                }
+        return view('store.index',compact('stores','types_stores'));
+
     }
 
     /**

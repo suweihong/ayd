@@ -7,6 +7,7 @@ use App\Models\ItemType;
 use App\Models\StoreType;
 use App\Models\Store;
 use App\Models\Type;
+use App\Models\Field;
 
 class ItemsController extends Controller
 {
@@ -18,6 +19,7 @@ class ItemsController extends Controller
     //店铺 每个运动品类的 营业时间
     public function index(Request $request)
     {
+        $store = Store::find($request->store_id);
         if($request->start_time == '' || $request->end_time == ''){
             return back()->withInput()->with('warning','请填写完整的营业时间');
         }else{
@@ -29,7 +31,14 @@ class ItemsController extends Controller
                 $hours = $request->start_time . '-' . $request->end_time;
                 $store_type->hours = $hours;
                 $store_type->save();
-                return back()->withInput()->with('success','营业时间设置成功');
+               $places = $store->places()->where('type_id',$request->type_id)->orderBy('created_at','asc')->get();
+               if($places->isEmpty()){
+                    return back()->withInput()->with('warning','请先添加场地');
+               }else{
+                    
+                    return back()->withInput()->with('success','销售数据更新成功');
+               }
+               
             }else{
                  return back()->withInput()->with('warning','请先设置运动品类');
             }

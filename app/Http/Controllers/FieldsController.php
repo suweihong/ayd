@@ -36,7 +36,7 @@ class FieldsController extends Controller
        if($type == null){
             $places = [];
         }else{
-             $places = $type->places()->where('store_id',$store_id)->get();
+             $places = $type->places()->where('store_id',$store_id)->orderBy('created_at','asc')->get();
         }
         if($type_id == 0){
             $hours[0] = '';
@@ -104,13 +104,13 @@ class FieldsController extends Controller
     public function price_date(Request $request)
     {
         session_start();
-
         $store_id = $_SESSION['store_id'];
         $store = Store::find($store_id);
   
         $type_id = $request->type_id;
         $item_id = $request->item_id ?? 1;
         $types = $store->types()->where('item_id',$item_id)->get();
+        //现在的日期
         $now = date('Y-m-d',time());
         //要查询的日期
         $date = $request->date ?? $now;
@@ -118,7 +118,6 @@ class FieldsController extends Controller
         //要查询的那天是 周几
         $week = date('N',$time);
      
-        
         if(!$type_id){
             if(!$store->types()->get()->isEmpty()){
                 $type_id = $store->types()->first()->id;
@@ -131,10 +130,8 @@ class FieldsController extends Controller
        if($type == null){
             $places = [];
         }else{
-             $places = $type->places()->where('store_id',$store_id)->get();
+             $places = $type->places()->where('store_id',$store_id)->orderBy('created_at','asc')->get();
         }
-
-
 
         return view('sale.price_date',compact('store','type_id','places','types','now'));
     }
@@ -191,7 +188,7 @@ class FieldsController extends Controller
        if($type == null){
             $places = [];
         }else{
-             $places = $type->places()->where('store_id',$store_id)->get();
+             $places = $type->places()->where('store_id',$store_id)->orderBy('created_at','asc')->get();
         }
 
         return view('sale.switch_week',compact('store','type_id','places','types','week','now'));
@@ -223,7 +220,7 @@ class FieldsController extends Controller
        if($type == null){
             $places = [];
         }else{
-             $places = $type->places()->where('store_id',$store_id)->get();
+             $places = $type->places()->where('store_id',$store_id)->orderBy('created_at','asc')->get();
         }
         return view('sale.switch_date',compact('store','type_id','places','types','now'));
     }
