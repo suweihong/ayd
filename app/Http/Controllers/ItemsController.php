@@ -35,6 +35,7 @@ class ItemsController extends Controller
                if($places->isEmpty()){
                     return back()->withInput()->with('warning','请先添加场地');
                }else{
+                    
                     $new_start = (int)substr($request->start_time,0,strrpos($request->start_time,':')); 
                     $new_end =  substr($request->end_time,0,strrpos($request->start_time,':'));
                     $new_hours = [];
