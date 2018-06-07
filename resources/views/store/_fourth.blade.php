@@ -3,9 +3,9 @@
 	<ul class="nav nav-pills" id="store_menu2">
 		<li class="active btn"><a href="{{route('fields.create')}}" class="btnt">按星期</a></li>
 		<li class="btn">
-		<!-- <a href="/price/date" class="btnt" style="position: absolute;z-index: 9">按日期</a> -->
+		<a href="/price/date" class="btnt" style="position: absolute;z-index: 9">按日期</a>
 
-			<a href="javascript:void(0);" class="btnt btn_date" style="position: absolute;z-index: 9">按日期</a>
+			
 				<input type="text" class="demo-input" id="test1" value="{{$now}}">
 
 		</li>
@@ -21,9 +21,11 @@
 @endif
 
 <script type="text/javascript">
-	var day = $('.layui-this').attr('lay-ymd');
-	var aa = 333;
-	$('.btn_date').click(function(){
-			alert(day);
-	})
+	laydate.render({
+		elem: '#test1',
+		done: function(value, date, endDate){
+	    	console.log(value); //2017-08-18
+	    	console.log(date); //{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+		}
+	});
 </script>

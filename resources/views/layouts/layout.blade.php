@@ -183,13 +183,7 @@
 		$("#modelBtn").click(function(){
 			$("#model").fadeOut(500)
 		})
-		laydate.render({
-			elem: '#test1',
-			done: function(value, date, endDate){
-		    	console.log(value); //2017-08-18
-		    	console.log(date); //{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
-			}
-		});
+		
 		
 
 	</script>
