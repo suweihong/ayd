@@ -35,10 +35,49 @@ class ItemsController extends Controller
                if($places->isEmpty()){
                     return back()->withInput()->with('warning','请先添加场地');
                }else{
-                    
+                    $new_start = (int)substr($request->start_time,0,strrpos($request->start_time,':')); 
+                    $new_end =  substr($request->end_time,0,strrpos($request->start_time,':'));
+                    $new_hours = [];
+                    for ($i=$new_start; $i < $new_end; $i++) { 
+                        array_push($new_hours,$i);//添加元素
+                     }
+                     //改商家 改运动品类的 所有价格
+                     $fields = Field::where('store_id',$request->store_id)->where('type_id',$request->type_id)->get();
+                     if(!$fields->isEmpty()){
+                        foreach ($fields as $key => $field) {
+                            $res = $field -> delete();
+                        }
+                     }
+
+                     //添加每个场地的价格
+                     $fields = [];
+                     $weeks = [1,2,3,4,5,6,7];
+                     foreach ($places as $key => $place) {
+                        foreach ($new_hours as $ke => $new_hour) {
+                           foreach ($weeks as $k => $week) {
+                               $fields[$key][$ke][$k]['place_id'] = $place->id;
+                               $fields[$key][$ke][$k]['time'] = $new_hour;
+                               $fields[$key][$ke][$k]['week'] = $week;
+                               $fields[$key][$ke][$k]['store_id'] = $request->store_id;
+                               $fields[$key][$ke][$k]['type_id'] = $request->type_id;
+
+                           }
+                        }
+                     }
+                     $new_fields = [];
+                     foreach ($fields as $key => $value) {
+                        foreach ($value as $k => $field) {
+                            foreach ($field as $ke => $v) {
+                               $new_fields[] = $v;
+                            }
+
+                        }
+                     }
+                     $fields = Field::insert($new_fields);
+                
                     return back()->withInput()->with('success','销售数据更新成功');
                }
-               
+
             }else{
                  return back()->withInput()->with('warning','请先设置运动品类');
             }

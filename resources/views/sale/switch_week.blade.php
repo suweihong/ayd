@@ -7,7 +7,7 @@
 	
 	@include('store._first',['shadow'=>2,'store_id'=>$store->id])
 	@include('store._third',['shadow'=>3,'store'=>$store,'sale'=>3,'type_id'=>$type_id])
-	@include('store._fourth',['shadow'=>1,'switch'=>1,'now'=>$now])
+	@include('store._fourth',['shadow'=>1,'switch'=>1,'now'=>$now,'type_id'=>$type_id])
 
 	<!-- <h1>场地价格</h1> -->
 		
