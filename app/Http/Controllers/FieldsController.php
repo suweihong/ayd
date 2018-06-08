@@ -98,6 +98,13 @@ class FieldsController extends Controller
         $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('time','asc')->get();
         $group = $new_prices->groupBy('time');
         $prices = $group -> toArray();
+       dump($prices);
+       foreach ($prices as $key => $value) {
+           # code...
+       }
+        $date = array_column($prices,'place_id');
+        dump($date);       
+        dump($prices);
       
         return view('sale.price_week',compact('store','type_id','places','types','week','now','prices'));
     }
