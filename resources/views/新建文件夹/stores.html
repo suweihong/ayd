@@ -580,9 +580,8 @@
 			<a href="" class="addsubmit">新增</a>
 		</form>
 	</div>
-
 	<!-- 销售__评价 -->
-	<div class="con_right storeevaluate">
+	<div class="con_right storeevaluate" style="display: none;">
 		<h1 class="in_title">商家管理</h1>
 		<div class="storemenu1">
 			<a href="javascript:;">基础信息</a>
@@ -590,7 +589,7 @@
 			<a href="javascript:;">订单</a>
 			<a href="javascript:;">评价</a>
 		</div>
-		<div class="row evaluate">
+		<div class="evaluate">
 			<h3>综合评分: 4分</h3>
 			<h4>环境评价: 2分</h4>
 			<h4>服务评价: 3分</h4>
@@ -606,8 +605,7 @@
 				<span class="evaluatenum">3分</span>
 				<p class="evalua">分局甘肃路开发工具是</p>
 				<p class="evatime">2018-06-01 16:43:45</p>
-			</div>
-					
+			</div>	
 		</div>
 	</div>
 </div>
@@ -624,23 +622,11 @@
 	$('.form_name_close').click(function(){
 		$('.mask_codebox').fadeOut()
 	})
-	$('.menu_msg').click(function(){
-		$(this).siblings('.menulist_u').slideToggle()
-	})
+	
 	$('.starflist_item,.storesale_place a').hover(function(){
 		$(this).find('.masked').stop().fadeIn()
 	},function(){
 		$(this).find('.masked').stop().fadeOut()
-	})
-	function tabs(e){
-		if(e==1){
-			$('.in_pry2box_content_show1').show().siblings().hide()
-		}else{
-			$('.in_pry2box_content_show2').show().siblings().hide()
-		}
-	}
-	$('.in_pry2box_tab li').click(function(){
-		$(this).removeClass('in_pry2box_tab_0').addClass('in_pry2box_tab_1').siblings('li').removeClass('in_pry2box_tab_1').addClass('in_pry2box_tab_0')
 	})
 </script>
 </body>

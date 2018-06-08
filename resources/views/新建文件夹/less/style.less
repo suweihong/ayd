@@ -396,6 +396,10 @@ h1,h2,h3,h4,h5,h6 {
 		}
 	}
 	.storemanage{
+		.changguan{
+			font-weight: bold;
+			margin:20px 5%;
+		}
 		.search{
 			.searchstyle{
 				.ipt(160px,30px);
@@ -406,8 +410,17 @@ h1,h2,h3,h4,h5,h6 {
 				display: inline-block;
 				margin-left: 30px;
 			}
+			.searchstyle_w{
+				width: 100px!important;
+			}
 			.search_add{
 				.btn(78,28,#333,#fff);
+				border:1px solid #ccc;
+				display: inline-block;
+				margin-left: 30px;
+			}
+			.search_add_out{
+				.btn(110,28,#333,#fff);
 				border:1px solid #ccc;
 				display: inline-block;
 				margin-left: 30px;
@@ -803,5 +816,91 @@ h1,h2,h3,h4,h5,h6 {
 			}
 		}
 	}
-	
+	.storeorder{
+		.searchbox{
+			position: relative;
+			margin:20px 5%;
+			font-size: 14px;
+			.ordernum{
+				.ipt(200,30);
+				margin:4px 0;
+			}
+			.orderprice{
+				.ipt(80,30);
+				margin:4px 0;
+			}
+			.orderstyle{
+				.ipt(100,31);
+				margin:4px 0;
+			}
+			.fukuan1{
+				.posit(0,150)
+			}
+			.fukuan2{
+				.posit(19,150)
+			}
+		}
+		.orderjian{
+			.btn(100px,30px,#fff,#30a5ff);
+			display: inline-block;
+			margin-left: 5%;
+		}
+		.orderjian_r{
+			margin-left: 10px!important;
+		}
+		.evaluate{
+			margin-left: 55px!important;
+			.eavbox{
+				font-size:18px;
+				width: 96%;
+				border:1px solid #333;
+				padding:10px;
+				margin-top: 20px;
+				overflow:hidden;
+				display: flex;
+				position: relative;
+				.xinxi{
+					float: left;
+					flex: 1;
+				}
+				.laiyuan{
+					float: right;
+					width: 260px;
+					a{
+						text-decoration: underline;
+					}
+				}
+				.source{
+					font-weight: bold;
+					margin:20px 0;
+				}
+				.evaluatenum{
+					color:#d50000;
+					margin-left: 20px;
+				}
+				.evalua{
+					padding-right: 20px;
+					margin-top: 10px;
+				}
+				.pass{
+					.btn(70px,20px,#fff,#009966);
+					position: absolute;
+					bottom: 10px;
+					left: 10px;
+				}
+				.delete{
+					.btn(70px,20px,#fff,#ff0000);
+					position: absolute;
+					bottom: 10px;
+					left: 100px;
+				}
+				.nopass{
+					.btn(70px,20px,#fff,#ff9933);
+					position: absolute;
+					bottom: 10px;
+					left: 100px;
+				}
+			}
+		}
+	}
 }

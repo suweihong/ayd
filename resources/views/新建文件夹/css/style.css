@@ -491,6 +491,10 @@ h6 {
   height: 30px;
   padding-left: 10px;
 }
+.content .storemanage .changguan {
+  font-weight: bold;
+  margin: 20px 5%;
+}
 .content .storemanage .search .searchstyle {
   width: 160px;
   height: 30px;
@@ -514,8 +518,24 @@ h6 {
   display: inline-block;
   margin-left: 30px;
 }
+.content .storemanage .search .searchstyle_w {
+  width: 100px!important;
+}
 .content .storemanage .search .search_add {
   width: 78px;
+  height: 28px;
+  color: #333333;
+  line-height: 28px;
+  background: #ffffff;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  display: inline-block;
+  margin-left: 30px;
+}
+.content .storemanage .search .search_add_out {
+  width: 110px;
   height: 28px;
   color: #333333;
   line-height: 28px;
@@ -1086,4 +1106,142 @@ h6 {
 .content .storeevaluate .evaluate h4 {
   margin: 10px 0;
   font-size: 20px;
+}
+.content .storeorder .searchbox {
+  position: relative;
+  margin: 20px 5%;
+  font-size: 14px;
+}
+.content .storeorder .searchbox .ordernum {
+  width: 200px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 1px;
+  font-size: 14px;
+  padding-left: 10px;
+  border: 1px solid #afafaf;
+  outline: none;
+  margin: 4px 0;
+}
+.content .storeorder .searchbox .orderprice {
+  width: 80px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 1px;
+  font-size: 14px;
+  padding-left: 10px;
+  border: 1px solid #afafaf;
+  outline: none;
+  margin: 4px 0;
+}
+.content .storeorder .searchbox .orderstyle {
+  width: 100px;
+  height: 31px;
+  line-height: 31px;
+  border-radius: 1px;
+  font-size: 14px;
+  padding-left: 10px;
+  border: 1px solid #afafaf;
+  outline: none;
+  margin: 4px 0;
+}
+.content .storeorder .searchbox .fukuan1 {
+  position: absolute;
+  top: 0px;
+  left: 150px;
+}
+.content .storeorder .searchbox .fukuan2 {
+  position: absolute;
+  top: 19px;
+  left: 150px;
+}
+.content .storeorder .orderjian {
+  width: 100px;
+  height: 30px;
+  color: #ffffff;
+  line-height: 30px;
+  background: #30a5ff;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  display: inline-block;
+  margin-left: 5%;
+}
+.content .storeorder .orderjian_r {
+  margin-left: 10px!important;
+}
+.content .storeorder .evaluate {
+  margin-left: 55px!important;
+}
+.content .storeorder .evaluate .eavbox {
+  font-size: 18px;
+  width: 96%;
+  border: 1px solid #333;
+  padding: 10px;
+  margin-top: 20px;
+  overflow: hidden;
+  display: flex;
+  position: relative;
+}
+.content .storeorder .evaluate .eavbox .xinxi {
+  float: left;
+  flex: 1;
+}
+.content .storeorder .evaluate .eavbox .laiyuan {
+  float: right;
+  width: 260px;
+}
+.content .storeorder .evaluate .eavbox .laiyuan a {
+  text-decoration: underline;
+}
+.content .storeorder .evaluate .eavbox .source {
+  font-weight: bold;
+  margin: 20px 0;
+}
+.content .storeorder .evaluate .eavbox .evaluatenum {
+  color: #d50000;
+  margin-left: 20px;
+}
+.content .storeorder .evaluate .eavbox .evalua {
+  padding-right: 20px;
+  margin-top: 10px;
+}
+.content .storeorder .evaluate .eavbox .pass {
+  width: 70px;
+  height: 20px;
+  color: #ffffff;
+  line-height: 20px;
+  background: #009966;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+.content .storeorder .evaluate .eavbox .delete {
+  width: 70px;
+  height: 20px;
+  color: #ffffff;
+  line-height: 20px;
+  background: #ff0000;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  position: absolute;
+  bottom: 10px;
+  left: 100px;
+}
+.content .storeorder .evaluate .eavbox .nopass {
+  width: 70px;
+  height: 20px;
+  color: #ffffff;
+  line-height: 20px;
+  background: #ff9933;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  position: absolute;
+  bottom: 10px;
+  left: 100px;
 }
