@@ -1352,3 +1352,16 @@ a.todo-list-item:focus {
   margin: 3px;
   font-size: 15px;
 }
+.order_details {
+  font-weight: bold;
+  color: #333;
+  font-size: 16px;
+  margin: 20px 30px;
+}
+.order_detailsbtn {
+  margin-left: 30px;
+  background: #30a5ff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}

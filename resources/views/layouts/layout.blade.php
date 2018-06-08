@@ -44,7 +44,7 @@
 					<li class="dropdown pull-right">
 
 
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"></svg> 上次登录： {{$_SESSION['last_time'] }}</a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"></svg> 上次登录：</a>
 
 						
 
