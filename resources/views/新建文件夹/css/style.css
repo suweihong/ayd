@@ -61,6 +61,82 @@ h6 {
   font-size: 100%;
   font-weight: normal;
 }
+.bsck_green {
+  background: #336633!important;
+  color: #fff!important;
+}
+.bsck_fff {
+  background: #fff!important;
+  color: #333!important;
+}
+.bsck_black {
+  background: #000!important;
+  color: #fff!important;
+}
+.table_line {
+  border: 1px solid #ccc;
+  width: 90%;
+  margin: 0;
+  padding: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 30px auto;
+}
+.table_line tr {
+  border: 1px solid #aaa;
+  padding: 5px;
+}
+.table_line th,
+.table_line td {
+  padding: 10px;
+  text-align: center;
+  font-weight: normal;
+  font-size: 14px;
+}
+.table_line th {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: normal;
+}
+.table_btn {
+  margin-left: 56px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+.table_btn .none {
+  opacity: 0.01;
+}
+.table_btn tr {
+  white-space: nowrap;
+}
+.table_btn th,
+.table_btn td {
+  width: 80px;
+  height: 30px;
+  color: #ffffff;
+  line-height: 30px;
+  background: #30a5ff;
+  border-radius: 5px;
+  text-align: center;
+  margin: 20px 14px;
+  border-radius: 0;
+  display: inline-block;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+}
+.table_btn .table_btn_num {
+  width: 78px;
+  height: 28px;
+  color: #333333;
+  line-height: 28px;
+  background: #ffffff;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  border: 1px solid #333;
+  border-radius: 0;
+}
 .topper {
   height: 60px;
   width: 100%;
@@ -653,6 +729,9 @@ h6 {
 .content .storesale {
   width: 100%;
 }
+.content .storesale .storesale_msg {
+  position: relative;
+}
 .content .storesale .storesale_place {
   margin-left: 50px;
   overflow: hidden;
@@ -713,12 +792,34 @@ h6 {
   border-radius: 5px;
   text-align: center;
   font-size: 14px;
-  margin-left: 70px;
+  margin: 30px 70px;
   display: inline-block;
-  margin-top: 30px;
 }
 .content .storesale .tab_data {
-  margin-left: 70px;
+  margin: 20px 0px 10px 70px;
+}
+.content .storesale .tab_data .data_dtta {
+  width: 100px;
+  height: 30px;
+  color: #333333;
+  line-height: 30px;
+  background: #f1f4f7;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  display: inline-block;
+  border-radius: 0;
+  position: relative;
+}
+.content .storesale .tab_data .data_dtta input {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 30px;
+  background: rgba(0, 0, 0, 0.2);
+  padding-left: 80px;
+  width: 100px;
+  border: none;
 }
 .content .storesale .tab_data .data_week {
   width: 100px;
@@ -731,6 +832,7 @@ h6 {
   font-size: 14px;
   display: inline-block;
   border-radius: 0;
+  position: relative;
 }
 .content .storesale .tab_data .active {
   background: #f88015;
@@ -756,44 +858,115 @@ h6 {
   background: #30a5ff;
   color: #fff;
 }
-.table_line {
-  border: 1px solid #ccc;
-  width: 90%;
-  margin: 0;
-  padding: 0;
-  border-collapse: collapse;
-  border-spacing: 0;
-  margin: 30px auto;
-}
-.table_line tr {
-  border: 1px solid #aaa;
-  padding: 5px;
-}
-.table_line th,
-.table_line td {
-  padding: 10px;
-  text-align: center;
-  font-weight: normal;
-  font-size: 14px;
-}
-.table_line th {
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: normal;
-}
-.table_btn {
-  margin-left: 56px;
+.content .storesale .swichbox {
   overflow: hidden;
-  margin-bottom: 30px;
+  height: 80px;
+  margin-left: 70px;
+  position: relative;
 }
-.table_btn .none {
-  opacity: 0.01;
+.content .storesale .swichbox .swichi_p1 {
+  width: 50px;
+  height: 34px;
+  background: #ffffff;
+  position: absolute;
+  top: 10px;
+  left: 0px;
+  border: 1px solid #ccc;
 }
-.table_btn tr {
-  white-space: nowrap;
+.content .storesale .swichbox .swichi_p2 {
+  width: 50px;
+  height: 34px;
+  background: #336633;
+  position: absolute;
+  top: 10px;
+  left: 80px;
+  border: 1px solid #ccc;
 }
-.table_btn th,
-.table_btn td {
+.content .storesale .swichbox .swichi_p3 {
+  width: 50px;
+  height: 34px;
+  background: #000000;
+  position: absolute;
+  top: 10px;
+  left: 160px;
+  border: 1px solid #ccc;
+}
+.content .storesale .swichbox .swichi_p4 {
+  width: 50px;
+  height: 34px;
+  background: transparent;
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  border: 1px solid #ccc;
+  border: none;
+}
+.content .storesale .swichbox .swichi_p5 {
+  width: 50px;
+  height: 34px;
+  background: transparent;
+  position: absolute;
+  top: 50px;
+  left: 80px;
+  border: 1px solid #ccc;
+  border: none;
+}
+.content .storesale .swichbox .swichi_p6 {
+  width: 50px;
+  height: 34px;
+  background: transparent;
+  position: absolute;
+  top: 50px;
+  left: 160px;
+  border: 1px solid #ccc;
+  border: none;
+}
+.content .storesale .swichboxmsg {
+  padding: 6px 20px;
+  position: absolute;
+  bottom: -50px;
+  right: 100px;
+  width: 200px;
+  height: 120px;
+  background-color: #ffdf25;
+  box-shadow: 6px 5px 8px #ccc;
+}
+.content .storesale .swichboxmsg h5 {
+  font-size: 14px;
+  color: #676767;
+  margin: 10px 0;
+}
+.content .storesale .swichboxmsg p {
+  font-size: 12px;
+  color: #000;
+  margin-bottom: 10px;
+}
+.content .storecard .form_name {
+  padding-top: 20px;
+}
+.content .storecard .form-group {
+  margin-left: 70px;
+  margin-top: 20px;
+}
+.content .storecard .form-group label {
+  width: 100px;
+  text-align: left;
+  font-size: 18px;
+  font-weight: bold;
+  display: inline-block;
+}
+.content .storecard .form-group select {
+  width: 140px;
+  height: 30px;
+  color: #333333;
+  line-height: 30px;
+  background: #ffffff;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  border-radius: 0;
+}
+.content .storecard .addsubmit {
   width: 80px;
   height: 30px;
   color: #ffffff;
@@ -801,22 +974,7 @@ h6 {
   background: #30a5ff;
   border-radius: 5px;
   text-align: center;
-  margin: 20px 14px;
-  border-radius: 0;
+  font-size: 14px;
   display: inline-block;
-  margin-bottom: 0;
-  font-size: 14px;
-  font-weight: 400;
-}
-.table_btn .table_btn_num {
-  width: 78px;
-  height: 28px;
-  color: #333333;
-  line-height: 28px;
-  background: #ffffff;
-  border-radius: 5px;
-  text-align: center;
-  font-size: 14px;
-  border: 1px solid #333;
-  border-radius: 0;
+  margin: 30px 70px;
 }

@@ -53,6 +53,68 @@ h1,h2,h3,h4,h5,h6 {
 	top: 1px*@top;
 	left: 1px*@left;
 }
+.bsck_green{
+	background: #336633!important;
+	color: #fff!important;
+}
+.bsck_fff{
+	background: #fff!important;
+	color: #333!important;
+}
+.bsck_black{
+	background: #000!important;
+	color: #fff!important;
+}
+.table_line{
+    border: 1px solid #ccc;
+    width: 90%;
+    margin:0;
+    padding:0;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 30px auto;
+    tr {
+	    border: 1px solid #aaa;
+	    padding: 5px;
+	}
+	th,td{
+		padding: 10px;
+    	text-align: center;
+	    font-weight:normal;
+	    font-size: 14px;
+	}
+	th {
+	    text-transform: uppercase;
+	    letter-spacing: 1px;
+	    font-weight:normal;
+	}
+}
+.table_btn{
+	margin-left: 56px;
+	overflow: hidden;
+	margin-bottom: 30px;
+	.none{
+		opacity: 0.01;
+	}
+	tr{
+
+	    white-space: nowrap;
+	}
+	th,td{
+		.btn(80px,30px,#fff,#30a5ff);
+	    margin:20px 14px;
+	    border-radius: 0;
+	    display: inline-block;
+	    margin-bottom: 0;
+	    font-size: 14px;
+	    font-weight: 400;
+	}
+    .table_btn_num{
+    	.btn(78px,28px,#333,#fff);
+    	border:1px solid #333;
+    	border-radius:0;
+    }
+}
 .topper{
 	height: 60px;
 	width: 100%;
@@ -493,6 +555,9 @@ h1,h2,h3,h4,h5,h6 {
 	}
 	.storesale{
 		width: 100%;
+		.storesale_msg{
+			position: relative;
+		}
 		.storesale_place{
 			margin-left: 50px;
 			overflow: hidden;
@@ -532,16 +597,32 @@ h1,h2,h3,h4,h5,h6 {
 		}
 		.updata_salenum{
 			.btn(110px,32px,#fff,#30a5ff);
-			margin-left: 70px;
+			margin:30px 70px;
 			display: inline-block;
-			margin-top: 30px;
 		}
 		.tab_data{
-			margin-left: 70px;
+			margin: 20px 0px 10px 70px;
+			.data_dtta{
+				.btn(100px,30px,#333,#f1f4f7);
+				display: inline-block;
+				border-radius: 0;
+				position: relative;
+				input{
+					position:absolute;
+					top:0px;
+					left:0px;
+					height: 30px;
+					background: rgba(0,0,0,0.2);
+					padding-left: 80px;
+					width: 100px;
+					border:none;
+				}
+			}
 			.data_week{
 				.btn(100px,30px,#333,#ccc);
 				display: inline-block;
 				border-radius: 0;
+				position: relative;
 			}
 			.active{
 				background: #f88015;
@@ -561,55 +642,86 @@ h1,h2,h3,h4,h5,h6 {
 				color: #fff;
 			}
 		}
+		.swichbox{
+		    overflow: hidden;
+		    height: 80px;
+		    margin-left: 70px;
+		    position: relative;
+			.pobox(@top,@left,@backcolor){
+				width: 50px;
+			    height: 34px;
+			    background: @backcolor;
+			    position: absolute;
+			    top: 1px*@top;
+			    left:1px* @left;
+			    border: 1px solid #ccc;
+			}
+			.swichi_p1{
+				.pobox(10px,0px,#fff)
+			}
+			.swichi_p2{
+				.pobox(10px,80px,#336633)
+			}
+			.swichi_p3{
+				.pobox(10px,160px,#000)
+			}
+			.swichi_p4{
+				.pobox(50px,10px,transparent);
+				border:none;
+			}
+			.swichi_p5{
+				.pobox(50px,80px,transparent);
+				border:none;
+			}
+			.swichi_p6{
+				.pobox(50px,160px,transparent);
+				border:none;
+			}
+		}
+		.swichboxmsg{
+			padding: 6px 20px;
+		    position: absolute;
+		    bottom: -50px;
+		    right: 100px;
+		    width: 200px;
+		    height: 120px;
+		    background-color: #ffdf25;    
+		    box-shadow: 6px 5px 8px #ccc;
+		    h5{
+		    	font-size: 14px;
+    			color: #676767;
+    			margin: 10px 0;
+		    }
+		    p{
+		    	font-size: 12px;
+    			color: #000;
+    			margin-bottom: 10px;
+		    }
+		}
 	}
-}
-.table_line{
-    border: 1px solid #ccc;
-    width: 90%;
-    margin:0;
-    padding:0;
-    border-collapse: collapse;
-    border-spacing: 0;
-    margin: 30px auto;
-    tr {
-	    border: 1px solid #aaa;
-	    padding: 5px;
+	.storecard{
+		.form_name{
+			padding-top: 20px;
+		}
+		.form-group{
+			margin-left: 70px;
+			margin-top: 20px;
+			label{
+				width: 100px;
+				text-align: left;
+				font-size: 18px;
+				font-weight: bold;
+				display: inline-block;
+			}
+			select{
+				.btn(140px,30px,#333,#fff);
+				border-radius: 0;
+			}
+		}
+		.addsubmit{
+			.btn(80px,30px,#fff,#30a5ff);
+			display: inline-block;
+			margin:30px 70px;
+		}
 	}
-	th,td{
-		padding: 10px;
-    	text-align: center;
-	    font-weight:normal;
-	    font-size: 14px;
-	}
-	th {
-	    text-transform: uppercase;
-	    letter-spacing: 1px;
-	    font-weight:normal;
-	}
-}
-.table_btn{
-	margin-left: 56px;
-	overflow: hidden;
-	margin-bottom: 30px;
-	.none{
-		opacity: 0.01;
-	}
-	tr{
-
-	    white-space: nowrap;
-	}
-	th,td{
-		.btn(80px,30px,#fff,#30a5ff);
-	    margin:20px 14px;
-	    border-radius: 0;
-	    display: inline-block;
-	    margin-bottom: 0;
-	    font-size: 14px;
-	    font-weight: 400;
-	}
-    .table_btn_num{
-    	.btn(78px,28px,#333,#fff);
-    	border:1px solid #333;
-    	border-radius:0;
-    }
 }
