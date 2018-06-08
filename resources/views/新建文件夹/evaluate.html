@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>奥运动</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+	<link href="css/style.css" type="text/css" media="screen" rel="stylesheet" />
+	<link href="font/iconfont.css" type="text/css" media="screen" rel="stylesheet" />
+	<script src="js/laydate/laydate.js"></script>
+	<script src="js/jquery-2.1.3.min.js"></script>
+</head>
+<body>
+<div class="topper">
+	<div class="topper_l">
+		奥运动管理员平台
+	</div>
+	<div class="topper_r">
+		<a href="javascript:;">上次登录</a>
+		<a href="javascript:;">退出登录</a>
+	</div>
+</div>
+<div class="content">
+	<ul class="con_left">
+		<li class="menulist0"></li>
+        <li class="menulist1"></li>
+        <li class="menulist hover">
+        	<img src="img/pencil.png" class="menuimg">
+            <a href="javascript:;" class="menutxt">系统概览</a>
+        </li>
+        <li class="menulist">
+        	<div class="menu_msg hover">
+	        	<img src="img/xia.png" class="menuimg_x">
+	        	<img src="img/you.png" class="menuimg_y">
+	            <a href="javascript:;" class="menutxt">核心系统</a>
+	        </div>
+            <ul class="menulist_u">
+            	<li class="hover">
+		        	<img src="img/you.png" class="menuimg">
+		            <a href="javascript:;" class="menutxt">广告管理</a>
+            	</li>
+            	<li class="hover">
+		        	<img src="img/you.png" class="menuimg">
+		            <a href="javascript:;" class="menutxt">运动品类</a>
+            	</li>
+            	<li class="hover">
+		        	<img src="img/you.png" class="menuimg">
+		            <a href="javascript:;" class="menutxt">商家管理</a>
+            	</li>
+            </ul>
+        </li>
+        <li class="menulist">
+        	<div class="menu_msg hover">
+	        	<img src="img/xia.png" class="menuimg_x">
+	        	<img src="img/you.png" class="menuimg_y">
+	            <a href="javascript:;" class="menutxt">订单查询</a>
+            </div>
+            <ul class="menulist_u">
+            	<li class="hover">
+		        	<img src="img/you.png" class="menuimg">
+		            <a href="javascript:;" class="menutxt">所有订单</a>
+            	</li>
+            	<li class="hover">
+		        	<img src="img/you.png" class="menuimg">
+		            <a href="javascript:;" class="menutxt">按商家</a>
+            	</li>
+            	<li class="hover">
+		        	<img src="img/you.png" class="menuimg">
+		            <a href="javascript:;" class="menutxt">按用户</a>
+            	</li>
+            	<li class="hover">
+		        	<img src="img/you.png" class="menuimg">
+		            <a href="javascript:;" class="menutxt">订单详情</a>
+            	</li>
+            </ul>
+        </li>
+        <li class="menulist hover">
+        	<img src="img/pencil.png" class="menuimg">
+            <a href="javascript:;" class="menutxt">财务对账</a>
+        </li>
+        <li class="menulist">
+        	<div class="menu_msg hover">
+	        	<img src="img/xia.png" class="menuimg_x">
+	        	<img src="img/you.png" class="menuimg_y">
+	            <a href="javascript:;" class="menutxt">服务中心</a>
+	        </div>
+            <ul class="menulist_u">
+            	<li class="hover">
+		        	<img src="img/you.png" class="menuimg">
+		            <a href="javascript:;" class="menutxt">商家反馈</a>
+            	</li>
+            	<li class="hover">
+		        	<img src="img/you.png" class="menuimg">
+		            <a href="javascript:;" class="menutxt">用户投诉</a>
+            	</li>
+            	<li class="hover">
+		        	<img src="img/you.png" class="menuimg">
+		            <a href="javascript:;" class="menutxt">公告</a>
+            	</li>
+            </ul>
+        </li>
+        <li class="menulist hover">
+        	<img src="img/pencil.png" class="menuimg">
+            <a href="javascript:;" class="menutxt">评价审核</a>
+        </li>
+    </ul>
+	<!-- 订单查询 -->
+	<div class="con_right storeorder" style="display: none;">
+		<h1 class="in_title">订单查询</h1>
+		<div class="searchbox">
+			<p>订单号</p>
+			<input type="text" class="ordernum" value="123123123">
+		</div>
+		<div class="searchbox">
+			<p>日期区间</p>
+			<input type="text" class="ordernum" value="8月12日-9月12日">
+			<select class="orderstyle">
+				<option value="1">下单</option>
+				<option value="2">核销</option>
+			</select>
+		</div>
+		<div class="searchbox">
+			<p>运动品类</p>
+			<select class="orderstyle">
+				<option value="1">羽毛球</option>
+				<option value="2">足球</option>
+				<option value="3">健身</option>
+			</select>
+			<p class="fukuan1">付款类型</p>
+			<select class="orderstyle fukuan2">
+				<option value="1">全部</option>
+				<option value="2">线上预定</option>
+				<option value="3">系统代收</option>
+				<option value="4">线下付款</option>
+			</select>
+		</div>
+		<a href="javascript:;" class="orderjian">检索</a>
+		<a href="javascript:;" class="orderjian orderjian_r">导出当前数据</a>
+		<table border="1" class="table_line">
+		    <tr>
+		      <th>序号</th>
+		      <th>订单号</th>
+		      <th>价格</th>
+		      <th>场馆</th>
+		      <th>购买信息</th>
+		      <th>购买时间</th>
+		      <th>状态</th>
+		    </tr>
+		    <tr>
+		      <td>1</td>
+		      <td>1152312</td>
+		      <td>88</td>
+		      <th>健身中心</th>
+		      <th>张三</th>
+		      <td>2018-12-12 12:12</td>
+		      <th>未核销</th>
+		    </tr>
+		</table>
+	</div>
+	<!-- 订单查询——按商家、按用户 -->
+	<div class="con_right storemanage" style="display: none;">
+		<h1 class="in_title">订单查询</h1>
+		<div class="search">
+			<input class="searchstyle" type="text" placeholder="订单号">
+			<input class="searchstyle" type="text" placeholder="8月12日-9月12日">
+			<select class="searchstyle searchstyle_w">
+				<option value="">羽毛球</option>
+				<option value="">足球</option>
+			</select>
+			<a href="javascript:;" class="search_jian">检索</a>
+			<a href="javascript:;" class="search_add_out">导出当前数据</a>
+		</div>
+		<p class="changguan">场馆：奇乐健身中心</p>
+		<table border="1" class="table_line">
+		    <tr>
+		      <th>序号</th>
+		      <th>名称</th>
+		      <th>状态</th>
+		      <th>销售项目</th>
+		      <th>管理员</th>
+		      <th>创建时间</th>
+		      <th>操作</th>
+		    </tr>
+		    <tr>
+		      <td>1</td>
+		      <td>起了健身中心</td>
+		      <td>正常</td>
+		      <th>健身</th>
+		      <th>aysd</th>
+		      <td>2018-12-12 12:12</td>
+		      <th>管理商家</th>
+		    </tr>
+		</table>
+	</div>
+	<!-- 财务对账 -->
+	<div class="con_right storeorder" style="display: none;">
+		<h1 class="in_title">对账</h1>
+		<div class="searchbox">
+			<p>账单时间</p>
+			<input type="text" class="ordernum" value="8月4日">
+		</div>
+		<div class="searchbox">
+			<p>确认时间</p>
+			<input type="text" class="ordernum" value="8月4日">
+		</div>
+		<div class="searchbox">
+			<p>商家名称</p>
+			<input type="text" class="ordernum" placeholder="按名字检索">
+		</div>
+		<div class="searchbox">
+			<p>价格区间</p>
+			<input type="text" class="orderprice" value="0">
+			至
+			<input type="text" class="orderprice" value="99999">
+		</div>
+		<a href="javascript:;" class="orderjian">检索</a>
+		<a href="javascript:;" class="orderjian orderjian_r">导出当前数据</a>
+		<table border="1" class="table_line">
+		    <tr>
+		      <th>序号</th>
+		      <th>订单号</th>
+		      <th>价格</th>
+		      <th>场馆</th>
+		      <th>购买信息</th>
+		      <th>购买时间</th>
+		      <th>状态</th>
+		    </tr>
+		    <tr>
+		      <td>1</td>
+		      <td>1152312</td>
+		      <td>88</td>
+		      <th>健身中心</th>
+		      <th>张三</th>
+		      <td>2018-12-12 12:12</td>
+		      <th>未核销</th>
+		    </tr>
+		</table>
+	</div>
+	<!-- 服务中心 -->
+	<div class="con_right storeorder" style="display: none;">
+		<h1 class="in_title">商家反馈</h1>
+		<table border="1" class="table_line">
+		    <tr>
+		      <th>序号</th>
+		      <th>订单号</th>
+		      <th>价格</th>
+		      <th>场馆</th>
+		      <th>购买信息</th>
+		      <th>购买时间</th>
+		      <th>状态</th>
+		    </tr>
+		    <tr>
+		      <td>1</td>
+		      <td>1152312</td>
+		      <td>88</td>
+		      <th>健身中心</th>
+		      <th>张三</th>
+		      <td>2018-12-12 12:12</td>
+		      <th>未核销</th>
+		    </tr>
+		</table>
+	</div>
+	<!-- 用户投诉 -->
+	<div class="con_right storeorder" style="display: none;">
+		<h1 class="in_title">用户投诉</h1>
+		<table border="1" class="table_line">
+		    <tr>
+		      <th>序号</th>
+		      <th>订单号</th>
+		      <th>价格</th>
+		      <th>场馆</th>
+		      <th>购买信息</th>
+		      <th>购买时间</th>
+		      <th>状态</th>
+		    </tr>
+		    <tr>
+		      <td>1</td>
+		      <td>1152312</td>
+		      <td>88</td>
+		      <th>健身中心</th>
+		      <th>张三</th>
+		      <td>2018-12-12 12:12</td>
+		      <th>未核销</th>
+		    </tr>
+		</table>
+	</div>
+	<!-- 评价审核 -->
+	<div class="con_right storeorder">
+		<h1 class="in_title">评价审核</h1>
+		<div class="storemenu1">
+			<a href="javascript:;">未审核</a>
+			<a href="javascript:;">已审核</a>
+			<a href="javascript:;">全部</a>
+		</div>
+		<div class="evaluate">
+			<div class="eavbox">
+				<div class="xinxi">
+					<span>张三 </span>
+					<span class="evaluatenum">5分</span>
+					<p class="evalua">场馆不错，我很喜sfsdgdsg fssd d都挺贵的饭否嘀咕的方式梵蒂冈电费梵蒂冈反对电费发的合法的欢</p>
+					<a href="javascript:;" class="pass">审核通过</a>
+					<a href="javascript:;" class="delete">删除</a>
+				</div>
+				<div class="laiyuan">
+					<p class="source">评价来源</p>
+					<p>商家: <a href="javascript:;">起了健身</a></p>
+					<p>订单: <a href="javascript:;">123123</a></p>
+					<p class="evatime">评价时间: 2018-06-01 16:44:43</p>
+				</div>
+			</div>
+			<div class="eavbox">
+				<div class="xinxi">
+					<span>张三 </span>
+					<span class="evaluatenum">5分</span>
+					<p class="evalua">场馆不错，我很喜sfsdgdsg fssd d都挺贵的饭否嘀咕的方式梵蒂冈电费梵蒂冈反对电费发的合法的欢</p>
+					<a href="javascript:;" class="pass">审核通过</a>
+					<a href="javascript:;" class="delete">删除</a>
+				</div>
+				<div class="laiyuan">
+					<p class="source">评价来源</p>
+					<p>商家: <a href="javascript:;">起了健身</a></p>
+					<p>订单: <a href="javascript:;">123123</a></p>
+					<p class="evatime">评价时间: 2018-06-01 16:44:43</p>
+				</div>
+			</div>
+			<div class="eavbox">
+				<div class="xinxi">
+					<span>张三 </span>
+					<span class="evaluatenum">5分</span>
+					<p class="evalua">场馆不错，我很喜sfsdgdsg fssd d都挺贵的饭否嘀咕的方式梵蒂冈电费梵蒂冈反对电费发的合法的欢</p>
+					<a href="javascript:;" class="pass">审核通过</a>
+					<a href="javascript:;" class="delete">删除</a>
+				</div>
+				<div class="laiyuan">
+					<p class="source">评价来源</p>
+					<p>商家: <a href="javascript:;">起了健身</a></p>
+					<p>订单: <a href="javascript:;">123123</a></p>
+					<p class="evatime">评价时间: 2018-06-01 16:44:43</p>
+				</div>
+			</div>	
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+</script>
+</body>
+</html>
