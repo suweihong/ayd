@@ -146,22 +146,36 @@ class FieldsController extends Controller
 
         //读取所有价格
         $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('date',$date)->orderBy('time','asc')->get();
+     
 
         if($new_prices->isEmpty()){
 
             $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('time','asc')->get();
-            dump($new_prices);
+          
+
+        }else{
+             $price_week = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('time','asc')->get();
+
+            foreach ($price_week as $key => $value) {
+               foreach ($new_prices as $k => $v) {
+                  if($value->place_id == $v->place_id && $value->time == $v->time){
+                    $price_week->pull($key);
+                    $price_week->push($v);
+                  }
+               }
+            }
+            $new_prices = $price_week;
 
         }
 
            // if('1'){
-              
+
             //      // 添加该日期的价格
             //     if(!$hours){
-               
+
             //         return back()->with('warning','请先设置营业时间');
             //     }else{
-               
+
             //             //营业时间
             //          $new_hours = explode('-',$hours);
             //          $new_start = (int)substr($new_hours[0],0,strrpos($new_hours[0],':')); 
@@ -171,13 +185,13 @@ class FieldsController extends Controller
             //                     array_push($new_hours,$i);//添加元素
             //                  }
 
-            //             //添加价格   
-            //             
-            //             
-            //             先添加 该日期 价格被修改的数据 
+            //             //添加价格
+            //
+            //
+            //             先添加 该日期 价格被修改的数据
             //             再重组(transform) 价格数组（$new_price）
-            //             
-            //             
+            //
+            //
             //             $fields = [];
             //             foreach ($places as $key => $place) {
             //                 foreach ($new_hours as $ke => $new_hour) {
@@ -206,7 +220,7 @@ class FieldsController extends Controller
 
         $group = $new_prices->groupBy('time');
         $prices = $group -> toArray();
-
+dump($prices);
         return view('sale.price_date',compact('store','type_id','places','types','now','prices'));
     }
     /**

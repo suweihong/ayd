@@ -24,9 +24,17 @@
 			<table class="col-sm-12">
 				<tr>
 					<th class="btn"></th>
-					@foreach($places as $place)
-						<th class="btn btn-info">场地{{$loop->iteration}}</th>
-					@endforeach
+					<!-- @foreach($places as $place)
+						<th class="btn btn-info">场地{{$loop->iteration}}{{$place->id}}</th>
+					@endforeach -->
+
+				<?php foreach ($prices as $key => $value): ?>
+					@if($key == 0)
+						@foreach($price as $v)
+								<th class="btn btn-info">场地{{$loop->iteration}}</th>
+						@endforeach
+					@endif
+				<?php endforeach ?>
 				</tr>
 
 

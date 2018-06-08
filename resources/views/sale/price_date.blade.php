@@ -16,7 +16,7 @@
 			<tr>
 				<th class="btn"></th>
 				@foreach($places as $place)
-					<th class="btn btn-info">场地{{$loop->iteration}}</th>
+					<th class="btn btn-info">场地{{$loop->iteration}}{{$place->id}}</th>
 				@endforeach	
 			</tr>
 			<?php foreach ($prices as $key => $price): ?>
