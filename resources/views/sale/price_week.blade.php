@@ -24,14 +24,12 @@
 			<table class="col-sm-12">
 				<tr>
 					<th class="btn"></th>
-					<!-- @foreach($places as $place)
-						<th class="btn btn-info">场地{{$loop->iteration}}{{$place->id}}</th>
-					@endforeach -->
+				
 
 				<?php foreach ($prices as $key => $price): ?>
 					@if($key == 2)
 						@foreach($price as $v)
-								<th class="btn btn-info">场地{{$loop->iteration}}{{$v['place_id']}}</th>
+								<th class="btn btn-info">场地{{$loop->iteration}}{{$v->place_id}}</th>
 						@endforeach
 					@endif
 				<?php endforeach ?>
@@ -43,7 +41,7 @@
 						<td class="btn btn-info">{{$key}}:00-{{$key+1}}:00</td>
 						@foreach($price as $value)
 
-							<td class="btn btn-btn">{{$value['price']}}</input></td>
+							<td class="btn btn-btn">{{$value->price}}</input></td>
 
 
 						@endforeach

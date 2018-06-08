@@ -10,7 +10,7 @@
 
 	<ul class="col-sm-12" id="salePlace">
 		@foreach($places as $place)
-			<li class="btn btn-info">场地{{$loop->iteration}}</li>
+			<li class="btn btn-info">场地{{$loop->iteration}}{{$place->id}}</li>
 		@endforeach
 		<form action="{{route('fields.store')}}" method="post" name="form">
 			<input type="hidden" name="_token" value=" {{ csrf_token() }}" />

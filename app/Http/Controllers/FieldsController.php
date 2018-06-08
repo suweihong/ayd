@@ -37,7 +37,7 @@ class FieldsController extends Controller
        if($type == null){
             $places = [];
         }else{
-             $places = $type->places()->where('store_id',$store_id)->orderBy('created_at','asc')->get();
+             $places = $type->places()->where('store_id',$store_id)->orderBy('id','asc')->get();
         }
         if($type_id == 0){
             $hours[0] = '';
@@ -86,25 +86,21 @@ class FieldsController extends Controller
                $type_id = 0;
             }
         }
-        $type = Type::find($type_id);
+       //  $type = Type::find($type_id);
 
-       if($type == null){
-            $places = [];
-        }else{
-             $places = $type->places()->where('store_id',$store_id)->orderBy('created_at','asc')->get();
-        }
+       // if($type == null){
+       //      $places = [];
+       //  }else{
+       //       $places = $type->places()->where('store_id',$store_id)->orderBy('created_at','asc')->get();
+       //  }
 
         //读取所有价格
-        $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('time','asc')->get();
-        $group = $new_prices->groupBy('time');
-        $prices = $group -> toArray();
-       dump($prices);
-       foreach ($prices as $key => $value) {
-           # code...
-       }
-        $date = array_column($prices,'place_id');
-        dump($date);       
-        dump($prices);
+        $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
+
+
+        $prices = $new_prices->groupBy('time')->sort();
+
+     
       
         return view('sale.price_week',compact('store','type_id','places','types','week','now','prices'));
     }
@@ -150,28 +146,34 @@ class FieldsController extends Controller
                             ->where('item_id','1')
                             ->first()
                             ->hours;
+     
 
         //读取所有价格
-        $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('date',$date)->orderBy('time','asc')->get();
-     
+           $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('date',$date)->orderBy('place_id','asc')->get();
+
 
         if($new_prices->isEmpty()){
 
-            $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('time','asc')->get();
-          
+            $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
+           
 
         }else{
-             $price_week = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('time','asc')->get();
 
+             $price_week = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
+           
+             //将 星期价格 替换为 日期的价格
             foreach ($price_week as $key => $value) {
                foreach ($new_prices as $k => $v) {
                   if($value->place_id == $v->place_id && $value->time == $v->time){
-                    $price_week->pull($key);
-                    $price_week->push($v);
+                 
+                    $price_week[$key] = $v;
+                   
                   }
                }
             }
             $new_prices = $price_week;
+
+         
 
         }
 
@@ -225,9 +227,11 @@ class FieldsController extends Controller
                     //获取fields_id 修改某个场地的价格
             // }
 
-        $group = $new_prices->groupBy('time');
-        $prices = $group -> toArray();
-dump($prices);
+        
+        
+        $prices = $new_prices->groupBy('time')->sort();
+
+
         return view('sale.price_date',compact('store','type_id','places','types','now','prices'));
     }
     /**

@@ -64,13 +64,11 @@ class LoginController extends Controller
     public function index()
     {
         $user = Auth::user();
-        // $last_time = $user->last_time;
-        // session(['last_time'=>$last_time]);
+       
            session_start();
            $time=1*51840000;
           setcookie(session_name(),session_id(),time()+$time,"/");
-          // $_SESSION['last_time']=$last_time;
-
+    
           //消息动态
           $today = date('Y-m-d H:i:s');
           $date = date('Y-m-d H:i:s',strtotime('today') - 2592000);
