@@ -1,32 +1,39 @@
 
 @if($switch == 0)
-		<!-- 价格 -->
-	<ul class="nav nav-pills" id="store_menu2">
-		<li class="active btn"><a href="{{route('fields.create')}}" class="btnt">按星期</a></li>
-		<li class="btn">
-
-			<!-- <a href="/price/date" class="btnt" style="position: absolute;z-index: 9">按日期</a> -->
-<form action="/price/date" method="get" name="form">
-		<a href="javascript:document.form.submit();" class="btnt btn_date  price_date" style="position: absolute;z-index: 9">按日期</a>
-		<input type="text" class="demo-input btn_date" id="test1" name="date" value="">
-		<input type="hidden" name="type_id" value="{{$type_id}}"></input>
-</form>
-
-
-		</li>
-	</ul>
+	<!-- 价格 -->
+	<!-- <div class="tab_data">
+			<a href="javascript:;" class="data_week active">按星期</a>
+			<a href="javascript:;" class="data_dtta">
+				按日期
+				<input type="text" readonly="readonly" class="demo-input btn_date" id="test1" name="date" value="2018-01-01">
+				<input type="hidden" name="type_id"></input>
+			</a>
+		</div> -->
+	<div class="tab_data">
+		<a href="{{route('fields.create')}}" class="data_week active">按星期</a>
+		<form action="/price/date" method="get" name="form" style="    display: initial">
+			<a href="javascript:document.form.submit();" class="data_dtta">
+				按日期
+				<input type="text" readonly="readonly" class="demo-input btn_date" id="test1" name="date" value="2018-01-01">
+				<input type="hidden" name="type_id" value="{{$type_id}}"></input>
+			</a>
+		</form>
+	</div>
 @else
 		<!-- 开关 -->
-	<ul class="nav nav-pills" id="store_menu2">
-		<li class="active btn"><a href="{{route('fields.show',1)}}" class="btnt">按星期</a></li>
-		<li class="btn">
-			<a href="/switch/date" class="btnt" style="position: absolute;z-index: 9">按日期</a>
-			<input type="text" class="demo-input" id="test1" value="{{$now}}">
-		</li>
-	</ul>
+	<div class="tab_data">
+		<a href="{{route('fields.show',1)}}" class="data_week active">按星期</a>
+		<form action="/switch/date" method="get" name="form1" style="    display: initial">
+			<a href="javascript:document.form1.submit();" class="data_dtta">
+				按日期
+				<input type="text" readonly="readonly" class="demo-input btn_date" id="test1" name="date" value="2018-01-01">
+				<input type="hidden" name="type_id" value="{{$type_id}}"></input>
+			</a>
+		</form>
+	</div>
 @endif
 
-<script type="text/javascript">
+ <script type="text/javascript">
 
 $('.btn_date').click(function(){
 	console.log($('#test1').val())

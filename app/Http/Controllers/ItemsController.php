@@ -111,6 +111,7 @@ class ItemsController extends Controller
     //添加销售项目的操作
     public function store(Request $request)
     {
+        dd(3333);
        //新增销售项目
         ItemType::create([
             'store_id' => $request->store_id,

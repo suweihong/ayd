@@ -478,7 +478,19 @@ h6 {
   text-align: center;
   font-size: 14px;
   display: block;
-  margin-left: 60px;
+  margin-left: 5%;
+}
+.content .sportStyle .addsport_t {
+  width: 110px;
+  height: 32px;
+  color: #ffffff;
+  line-height: 32px;
+  background: #30a5ff;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  display: block;
+  margin-top: 60px;
 }
 .content .sportStyle .sportadd {
   margin: 50px 60px;
@@ -552,6 +564,18 @@ h6 {
 }
 .content .store_base_msg {
   margin-left: 40px;
+}
+.content .store_base_msg .form_name_submitn {
+  width: 102px;
+  height: 32px;
+  color: #ffffff;
+  line-height: 32px;
+  background: #30a5ff;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  display: inline-block;
+  margin: 30px 68px;
 }
 .content .store_base_msg .form_name_submit {
   width: 102px;
@@ -999,6 +1023,19 @@ h6 {
   text-align: center;
   font-size: 14px;
   border-radius: 0;
+}
+.content .storecard .form-group .selectipt {
+  width: 230px;
+  height: 28px;
+  color: #333333;
+  line-height: 28px;
+  background: #ffffff;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  border-radius: 0;
+  padding-left: 4px;
+  text-align: left;
 }
 .content .storecard .addsubmit {
   width: 80px;

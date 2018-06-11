@@ -1,192 +1,150 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>@yield('title')</title>
-	{!! we_css() !!}
-    {!! we_js() !!}
-<link href="/css/admin/bootstrap.min.css" rel="stylesheet">
-<link href="/css/admin/datepicker3.css" rel="stylesheet">
-<link href="/css/admin/styles.css" rel="stylesheet">
-
-<!--Icons-->
-<script src="/js/admin/lumino.glyphs.js"></script>
-
-<!--[if lt IE 9]>
-<script src="js/admin/html5shiv.js"></script>
-<script src="js/admin/respond.min.js"></script>
-<![endif]-->
-
-<script src="/js/admin/jquery-1.11.1.min.js"></script>
-<script src="/js/laydate/laydate.js"></script>
-<script src="/js/admin/bootstrap.min.js"></script>
-<script src="/js/admin/easypiechart.js"></script>
-<script src="/js/admin/bootstrap-datepicker.js"></script>
-<!-- <script src="/js/admin/chart.min.js"></script>
-<script src="js/admin/easypiechart-data.js"></script>
-<script src="js/admin/chart-data.js"></script> -->
-
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>@yield('title','奥运动')</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+	<link href="/css/style.css" type="text/css" media="screen" rel="stylesheet" />
+	<link href="/font/iconfont.css" type="text/css" media="screen" rel="stylesheet" />
+	<script src="/js/laydate/laydate.js"></script>
+	<script src="/js/jquery-2.1.3.min.js"></script>
 </head>
-
 <body>
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="/"><span>奥运动管理员平台</span></a>
-				<ul class="user-menu">
-					<li class="dropdown pull-right">
+<div class="topper">
+	<div class="topper_l">
+		奥运动管理员平台
+	</div>
+	<div class="topper_r">
+		<a href="javascript:;">上次登录：{{$_SESSION['last_time']}}</a>
+		<a href="/logout">退出登录</a>
+	</div>
+</div>
+<div class="content">
+	<ul class="con_left">
+		<li class="menulist0"></li>
+        <li class="menulist1"></li>
+        <li class="menulist hover">
+        	<img src="/img/pencil.png" class="menuimg">
+            <a href="/" class="menutxt">系统概览</a>
+        </li>
+        <li class="menulist">
+        	<div class="menu_msg hover">
+	        	<img src="/img/xia.png" class="menuimg_x">
+	        	<img src="/img/you.png" class="menuimg_y">
+	            <a href="javascript:;" class="menutxt">核心系统</a>
+	        </div>
+            <ul class="menulist_u">
+            	<li class="hover">
+		        	<img src="/img/you.png" class="menuimg">
+		            <a href="{{route('advertisements.index')}}" class="menutxt">广告管理</a>
+            	</li>
+            	<li class="hover">
+		        	<img src="/img/you.png" class="menuimg">
+		            <a href="{{ route('types.index')}}" class="menutxt">运动品类</a>
+            	</li>
+            	<li class="hover">
+		        	<img src="/img/you.png" class="menuimg">
+		            <a href="{{ route('stores.index')}}" class="menutxt">商家管理</a>
+            	</li>
+            </ul>
+        </li>
+        <li class="menulist">
+        	<div class="menu_msg hover">
+	        	<img src="/img/xia.png" class="menuimg_x">
+	        	<img src="/img/you.png" class="menuimg_y">
+	            <a href="javascript:;" class="menutxt">订单查询</a>
+            </div>
+            <ul class="menulist_u">
+            	<li class="hover">
+		        	<img src="/img/you.png" class="menuimg">
+		            <a href="{{route('orders.index')}}" class="menutxt">所有订单</a>
+            	</li>
+            	<li class="hover">
+		        	<img src="/img/you.png" class="menuimg">
+		            <a href="{{route('orders.create')}}" class="menutxt">按商家</a>
+            	</li>
+            	<li class="hover">
+		        	<img src="/img/you.png" class="menuimg">
+		            <a href="{{route('orders.edit',1)}}" class="menutxt">按用户</a>
+            	</li>
+            	<li class="hover">
+		        	<img src="/img/you.png" class="menuimg">
+		            <a href="{{route('orders.show',1)}}" class="menutxt">订单详情</a>
+            	</li>
+            </ul>
+        </li>
+        <li class="menulist hover">
+        	<img src="/img/pencil.png" class="menuimg">
+            <a href="{{ route('bills.index')}}" class="menutxt">财务对账</a>
+        </li>
+        <li class="menulist">
+        	<div class="menu_msg hover">
+	        	<img src="/img/xia.png" class="menuimg_x">
+	        	<img src="/img/you.png" class="menuimg_y">
+	            <a href="javascript:;" class="menutxt">服务中心</a>
+	        </div>
+            <ul class="menulist_u">
+            	<li class="hover">
+		        	<img src="/img/you.png" class="menuimg">
+		            <a href="{{route('complaints.index',1)}}" class="menutxt">商家反馈</a>
+            	</li>
+            	<li class="hover">
+		        	<img src="/img/you.png" class="menuimg">
+		            <a href="{{ route('complaints.index',2)}}" class="menutxt">用户投诉</a>
+            	</li>
+            	<li class="hover">
+		        	<img src="/img/you.png" class="menuimg">
+		            <a href="{{ route('notices.index')}}" class="menutxt">公告</a>
+            	</li>
+            </ul>
+        </li>
+        <li class="menulist hover">
+        	<img src="/img/pencil.png" class="menuimg">
+            <a href="javascript:;" class="menutxt">评价审核</a>
+        </li>
+    </ul>
+	@yield('content')
 
-
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"></svg> 上次登录：{{$_SESSION['last_time']}}</a>
-
-						
-
-					
-						<a href="/logout" class="dropdown-toggle" ><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> 退出登录</a>
-					</li>
-				</ul>
-			</div>
-							
-		</div><!-- /.container-fluid -->
-	</nav>
-		
-	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-		<form role="search">
-			<div class="form-group">
-			<!-- 	<input type="text" class="form-control" placeholder="Search"> -->
-			</div>
-		</form>
-		<ul class="nav menu">
-			
-				<li class="menulist"><a href="/"><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg> 系统概览</a></li>
-				<li class="parent ">
-				<a href="#">
-					<span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> 核心系统 
-				</a>
-				<ul class="children collapse" id="sub-item-1">
-					<li>
-						<a class="" href="{{route('advertisements.index')}}">
-							<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> 广告管理
-						</a>
-					</li>
-					<li>
-						<a class="" href="{{ route('types.index')}}">
-							<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> 运动品类
-						</a>
-					</li>
-					<li>
-						<a class="" href="{{ route('stores.index')}}">
-							<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> 商家管理
-						</a>
-					</li>
-				</ul>
-			</li>
-			<li class="parent ">
-				<a href="">
-					<span data-toggle="collapse" href="#sub-item-2"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> 订单查询 
-				</a>
-				<ul class="children collapse" id="sub-item-2">
-					<li>
-						<a class="" href="{{route('orders.index')}}">
-							<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> 所有订单
-						</a>
-					</li>
-					<li>
-						<a class="" href="{{route('orders.create')}}">
-							<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> 按商家
-						</a>
-					</li>
-					<li>
-						<a class="" href="{{route('orders.edit',1)}}">
-							<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> 按用户
-						</a>
-					</li>
-					<li>
-						<a class="" href="{{route('orders.show',1)}}">
-							<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> 订单详情
-						</a>
-					</li>
-				</ul>
-			</li>
-			<li class="parent ">
-				<a href="{{ route('bills.index')}}">
-					<span data-toggle="collapse" href="#sub-item-3"><svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg></span> 财务对账 
-				</a>
-			</li>
-			<li class="parent ">
-				<a href="#">
-					<span data-toggle="collapse" href="#sub-item-4"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> 服务中心 
-				</a>
-				<ul class="children collapse" id="sub-item-4">
-					<li>
-						<a class="" href="{{route('complaints.index',1)}}">
-							<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> 商家反馈
-						</a>
-					</li>
-					<li>
-						<a class="" href="{{ route('complaints.index',2)}}">
-							<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> 用户投诉
-						</a>
-					</li>
-					<li>
-						<a class="" href="{{ route('notices.index')}}">
-							<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> 公告
-						</a>
-					</li>
-				</ul>
-			</li>	
-			<li class="parent ">
-				<a href="#">
-					<span data-toggle="collapse" href="#sub-item-5"><svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg></span> 评价审核 
-				</a>
-			</li>
-		
-		</ul>
-
-	</div><!--/.sidebar-->
-		
-	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-		@yield('content')
-		
-	
-	</div><!--/.main-->			
-	
-	
-
-	<script>
-		// $('#calendar').datepicker({
-		// });
-
-		(function ($) {
-		    $(document).on("click","ul.nav li.parent > a > span.icon", function(){
-		        $(this).find('em:first').toggleClass("glyphicon-minus");
-		    });
-		    $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
-		}(window.jQuery));
-
-		$(window).on('resize', function () {
-		  if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
-		})
-		$(window).on('resize', function () {
-		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
-		})
-		$("#stuffAdd").click(function(){
-			$("#model").fadeIn(500)
-		})
-		$("#modelBtn").click(function(){
-			$("#model").fadeOut(500)
-		})
-		
-		
-
-	</script>
+<script type="text/javascript">
+	$('.btn_date').click(function(){
+		console.log($('#test1').val())
+	});
+	laydate.render({
+		elem: '#test1',
+	});
+	$('.form_name_newadd').click(function(){
+		$('.mask_codebox').fadeIn()
+	})
+	$('.form_name_close').click(function(){
+		$('.mask_codebox').fadeOut()
+	})
+	$('.starflist_item,.storesale_place a').hover(function(){
+		$(this).find('.masked').stop().fadeIn()
+	},function(){
+		$(this).find('.masked').stop().fadeOut()
+	})
+	$('.menu_msg').click(function(){
+		$(this).siblings('.menulist_u').slideToggle()
+	})
+	function tabs(e){
+		if(e==1){
+			$('.in_pry2box_content_show1').show().siblings().hide()
+		}else{
+			$('.in_pry2box_content_show2').show().siblings().hide()
+		}
+	}
+	$('.in_pry2box_tab li').click(function(){
+		$(this).removeClass('in_pry2box_tab_0').addClass('in_pry2box_tab_1').siblings('li').removeClass('in_pry2box_tab_1').addClass('in_pry2box_tab_0')
+	})
+	function salestyle(e){
+		if(e==1){
+			$('#salestyle_name').hide()
+		}else{
+			$('#salestyle_name').show()
+		}
+	}
+</script>
 </body>
 
 </html>

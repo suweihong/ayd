@@ -71,7 +71,7 @@ class StoreController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         if(!$request->title || !$request->address || !$request->map || !$request->phone || $request->introduction){
             return back()->withInput()->with('warning','请填写完整内容');
 
@@ -132,7 +132,7 @@ class StoreController extends Controller
      */
     public function update(Request $request, Store $store)
     {
-        
+    
         $time = now();
         $store_imgs = [];
         $imgs = ['1223','43423','34534'];
