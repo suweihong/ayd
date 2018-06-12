@@ -338,7 +338,20 @@ class FieldsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $fields = Field::find($id);
+        $switch = $fields->switch;
+
+            if($switch == ''){
+                $new_switch = 1;
+            }elseif($switch == 1){
+                $new_switch = '';
+            }else{
+                $new_switch = 2;
+            }
+            $fields->switch = $new_switch;
+            $fields->save();
+            return $new_switch;
+
     }
 
     /**

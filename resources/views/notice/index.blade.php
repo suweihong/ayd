@@ -2,18 +2,20 @@
 @section('title','公告管理')
 @section('content')
 
-<div class="row">
-	
+
+	<div class="con_right storemanage" style="display: none;">
 		@include('_messages')
 		@include('_delete')
-				
+
+		<h1 class="in_title">公告列表</h1>
+		<h3><a href="{{route('notices.create')}}"><button class="btn btn-primary">添加公告</button></a></h3>
 
 	<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading">公告列表</div>
+					<div class="panel-heading"></div>
 					<div class="col-lg-12">
-				<h3><a href="{{route('notices.create')}}"><button class="btn btn-primary">添加公告</button></a></h3>
+				
 			</div>
 					<div class="panel-body">
 						<table  width='600' border='1' height='150' style="margin:auto;text-align:center;">
@@ -44,8 +46,7 @@
 	</div><!--/.row-->	
 		{!! $notices->render() !!}
 
-</div><!--/.row-->
-
+	</div>
 <script type="text/javascript">
 	 function btnClick(id){
 			$('.del_prompt').css('display','block') ;

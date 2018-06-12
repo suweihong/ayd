@@ -13,13 +13,13 @@
 
 		<div class="storesale_msg">
 			<div class="storesale_data">
-				 <a @if($week == 1) class="active"  @endif href="{{ route('fields.show',1) }}?week=1&&type_id={{$type_id}}">星期一</a>
-				 <a @if($week == 2) class="active"  @endif href="{{route('fields.show',1)}}?week=2&&type_id={{$type_id}}" >星期二</a>
-				 <a @if($week == 3) class="active"  @endif href="{{route('fields.show',1)}}?week=3&&type_id={{$type_id}}">星期三</a>
-				 <a @if($week == 4) class="active"  @endif href="{{route('fields.show',1)}}?week=4&&type_id={{$type_id}}">星期四</a>
-				 <a @if($week == 5) class="active"  @endif href="{{route('fields.show',1)}}?week=5&&type_id={{$type_id}}">星期五</a>
-				 <a @if($week == 6) class="active"  @endif href="{{route('fields.show',1)}}?week=6&&type_id={{$type_id}}">星期六</a>
-				 <a @if($week == 7) class="active"  @endif href="{{route('fields.show',1)}}?week=7&&type_id={{$type_id}}">星期日</a>
+				 <a @if($week == 1) class="active"  @endif href="{{ route('fields.show',1) }}?week=1&type_id={{$type_id}}">星期一</a>
+				 <a @if($week == 2) class="active"  @endif href="{{route('fields.show',1)}}?week=2&type_id={{$type_id}}" >星期二</a>
+				 <a @if($week == 3) class="active"  @endif href="{{route('fields.show',1)}}?week=3&type_id={{$type_id}}">星期三</a>
+				 <a @if($week == 4) class="active"  @endif href="{{route('fields.show',1)}}?week=4&type_id={{$type_id}}">星期四</a>
+				 <a @if($week == 5) class="active"  @endif href="{{route('fields.show',1)}}?week=5&type_id={{$type_id}}">星期五</a>
+				 <a @if($week == 6) class="active"  @endif href="{{route('fields.show',1)}}?week=6&type_id={{$type_id}}">星期六</a>
+				 <a @if($week == 7) class="active"  @endif href="{{route('fields.show',1)}}?week=7&type_id={{$type_id}}">星期日</a>
 			</div>
 			<table class="table_btn">
 			    <tr>
@@ -27,7 +27,7 @@
 					<?php foreach ($prices as $key => $price): ?>
 						@if($key == $start_time)
 							@foreach($price as $v)
-									<th>场地{{$loop->iteration}}{{$v->place_id}}</th>
+								<th>场地{{$loop->iteration}}{{$v->place_id}}</th>
 							@endforeach
 						@endif
 					<?php endforeach ?>
@@ -36,7 +36,9 @@
 					<tr>
 						<td>{{$key}}:00-{{$key+1}}:00</td>
 						@foreach($price as $value)
-						<td><input type="text" value="{{$value->price}}" maxlength="8" disabled="disabled" @if($value->switch == '')class="table_btn_num bsck_fff"" @elseif($value->switch == 1) class="table_btn_num bsck_green" @else class="table_btn_num bsck_black"  @endif/></td>
+							<td onclick="btnClick({{$value->id}})"><input type="text" id="{{$value->id}}" value="{{$value->price}}" maxlength="8" disabled="disabled" @if($value->switch == '')class="table_btn_num bsck_fff" @elseif($value->switch == 2) class="table_btn_num bsck_green"
+							@else class="table_btn_num bsck_black"  @endif
+							/></td>
 						@endforeach
 					</tr>
 				<?php endforeach ?>
@@ -58,5 +60,23 @@
 		</div>
 		<a href="javascript:;" class="updata_salenum">更新销售数据</a>
 	</div>
-		
+
+	<script type="text/javascript">
+		function btnClick(id){
+			$.ajax({
+				url: '/fields/'+id+'/edit',
+				type: 'GET',
+				success : function(data){
+					if(data == ''){
+						$('#'+id).removeClass('bsck_black').addClass('bsck_fff')
+					}else if(data == 1){
+						$('#'+id).addClass('bsck_black').removeClass('bsck_fff')
+					}else{
+						location.href = "{{route('orders.show',1)}}";
+					}
+				}
+			})
+		}
+	</script>
+
 @stop
