@@ -46,16 +46,25 @@ class FieldsController extends Controller
             $type_hours = StoreType::where('store_id',$store_id)
                             ->where('item_id',$item_id)
                             ->where('type_id',$type_id)
-                            ->first()
-                            ->hours;
-            if($type_hours){
-                $hours = explode('-', $type_hours);
+                            ->first();
+                         
+            if(!$type_hours){
+              dump(0);
+              $hours[0] = '';
+              $hours[1] = '';
             }else{
-                $hours[0] = '';
-                $hours[1] = '';
+              dump(333);
+              $type_hours = $type_hours->hours;
+            
+              if(!$type_hours){
+                  $hours[0] = '';
+                  $hours[1] = '';
+              }else{
+                  $hours = explode('-', $type_hours);
+              }
+               
             }
         }
-       
         return view('sale.index',compact('store','type_id','places','types','hours'));
     }
 
@@ -91,7 +100,6 @@ class FieldsController extends Controller
                             ->where('item_id','1')
                             ->first()
                             ->hours;
-
 
              //运动品类开始营业的时间
             $store_hours = explode('-', $store_hours);

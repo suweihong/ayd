@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class StoreType extends Model
 {
+	// use SoftDeletes;
+	
     protected $table = 'store_type';
     protected $fillable = ['store_id','type_id','item_id','hours'];
-	use SoftDeletes;
+	
 }

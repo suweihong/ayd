@@ -17,7 +17,8 @@ class Type extends Model
      */
     public function stores()
     {
-        return $this->belongsToMany('App\Models\Store');
+        return $this->belongsToMany('App\Models\Store')
+                    ->withTimestamps();
     }
 
     //该类型拥有的 场地

@@ -10,7 +10,7 @@ class Field extends Model
 {
     //
     	use SoftDeletes;
-        protected $fillable = ['type_id','store_id','week','time','place_id','date','price','switch'];
+        protected $fillable = ['type_id','store_id','week','time','place_id','date','price','switch','name','rule','intro'];
 
     	//该商品所属类型
     	public function type()
