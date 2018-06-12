@@ -3,8 +3,9 @@
 @section('title','商家管理')
 
 @section('content')
-	@include('_messages')
+
 	<div class="con_right storemanage" >
+		@include('_messages')
 		<h1 class="in_title">商家管理</h1>
 		<div class="search">
 			<form name="form" action="{{route('stores.index')}}" method="get">

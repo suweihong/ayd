@@ -1,5 +1,5 @@
 
-<!-- <div id="error_messages" >
+<div id="error_messages" >
 @foreach (['danger', 'warning', 'success', 'info'] as $msg)
   @if(session()->has($msg))
     <div class="flash-message">
@@ -11,15 +11,10 @@
 @endforeach
 
 <script type="text/javascript">
-					setTimeout(() => {
-						$("#error_messages").slideUp()
-					}, 3000)
-				</script>
+	setTimeout(() => {
+		$("#error_messages").slideUp()
+	}, 3000)
+</script>
 
-</div> -->
+</div>
 
-@if (session('warning'))
-    <div class="alert alert-success" style="font-style: weight;color:#F00;font-size: large;">
-        {{ session('warning') }}
-    </div>
-@endif

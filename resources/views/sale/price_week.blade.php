@@ -32,17 +32,42 @@
 			<tr>
 				<td>{{$key}}:00-{{$key+1}}:00</td>
 				@foreach($price as $value)
-				<td onclick="btnClick({{$value->id}})"><input type="text" id="{{$value->id}}" value="{{$value->price}}" maxlength="8" class="table_btn_num"/></td>
+				<td>
+					<input type="text" onchange="updatePrice({{$value->id}})" id="{{$value->id}}" value="{{$value->price}}" maxlength="8"  class="table_btn_num"/>
+				</td>
 				@endforeach
 			</tr>
 		<?php endforeach ?>
 	</table>
-	<a href="javascript:;" class="updata_salenum">更新销售数据</a>
+	<a href="javascript:;" class="updata_salenum" onclick="btnPrice()">更新销售数据</a>
 </div>
 
 <script type="text/javascript">
-	function btnClick(id){
-		alert(id);
+	 arrId=[]
+	 arrNum=[]
+	function updatePrice(id){
+	
+		arrId.push(id)
+		arrNum.push($('#'+id).val())
+		console.log(arrId);
+		console.log(arrNum);
+	}
+	function btnPrice(){
+		$.ajax({
+			url : '/price/update',
+			type : 'POST',
+			data : {
+				'_token' : '{{csrf_token()}}',
+				'arrId' : arrId,
+				'arrNum' :arrNum,
+			},
+			success : function(data)
+			{
+				console.log(data)
+			}
+		})
+		arrId=[]
+		arrNum=[]
 	}
 </script>
 

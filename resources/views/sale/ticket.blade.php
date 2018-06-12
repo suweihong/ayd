@@ -16,7 +16,7 @@
 				<p class="storecatd_p2">票卡备注说明：{{$ticket->intro}}</p>
 				<p class="storecatd_p3">价格：{{$ticket->price}}</p>
 
-					<a href="javascript:;" class="storecatd_p4"> 销售中</a>
+				<a href="javascript:;" class="storecatd_p4"> 销售中 </a>
 
 				<a class="storecatd_p5" href="javascript:;">删除</a>
 			</div>

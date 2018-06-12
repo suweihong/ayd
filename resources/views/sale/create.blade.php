@@ -1,8 +1,9 @@
 
 @extends('layouts.layout')
 @section('content')
-	@include('_messages')
+	
 	<div class="con_right storecard">
+		@include('_messages')
 		<h1 class="in_title">销售分类</h1>
 		<form action="{{route('items.store')}}" method="post" name="form">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}"/>

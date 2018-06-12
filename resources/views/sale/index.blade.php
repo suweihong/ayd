@@ -10,11 +10,7 @@
 		@include('store._third',['shadow'=>1,'store'=>$store,'sale'=>0,'type_id'=>$type_id])
 		<div class="storesale_place">
 			@foreach($places as $place)
-				<form name="form1" action="{{route('fields.destroy',$place->id)}}" method="post">
-					<input type="hidden" name="_token" value="{{csrf_token()}}">
-					<input type="hidden" name="_method" value="DELETE">
-					<a href="javascript:document.form1.submit();"><span class="masked">删除</span>场地{{$loop->iteration}}{{$place->id}}</a>
-				</form>
+			<a href="javascript:;" onclick="btnDelete({{$place->id}})" id="{{$place->id}}"><span class="masked">删除</span>场地{{$loop->iteration}}{{$place->id}}</a>
 			@endforeach
 			<form action="{{route('fields.store')}}" method="post" name="form">
 				<input type="hidden" name="_token" value=" {{ csrf_token() }}" />
@@ -32,5 +28,19 @@
 		<a href="javascript:;" class="updata_salenum">更新销售数据</a>
 	</div>
 
-	
+	<script type="text/javascript">
+		function btnDelete(id){
+			$.ajax({
+				url : '/fields/'+id,
+				type: 'DELETE',
+				data: {
+					'_token':'{{csrf_token()}}',
+					'id':id,
+				},
+				success : function(data){
+					$('#'+id).remove()
+				}
+			})
+		}
+	</script>
 @stop

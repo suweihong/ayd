@@ -48,10 +48,11 @@ class FieldsController extends Controller
                             ->where('type_id',$type_id)
                             ->first();
                          
-            if(!$type_hours){
+            if(!$type_hours){ 
               $hours[0] = '';
               $hours[1] = '';
             }else{
+           
               $type_hours = $type_hours->hours;
             
               if(!$type_hours){
@@ -111,6 +112,11 @@ class FieldsController extends Controller
             return view('sale.price_week',compact('store','type_id','start_time','types','week','now','prices'));
 
     }
+    //  修改场地价格
+    public function update_price(Request $request)
+    {
+       
+    }
 
 
      //价格配置页 按日期
@@ -163,21 +169,16 @@ class FieldsController extends Controller
         }else{
 
              $price_week = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
-           
              //将 星期价格 替换为 日期的价格
             foreach ($price_week as $key => $value) {
                foreach ($new_prices as $k => $v) {
                   if($value->place_id == $v->place_id && $value->time == $v->time){
-                 
+
                     $price_week[$key] = $v;
-                   
                   }
                }
             }
             $new_prices = $price_week;
-
-         
-
         }
 
         $prices = $new_prices->groupBy('time')->sort();
@@ -218,8 +219,7 @@ class FieldsController extends Controller
         $store_id = $_SESSION['store_id'];
         $store = Store::find($store_id);
 
-
-         $type_id = $request->type_id;
+        $type_id = $request->type_id;
         $item_id = $request->item_id ?? 1;
         $types = $store->types()->where('item_id',$item_id)->get();
         $week = $request->week ?? 1;
@@ -258,8 +258,6 @@ class FieldsController extends Controller
         session_start();
         $store_id = $_SESSION['store_id'];
         $store = Store::find($store_id);
-
-
 
          $type_id = $request->type_id;
         $item_id = $request->item_id ?? 1;
@@ -327,8 +325,10 @@ class FieldsController extends Controller
      */
     public function destroy($id)
     {
-        return $id;
-        $place -> delete();
-        return back()->with('warning','删除成功');
+        
+        $place = Place::find($id);
+        $res = $place -> delete();
+        return 1;
+       
     }
 }

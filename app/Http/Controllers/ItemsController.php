@@ -111,6 +111,7 @@ class ItemsController extends Controller
     public function store(Request $request)
     {
 
+
         $types_id = Store::find($request->store_id)->types()->where('item_id',$request->item_id)->pluck('types.id')->toArray();
         if(!in_array($request->type_id, $types_id)){
             //新增商家的 运动品类
