@@ -37,7 +37,7 @@ class FieldsController extends Controller
        if($type == null){
             $places = [];
         }else{
-             $places = $type->places()->where('store_id',$store_id)->orderBy('created_at','asc')->get();
+             $places = $type->places()->where('store_id',$store_id)->orderBy('id','asc')->get();
         }
         if($type_id == 0){
             $hours[0] = '';
@@ -55,7 +55,6 @@ class FieldsController extends Controller
                 $hours[1] = '';
             }
         }
-       
        
         return view('sale.index',compact('store','type_id','places','types','hours'));
     }
@@ -79,27 +78,32 @@ class FieldsController extends Controller
         $now = date('Y-m-d',time());
 
         if(!$type_id){
-            if(!$store->types()->get()->isEmpty()){
-                $type_id = $store->types()->first()->id;
-              
-            }else{
-               $type_id = 0;
-            }
-        }
-        $type = Type::find($type_id);
+                if(!$store->types()->get()->isEmpty()){
+                    $type_id = $store->types()->first()->id;
+                }else{
+                     $type_id = 0;
+                 }
+             }
 
-       if($type == null){
-            $places = [];
-        }else{
-             $places = $type->places()->where('store_id',$store_id)->orderBy('created_at','asc')->get();
-        }
+        //该店铺 该运动品类 的营业时间
+        $store_hours = StoreType::where('store_id',$store_id)
+                            ->where('type_id',$type_id)
+                            ->where('item_id','1')
+                            ->first()
+                            ->hours;
 
-        //读取所有价格
-        $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('time','asc')->get();
-        $group = $new_prices->groupBy('time');
-        $prices = $group -> toArray();
-      
-        return view('sale.price_week',compact('store','type_id','places','types','week','now','prices'));
+
+             //运动品类开始营业的时间
+            $store_hours = explode('-', $store_hours);
+            $start_time =(int)substr($store_hours[0],0,strrpos($store_hours[0],':')); 
+
+            //读取所有价格
+            $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
+
+            $prices = $new_prices->groupBy('time')->sort();
+
+            return view('sale.price_week',compact('store','type_id','start_time','types','week','now','prices'));
+
     }
 
 
@@ -129,12 +133,6 @@ class FieldsController extends Controller
                $type_id = 0;
             }
         }
-        $type = Type::find($type_id);
-       if($type == null){
-            $places = [];
-        }else{
-             $places = $type->places()->where('store_id',$store_id)->orderBy('created_at','asc')->get();
-        }
 
 
          //该店铺 该运动品类 的营业时间
@@ -143,25 +141,47 @@ class FieldsController extends Controller
                             ->where('item_id','1')
                             ->first()
                             ->hours;
+          //运动品类开始营业的时间
+        $store_hours = explode('-', $hours);
+        $start_time =(int)substr($store_hours[0],0,strrpos($store_hours[0],':')); 
+     
 
         //读取所有价格
-        $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('date',$date)->orderBy('time','asc')->get();
+           $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('date',$date)->orderBy('place_id','asc')->get();
+
 
         if($new_prices->isEmpty()){
 
-            $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('time','asc')->get();
-            dump($new_prices);
+            $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
+
+        }else{
+
+             $price_week = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
+           
+             //将 星期价格 替换为 日期的价格
+            foreach ($price_week as $key => $value) {
+               foreach ($new_prices as $k => $v) {
+                  if($value->place_id == $v->place_id && $value->time == $v->time){
+                 
+                    $price_week[$key] = $v;
+                   
+                  }
+               }
+            }
+            $new_prices = $price_week;
+
+         
 
         }
 
            // if('1'){
-              
+
             //      // 添加该日期的价格
             //     if(!$hours){
-               
+
             //         return back()->with('warning','请先设置营业时间');
             //     }else{
-               
+
             //             //营业时间
             //          $new_hours = explode('-',$hours);
             //          $new_start = (int)substr($new_hours[0],0,strrpos($new_hours[0],':')); 
@@ -171,13 +191,13 @@ class FieldsController extends Controller
             //                     array_push($new_hours,$i);//添加元素
             //                  }
 
-            //             //添加价格   
-            //             
-            //             
-            //             先添加 该日期 价格被修改的数据 
+            //             //添加价格
+            //
+            //
+            //             先添加 该日期 价格被修改的数据
             //             再重组(transform) 价格数组（$new_price）
-            //             
-            //             
+            //
+            //
             //             $fields = [];
             //             foreach ($places as $key => $place) {
             //                 foreach ($new_hours as $ke => $new_hour) {
@@ -204,10 +224,12 @@ class FieldsController extends Controller
                     //获取fields_id 修改某个场地的价格
             // }
 
-        $group = $new_prices->groupBy('time');
-        $prices = $group -> toArray();
+        
+        
+        $prices = $new_prices->groupBy('time')->sort();
 
-        return view('sale.price_date',compact('store','type_id','places','types','now','prices'));
+
+        return view('sale.price_date',compact('store','type_id','start_time','types','now','prices'));
     }
     /**
      * Store a newly created resource in storage.
@@ -258,14 +280,23 @@ class FieldsController extends Controller
                $type_id = 0;
             }
         }
-        $type = Type::find($type_id);
-       if($type == null){
-            $places = [];
-        }else{
-             $places = $type->places()->where('store_id',$store_id)->orderBy('created_at','asc')->get();
-        }
+         //该店铺 该运动品类 的营业时间
+        $hours = StoreType::where('store_id',$store_id)
+                            ->where('type_id',$type_id)
+                            ->where('item_id','1')
+                            ->first()
+                            ->hours;
+          //运动品类开始营业的时间
+        $store_hours = explode('-', $hours);
+        $start_time =(int)substr($store_hours[0],0,strrpos($store_hours[0],':')); 
 
-        return view('sale.switch_week',compact('store','type_id','places','types','week','now'));
+       //读取所有价格
+        $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
+
+        $prices = $new_prices->groupBy('time')->sort();
+
+
+        return view('sale.switch_week',compact('store','type_id','start_time','types','week','now','prices'));
     }
 
     //按日期开关场地
@@ -307,7 +338,20 @@ class FieldsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $fields = Field::find($id);
+        $switch = $fields->switch;
+
+            if($switch == ''){
+                $new_switch = 1;
+            }elseif($switch == 1){
+                $new_switch = '';
+            }else{
+                $new_switch = 2;
+            }
+            $fields->switch = $new_switch;
+            $fields->save();
+            return $new_switch;
+
     }
 
     /**

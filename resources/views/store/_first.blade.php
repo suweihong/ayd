@@ -1,15 +1,21 @@
+<h1 class="in_title">商家管理</h1>
+<div class="storemenu1">
+	<a href="{{route('stores.edit',$store_id)}}"  @if($shadow == 1) class="active" @endif>基础信息</a>
+	<a href="{{route('fields.index')}}" @if($shadow == 2) class="active" @endif>销售</a>
+	<a href="{{route('orders.create')}}" @if($shadow == 3) class="active" @endif>订单</a>
+	<a href="{{route('estimates.index')}}" @if($shadow == 4) class="active" @endif>评价</a>
+</div>
 
-
-	<div class="row">
-		<div class="col-xs-12 in_box">
-			<div class="alert" role="alert">
-				<span class="in_title">商家管理</span>
-			</div>
-			<ul id="store_menu1" class="col-xs-12">
-				<li @if($shadow == 1) class="active" @endif><a href="{{route('stores.edit',$store_id)}}">基础信息</a></li>
-				<li @if($shadow == 2) class="active" @endif><a href="{{route('fields.index')}}">销售</a></li>
-				<li @if($shadow == 3) class="active" @endif><a href="{{route('orders.create')}}">订单</a></li>
-				<li @if($shadow == 4) class="active" @endif><a href="{{route('estimates.index')}}">评价</a></li>
-			</ul>
+<!-- <div class="con_right storebase" style="display: none;">
+		<h1 class="in_title">商家管理</h1>
+		<div class="storemenu1">
+			<a href="javascript:;">基础信息</a>
+			<a href="javascript:;">销售</a>
+			<a href="javascript:;">订单</a>
+			<a href="javascript:;">评价</a>
 		</div>
-	</div>
+		<div class="storemenu1">
+			<a href="javascript:;">基础信息管理</a>
+			<a href="javascript:;">管理员管理</a>
+			<a href="javascript:;">员工管理</a>
+		</div> -->

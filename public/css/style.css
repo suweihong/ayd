@@ -78,6 +78,7 @@ h6 {
   width: 90%;
   margin: 0;
   padding: 0;
+  background: #fff;
   border-collapse: collapse;
   border-spacing: 0;
   margin: 30px auto;
@@ -227,6 +228,7 @@ h6 {
 .content .con_right {
   margin-left: 280px;
   margin-top: 60px;
+  padding-bottom: 20px;
   flex: 1;
 }
 .content .con_right .title {
@@ -478,7 +480,19 @@ h6 {
   text-align: center;
   font-size: 14px;
   display: block;
-  margin-left: 60px;
+  margin-left: 5%;
+}
+.content .sportStyle .addsport_t {
+  width: 110px;
+  height: 32px;
+  color: #ffffff;
+  line-height: 32px;
+  background: #30a5ff;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  display: block;
+  margin-top: 60px;
 }
 .content .sportStyle .sportadd {
   margin: 50px 60px;
@@ -552,6 +566,18 @@ h6 {
 }
 .content .store_base_msg {
   margin-left: 40px;
+}
+.content .store_base_msg .form_name_submitn {
+  width: 102px;
+  height: 32px;
+  color: #ffffff;
+  line-height: 32px;
+  background: #30a5ff;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  display: inline-block;
+  margin: 30px 68px;
 }
 .content .store_base_msg .form_name_submit {
   width: 102px;
@@ -1000,6 +1026,19 @@ h6 {
   font-size: 14px;
   border-radius: 0;
 }
+.content .storecard .form-group .selectipt {
+  width: 230px;
+  height: 28px;
+  color: #333333;
+  line-height: 28px;
+  background: #ffffff;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  border-radius: 0;
+  padding-left: 4px;
+  text-align: left;
+}
 .content .storecard .addsubmit {
   width: 80px;
   height: 30px;
@@ -1244,29 +1283,4 @@ h6 {
   position: absolute;
   bottom: 10px;
   left: 100px;
-}
-#error_messages {
-  width: 100%;
-}
-#error_messages .alerten {
-  color: #fff;
-}
-#error_messages p {
-  height: 36px!important;
-  border-radius: 3px!important;
-  display: block!important;
-  padding-left: 30px!important;
-  line-height: 36px!important;
-}
-#error_messages .alert-danger {
-  background: #d7564c;
-}
-#error_messages .alert-warning {
-  background: #f3a83c;
-}
-#error_messages .alert-success {
-  background: #54ae52;
-}
-#error_messages .alert-info {
-  background: #5ebfdc;
 }

@@ -3,35 +3,32 @@
 @section('title','商家管理')
 
 @section('content')
+
+
 	<!-- <h1>员工管理</h1> -->
-	<div class="row">
+	<div class="con_right storebase" >
 
 		@include('store._first',['shadow'=>1,'store_id'=>$store->id])
 		@include('store._second',['shadow'=>3,'store_id'=>$store->id])
-
-
-		<div class="col-xs-12 in_box">
-			<div class="col-xs-4">			
-				<img class="statf_pic" src="img/pic.jpg" width="80%">
+		<div class="store_base_starf">
+			<div class="starflist">
+				<div class="starflist_item">
+					<div class="masked">删除</div>
+					<img src="img/uu.jpg">
+					<p class="starf_name">张三</p>
+				</div>
+				<div class="starflist_item">
+					<div class="masked">删除</div>
+					<img src="img/uu.jpg">
+					<p class="starf_name">张三</p>
+				</div>
 			</div>
-			<div class="col-xs-4">			
-				<img class="statf_pic" src="img/pic.jpg" width="80%">
+			<div class="mask_codebox">
+				<img src="img/erweima.jpg" alt="">
+				<p>请使用微信扫描以上二维码完成绑定</p>
+				<a href="javascript:;" class="form_name_close">关闭</a>
 			</div>
-			<div class="col-xs-4">				
-				<img class="statf_pic" src="img/pic.jpg" width="80%">
-			</div>
-			<div class="col-xs-4">				
-				<img class="statf_pic" src="img/pic.jpg" width="80%">
-			</div>
-			<div class="col-xs-4">				
-				<img class="statf_pic" src="img/pic.jpg" width="80%">
-			</div>
-		</div>
-		<button class="btn btn-info" id="stuffAdd" style="margin:66px;">新增员工  {{$store->id}}</button>
-		<div class="modell col-xs-6" id="model">
-			<img src="img/erweima.jpg">
-			<label class="col-xs-12">请使用微信扫描以上二维码完成绑定</label>
-			<button class="btn btn-info"  id="modelBtn">关闭</button>
+			<a href="javascript:;" class="form_name_submitn form_name_newadd" type="submit">新增员工</a>
 		</div>
 	</div>
 @stop

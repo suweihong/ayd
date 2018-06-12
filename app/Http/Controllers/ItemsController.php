@@ -35,6 +35,7 @@ class ItemsController extends Controller
                if($places->isEmpty()){
                     return back()->withInput()->with('warning','请先添加场地');
                }else{
+
                     $new_start = (int)substr($request->start_time,0,strrpos($request->start_time,':')); 
                     $new_end =  substr($request->end_time,0,strrpos($request->start_time,':'));
                     $new_hours = [];
@@ -42,7 +43,7 @@ class ItemsController extends Controller
                         array_push($new_hours,$i);//添加元素
                      }
                      //改商家 改运动品类的 所有价格
-                     $fields = Field::where('store_id',$request->store_id)->where('type_id',$request->type_id)->get();
+                     $fields = Field::where('store_id',$request->store_id)->where('type_id',$request->type_id)->where('date',null)->get();
                      if(!$fields->isEmpty()){
                         foreach ($fields as $key => $field) {
                             $res = $field -> delete();
@@ -64,6 +65,7 @@ class ItemsController extends Controller
                            }
                         }
                      }
+
                      $new_fields = [];
                      foreach ($fields as $key => $value) {
                         foreach ($value as $k => $field) {
@@ -109,6 +111,7 @@ class ItemsController extends Controller
     //添加销售项目的操作
     public function store(Request $request)
     {
+        dd(3333);
        //新增销售项目
         ItemType::create([
             'store_id' => $request->store_id,

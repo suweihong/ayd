@@ -42,7 +42,7 @@ class TypeController extends Controller
         
         if($request->type == null){
             session()->flash('warning','请填写完整内容');
-            return redirect('/types/create');
+            return redirect('/types/create')->withInput();
         }else{
             
             $types = Type::pluck('name')->toArray();
@@ -55,7 +55,7 @@ class TypeController extends Controller
                 Type::create([
                 'name' => $request->type,
             ]);
-                session()->flash('success','添加成功');
+                session()->flash('warning','添加成功');
                 return redirect('/types');
             }
             
