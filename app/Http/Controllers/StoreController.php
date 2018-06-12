@@ -71,11 +71,12 @@ class StoreController extends Controller
      */
     public function store(Request $request)
     {
-        
-        if(!$request->title || !$request->address || !$request->map || !$request->phone || $request->introduction){
-            return back()->withInput()->with('warning','请填写完整内容');
+
+        if(!$request->title || !$request->address || !$request->map || !$request->phone || !$request->introduction){
+            return back()->withInput()->with('warning','请填写完整内容55');
 
         }else{
+
             //添加店铺
              $store = Store::create([
             // 'neighbourhood_id' => $request->neighbourhood_id,
@@ -85,14 +86,16 @@ class StoreController extends Controller
             'phone' => $request->phone,
             'introduction' => $request->introduction,
             ]);
+
+            if($store){
+                session()->flash('success','添加成功');
+                return redirect(route("stores.index"));
+            }else{
+                session()->flash('warning','请填写完整内容666');
+                // return redirect(route("stores.create"));
+            }
         }
-        if($store){
-            session()->flash('success','添加成功');
-            return redirect(route("stores.index"));
-        }else{
-            session()->flash('warning','请填写完整内容');
-            return redirect(route("stores.create"));
-        }
+       
         
     }
 

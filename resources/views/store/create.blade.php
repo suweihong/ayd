@@ -59,7 +59,6 @@
 					<a href="{{ route('stores.index') }}" class="btn clickt col-xs-1">返回</a>
 				</div>
 			</form>
-			
 		</div>
 	</div>		
 @stop

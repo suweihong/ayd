@@ -1245,3 +1245,28 @@ h6 {
   bottom: 10px;
   left: 100px;
 }
+#error_messages {
+  width: 100%;
+}
+#error_messages .alerten {
+  color: #fff;
+}
+#error_messages p {
+  height: 36px!important;
+  border-radius: 3px!important;
+  display: block!important;
+  padding-left: 30px!important;
+  line-height: 36px!important;
+}
+#error_messages .alert-danger {
+  background: #d7564c;
+}
+#error_messages .alert-warning {
+  background: #f3a83c;
+}
+#error_messages .alert-success {
+  background: #54ae52;
+}
+#error_messages .alert-info {
+  background: #5ebfdc;
+}
