@@ -1,8 +1,9 @@
 
 @extends('layouts.layout')
 @section('content')
-	@include('_messages')
+	
 	<div class="con_right storecard">
+		@include('_messages')
 		<h1 class="in_title">销售分类</h1>
 		<form action="{{route('items.store')}}" method="post" name="form">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}"/>
@@ -24,7 +25,15 @@
 			</div>
 			<div class="form-group" id="salestyle_name">
 			 	<label>名称</label>
-				<input type="text" class="selectipt" value="篮球午后场" name="name">
+				<input type="text" class="selectipt" value="{{old('name')}}" name="name" >
+			</div>
+			<div class="form-group" id="salestyle_price">
+			 	<label>价格</label>
+				<input type="text" class="selectipt" value="{{ old('price') }}" name="price">
+			</div>
+			<div class="form-group" id="salestyle_intro">
+			 	<label>说明</label>
+				<input type="text" class="selectipt" value="{{ old('intro')}}" name="intro">
 			</div>
 			<div class="form-group">
 			 	<label>限购规则</label>

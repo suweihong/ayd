@@ -15,7 +15,7 @@
 			<input type="hidden" name="_method" value="PATCH">
 			<div class="form_name">
 				<span class="form_name_n">名称</span>
-				<input type="text" class="form_name_ipt" name="title" placeholder="奥方体育馆" value="{{ old('title') }}">
+				<input type="text" class="form_name_ipt" name="title" placeholder="奥方体育馆" value="{{ old('title') or $store->title }}">
 			</div> 
 			<div class="form_name">
 				<span  class="form_name_n">商家位置 </span>
@@ -32,7 +32,7 @@
 					    <option>净月区</option>
 					</select>  
 				<br>
-				<input type="text" class="form_name_address" name="address" placeholder="如xx街道xx号" value="{{ old('address') }}" />
+				<input type="text" class="form_name_address" name="address" placeholder="如xx街道xx号" value="{{ old('address')  or $store->address}}" />
 				<br>
 				<input type="text" class="form_name_address" name='map' placeholder="地图名片地址" value="{{ old('map') }}" />
 			</div> 

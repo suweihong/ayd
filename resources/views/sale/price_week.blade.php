@@ -37,7 +37,7 @@
 			</tr>
 		<?php endforeach ?>
 	</table>
-	<div class="btn btn-info" style="margin:20px 40px">更新销售数据</div>
+	<a href="javascript:;" class="updata_salenum">更新销售数据</a>
 </div>
 
 <script type="text/javascript">

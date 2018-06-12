@@ -68,7 +68,8 @@ class Store extends Model
     //该店拥有的体育品类
     public function types()
     {
-        return $this->belongsToMany('App\Models\Type');
+        return $this->belongsToMany('App\Models\Type')
+                    ->withTimestamps();
     }
 
     //该商店拥有的 场地

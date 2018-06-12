@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\ItemType;
 use App\Models\StoreType;
 use App\Models\Store;
 use App\Models\Type;
@@ -111,15 +110,7 @@ class ItemsController extends Controller
     //添加销售项目的操作
     public function store(Request $request)
     {
-        dd(3333);
-       //新增销售项目
-        ItemType::create([
-            'store_id' => $request->store_id,
-            'item_id' => $request->item_id,
-            'type_id' => $request->type_id,
-            'name' => $request->name ?? '',
-            'rule' => $request->rule,
-        ]);
+
 
         $types_id = Store::find($request->store_id)->types()->where('item_id',$request->item_id)->pluck('types.id')->toArray();
         if(!in_array($request->type_id, $types_id)){
@@ -129,10 +120,22 @@ class ItemsController extends Controller
                 'type_id' => $request->type_id,
                 'item_id' => $request->item_id,
              ]);
+        }
+     
+       //新增销售项目
+        if($request->item_id == 2){
+            $res = Field::create([
+                'store_id' => $request->store_id,
+                'item_id' => $request->item_id,
+                'type_id' => $request->type_id,
+                'name' => $request->name ,
+                'price' => $request->price,
+                'intro' => $request->intro,
+                'rule' => $request->rule,
+             ]);
+        }
 
-       }
-
-         return back()->with('success','销售项目添加成功');
+         return back()->withInput()->with('warning','销售项目添加成功');
 
     }
 
@@ -162,25 +165,19 @@ class ItemsController extends Controller
 
 
         $type_id = $request->type_id;
-        $item_id = $request->item_id ?? 1;
-        $types = $store->types()->where('item_id',$item_id)->orderBy('created_at','asc')->get();
-        
+        // $item_id = $request->item_id ?? 1;
+        $types = $store->types()->where('item_id',2)->orderBy('created_at','asc')->get();
         if(!$type_id){
             if(!$store->types()->get()->isEmpty()){
                 $type_id = $store->types()->first()->id;
-              
             }else{
                $type_id = 0;
             }
         }
-        $type = Type::find($type_id);
+        //读取所有票卡
+        $tickets = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('date',null)->where('week',null)->orderBy('created_at','asc')->get();
 
-       if($type == null){
-            $places = [];
-        }else{
-             $places = $type->places()->where('store_id',$store_id)->get();
-        }
-        return view('sale.ticket',compact('store','type_id','places','types'));
+        return view('sale.ticket',compact('store','type_id','types','tickets'));
     }
     public function edit($id)
     {

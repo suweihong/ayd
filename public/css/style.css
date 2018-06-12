@@ -262,10 +262,10 @@ h6 {
   background: #30a5ff;
 }
 .content .con_right .storemenu2 .storemenu2_add {
-  width: 98px;
-  height: 28px;
+  width: 118px;
+  height: 27px;
   color: #333333;
-  line-height: 28px;
+  line-height: 27px;
   background: #ffffff;
   border-radius: 5px;
   text-align: center;
@@ -1079,7 +1079,9 @@ h6 {
 .content .storecard .storecard_itembox .storecard_item .storecatd_p3 {
   position: absolute;
   top: 94px;
-  left: 240px;
+  left: 230px;
+  text-align: center;
+  width: 78px;
 }
 .content .storecard .storecard_itembox .storecard_item .storecatd_p4 {
   width: 125px;
@@ -1283,4 +1285,47 @@ h6 {
   position: absolute;
   bottom: 10px;
   left: 100px;
+}
+.pagination {
+  margin-left: 5%;
+}
+.pagination li:first-child,
+.pagination li:last-child {
+  background-color: transparent;
+  color: #333;
+}
+.pagination li {
+  float: left;
+  width: 20px;
+  height: 20px;
+  color: #fff;
+  margin-right: 10px;
+  text-align: center;
+  line-height: 20px;
+}
+.pagination .active {
+  background: #30a5ff;
+}
+#error_messages {
+  width: 100%;
+}
+#error_messages p {
+  width: 98%;
+  padding-left: 2%;
+  height: 40px;
+  line-height: 40px;
+  font-size: 14px;
+  color: #fff;
+}
+#error_messages .alert-danger {
+  background: #db514e;
+}
+#error_messages .alert-warning {
+  background: #eeac4c;
+}
+#error_messages .alert-success {
+  background: #5eb75d;
+}
+#error_messages .alert-info {
+  background: #55bdd6;
 }
