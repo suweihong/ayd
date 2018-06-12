@@ -3,12 +3,33 @@
 @section('content')
 
 
-	<div class="con_right storemanage" style="display: none;">
+	<div class="con_right storemanage" >
 		@include('_messages')
 		@include('_delete')
 
 		<h1 class="in_title">公告列表</h1>
-		<h3><a href="{{route('notices.create')}}"><button class="btn btn-primary">添加公告</button></a></h3>
+		<h3><a href="{{route('notices.create')}}" class="updata_salenum">添加公告</a></h3>
+
+		<table border="1" class="table_line">
+		    <tr>
+		      <th>序号</th>
+		      <th>名称</th>
+		      <th>状态</th>
+		      <th>销售项目</th>
+		      <th>管理员</th>
+		      <th>创建时间</th>
+		      <th>操作</th>
+		    </tr>
+		    <tr>
+		      <td>1</td>
+		      <td>起了健身中心</td>
+		      <td>正常</td>
+		      <th>健身</th>
+		      <th>aysd</th>
+		      <td>2018-12-12 12:12</td>
+		      <th><a href="javascript:;">管理商家</a></th>
+		    </tr>
+		</table>
 
 	<div class="row">
 			<div class="col-lg-12">
