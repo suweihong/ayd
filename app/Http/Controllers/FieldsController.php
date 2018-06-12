@@ -49,11 +49,9 @@ class FieldsController extends Controller
                             ->first();
                          
             if(!$type_hours){
-              dump(0);
               $hours[0] = '';
               $hours[1] = '';
             }else{
-              dump(333);
               $type_hours = $type_hours->hours;
             
               if(!$type_hours){
@@ -182,60 +180,7 @@ class FieldsController extends Controller
 
         }
 
-           // if('1'){
-
-            //      // 添加该日期的价格
-            //     if(!$hours){
-
-            //         return back()->with('warning','请先设置营业时间');
-            //     }else{
-
-            //             //营业时间
-            //          $new_hours = explode('-',$hours);
-            //          $new_start = (int)substr($new_hours[0],0,strrpos($new_hours[0],':')); 
-            //          $new_end =  substr($new_hours[1],0,strrpos($new_hours[1],':'));
-            //          $new_hours = [];
-            //                 for ($i=$new_start; $i < $new_end; $i++) { 
-            //                     array_push($new_hours,$i);//添加元素
-            //                  }
-
-            //             //添加价格
-            //
-            //
-            //             先添加 该日期 价格被修改的数据
-            //             再重组(transform) 价格数组（$new_price）
-            //
-            //
-            //             $fields = [];
-            //             foreach ($places as $key => $place) {
-            //                 foreach ($new_hours as $ke => $new_hour) {
-            //                        $fields[$key][$ke]['place_id'] = $place->id;
-            //                        $fields[$key][$ke]['time'] = $new_hour;
-            //                        $fields[$key][$ke]['date'] = $date;
-            //                        $fields[$key][$ke]['store_id'] = $store_id;
-            //                        $fields[$key][$ke]['type_id'] = $type_id;
-            //                        $fields[$key][$ke]['price'] = $type_id;
-
-            //                    }
-            //              }
-            //     }
-            //      $new_fields = [];
-            //      foreach ($fields as $key => $value) {
-            //         foreach ($value as $k => $field) {
-            //                $new_fields[] = $field;
-            //         }
-            //      }
-                
-                // $fields = Field::insert($new_fields);
-            // }else{
-            // if(1){
-                    //获取fields_id 修改某个场地的价格
-            // }
-
-        
-        
         $prices = $new_prices->groupBy('time')->sort();
-
 
         return view('sale.price_date',compact('store','type_id','start_time','types','now','prices'));
     }
@@ -380,9 +325,10 @@ class FieldsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Place $place)
+    public function destroy($id)
     {
+        return $id;
         $place -> delete();
-        return back()->with('success','删除成功');
+        return back()->with('warning','删除成功');
     }
 }

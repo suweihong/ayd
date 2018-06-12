@@ -168,14 +168,13 @@ class ItemsController extends Controller
         $types = $store->types()->where('item_id',2)->orderBy('created_at','asc')->get();
         if(!$type_id){
             if(!$store->types()->get()->isEmpty()){
-                $type_id = $store->types()->first()->id;
+                $type_id = $store->types()->where('item_id',2)->orderBy('created_at','asc')->first()->id;
             }else{
                $type_id = 0;
             }
         }
         //读取所有票卡
         $tickets = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('date',null)->where('week',null)->orderBy('created_at','asc')->get();
-
         return view('sale.ticket',compact('store','type_id','types','tickets'));
     }
     public function edit($id)

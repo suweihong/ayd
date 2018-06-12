@@ -58,7 +58,10 @@
     		</tr>
 	   		@endforeach
 		</table>
-		{!! $stores->render() !!}
+		
+			{!! $stores->render() !!}
+		
+		
 	</div>
 
 	<script type="text/javascript">
