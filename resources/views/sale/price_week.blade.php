@@ -49,6 +49,9 @@
 		arr.push({'id':id,'price':$('#'+id).val()})
 	}
 	function btnPrice(){
+	  	setTimeout(() => {
+	  		$("#error_messages").slideUp()
+	  	}, 2000)
 		$.ajax({
 			url : '/price/update',
 			type : 'POST',
@@ -57,9 +60,16 @@
 				'arr' : arr,
 			},
 			success : function(data){
+				$('#error_messages').show()
+				$('#error_messages .flash-message').remove()
 				var tt=data.errmsg
+				if(data.errcode==2){
+					var classn="alert-warning"
+				}else{
+					var classn="alert-success"
+				}
 				var html='<div class="flash-message">\
-					        <p class="alert alert-warning">'+tt+'</p>\
+					        <p class="alert '+classn+'">'+tt+'</p>\
 				      	</div>'
 				$('#error_messages').append(html)
 			}

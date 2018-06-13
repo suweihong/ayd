@@ -13,7 +13,7 @@
   <script type="text/javascript">
   	setTimeout(() => {
   		$("#error_messages").slideUp()
-  	}, 3000)
+  	}, 2000)
   </script>
 
 </div>
