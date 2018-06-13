@@ -18,7 +18,7 @@
 				<p class="storecatd_p1">票卡名称：{{$ticket->name}}</p>
 				<p class="storecatd_p2">票卡备注说明：{{$ticket->intro}}</p>
 				<p class="storecatd_p3">价格：{{$ticket->price}}</p>
-				<a href="javascript:;" @if($ticket->switch == '') class="storecatd_p4" @else class="qq" @endif   id="{{$ticket->id}}"onClick="ticketSwitch({{ $ticket->id }})" >@if($ticket->switch == '') 销售中{{$ticket->switch}} @else 暂停销售 @endif</a>
+				<a href="javascript:;" @if($ticket->switch == '') class="storecatd_p4" @else class="storecatd_p0" @endif   id="{{$ticket->id}}"onClick="ticketSwitch({{ $ticket->id }})" >@if($ticket->switch == '') 销售中{{$ticket->switch}} @else 暂停销售 @endif</a>
 
 				<a class="storecatd_p5" href="javascript:;" onclick="btnClick({{$ticket->id}})">删除</a>
 			</div>

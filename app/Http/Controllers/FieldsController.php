@@ -162,8 +162,6 @@ class FieldsController extends Controller
                             ->setCallback($request->input('callback'));
 
       }else{
-
-    
          return response()->json([
                             'errcode'=> '2',
                             'errmsg'=> '请修改数据',
@@ -389,7 +387,6 @@ class FieldsController extends Controller
      */
     public function destroy(Request $request,$id)
     {
-      return $id;
         $place = Place::find($id);
         $place -> delete();
         return 1;
