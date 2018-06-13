@@ -1110,6 +1110,20 @@ h6 {
   text-align: center;
   width: 78px;
 }
+.content .storecard .storecard_itembox .storecard_item .storecatd_p0 {
+  width: 125px;
+  height: 28px;
+  color: #ffffff;
+  line-height: 28px;
+  background: #ff9933;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  display: block;
+  position: absolute;
+  top: 160px;
+  left: 15px;
+}
 .content .storecard .storecard_itembox .storecard_item .storecatd_p4 {
   width: 125px;
   height: 28px;

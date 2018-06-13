@@ -51,7 +51,7 @@
 	function btnPrice(){
 	  	setTimeout(() => {
 	  		$("#error_messages").slideUp()
-	  	}, 3000)
+	  	}, 2000)
 		$.ajax({
 			url : '/price/update',
 			type : 'POST',
