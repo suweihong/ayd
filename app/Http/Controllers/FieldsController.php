@@ -138,7 +138,6 @@ class FieldsController extends Controller
         }
       }
       
-   
     return response()->json([
                             'errcode'=> '1',
                             'errmsg'=> '修改成功',
