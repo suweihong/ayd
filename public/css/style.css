@@ -279,6 +279,10 @@ h6 {
 .content .con_right .storemenu1 {
   margin-left: 50px;
 }
+.content .con_right .storemenu1 .active {
+  font-weight: bold;
+  text-decoration: underline;
+}
 .content .con_right .storemenu1 a {
   padding: 16px 20px;
   color: #333;
