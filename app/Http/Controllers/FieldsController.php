@@ -98,13 +98,15 @@ class FieldsController extends Controller
         $store_hours = StoreType::where('store_id',$store_id)
                             ->where('type_id',$type_id)
                             ->where('item_id','1')
-                            ->first()
-                            ->hours;
-
-             //运动品类开始营业的时间
-            $store_hours = explode('-', $store_hours);
-            $start_time =(int)substr($store_hours[0],0,strrpos($store_hours[0],':')); 
-
+                            ->first();
+          //运动品类营业的  开始时间
+        if($store_hours){
+            $hours = $store_hours->hours;
+            $store_hours = explode('-', $hours);
+            $start_time = (int)substr($store_hours[0],0,strrpos($store_hours[0],':')); 
+        }else{
+            $start_time = 0;
+        }
             //读取所有价格
             $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
 
@@ -117,8 +119,9 @@ class FieldsController extends Controller
     public function update_price(Request $request)
     {
       $prices = $request->arr;
-      $update_price = [];
-      foreach ($prices as $key => $value) {
+      if($prices){
+        $update_price = [];
+        foreach ($prices as $key => $value) {
         $update_price[$value['id']] = $value['price'];
       }
       //按日期  改价格
@@ -151,12 +154,23 @@ class FieldsController extends Controller
         }
       }
       
-       // session()->flash('success','修改成功');
-     return response()->json([
+   
+    return response()->json([
                             'errcode'=> '1',
                             'errmsg'=> '修改成功',
                             ], 200)
-                            ->setCallback($request->input('callback'));;
+                            ->setCallback($request->input('callback'));
+
+      }else{
+
+    
+         return response()->json([
+                            'errcode'=> '2',
+                            'errmsg'=> '请修改数据',
+                            ], 200)
+                            ->setCallback($request->input('callback'));
+      }
+     
     }
 
 
@@ -192,11 +206,16 @@ class FieldsController extends Controller
         $hours = StoreType::where('store_id',$store_id)
                             ->where('type_id',$type_id)
                             ->where('item_id','1')
-                            ->first()
-                            ->hours;
+                            ->first;
           //运动品类营业的  开始时间
-        $store_hours = explode('-', $hours);
-        $start_time =(int)substr($store_hours[0],0,strrpos($store_hours[0],':')); 
+        if($hours){
+            $hours = $hours->hours;
+            $store_hours = explode('-', $hours);
+            $start_time = (int)substr($store_hours[0],0,strrpos($store_hours[0],':')); 
+        }else{
+            $start_time = 0;
+        }
+       
      
 
         //读取所有价格
@@ -223,8 +242,9 @@ class FieldsController extends Controller
         }
 
         $prices = $new_prices->groupBy('time')->sort();
+        return 111;
 
-        return view('sale.price_date',compact('store','type_id','start_time','types','now','prices'));
+        // return view('sale.price_date',compact('store','type_id','start_time','types','now','prices'));
     }
     /**
      * Store a newly created resource in storage.
@@ -278,12 +298,15 @@ class FieldsController extends Controller
         $hours = StoreType::where('store_id',$store_id)
                             ->where('type_id',$type_id)
                             ->where('item_id','1')
-                            ->first()
-                            ->hours;
-          //运动品类开始营业的时间
-        $store_hours = explode('-', $hours);
-        $start_time =(int)substr($store_hours[0],0,strrpos($store_hours[0],':')); 
-
+                            ->first;
+          //运动品类营业的  开始时间
+        if($hours){
+            $hours = $hours->hours;
+            $store_hours = explode('-', $hours);
+            $start_time = (int)substr($store_hours[0],0,strrpos($store_hours[0],':')); 
+        }else{
+            $start_time = 0;
+        }
        //读取所有价格
         $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
 

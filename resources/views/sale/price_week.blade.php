@@ -56,9 +56,12 @@
 				'_token' : '{{csrf_token()}}',
 				'arr' : arr,
 			},
-			success : function(data)
-			{
-				console.log(data)
+			success : function(data){
+				var tt=data.errmsg
+				var html='<div class="flash-message">\
+					        <p class="alert alert-warning">'+tt+'</p>\
+				      	</div>'
+				$('#error_messages').append(html)
 			}
 		})
 		arr=[]

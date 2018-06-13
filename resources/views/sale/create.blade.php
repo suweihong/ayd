@@ -23,17 +23,19 @@
 					@endforeach
 				</select>
 			</div>
-			<div class="form-group" id="salestyle_name">
-			 	<label>名称</label>
-				<input type="text" class="selectipt" value="{{old('name')}}" name="name" >
-			</div>
-			<div class="form-group" id="salestyle_price">
-			 	<label>价格</label>
-				<input type="text" class="selectipt" value="{{ old('price') }}" name="price">
-			</div>
-			<div class="form-group" id="salestyle_intro">
-			 	<label>说明</label>
-				<input type="text" class="selectipt" value="{{ old('intro')}}" name="intro">
+			<div id="saletay">
+				<div class="form-group">
+				 	<label>名称</label>
+					<input type="text" class="selectipt" value="{{old('name')}}" name="name" >
+				</div>
+				<div class="form-group">
+				 	<label>价格</label>
+					<input type="text" class="selectipt" value="{{ old('price') }}" name="price">
+				</div>
+				<div class="form-group">
+				 	<label>说明</label>
+					<input type="text" class="selectipt" value="{{ old('intro')}}" name="intro">
+				</div>
 			</div>
 			<div class="form-group">
 			 	<label>限购规则</label>

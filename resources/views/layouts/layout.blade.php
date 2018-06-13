@@ -111,11 +111,19 @@
 	@yield('content')
 
 <script type="text/javascript">
-	$('.btn_date').click(function(){
-		console.log($('#test1').val())
-	});
 	laydate.render({
 		elem: '#test1',
+		done: function(datas){ //选择日期完毕的回调  
+	        $.ajax({
+				url :'/price/date',
+				type : 'get',
+				data :{
+					'_token': "{!! csrf_token() !!}",
+					'data':"datas"
+					},
+				success : function(data){}
+			}) 
+	    }
 	});
 	$('.form_name_newadd').click(function(){
 		$('.mask_codebox').fadeIn()
@@ -143,13 +151,9 @@
 	})
 	function salestyle(e){
 		if(e==1){
-			$('#salestyle_name').hide()
-			$('#salestyle_price').hide()
-			$('#salestyle_intro').hide()
+			$('#saletay').hide()
 		}else{
-			$('#salestyle_name').show()
-			$('#salestyle_price').show()
-			$('#salestyle_intro').show()
+			$('#saletay').show()
 		}
 	}
 	//删除提示框
