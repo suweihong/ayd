@@ -172,7 +172,12 @@ class ItemsController extends Controller
         $types = $store->types()->where('item_id',2)->orderBy('created_at','asc')->get();
         if(!$type_id){
             if(!$store->types()->get()->isEmpty()){
-                $type_id = $store->types()->where('item_id',2)->orderBy('created_at','asc')->first()->id;
+                $type_id = $store->types()->where('item_id',2)->orderBy('created_at','asc')->first();
+                if($type_id){
+                    $type_id = $type_id->id;
+                }else{
+                    $type_id = 0;
+                }
             }else{
                $type_id = 0;
             }
