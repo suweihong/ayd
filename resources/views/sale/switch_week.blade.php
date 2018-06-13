@@ -36,7 +36,7 @@
 					<tr>
 						<td>{{$key}}:00-{{$key+1}}:00</td>
 						@foreach($price as $value)
-							<td onclick="btnClick({{$value->id}})"><input type="text" id="{{$value->id}}" value="{{$value->price}}" maxlength="8" disabled="disabled" @if($value->switch == '')class="table_btn_num bsck_fff" @elseif($value->switch == 2) class="table_btn_num bsck_green"
+							<td onclick="btnSwitchClick({{$value->id}})"><input type="text" id="{{$value->id}}" value="{{$value->price}}" maxlength="8" disabled="disabled" @if($value->switch == '')class="table_btn_num bsck_fff" @elseif($value->switch == 2) class="table_btn_num bsck_green"
 							@else class="table_btn_num bsck_black"  @endif
 							/></td>
 						@endforeach
@@ -62,7 +62,7 @@
 	</div>
 
 	<script type="text/javascript">
-		function btnClick(id){
+		function btnSwitchClick(id){
 			$.ajax({
 				url: '/fields/'+id+'/edit',
 				type: 'GET',

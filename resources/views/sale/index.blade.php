@@ -10,7 +10,7 @@
 		@include('store._third',['shadow'=>1,'store'=>$store,'sale'=>0,'type_id'=>$type_id])
 		<div class="storesale_place">
 			@foreach($places as $place)
-			<a href="javascript:;" onclick="btnDelete({{$place->id}})" id="{{$place->id}}"><span class="masked">删除</span>场地{{$loop->iteration}}{{$place->id}}</a>
+			<a href="javascript:;" onclick="btnClick({{$place->id}})" id="{{$place->id}}"><span class="masked">删除</span>场地{{$loop->iteration}}{{$place->id}}</a>
 			@endforeach
 			<form action="{{route('fields.store')}}" method="post" name="form">
 				<input type="hidden" name="_token" value=" {{ csrf_token() }}" />
@@ -29,18 +29,20 @@
 	</div>
 
 	<script type="text/javascript">
-		function btnDelete(id){
+	//删除场地
+		$('.message_del').click(function(){
+			$('.del_prompt').css('display','none') ;
 			$.ajax({
-				url : '/fields/'+id,
+				url : '/fields/'+$('.message_del').attr('data_id'),
 				type: 'DELETE',
 				data: {
 					'_token':'{{csrf_token()}}',
-					'id':id,
 				},
 				success : function(data){
-					$('#'+id).remove()
+					$('#'+$('.message_del').attr('data_id')).remove()
 				}
 			})
-		}
+		})
+
 	</script>
 @stop
