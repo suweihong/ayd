@@ -206,12 +206,14 @@ class ItemsController extends Controller
             $ticket->update([
                 'switch' => '1',
                 ]);
+             return 1;
         }else{
             $ticket->update([
                 'switch' => '',
                 ]);
+            return 2;
         }
-        return 1;
+       
     }
 
     /**
@@ -220,8 +222,13 @@ class ItemsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //删除票卡
     public function destroy($id)
     {
-        //
+      
+        $ticket = Field::find($id);
+        $ticket -> delete();
+        return 1;
+      
     }
 }

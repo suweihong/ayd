@@ -152,6 +152,14 @@
 			$('#salestyle_intro').show()
 		}
 	}
+	//删除提示框
+	function btnClick(id){
+		$('.del_prompt').css('display','block') ;
+		$('.message_del').attr('data_id',id);
+		$('.del_cancle').click(function(){
+			$('.del_prompt').css('display','none') ;
+		})
+	};
 </script>
 </body>
 

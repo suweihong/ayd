@@ -22,7 +22,7 @@
 			@endforeach
 		@elseif($sale == 5)
 			@foreach ($types as $type)
-				<a @if($type_id == $type->id) class="active" @endif href="/tickets/list?type_id={{$type->id}}&&item_id=2">{{$type->name}}</a>
+				<a @if($type_id == $type->id) class="active" @endif href="/tickets/list?type_id={{$type->id}}&item_id=2">{{$type->name}}</a>
 			@endforeach
 		@endif
 	@endif

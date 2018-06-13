@@ -121,12 +121,28 @@ class FieldsController extends Controller
       foreach ($prices as $key => $value) {
         $update_price[$value['id']] = $value['price'];
       }
-      if($request->data == 1){
+      //按日期  改价格
+      if($request->date){
         foreach ($update_price as $key => $value) {
           $fields = Field::find($key);
+          $time = $fields->time;
+          $date_fields = Field::where('place_id',$key)->where('time',$time)->where('date',$request->date)->first();
+          if($date_fields){
+            $date_fields->update([
+                'price' => $value,
+              ]);
+          }else{
+            Field::create([
+              'place_id' => $key,
+              'time' => $time,
+              'data' => $request->date,
+              ]);
+          }
+
         }
 
       }else{
+        //按星期 改价格
         foreach ($update_price as $key => $value) {
           $fields = Field::find($key);
           $fields -> update([
@@ -348,12 +364,11 @@ class FieldsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
-        
+      return $id;
         $place = Place::find($id);
-        $res = $place -> delete();
+        $place -> delete();
         return 1;
-       
     }
 }
