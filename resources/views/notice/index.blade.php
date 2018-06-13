@@ -32,27 +32,27 @@
 	</div>
 <script type="text/javascript">
 	 function btnClick(id){
-			$('.del_prompt').css('display','block') ;
-			$('.message_del').attr('data_id',id);
-			$('.del_cancle').click(function(){
-				$('.del_prompt').css('display','none') ;
-			})
+		$('.del_prompt').css('display','block') ;
+		$('.message_del').attr('data_id',id);
+		$('.del_cancle').click(function(){
+			$('.del_prompt').css('display','none') ;
+		})
 	};
 
 	$('.message_del').click(function(){
-				$('.del_prompt').css('display','none') ;
-				$.ajax({
-					url :'/notices/'+ $('.message_del').attr('data_id'),
-					type : 'DELETE',
-					data :{
-						'_token': "{!! csrf_token() !!}",
-						},
-					success : function(data){
-						if(data){
-							location.reload();
-						}
+			$('.del_prompt').css('display','none') ;
+			$.ajax({
+				url :'/notices/'+ $('.message_del').attr('data_id'),
+				type : 'DELETE',
+				data :{
+					'_token': "{!! csrf_token() !!}",
+					},
+				success : function(data){
+					if(data){
+						location.reload();
 					}
-				})
+				}
+			})
 		})
 </script>
 @stop
