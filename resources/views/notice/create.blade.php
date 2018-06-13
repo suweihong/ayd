@@ -8,8 +8,7 @@
 	
 	<h1 class="in_title">添加公告</h1>
 	<form method="post" action="{{route('notices.store')}}" name="form">	
-		{{ csrf_field() }}
-
+		<input type="hidden" name="_token" value="{{csrf_token()}}"></input>
 		<div class="form_name">
 			<span class="form_name_n">公告标题：</span>
 			<input name="title" value="{{ old('title') }}">
@@ -21,7 +20,7 @@
 			{!! we_config('wangeditor') !!}
 		</div>
 
-		<a href="javescript:document.form.submit()" class="">提交</a>
+		<a href="javascript:document.form.submit()" class="">提交</a>
 	</form>
 	<a href="{{route('notices.index')}}" >返回</a>
 </div>

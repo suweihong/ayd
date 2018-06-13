@@ -25,13 +25,37 @@
 			<tr>
 				<td>{{$key}}:00-{{$key+1}}:00</td>
 				@foreach($price as $value)
-				<td><input type="text" value="{{$value->price}}" maxlength="8" class="table_btn_num"/></td>
+				<td>
+					<input type="text" onchange="datePrice({{$value->id}})" id="{{$value->id}}" value="{{$value->price}}" maxlength="8" class="table_btn_num"/>
+				</td>
 				@endforeach
 			</tr>
 		<?php endforeach ?>
 	</table>
-	<div class="btn btn-info" style="margin:20px 40px">更新销售数据</div>
+	<a href="javascript:;" class="updata_salenum" onclick="price()">更新销售数据</a>
 </div>
-
+	
+	<script type="text/javascript">
+	arr=[]
+	function datePrice(id){
+		arr.push({'id':id,'price':$('#'+id).val()})
+	}
+	function price(){
+		$.ajax({
+			url : '/price/update',
+			type : 'POST',
+			data : {
+				'_token' : '{{csrf_token()}}',
+				'arr' : arr,
+				'date' : 1,
+			},
+			success : function(data)
+			{
+				console.log(data)
+			}
+		})
+		arr=[]
+	}
+</script>
 	
 @stop

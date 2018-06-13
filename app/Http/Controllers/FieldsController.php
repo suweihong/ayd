@@ -85,6 +85,7 @@ class FieldsController extends Controller
         $week = $request->week ?? 1;
         $now = date('Y-m-d',time());
 
+
         if(!$type_id){
                 if(!$store->types()->get()->isEmpty()){
                     $type_id = $store->types()->first()->id;
@@ -115,7 +116,31 @@ class FieldsController extends Controller
     //  修改场地价格
     public function update_price(Request $request)
     {
-       
+      $prices = $request->arr;
+      $update_price = [];
+      foreach ($prices as $key => $value) {
+        $update_price[$value['id']] = $value['price'];
+      }
+      if($request->data == 1){
+        foreach ($update_price as $key => $value) {
+          $fields = Field::find($key);
+        }
+
+      }else{
+        foreach ($update_price as $key => $value) {
+          $fields = Field::find($key);
+          $fields -> update([
+            'price' => $value,
+            ]);
+        }
+      }
+      
+       // session()->flash('success','修改成功');
+     return response()->json([
+                            'errcode'=> '1',
+                            'errmsg'=> '修改成功',
+                            ], 200)
+                            ->setCallback($request->input('callback'));;
     }
 
 
@@ -153,7 +178,7 @@ class FieldsController extends Controller
                             ->where('item_id','1')
                             ->first()
                             ->hours;
-          //运动品类开始营业的时间
+          //运动品类营业的  开始时间
         $store_hours = explode('-', $hours);
         $start_time =(int)substr($store_hours[0],0,strrpos($store_hours[0],':')); 
      

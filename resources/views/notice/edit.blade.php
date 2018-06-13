@@ -7,12 +7,12 @@
 	@include('_messages')
 
 	<h1 class="in_title">添加公告</h1>
-	<form method="post" action="{{route('notices.update',$notice->id)}}">
+	<form method="post" action="{{route('notices.update',$notice->id)}}" name="form">
 		<input type="hidden" name="_method" value="PUT">
     	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		<div class="form_name">
 			<span class="form_name_n">公告标题：</span>
-			<input name="title" value="{{ old('title')  or $notice->title}}">
+			<input name="title" value="{{ old('title',$notice->title)}}">
 		</div> 
 
 		<div class="form_name">
@@ -21,7 +21,7 @@
 			{!! we_field('wangeditor', 'content',$notice->content) !!}
 			{!! we_config('wangeditor') !!}
 		</div>
-		<a href="javescript:document.form.submit()" class="">提交</a>
+		<a href="javascript:document.form.submit()" class="">提交</a>
 	</form>
 </div>
 @stop

@@ -15,7 +15,7 @@
 			<input type="hidden" name="_method" value="PATCH">
 			<div class="form_name">
 				<span class="form_name_n">名称</span>
-				<input type="text" class="form_name_ipt" name="title" placeholder="奥方体育馆" value="{{ old('title') or $store->title }}">
+				<input type="text" class="form_name_ipt" name="title" placeholder="奥方体育馆" value="{{ old('title',$store->title) }}">
 			</div> 
 			<div class="form_name">
 				<span  class="form_name_n">商家位置 </span>
@@ -32,16 +32,16 @@
 					    <option>净月区</option>
 					</select>  
 				<br>
-				<input type="text" class="form_name_address" name="address" placeholder="如xx街道xx号" value="{{ old('address')  or $store->address}}" />
+				<input type="text" class="form_name_address" name="address" placeholder="如xx街道xx号" value="{{ old('address',$store->address)}}" />
 				<br>
-				<input type="text" class="form_name_address" name='map' placeholder="地图名片地址" value="{{ old('map') }}" />
+				<input type="text" class="form_name_address" name='map' placeholder="地图名片地址" value="{{ old('map',$store->map_url)}}" />
 			</div> 
 			<div class="form_name">
 				<div class="form_name_n form_name_p1">
 					<span class="chang1">场馆封面图</span>
 				</div>
 				<div class="form_name_img" >
-					<img src="/img/pic.jpg" width="100%" name="logo" >	
+					<img src="/img/pic.jpg" width="100%" name="logo" >
 				</div>
 			</div> 
 			<div class="form_name">
@@ -60,13 +60,13 @@
 			</div> 
 			<div class="form_name">
 				<span class="form_name_n">联系电话 </span>
-				<input type="text" class="form_name_ipt" placeholder="" name="phone" value="{{ old('phone') }}" />
+				<input type="text" class="form_name_ipt" placeholder="" name="phone" value="{{ old('phone',$store->phone) }}" />
 			</div>
 			<div class="form_name">
 				<div class="form_name_n form_name_p1">
 					<span class="changlast">场馆简介</span>
 				</div>
-				<textarea rows="3" cols="20" class="form_name_txt" name="introduction" value="{{ old('introduction') }}"></textarea>
+				<textarea rows="3" cols="20" class="form_name_txt" name="introduction" value="{{ old('introduction',$store->introduction) }}"></textarea>
 			</div>  
 			<a href="javascript:document.form.submit();" class="form_name_submit">更新场地信息</a>
 			<a href="{{ route('stores.index') }}" class="form_name_back">返回</a>

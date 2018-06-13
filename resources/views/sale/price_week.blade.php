@@ -5,6 +5,7 @@
 
 @section('content')
 <div class="con_right storesale">
+	@include('_messages')
 	@include('store._first',['shadow'=>2,'store_id'=>$store->id])
 	@include('store._third',['shadow'=>2,'store'=>$store,'sale'=>1,'type_id'=>$type_id])
 	@include('store._fourth',['shadow'=>1,'store_id'=>$store->id,'switch'=>0,'now'=>$now,'type_id=$type_id'])
@@ -43,14 +44,9 @@
 </div>
 
 <script type="text/javascript">
-	 arrId=[]
-	 arrNum=[]
+	arr=[]
 	function updatePrice(id){
-	
-		arrId.push(id)
-		arrNum.push($('#'+id).val())
-		console.log(arrId);
-		console.log(arrNum);
+		arr.push({'id':id,'price':$('#'+id).val()})
 	}
 	function btnPrice(){
 		$.ajax({
@@ -58,16 +54,14 @@
 			type : 'POST',
 			data : {
 				'_token' : '{{csrf_token()}}',
-				'arrId' : arrId,
-				'arrNum' :arrNum,
+				'arr' : arr,
 			},
 			success : function(data)
 			{
 				console.log(data)
 			}
 		})
-		arrId=[]
-		arrNum=[]
+		arr=[]
 	}
 </script>
 

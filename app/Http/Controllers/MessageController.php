@@ -36,6 +36,7 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
+    
         if($request->reply_content == ''){
 
             session()->flash('warning','请填写完整内容');

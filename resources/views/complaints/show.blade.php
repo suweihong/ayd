@@ -18,9 +18,9 @@
 		</div>
 
 		<div>
-			<form method="post" action="{{ route('messages.store')}}">
+			<form method="post" action="{{ route('messages.store')}}"name='form'>
 				@if($message)
-					<textarea style="text-indent: 0px;background-color: #f2f2f2;margin-top: 50px;" name="reply_content" placeholder="{{$message->content}}"  rows="10" cols="110"></textarea>
+					<textarea style="text-indent: 0px;background-color: #f2f2f2;margin-top: 50px;" name="reply_content" rows="10" cols="110">{{$message->content}}</textarea>
 				@else
 					<textarea style="text-indent: 0px;background-color: #f2f2f2;margin-top: 50px;" name="reply_content" placeholder="您的反馈信息已收到"  rows="10" cols="110"></textarea>
 
@@ -30,7 +30,7 @@
 				<input type="hidden" name="id" value="{{$complaint->id}}">
 				<input type="hidden" name="mp_user_id" value="{{$complaint->mp_user_id}}">
 
-				<a href="" class="form_name_back">确认回复</a>
+				<a href="javascript:document.form.submit()" class="form_name_back">确认回复</a>
 			</form>
 			
 		</div>

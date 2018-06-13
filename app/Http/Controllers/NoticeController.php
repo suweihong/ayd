@@ -42,7 +42,7 @@ class NoticeController extends Controller
        if( $request->title == '' || $request->content == '<p><br></p>' ){
        
             session()->flash('warning','请填写完整内容');
-            return redirect("/notices/create");
+            return redirect("/notices/create")->withInput();
        }else{
             $notice = message::create([
             'mp_user_id' => '0',
@@ -88,11 +88,10 @@ class NoticeController extends Controller
      */
     public function update(Request $request, Message $notice)
     {
-
         if( $request->title == '' || $request->content == '<p><br></p>' ){
                 
             session()->flash('warning','请填写完整内容');
-            return redirect("/notices/".$notice->id."/edit");
+            return redirect("/notices/".$notice->id."/edit")->withInput();
        }else{
             $notice = $notice->update([
         

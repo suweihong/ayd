@@ -110,8 +110,6 @@ class ItemsController extends Controller
     //添加销售项目的操作
     public function store(Request $request)
     {
-
-
         $types_id = Store::find($request->store_id)->types()->where('item_id',$request->item_id)->pluck('types.id')->toArray();
         if(!in_array($request->type_id, $types_id)){
             //新增商家的 运动品类
@@ -121,10 +119,13 @@ class ItemsController extends Controller
                 'item_id' => $request->item_id,
              ]);
         }
-     
        //新增销售项目
         if($request->item_id == 2){
-            $res = Field::create([
+            if(!$request->item_id || !$request->type_id || !$request->name || !$request->price || !$request->intro){
+            return back()->withInput()->with('warning','请填写完整内容');
+
+            }else{
+                $res = Field::create([
                 'store_id' => $request->store_id,
                 'item_id' => $request->item_id,
                 'type_id' => $request->type_id,
@@ -133,9 +134,11 @@ class ItemsController extends Controller
                 'intro' => $request->intro,
                 'rule' => $request->rule,
              ]);
+            }
+            
         }
 
-         return back()->withInput()->with('warning','销售项目添加成功');
+         return back()->withInput()->with('success','销售项目添加成功');
 
     }
 
@@ -190,9 +193,20 @@ class ItemsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //改变票卡的 销售状态
     public function update(Request $request, $id)
     {
-        //
+        $ticket = Field::find($id);
+        if($ticket->switch == ''){
+            $ticket->update([
+                'switch' => '1',
+                ]);
+        }else{
+            $ticket->update([
+                'switch' => '',
+                ]);
+        }
+        return 1;
     }
 
     /**
