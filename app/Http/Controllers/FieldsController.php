@@ -203,7 +203,7 @@ class FieldsController extends Controller
         $hours = StoreType::where('store_id',$store_id)
                             ->where('type_id',$type_id)
                             ->where('item_id','1')
-                            ->first;
+                            ->first();
           //运动品类营业的  开始时间
         if($hours){
             $hours = $hours->hours;
@@ -239,10 +239,10 @@ class FieldsController extends Controller
         }
 
         $prices = $new_prices->groupBy('time')->sort();
-        return 111;
 
-        // return view('sale.price_date',compact('store','type_id','start_time','types','now','prices'));
+        return view('sale.price_date',compact('store','type_id','start_time','types','now','prices'));
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -285,7 +285,12 @@ class FieldsController extends Controller
         
         if(!$type_id){
             if(!$store->types()->get()->isEmpty()){
-                $type_id = $store->types()->first()->id;
+                $type_id = $store->types()->first();
+                if($type_id){
+                  $type_id = $type_id->id;
+                }else{
+                  $type_id = 0;
+                }
               
             }else{
                $type_id = 0;

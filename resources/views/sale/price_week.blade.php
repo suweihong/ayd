@@ -8,7 +8,7 @@
 	@include('_messages')
 	@include('store._first',['shadow'=>2,'store_id'=>$store->id])
 	@include('store._third',['shadow'=>2,'store'=>$store,'sale'=>1,'type_id'=>$type_id])
-	@include('store._fourth',['shadow'=>1,'store_id'=>$store->id,'switch'=>0,'now'=>$now,'type_id=$type_id'])
+	@include('store._fourth',['shadow'=>1,'store_id'=>$store->id,'switch'=>0,'now'=>$now,'type_id=>$type_id','date'=>2])
 	<div class="storesale_data">
 		<a @if($week == 1) class="active" @endif href="{{ route('fields.create') }}?week=1&type_id={{$type_id}}">星期一</a>
 		<a @if($week == 2) class="active" @endif href="{{route('fields.create')}}?week=2&type_id={{$type_id}}" >星期二</a>

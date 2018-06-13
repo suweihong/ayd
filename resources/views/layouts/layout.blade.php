@@ -113,16 +113,9 @@
 <script type="text/javascript">
 	laydate.render({
 		elem: '#test1',
-		done: function(datas){ //选择日期完毕的回调  
-	        $.ajax({
-				url :'/price/date',
-				type : 'get',
-				data :{
-					'_token': "{!! csrf_token() !!}",
-					'data':"datas"
-					},
-				success : function(data){}
-			}) 
+		done: function(datas){ //选择日期完毕的回调
+			window.location.href="/price/date?date="+datas;
+			sessionStorage.setItem("data",datas);
 	    }
 	});
 	$('.form_name_newadd').click(function(){
