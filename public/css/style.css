@@ -1402,8 +1402,8 @@ h6 {
   text-align: center;
   font-size: 14px;
   position: absolute;
-  bottom: 10px;
-  left: 100px;
+  bottom: 100px;
+  left: 10px;
 }
 .content .storeorder .evaluate .eavbox .nopass {
   width: 70px;
@@ -1415,8 +1415,34 @@ h6 {
   text-align: center;
   font-size: 14px;
   position: absolute;
-  bottom: 10px;
-  left: 100px;
+  bottom: 100px;
+  left: 10px;
+}
+.content .storeorder .evaluate .eavbox .review1 {
+  width: 70px;
+  height: 20px;
+  color: #ffffff;
+  line-height: 20px;
+  background: #db514e;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  position: absolute;
+  bottom: 100px;
+  left: 10px;
+}
+.content .storeorder .evaluate .eavbox .review2 {
+  width: 70px;
+  height: 20px;
+  color: #ffffff;
+  line-height: 20px;
+  background: #5eb75d;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  position: absolute;
+  bottom: 100px;
+  left: 10px;
 }
 .pagination {
   margin-left: 5%;

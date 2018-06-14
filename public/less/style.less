@@ -975,23 +975,30 @@ h1,h2,h3,h4,h5,h6 {
 					padding-right: 20px;
 					margin-top: 10px;
 				}
+				.op(@top,@bottom){
+					position: absolute;
+					bottom: 1px*@top;
+					left: 1px*@bottom;
+				}
 				.pass{
 					.btn(70px,20px,#fff,#009966);
-					position: absolute;
-					bottom: 10px;
-					left: 10px;
+					.op(10,10)
 				}
 				.delete{
 					.btn(70px,20px,#fff,#ff0000);
-					position: absolute;
-					bottom: 10px;
-					left: 100px;
+					.op(100,10)
 				}
 				.nopass{
 					.btn(70px,20px,#fff,#ff9933);
-					position: absolute;
-					bottom: 10px;
-					left: 100px;
+					.op(100,10)
+				}
+				.review1{
+					.btn(70px,20px,#fff,#db514e);
+					.op(100,10)
+				}
+				.review2{
+					.btn(70px,20px,#fff,#5eb75d);
+					.op(100,10)
 				}
 			}
 		}
