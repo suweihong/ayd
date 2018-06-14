@@ -10,7 +10,7 @@
 			@endforeach
 		@elseif($sale == 2)
 			@foreach ($types as $type)
-				<a @if($type_id == $type->id) class="active" @endif href="/price/date?type_id={{$type->id}}">{{$type->name}}</a>
+				<a @if($type_id == $type->id) class="active" @endif href="/price/date?type_id={{$type->id}}&date={{$_SESSION['date']}}">{{$type->name}}</a>
 			@endforeach
 		@elseif($sale == 3)
 			@foreach ($types as $type)
@@ -18,7 +18,7 @@
 			@endforeach
 		@elseif($sale == 4)
 			@foreach ($types as $type)
-				<a @if($type_id == $type->id) class="active" @endif href="/switch/date?type_id={{$type->id}}">{{$type->name}}</a>
+				<a @if($type_id == $type->id) class="active" @endif href="/switch/date?type_id={{$type->id}}&date={{$_SESSION['date']}}">{{$type->name}}</a>
 			@endforeach
 		@elseif($sale == 5)
 			@foreach ($types as $type)

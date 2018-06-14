@@ -64,7 +64,7 @@ class LoginController extends Controller
     public function index()
     {
         $user = Auth::user();
-       
+          //店铺id 存到session
            session_start();
            $time=1*51840000;
           setcookie(session_name(),session_id(),time()+$time,"/");

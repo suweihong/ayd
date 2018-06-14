@@ -111,13 +111,6 @@
 	@yield('content')
 
 <script type="text/javascript">
-	laydate.render({
-		elem: '#test1',
-		done: function(datas){ //选择日期完毕的回调
-			window.location.href="/price/date?date="+datas+'&type_id={{$type_id}}';
-			sessionStorage.setItem("data",datas);
-	    }
-	});
 	$('.form_name_newadd').click(function(){
 		$('.mask_codebox').fadeIn()
 	})

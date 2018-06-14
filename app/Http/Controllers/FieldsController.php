@@ -184,14 +184,23 @@ class FieldsController extends Controller
         $now = date('Y-m-d',time());
         //要查询的日期
         $date = $request->date ?? $now;
+          //日期存到session
+        $time=1*51840000;
+        setcookie(session_name(),session_id(),time()+$time,"/");
+        $_SESSION['date']=$date;
+    
         $time = strtotime($date);
         //要查询的那天是 周几
         $week = date('N',$time);
 
         if(!$type_id){
             if(!$store->types()->get()->isEmpty()){
-                $type_id = $store->types()->first()->id;
-
+                $type_id = $store->types()->first();
+                if($type_id){
+                  $type_id = $type_id->id;
+                }else{
+                  $type_id = 0;
+                }
             }else{
                $type_id = 0;
             }
@@ -215,8 +224,6 @@ class FieldsController extends Controller
         //读取所有价格
           $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('date',$date)->orderBy('place_id','asc')->get();
 
-
-
         if($new_prices->isEmpty()){
 
             $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
@@ -235,6 +242,7 @@ class FieldsController extends Controller
             $new_prices = $price_week;
         }
         $prices = $new_prices->groupBy('time')->sort();
+
         return view('sale.price_date',compact('store','type_id','start_time','types','now','prices','date'));
     }
 
@@ -316,30 +324,78 @@ class FieldsController extends Controller
     //按日期开关场地
     public function switch_date(Request $request)
     {
-        session_start();
+       session_start();
         $store_id = $_SESSION['store_id'];
         $store = Store::find($store_id);
-
-         $type_id = $request->type_id;
+  
+        $type_id = $request->type_id;
         $item_id = $request->item_id ?? 1;
         $types = $store->types()->where('item_id',$item_id)->get();
+        //现在的日期
         $now = date('Y-m-d',time());
-        
+        //要查询的日期
+        $date = $request->date ?? $now;
+          //日期存到session
+        $time=1*51840000;
+        setcookie(session_name(),session_id(),time()+$time,"/");
+        $_SESSION['date']=$date;
+    
+        $time = strtotime($date);
+        //要查询的那天是 周几
+        $week = date('N',$time);
+
         if(!$type_id){
             if(!$store->types()->get()->isEmpty()){
-                $type_id = $store->types()->first()->id;
-              
+                $type_id = $store->types()->first();
+                if($type_id){
+                  $type_id = $type_id->id;
+                }else{
+                  $type_id = 0;
+                }
             }else{
                $type_id = 0;
             }
         }
-        $type = Type::find($type_id);
-       if($type == null){
-            $places = [];
+
+
+         //该店铺 该运动品类 的营业时间
+        $hours = StoreType::where('store_id',$store_id)
+                            ->where('type_id',$type_id)
+                            ->where('item_id','1')
+                            ->first();
+          //运动品类营业的  开始时间
+        if($hours){
+            $hours = $hours->hours;
+            $store_hours = explode('-', $hours);
+            $start_time = (int)substr($store_hours[0],0,strrpos($store_hours[0],':')); 
         }else{
-             $places = $type->places()->where('store_id',$store_id)->orderBy('created_at','asc')->get();
+            $start_time = 0;
         }
-        return view('sale.switch_date',compact('store','type_id','places','types','now'));
+
+        //读取所有价格
+          $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('date',$date)->orderBy('place_id','asc')->get();
+
+        if($new_prices->isEmpty()){
+
+            $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
+
+        }else{
+             $price_week = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
+             //将 星期价格 替换为 日期的价格
+            foreach ($price_week as $key => $value) {
+               foreach ($new_prices as $k => $v) {
+                  if($value->place_id == $v->place_id && $value->time == $v->time){
+
+                    $price_week[$key] = $v;
+                  }
+               }
+            }
+            $new_prices = $price_week;
+        }
+        $prices = $new_prices->groupBy('time')->sort();
+
+       
+        return view('sale.switch_date',compact('store','type_id','start_time','types','now','prices'));
     }
 
     /**
