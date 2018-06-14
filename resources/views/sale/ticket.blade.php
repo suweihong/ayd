@@ -40,10 +40,10 @@
 			success: function(data)
 			{
 				if(data == 1){
-					$('#'+id).removeClass('storecatd_p4').addClass('qq')
+					$('#'+id).removeClass('storecatd_p4').addClass('storecatd_p0')
 					$('#'+id).text('暂停销售')
 				}else{
-					$('#'+id).removeClass('qq').addClass('storecatd_p4')
+					$('#'+id).removeClass('storecatd_p0').addClass('storecatd_p4')
 					$('#'+id).text('销售中')
 
 				}

@@ -8,7 +8,7 @@
 		@include('_delete')
 
 		<h1 class="in_title">公告列表</h1>
-		<label class="title"><a href="{{route('notices.create')}}">添加公告</a></label>
+		<label class="sportStyle"><a class="addsport" href="{{route('notices.create')}}">添加公告</a></label>
 
 		<table border="1" class="table_line">
 		    <tr>
@@ -21,8 +21,8 @@
 	    			<td>{{$notice->id}}</td>
 	    			<td>{{$notice->title}}</td>
 	    			<td>
-	    				<button onclick="btnClick({{$notice->id}})">删除</button>
-						<a href="{{route('notices.edit',$notice->id)}}">修改</a>
+	    				<a href="javascript:;" class="ben_notice" onclick="btnClick({{$notice->id}})">删除</a>
+						<a href="{{route('notices.edit',$notice->id)}}" class="ben_notice">修改</a>
 	    			</td>
     			</tr>
     		@endforeach

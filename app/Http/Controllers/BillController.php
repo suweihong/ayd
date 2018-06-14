@@ -13,7 +13,8 @@ class BillController extends Controller
      */
     public function index()
     {
-        dump(44);
+        session_start();
+        return view('bills.index');
     }
 
     /**

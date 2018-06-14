@@ -269,6 +269,54 @@ h6 {
   padding-bottom: 20px;
   flex: 1;
 }
+.content .con_right #wangeditor {
+  margin-top: 20px;
+  width: 98%;
+}
+.content .con_right .notice_submit {
+  width: 70px;
+  height: 27px;
+  color: #ffffff;
+  line-height: 27px;
+  background: #30a5ff;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  display: inline-block;
+}
+.content .con_right .notice_submit3 {
+  width: 70px;
+  height: 27px;
+  color: #ffffff;
+  line-height: 27px;
+  background: #30a5ff;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  display: inline-block;
+}
+.content .con_right .notice_back {
+  width: 70px;
+  height: 27px;
+  color: #ffffff;
+  line-height: 27px;
+  background: #30a5ff;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  display: inline-block;
+}
+.content .con_right .ben_notice {
+  width: 60px;
+  height: 21px;
+  color: #ffffff;
+  line-height: 21px;
+  background: #30a5ff;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  display: inline-block;
+}
 .content .con_right .title {
   font-size: 18px;
   font-weight: bold;
