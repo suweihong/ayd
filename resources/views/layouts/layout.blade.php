@@ -95,7 +95,7 @@
             	</li>
             	<li class="hover">
 		        	<img src="/img/you.png" class="menuimg">
-		            <a href="{{ route('complaints.index',2)}}" class="menutxt">用户投诉</a>
+		            <a href="{{ route('complaints.index',3)}}" class="menutxt">用户投诉</a>
             	</li>
             	<li class="hover">
 		        	<img src="/img/you.png" class="menuimg">
@@ -105,7 +105,7 @@
         </li>
         <li class="menulist hover">
         	<img src="/img/pencil.png" class="menuimg">
-            <a href="{{route('estimates.index')}}?store=1" class="menutxt">评价审核</a>
+            <a href="{{route('estimates.index')}}?check_id=3" class="menutxt">评价审核</a>
         </li>
     </ul>
 	@yield('content')

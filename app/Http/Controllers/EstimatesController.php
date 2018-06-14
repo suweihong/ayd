@@ -16,10 +16,10 @@ class EstimatesController extends Controller
     public function index(Request $request)
     {
         session_start();
-        if($request->store == 1){
+        if($request->check_id == 3){
             //所有商家的评价
-            $estimates = Estimate::all()->paginate(10);
-            
+            $estimates = Estimate::where('check_id',3)->orderBy('created_at','desc')->paginate(10);
+            return view('estimates.list',compact('estimates'));
 
         }else{
             //指定商家的 评价
