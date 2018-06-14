@@ -45,8 +45,8 @@
 		<ul class="in_boxt">
 			@foreach($complaints as $complaint)
 				<li  class="in_box_line">
-					@if($complaint->check_id == 1)<p class="btn_n">已读</p>
-					@elseif($complaint->check_id == 2 && $complaint->client_id == '')<p class="btn_y">未读</p>
+					@if($complaint->check_id == 1)<p class="btn_y">已读</p>
+					@elseif($complaint->check_id == 2 && $complaint->client_id == '')<p class="btn_n">未读</p>
 					@else<p class="btn_request">投诉</p>
 					@endif
 					<p>{{str_limit($complaint->content,$limit = 60, $end = '......')}}</p>

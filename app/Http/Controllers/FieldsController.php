@@ -300,7 +300,7 @@ class FieldsController extends Controller
         $hours = StoreType::where('store_id',$store_id)
                             ->where('type_id',$type_id)
                             ->where('item_id','1')
-                            ->first;
+                            ->first();
           //运动品类营业的  开始时间
         if($hours){
             $hours = $hours->hours;
