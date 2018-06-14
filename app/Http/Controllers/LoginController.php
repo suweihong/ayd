@@ -70,7 +70,7 @@ class LoginController extends Controller
           setcookie(session_name(),session_id(),time()+$time,"/");
           $_SESSION['last_time']=$user->last_time;
     
-          //消息动态
+          //消息动态 最近一个月的
           $today = date('Y-m-d H:i:s');
           $date = date('Y-m-d H:i:s',strtotime('today') - 2592000);
           $complaints = Complaint::whereBetween('created_at',[$date,$today])
