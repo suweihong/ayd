@@ -16,10 +16,16 @@ class EstimatesController extends Controller
     public function index(Request $request)
     {
         session_start();
-        if($request->check_id == 3){
+        if($request->check_id){
+            $check_id = $request->check_id;
             //所有商家的评价
-            $estimates = Estimate::where('check_id',3)->orderBy('created_at','desc')->paginate(10);
-            return view('estimates.list',compact('estimates'));
+            if($check_id == 33){
+                 $estimates = Estimate::orderBy('created_at','desc')->paginate(10);
+            }else{
+                $estimates = Estimate::where('check_id',$check_id)->orderBy('created_at','desc')->paginate(10);
+            }
+            
+            return view('estimates.list',compact('estimates','check_id'));
 
         }else{
             //指定商家的 评价
