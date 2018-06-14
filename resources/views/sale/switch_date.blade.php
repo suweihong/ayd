@@ -4,12 +4,51 @@
 @section('title','场地管理')
 
 @section('content')
-	
-	@include('store._first',['shadow'=>2,'store_id'=>$store->id])
-	@include('store._third',['shadow'=>3,'store'=>$store,'sale'=>4,'type_id'=>$type_id])
-	@include('store._fourth',['shadow'=>2,'switch'=>1,'now'=>$now,'type_id'=>$type_id,'date'=>1])
+	<div class="con_right storesale">
+		@include('store._first',['shadow'=>2,'store_id'=>$store->id])
+		@include('store._third',['shadow'=>3,'store'=>$store,'sale'=>4,'type_id'=>$type_id])
+		@include('store._fourth',['shadow'=>2,'switch'=>1,'now'=>$now,'type_id'=>$type_id,'date'=>1])
+		<table class="table_btn">
+			    <tr>
+					<th class="none"></th>
+					<?php foreach ($prices as $key => $price): ?>
+						@if($key == $start_time)
+							@foreach($price as $v)
+								<th>场地{{$loop->iteration}}{{$v->place_id}}</th>
+							@endforeach
+						@endif
+					<?php endforeach ?>
+				</tr>
+				<?php foreach ($prices as $key => $price): ?>
+					<tr>
+						<td>{{$key}}:00-{{$key+1}}:00</td>
+						@foreach($price as $value)
+							<td onclick="btnSwitchClick({{$value->id}})"><input type="text" id="{{$value->id}}" value="{{$value->price}}" maxlength="8" disabled="disabled" @if($value->switch == '')class="table_btn_num bsck_fff" @elseif($value->switch == 2) class="table_btn_num bsck_green"
+							@else class="table_btn_num bsck_black"  @endif
+							/></td>
+						@endforeach
+					</tr>
+				<?php endforeach ?>
+			</table>
+			<div class="swichbox">
+				<p class="swichi_p1"></p>
+				<p class="swichi_p2"></p>
+				<p class="swichi_p3"></p>
+				<p class="swichi_p4">空闲</p>
+				<p class="swichi_p5">已销售</p>
+				<p class="swichi_p6">已关闭</p>
+			</div>
+			<div class="swichboxmsg">
+				<h5>交互说明</h5>
+				<p>点击空闲场地-&gt;关闭</p>
+				<p>点击关闭场地-&gt;打开</p>
+				<p>点击已销售场地-&gt;查看订单</p>
+			</div>
+			<!-- <a href="javascript:;" class="updata_salenum">更新销售数据</a> -->
 
-	<!-- <h1>场地价格</h1> -->
+	</div>
+	
+
 		
 		<div class="tab-pane fade in active saletab" id="saletab1">
 		<table class="col-sm-12">

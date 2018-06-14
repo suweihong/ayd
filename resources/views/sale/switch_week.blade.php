@@ -58,7 +58,7 @@
 				<p>点击已销售场地-&gt;查看订单</p>
 			</div>
 		</div>
-		<a href="javascript:;" class="updata_salenum">更新销售数据</a>
+		<!-- <a href="javascript:;" class="updata_salenum">更新销售数据</a> -->
 	</div>
 
 	<script type="text/javascript">

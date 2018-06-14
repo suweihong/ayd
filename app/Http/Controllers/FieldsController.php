@@ -118,6 +118,7 @@ class FieldsController extends Controller
     //  修改场地价格
     public function update_price(Request $request)
     {
+      return 222;
         $prices = $request->arr;
         if($prices){
           $update_price = [];
