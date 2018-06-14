@@ -118,7 +118,6 @@ class FieldsController extends Controller
     //  修改场地价格
     public function update_price(Request $request)
     {
-      return 222;
         $prices = $request->arr;
         if($prices){
           $update_price = [];
@@ -127,7 +126,6 @@ class FieldsController extends Controller
           }
         //按日期  改价格
         if($request->date){
-          return $request->date;
           foreach ($update_price as $key => $value) {
             $fields = Field::find($key);
             $time = $fields->time;
@@ -171,7 +169,6 @@ class FieldsController extends Controller
       }
      
     }
-
 
      //价格配置页 按日期
     public function price_date(Request $request)
@@ -237,7 +234,6 @@ class FieldsController extends Controller
             }
             $new_prices = $price_week;
         }
-
         $prices = $new_prices->groupBy('time')->sort();
         return view('sale.price_date',compact('store','type_id','start_time','types','now','prices','date'));
     }
