@@ -118,48 +118,49 @@ class FieldsController extends Controller
     //  修改场地价格
     public function update_price(Request $request)
     {
-      $prices = $request->arr;
-      if($prices){
-        $update_price = [];
-        foreach ($prices as $key => $value) {
-        $update_price[$value['id']] = $value['price'];
-      }
-      //按日期  改价格
-      if($request->date){
-        foreach ($update_price as $key => $value) {
-          $fields = Field::find($key);
-          $time = $fields->time;
-          $date_fields = Field::where('place_id',$key)->where('time',$time)->where('date',$request->date)->first();
-          if($date_fields){
-            $date_fields->update([
+        $prices = $request->arr;
+        if($prices){
+          $update_price = [];
+          foreach ($prices as $key => $value) {
+          $update_price[$value['id']] = $value['price'];
+          }
+        //按日期  改价格
+        if($request->date){
+          return $request->date;
+          foreach ($update_price as $key => $value) {
+            $fields = Field::find($key);
+            $time = $fields->time;
+            $date_fields = Field::where('place_id',$fields->place_id)->where('time',$time)->where('date',$request->date)->first();
+            if($date_fields){
+              $date_fields->update([
+                  'price' => $value,
+                ]);
+            }else{
+              Field::create([
+                'place_id' => $fields->place_id,
+                'time' => $time,
+                'store_id' => $fields->store_id,
+                'type_id' => $fields->type_id,
+                'date' => $request->date,
                 'price' => $value,
-              ]);
-          }else{
-            Field::create([
-              'place_id' => $key,
-              'time' => $time,
-              'data' => $request->date,
+                ]);
+            }
+
+          }
+        }else{
+          //按星期 改价格
+          foreach ($update_price as $key => $value) {
+            $fields = Field::where('date',null)->find($key);
+            $fields -> update([
+              'price' => $value,
               ]);
           }
-
         }
-
-      }else{
-        //按星期 改价格
-        foreach ($update_price as $key => $value) {
-          $fields = Field::find($key);
-          $fields -> update([
-            'price' => $value,
-            ]);
-        }
-      }
-      
-    return response()->json([
-                            'errcode'=> '1',
-                            'errmsg'=> '修改成功',
-                            ], 200)
-                            ->setCallback($request->input('callback'));
-
+        return response()->json([
+                                'errcode'=> '1',
+                                'errmsg'=> '修改成功',
+                                ], 200)
+                                ->setCallback($request->input('callback'));
       }else{
          return response()->json([
                             'errcode'=> '2',
@@ -212,11 +213,10 @@ class FieldsController extends Controller
         }else{
             $start_time = 0;
         }
-       
-     
 
         //读取所有价格
-           $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('date',$date)->orderBy('place_id','asc')->get();
+          $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('date',$date)->orderBy('place_id','asc')->get();
+
 
 
         if($new_prices->isEmpty()){
@@ -224,7 +224,6 @@ class FieldsController extends Controller
             $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
 
         }else{
-
              $price_week = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
              //将 星期价格 替换为 日期的价格
             foreach ($price_week as $key => $value) {
@@ -239,8 +238,7 @@ class FieldsController extends Controller
         }
 
         $prices = $new_prices->groupBy('time')->sort();
-
-        return view('sale.price_date',compact('store','type_id','start_time','types','now','prices'));
+        return view('sale.price_date',compact('store','type_id','start_time','types','now','prices','date'));
     }
 
     /**

@@ -35,25 +35,40 @@
 	<a href="javascript:;" class="updata_salenum" onclick="price()">更新销售数据</a>
 </div>
 	<script type="text/javascript">
-	arr=[]
 	if(sessionStorage.getItem("data")!=null){
 		$('#test1').val(sessionStorage.getItem("data"))
 	}
+	//修改价格
+	arr=[]
 	function datePrice(id){
 		arr.push({'id':id,'price':$('#'+id).val()})
 	}
 	function price(){
+		setTimeout(() => {
+	  		$("#error_messages").slideUp()
+	  	}, 2000)
 		$.ajax({
 			url : '/price/update',
 			type : 'POST',
 			data : {
 				'_token' : '{{csrf_token()}}',
 				'arr' : arr,
-				'date' : 1,
+				'date' : sessionStorage.getItem("data"),
 			},
 			success : function(data)
 			{
-				console.log(data)
+				$('#error_messages').show()
+				$('#error_messages .flash-message').remove()
+				var tt=data.errmsg
+				if(data.errcode==2){
+					var classn="alert-warning"
+				}else{
+					var classn="alert-success"
+				}
+				var html='<div class="flash-message">\
+					        <p class="alert '+classn+'">'+tt+'</p>\
+				      	</div>'
+				$('#error_messages').append(html)
 			}
 		})
 		arr=[]

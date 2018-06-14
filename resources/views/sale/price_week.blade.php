@@ -44,6 +44,7 @@
 </div>
 
 <script type="text/javascript">
+	//修改价格
 	arr=[]
 	function updatePrice(id){
 		arr.push({'id':id,'price':$('#'+id).val()})
