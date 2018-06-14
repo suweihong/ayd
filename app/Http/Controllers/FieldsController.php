@@ -173,7 +173,9 @@ class FieldsController extends Controller
      //价格配置页 按日期
     public function price_date(Request $request)
     {
+
         session_start();
+        dump($_SESSION);
         $store_id = $_SESSION['store_id'];
         $store = Store::find($store_id);
   

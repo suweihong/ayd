@@ -121,7 +121,7 @@
 	laydate.render({
 		elem: '#test2',
 		done: function(datas){ //选择日期完毕的回调
-			window.location.href="/price/date?date="+datas;
+			window.location.href="/switch/date?date="+datas;
 			sessionStorage.setItem("data",datas);
 	    }
 	});
