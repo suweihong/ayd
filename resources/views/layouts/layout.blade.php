@@ -114,7 +114,14 @@
 	laydate.render({
 		elem: '#test1',
 		done: function(datas){ //选择日期完毕的回调
-			window.location.href="/price/date?date="+datas+'&type_id={{$type_id}}';
+			window.location.href="/price/date?date="+datas;
+			sessionStorage.setItem("data",datas);
+	    }
+	});
+	laydate.render({
+		elem: '#test2',
+		done: function(datas){ //选择日期完毕的回调
+			window.location.href="/price/date?date="+datas;
 			sessionStorage.setItem("data",datas);
 	    }
 	});
