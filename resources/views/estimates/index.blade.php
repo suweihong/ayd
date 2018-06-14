@@ -19,6 +19,7 @@
 				</div>
 			@endforeach
 		</div>
+			{{ $estimates->render() }}
 	</div>
-	{{ $estimates->render() }}
+
 @stop

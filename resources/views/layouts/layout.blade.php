@@ -105,7 +105,7 @@
         </li>
         <li class="menulist hover">
         	<img src="/img/pencil.png" class="menuimg">
-            <a href="javascript:;" class="menutxt">评价审核</a>
+            <a href="{{route('estimates.index')}}?store=1" class="menutxt">评价审核</a>
         </li>
     </ul>
 	@yield('content')
