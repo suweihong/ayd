@@ -75,7 +75,37 @@
 		})
 		//改变评价的审核状态
 		function estimatePass(id,e){
-			
+			$('.del_prompt').css('display','none') ;
+				setTimeout(() => {
+			  	$("#error_messages").slideUp()
+			  	}, 2000)
+
+			 $.ajax({
+			 	url : "/estimates/"+id,
+			 	type : 'PATCH',
+			 	data:{
+			 		'_token' : '{{csrf_token()}}',
+			 		'check_id' : e,
+			 	},
+			 	success : function(data){
+			 		console.log(data)
+			 		$('#'+id).remove()
+			 		$('#'+$('.message_del').attr('data_id')).remove()
+					$('#error_messages').show()
+					$('#error_messages .flash-message').remove()
+					var tt=data.errmsg
+					if(data.errcode==2){
+						var classn="alert-warning"
+					}else{
+						var classn="alert-success"
+					}
+					var html='<div class="flash-message">\
+						        <p class="alert '+classn+'">'+tt+'</p>\
+					      	</div>'
+					$('#error_messages').append(html)
+			 		
+			 	}
+			 })
 		}
 	</script>
 @stop

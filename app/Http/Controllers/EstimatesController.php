@@ -104,7 +104,20 @@ class EstimatesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $estimates = Estimate::find($id);
+        if($request->check_id == 1){
+            $estimates->update([
+                'check_id' => 6,
+                ]);
+        }else{
+            $estimates->update([
+                'check_id' => 5,
+                ]);
+        }
+        return response()->json([
+            'errcode' => '1',
+            'errmsg' => '成功审核该评论',
+            ],200) ;
     }
 
     /**
