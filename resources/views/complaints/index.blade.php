@@ -4,9 +4,9 @@
 
 <div class="con_right storemanage">
 
-	@include('_messages')
-	@include('_delete')
-			
+		@include('_messages')
+		@include('_delete')
+				
 
 		@if($type == 2)
 			<h1 class="in_title">用户投诉</h1>

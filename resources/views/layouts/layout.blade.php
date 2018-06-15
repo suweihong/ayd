@@ -93,7 +93,7 @@
 	            	</li>
 	            	<li class="hover">
 			        	<img src="/img/you.png" class="menuimg">
-			            <a href="{{ route('complaints.index',3)}}" class="menutxt">用户投诉</a>
+			            <a href="{{ route('complaints.index',2)}}" class="menutxt">用户投诉</a>
 	            	</li>
 	            	<li class="hover">
 			        	<img src="/img/you.png" class="menuimg">

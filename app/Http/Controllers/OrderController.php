@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Order;
+use App\Models\Type;
+
 class OrderController extends Controller
 {
     /**
@@ -11,10 +14,13 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         session_start();
-        return view('orders.index');
+        dump($request->all());
+        $types = Type::all();
+        $orders = Order::orderBy('created_at','desc')->paginate(5);
+        return view('orders.index',compact('orders','types'));
     }
 
 
@@ -86,5 +92,13 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    //导出数据
+    public function export(Request $request)
+    {
+          $orders = Order::orderBy('created_at','desc')->get();
+          
+          
     }
 }

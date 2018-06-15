@@ -13,7 +13,7 @@ class Order extends Model
     //该订单的状态
     public function  status()
     {
-    	return $this->belongsToMany('App\Models\Status');
+    	return $this->belongsTo('App\Models\Status');
     }
 
     //该订单最新状态
@@ -35,5 +35,10 @@ class Order extends Model
     {
     	return $this->belongsToMany('App\Models\Field')
     				->withTimestamps();
+    }
+    //该订单所属用户
+    public function client()
+    {
+        return $this->belongsTo('App\Models\Client');
     }
 }

@@ -29,6 +29,7 @@ Route::resource('types/{types}/complaints','ComplaintController');//反馈
 Route::resource('messages','MessageController');//私信
 Route::resource('notices','NoticeController');//公告
 Route::resource('orders','OrderController');//订单
+Route::get('export/orders','OrderController@export');//导出订单
 Route::resource('stores','StoreController');//店铺
 Route::resource('mpusers','MpuserController');//店主
 Route::resource('staffs','StaffController');//店铺员工

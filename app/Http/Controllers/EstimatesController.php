@@ -37,15 +37,11 @@ class EstimatesController extends Controller
             $estimate_list = $store->estimates();
             $estimates = $estimate_list->orderBy('created_at','desc')->paginate(2);
 
-           $environments = $estimate_list->pluck('environment')->toArray();
-           $environment = array_sum($environments) / (count($environments)==0 ? 1 : count($environments));
-          
-           $services = $estimate_list->pluck('service')->toArray();
-           $service = array_sum($services) / (count($services)==0 ? 1 : count($services) );
+           $environment = $estimate_list->pluck('environment')->avg();
 
-           $averages = $estimate_list->pluck('average')->toArray();
-           $average = array_sum($averages) / (count($averages)==0 ? 1 : count($averages));
-           
+           $service = $estimate_list->pluck('service')->avg();
+
+           $average = $estimate_list->pluck('average')->avg();
             return view('estimates.index',compact('store','estimates','environment','service','average'));
         }
 

@@ -18,7 +18,7 @@
 				<div class="eavbox" id="{{$estimate->id}}">
 					<div class="xinxi">
 						<span>{{$estimate->client->nick_name}} </span>
-						<span class="evaluatenum">5分</span>
+						<span class="evaluatenum">{{$estimate->average}}分</span>
 						<p class="evalua">{{$estimate->content}}</p>
 						@if($estimate->check_id == 6)
 							<a href="javascript:;" class="pass">审核通过</a>
