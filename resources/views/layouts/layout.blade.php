@@ -3,10 +3,8 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>@yield('title','奥运动')</title>
-
 		{!! we_css() !!}
    		{!! we_js() !!}
-
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 	<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
 	<link href="/css/style.css" type="text/css" media="screen" rel="stylesheet" />
@@ -109,7 +107,7 @@
         </li>
     </ul>
 	@yield('content')
-
+</div>
 <script type="text/javascript">
 	$('.form_name_newadd').click(function(){
 		$('.mask_codebox').fadeIn()

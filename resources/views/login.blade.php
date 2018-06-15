@@ -9,19 +9,19 @@
 </head>
 <body>	
 	@include('_messages')
-		<div class="loginbox">
-			<div class="panel-heading">奥运动管理员平台</div>
-			<div class="panel-body">
-				<form role="form" action="/login" method="post">
-					{{ csrf_field() }}
-					<fieldset>
-						<input class="form-control" placeholder="Password" name="password" type="password" value="" >
-						<div class="checkbox"></div>
-						<button class="loginBtn" type="submit">登录</button>
-					</fieldset>
-				</form>
-			</div>
+	<div class="loginbox">
+		<div class="panel-heading">奥运动管理员平台</div>
+		<div class="panel-body">
+			<form role="form" action="/login" method="post">
+				{{ csrf_field() }}
+				<fieldset>
+					<input class="form-control" placeholder="Password" name="password" type="password" value="" >
+					<div class="checkbox"></div>
+					<button class="loginBtn" type="submit">登录</button>
+				</fieldset>
+			</form>
 		</div>
+	</div>
 	<script>
 		// !function ($) {
 		// 	$(document).on("click","ul.nav li.parent > a > span.icon", function(){		  

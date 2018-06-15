@@ -5,10 +5,8 @@
 @section('content')
 	
 	<div class="con_right  sportStyle">
-
 		@include('_messages')
 		@include('_delete')
-
 		<h1 class="in_title">运动品类</h1>
 		<a href="{{ route('types.create')}}" class="addsport">新增</a>
 		<table border="1" class="table_line">
@@ -61,7 +59,6 @@
 			}
 		})
 	})
-
 </script>
 
 @stop

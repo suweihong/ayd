@@ -14,6 +14,5 @@
 		<p class="order_details">核销状态：未审核</p>
 		<button  class="order_detailsbtn">协助核销</button>
 		<p class="order_details"><a href="javascript:;" class="btnorder_details">返回</a></p>
-  </div>
-</div>
+	</div>
 @stop

@@ -23,14 +23,12 @@
 				<a class="storecatd_p5" href="javascript:;" onclick="btnClick({{$ticket->id}})">删除</a>
 			</div>
 		@endforeach
-		
 	</div>
 	<a href="{{route('items.create')}}?store_id={{$store->id}}" class="updata_salenum">新增</a>
 </div>
 
 <script type="text/javascript">
-	function ticketSwitch(id)
-	{
+	function ticketSwitch(id){
 		$.ajax({
 			url:'/items/'+id,
 			type:'PATCH',
@@ -45,26 +43,25 @@
 				}else{
 					$('#'+id).removeClass('storecatd_p0').addClass('storecatd_p4')
 					$('#'+id).text('销售中')
-
 				}
 			}
 		})
 	}
 	//删除票卡
 	$('.message_del').click(function(){
-			$('.del_prompt').css('display','none') ;
-			$.ajax({
-				url : '/items/'+$('.message_del').attr('data_id'),
-				type: 'DELETE',
-				data: {
-					'_token':'{{csrf_token()}}',
-				},
-				success : function(data){
-					if(data){
-						$('#ticket'+$('.message_del').attr('data_id')).remove()
-					}
+		$('.del_prompt').css('display','none') ;
+		$.ajax({
+			url : '/items/'+$('.message_del').attr('data_id'),
+			type: 'DELETE',
+			data: {
+				'_token':'{{csrf_token()}}',
+			},
+			success : function(data){
+				if(data){
+					$('#ticket'+$('.message_del').attr('data_id')).remove()
 				}
-			})
+			}
 		})
+	})
 </script>
 @stop

@@ -7,7 +7,6 @@
 
 	<div class="con_right storebase">
 		@include('_messages')
-
 		@include('store._first',['shadow'=>1,'store_id'=>$store->id ])
 		@include('store._second',['shadow'=>1,'store_id'=>$store->id ])
 		<form action="{{route('stores.update',$store->id)}}" method="post" class="store_base_msg" name='form'>
