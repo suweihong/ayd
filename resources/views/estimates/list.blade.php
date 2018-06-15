@@ -5,6 +5,8 @@
 
 @section('content')
 	<div class="con_right storeorder">
+		@include('_delete')
+		@include('_messages')
 		<h1 class="in_title">评价审核</h1>
 		<div class="storemenu1">
 			<a href="{{route('estimates.index')}}?check_id=3" @if($check_id == 3) class="active" @endif>未审核</a>
@@ -23,10 +25,11 @@
 						@elseif($estimate->check_id == 5)
 							<a href="javascript:;" class="nopass">审核未通过</a>
 						@else
-							<a href="javascript:;" class="review1">通过</a>
-							<a href="javascript:;" class="review2">拒绝</a>
+							<a href="javascript:;" class="review1" onclick="estimatePass({{$estimate->id}})">通过</a>
+							<a href="javascript:;" class="review2" onclick="estimatePass({{$estimate->id}})">拒绝</a>
 						@endif
-						<a href="javascript:;" class="delete" onClick='delEstimate({{$estimate->id}})'>删除</a>
+						<a href="javascript:;" class="delete" 
+						onclick="btnClick({{$estimate->id}})">删除</a>
 					</div>
 					<div class="laiyuan">
 						<p class="source">评价来源</p>
@@ -41,19 +44,38 @@
 	</div>
 	
 	<script type="text/javascript">
-		function delEstimate(id)
-		{
+		//删除评价
+		$('.message_del').click(function(){
+			$('.del_prompt').css('display','none') ;
+				setTimeout(() => {
+			  	$("#error_messages").slideUp()
+			  	}, 2000)
 			$.ajax({
-				url : '/estimate/'+id,
-				type : 'DELETE',
-				data : {
-					'_token' : '{{csrf_token()}}'
+				url : '/estimates/'+$('.message_del').attr('data_id'),
+				type: 'DELETE',
+				data: {
+					'_token':'{{csrf_token()}}',
 				},
-				success : function(data)
-				{
-					console.log(data)
-				}
+				success : function(data){
+					$('#'+$('.message_del').attr('data_id')).remove()
+					$('#error_messages').show()
+					$('#error_messages .flash-message').remove()
+					var tt=data.errmsg
+					if(data.errcode==2){
+						var classn="alert-warning"
+					}else{
+						var classn="alert-success"
+					}
+					var html='<div class="flash-message">\
+						        <p class="alert '+classn+'">'+tt+'</p>\
+					      	</div>'
+					$('#error_messages').append(html)
+					}
 			})
+		})
+		//改变评价的审核状态
+		function estimatePass(){
+			
 		}
 	</script>
 @stop

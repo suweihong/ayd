@@ -115,6 +115,11 @@ class EstimatesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $estimates = Estimate::find($id);
+        $res = $estimates -> delete();
+        return response()->json([
+                            'errcode'=> '1',
+                            'errmsg'=> '删除成功',
+                            ], 200);
     }
 }
