@@ -7,7 +7,6 @@
 
 	<!-- <h1>员工管理</h1> -->
 	<div class="con_right storebase" >
-
 		@include('store._first',['shadow'=>1,'store_id'=>$store->id])
 		@include('store._second',['shadow'=>3,'store_id'=>$store->id])
 		<div class="store_base_starf">

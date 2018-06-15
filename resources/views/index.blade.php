@@ -4,7 +4,7 @@
 @section('title','奥运动管理系统')
 
 @section('content')
- <div class="con_right">
+<div class="con_right">
 	<div class="con_rightbox">
     	<h1 class="in_title">今日订单概览</h1>
 		<div class="in_box">

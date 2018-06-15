@@ -5,7 +5,7 @@
 
 @section('content')
 	
-	<div class="con_right storesale">
+<div class="con_right storesale">
 	@include('_messages')
 	@include('store._first',['shadow'=>2,'store_id'=>$store->id])
 	@include('store._third',['shadow'=>2,'store'=>$store,'sale'=>2,'type_id'=>$type_id])
@@ -35,7 +35,7 @@
 	</table>
 	<a href="javascript:;" class="updata_salenum" onclick="price()">更新销售数据</a>
 </div>
-	<script type="text/javascript">
+<script type="text/javascript">
 	if(sessionStorage.getItem("data")!=null){
 		$('#test1').val(sessionStorage.getItem("data"))
 	}

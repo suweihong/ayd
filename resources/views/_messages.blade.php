@@ -9,12 +9,10 @@
       </div>
     @endif
   @endforeach
-
   <script type="text/javascript">
   	setTimeout(() => {
   		$("#error_messages").slideUp()
   	}, 2000)
   </script>
-
 </div>
 
