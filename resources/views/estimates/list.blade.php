@@ -25,8 +25,8 @@
 						@elseif($estimate->check_id == 5)
 							<a href="javascript:;" class="nopass">审核未通过</a>
 						@else
-							<a href="javascript:;" class="review1" onclick="estimatePass({{$estimate->id}})">通过</a>
-							<a href="javascript:;" class="review2" onclick="estimatePass({{$estimate->id}})">拒绝</a>
+							<a href="javascript:;" class="review1" onclick="estimatePass({{$estimate->id}},1)">通过</a>
+							<a href="javascript:;" class="review2" onclick="estimatePass({{$estimate->id}},2)">拒绝</a>
 						@endif
 						<a href="javascript:;" class="delete" 
 						onclick="btnClick({{$estimate->id}})">删除</a>
@@ -74,7 +74,7 @@
 			})
 		})
 		//改变评价的审核状态
-		function estimatePass(){
+		function estimatePass(id,e){
 			
 		}
 	</script>
