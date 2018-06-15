@@ -142,6 +142,7 @@ class FieldsController extends Controller
                 'type_id' => $fields->type_id,
                 'date' => $request->date,
                 'price' => $value,
+                'switch' => 3,
                 ]);
             }
 
@@ -175,7 +176,6 @@ class FieldsController extends Controller
     {
 
         session_start();
-        dump($_SESSION);
         $store_id = $_SESSION['store_id'];
         $store = Store::find($store_id);
   
@@ -190,7 +190,7 @@ class FieldsController extends Controller
         $time=1*51840000;
         setcookie(session_name(),session_id(),time()+$time,"/");
         $_SESSION['date']=$date;
-    
+
         $time = strtotime($date);
         //要查询的那天是 周几
         $week = date('N',$time);
@@ -341,6 +341,7 @@ class FieldsController extends Controller
         $time=1*51840000;
         setcookie(session_name(),session_id(),time()+$time,"/");
         $_SESSION['date']=$date;
+       
     
         $time = strtotime($date);
         //要查询的那天是 周几
@@ -387,7 +388,10 @@ class FieldsController extends Controller
             foreach ($price_week as $key => $value) {
                foreach ($new_prices as $k => $v) {
                   if($value->place_id == $v->place_id && $value->time == $v->time){
-
+                    //日期 没有设置开关时 显示星期的开关
+                    if($v->switch == 3){
+                      $v->switch = $value->switch;
+                    }
                     $price_week[$key] = $v;
                   }
                }
@@ -406,10 +410,48 @@ class FieldsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    //修改 场地 开关状态
+    public function edit(Request $request,$id)
     {
-        $fields = Field::find($id);
-        $switch = $fields->switch;
+       
+
+        $date = $request->date;
+        if($date){
+            $field = $request->field;
+            $place_id = $field['place_id'];
+            $time = $field['time'];
+            $price = $field['price'];
+            $switch = $field['switch'];
+            $store_id = $field['store_id'];
+            $type_id = $field['type_id'];
+            
+            if(!$switch){
+              $switch = 1;
+            }elseif($switch == 1){
+              $switch = '';
+            }else{
+              $switch = 2;
+            }
+            // return $switch;
+            //该日期的数据
+            $fields = Field::where('place_id',$place_id)->where('time',$time)->where('date',$date)->first();
+            if($fields){
+              $fields->update(['switch' => $switch]);
+            }else{
+              Field::create([
+                'place_id' => $place_id,
+                'time' => $time,
+                'date' => $date,
+                'price' => $price,
+                'switch' => $switch,
+                'type_id' => $type_id,
+                'store_id' => $store_id,
+                ]);
+            }
+            return $switch;
+          }else{
+            $fields = Field::find($id);
+            $switch = $fields->switch;
 
             if($switch == ''){
                 $new_switch = 1;
@@ -421,6 +463,9 @@ class FieldsController extends Controller
             $fields->switch = $new_switch;
             $fields->save();
             return $new_switch;
+        }
+    
+       
 
     }
 

@@ -23,8 +23,8 @@
 					<tr>
 						<td>{{$key}}:00-{{$key+1}}:00</td>
 						@foreach($price as $value)
-							<td onclick="dateSwitchClick({{$value->id}})"><input type="text" id="{{$value->id}}" value="{{$value->price}}" maxlength="8" disabled="disabled" @if($value->switch == '')class="table_btn_num bsck_fff" @elseif($value->switch == 2) class="table_btn_num bsck_green"
-							@else class="table_btn_num bsck_black"  @endif
+							<td onclick="dateSwitchClick({{$value}},{{$value->id}})"><input type="text" id="{{$value->id}}" value="{{$value->price}}" maxlength="8" disabled="disabled" @if($value->switch == '')class="table_btn_num bsck_fff" @elseif($value->switch == 2) class="table_btn_num bsck_green"
+							@elseif($value->switch == 1) class="table_btn_num bsck_black"  @endif
 							/></td>
 						@endforeach
 					</tr>
@@ -53,11 +53,17 @@
 	}
 
 		//修改场地状态
-		function dateSwitchClick(id){
+		function dateSwitchClick(field,id){
+			// console.log(type_id)
 			$.ajax({
 				url: '/fields/'+id+'/edit',
 				type: 'GET',
+				data:{
+					'date' : sessionStorage.getItem("data"),
+					'field' : field,
+					},
 				success : function(data){
+					console.log(data);
 					if(data == ''){
 						$('#'+id).removeClass('bsck_black').addClass('bsck_fff')
 					}else if(data == 1){

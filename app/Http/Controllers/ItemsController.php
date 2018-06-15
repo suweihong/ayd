@@ -18,11 +18,14 @@ class ItemsController extends Controller
     //店铺 每个运动品类的 营业时间
     public function index(Request $request)
     {
-        $store = Store::find($request->store_id);
+        session_start();
+        $store_id = $_SESSION['store_id'];
+        $store = Store::find($store_id);
         if($request->start_time == '' || $request->end_time == ''){
             return back()->withInput()->with('warning','请填写完整的营业时间');
         }else{
-            $store_type = StoreType::where('store_id',$request->store_id)
+
+            $store_type = StoreType::where('store_id',$store_id)
                                     ->where('type_id',$request->type_id)
                                     ->where('item_id',1)
                                     ->first();
@@ -30,7 +33,7 @@ class ItemsController extends Controller
                 $hours = $request->start_time . '-' . $request->end_time;
                 $store_type->hours = $hours;
                 $store_type->save();
-               $places = $store->places()->where('type_id',$request->type_id)->orderBy('created_at','asc')->get();
+                $places = $store->places()->where('type_id',$request->type_id)->orderBy('id','asc')->get();
                if($places->isEmpty()){
                     return back()->withInput()->with('warning','请先添加场地');
                }else{
@@ -42,10 +45,10 @@ class ItemsController extends Controller
                         array_push($new_hours,$i);//添加元素
                      }
                      //改商家 改运动品类的 所有价格
-                     $fields = Field::where('store_id',$request->store_id)->where('type_id',$request->type_id)->where('date',null)->get();
+                     $fields = Field::where('store_id',$store_id)->where('type_id',$request->type_id)->where('date',null)->get();
                      if(!$fields->isEmpty()){
                         foreach ($fields as $key => $field) {
-                            $res = $field -> delete();
+                            $field -> delete();
                         }
                      }
 
@@ -58,8 +61,9 @@ class ItemsController extends Controller
                                $fields[$key][$ke][$k]['place_id'] = $place->id;
                                $fields[$key][$ke][$k]['time'] = $new_hour;
                                $fields[$key][$ke][$k]['week'] = $week;
-                               $fields[$key][$ke][$k]['store_id'] = $request->store_id;
+                               $fields[$key][$ke][$k]['store_id'] = $store_id;
                                $fields[$key][$ke][$k]['type_id'] = $request->type_id;
+                                $fields[$key][$ke][$k]['price'] = 9999;
 
                            }
                         }
@@ -74,6 +78,7 @@ class ItemsController extends Controller
 
                         }
                      }
+                     
                      $fields = Field::insert($new_fields);
                 
                     return back()->withInput()->with('success','销售数据更新成功');

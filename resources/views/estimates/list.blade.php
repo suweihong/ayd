@@ -13,7 +13,7 @@
 		</div>
 		<div class="evaluate">
 			@foreach($estimates as $estimate)
-				<div class="eavbox">
+				<div class="eavbox" id="{{$estimate->id}}">
 					<div class="xinxi">
 						<span>{{$estimate->client->nick_name}} </span>
 						<span class="evaluatenum">5分</span>
@@ -22,8 +22,11 @@
 							<a href="javascript:;" class="pass">审核通过</a>
 						@elseif($estimate->check_id == 5)
 							<a href="javascript:;" class="nopass">审核未通过</a>
+						@else
+							<a href="javascript:;" class="review1">通过</a>
+							<a href="javascript:;" class="review2">拒绝</a>
 						@endif
-						<a href="javascript:;" class="delete">删除</a>
+						<a href="javascript:;" class="delete" onClick='delEstimate({{$estimate->id}})'>删除</a>
 					</div>
 					<div class="laiyuan">
 						<p class="source">评价来源</p>
@@ -34,5 +37,23 @@
 				</div>
 			@endforeach
 		</div>
+		{{ $estimates->appends(['check_id'=>$check_id])->render() }}
 	</div>
+	
+	<script type="text/javascript">
+		function delEstimate(id)
+		{
+			$.ajax({
+				url : '/estimate/'+id,
+				type : 'DELETE',
+				data : {
+					'_token' : '{{csrf_token()}}'
+				},
+				success : function(data)
+				{
+					console.log(data)
+				}
+			})
+		}
+	</script>
 @stop
