@@ -80,7 +80,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dump(3333);
     }
 
     /**
@@ -91,7 +91,7 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        dump($id);
     }
 
     //导出数据
