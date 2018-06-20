@@ -148,6 +148,16 @@
 				$('.del_prompt').css('display','none') ;
 			})
 		};
+		laydate.render({
+			elem: '.laydate_2',
+			range: true
+		});
+		laydate.render({
+			elem: '.laydate_1',
+		});
+		laydate.render({
+			elem: '.laydate_3',
+		});
 	</script>
 </body>
 </html>

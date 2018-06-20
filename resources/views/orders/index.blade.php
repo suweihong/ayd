@@ -14,7 +14,7 @@
 			</div>
 			<div class="searchbox">
 				<p>日期区间</p>
-				<input type="text" class="ordernum" value="8月12日-9月12日" name="date">
+				<input type="text" readonly="readonly" class="demo-input ordernum laydate_2">
 				<select class="orderstyle" name="status">
 					<option value="1">下单</option>
 					<option value="2">核销</option>

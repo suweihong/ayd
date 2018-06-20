@@ -8,7 +8,7 @@
 		<h1 class="in_title">订单查询</h1>
 		<div class="search">
 			<input class="searchstyle" type="text" placeholder="订单号">
-			<input class="searchstyle" type="text" placeholder="8月12日-9月12日">
+			<input type="text" readonly="readonly" class="demo-input searchstyle laydate_2">
 			<select class="searchstyle searchstyle_w">
 				<option value="">羽毛球</option>
 				<option value="">足球</option>
