@@ -27,4 +27,9 @@ class Type extends Model
     	return $this->hasMany('App\Models\Place');
     }
     
+    //拥有的订单
+    public function orders()
+    {
+    	return $this->hasMany('App\Models\Order');
+    }
 }

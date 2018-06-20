@@ -42,12 +42,15 @@ class StoreController extends Controller
             $stores = $type->stores()->paginate(10);
         }else{
             $stores = Store::orderBy('created_at','asc')->paginate(10);
-
         }
          foreach ($stores as $key => $store) {
-                    $types = $store->types()->distinct('type_id')->get();
-                    $types_stores[$key] = $types;
-                }
+                    $types = $store->types()->get();
+                   //$types_stores[$key] = $types;
+                    foreach ($types as $k => $value) {
+          			$types_stores[$store->id][$value['id']] = $value;
+         }
+               }
+               
         return view('store.index',compact('stores','types_stores'));
 
     }
@@ -72,7 +75,7 @@ class StoreController extends Controller
     public function store(Request $request)
     {
 
-        if(!$request->title || !$request->address || !$request->map || !$request->phone || $request->introduction){
+        if(!$request->title || !$request->address || !$request->map || !$request->phone || !$request->introduction){
             return back()->withInput()->with('warning','请填写完整内容');
 
         }else{
@@ -116,7 +119,6 @@ class StoreController extends Controller
     public function edit(Store $store)
     {
         session_start();
-        // session(['store_id'=>$store->id]);
         $time=1*51840000;
         setcookie(session_name(),session_id(),time()+$time,"/");
         $_SESSION['store_id']=$store->id;

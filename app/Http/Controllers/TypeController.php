@@ -104,8 +104,7 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        $type->delete();
-
+        $type->delete();  
         session()->flash('success','删除成功');
         return 1;
     }

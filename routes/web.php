@@ -25,11 +25,14 @@ Route::get('logout','LoginController@logout');
 Route::get('/','LoginController@index')->middleware('auth');//首页
 Route::resource('advertisements','AdvertisementController'); //广告
 Route::resource('bills','BillController');//账单
+Route::get('export/bills','BillController@export_bills');//打印账单
 Route::resource('types/{types}/complaints','ComplaintController');//反馈
 Route::resource('messages','MessageController');//私信
 Route::resource('notices','NoticeController');//公告
 Route::resource('orders','OrderController');//订单
 Route::get('export/orders','OrderController@export');//导出订单
+Route::get('store/orders','OrderController@store_orders');//按商家查找
+Route::get('client/orders','OrderController@store_client');//按用户查找
 Route::resource('stores','StoreController');//店铺
 Route::resource('mpusers','MpuserController');//店主
 Route::resource('staffs','StaffController');//店铺员工

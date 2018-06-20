@@ -39,7 +39,7 @@
     			@endif
     			<td>
     			<?php foreach ($types_stores as $key => $types_store): ?>
-    				@if($key+1 == $store->id)
+    				@if($key == $store->id)
     				<?php foreach ($types_store as $k => $type): ?>
     					{{$type->name}}
     				<?php endforeach ?>

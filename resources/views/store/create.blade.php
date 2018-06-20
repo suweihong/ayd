@@ -5,6 +5,7 @@
 @section('content')
 
 <div class="con_right storeadd" >
+	@include('_messages')
 	<h1 class="in_title">商家管理-新增</h1>
 	<label class="title">基础信息</label>
 	<form action="{{route('stores.store')}}" method="post" class="store_base_msg" name="form">
