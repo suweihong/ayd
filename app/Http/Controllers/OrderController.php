@@ -73,6 +73,7 @@ class OrderController extends Controller
     public function store_orders(Request $request)
     {
     	session_start();
+    	$status_list = Status::all();//所有状态
     	$store_id = $request->store_id;//按店铺查找
     	$store = Store::find($store_id);
     	$types = $store->types()->get();
@@ -99,7 +100,7 @@ class OrderController extends Controller
     		$orders = Order::where('store_id',$store_id)->orderBy('created_at','desc')->paginate(5);
     	}
     	
-        return view('orders.store',compact('orders','store','store_types'));
+        return view('orders.store',compact('orders','store','store_types','status_list'));
     }
     //按用户查找
     public function client_orders(Request $request)

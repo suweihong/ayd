@@ -14,18 +14,23 @@
 				<input type="hidden" name="store_id" value="{{$store->id}}">
 				<input class="searchstyle" type="text" placeholder="订单号" name="order_id" value="{{ old('order_id') }}">
 				<input class="searchstyle" type="text" placeholder="8月12日-9月12日">
+				<select class="searchstyle searchstyle_w" name="status">
+					@foreach($status_list as $status)
+					    <option value="{{$status->id}}">
+					    	{{$status->name}}
+					    </option>
+					@endforeach	
+				</select>
 				<select class="searchstyle searchstyle_w" name="type_id">
 					<option value="0">全部</option>
-						@foreach($store_types as $type)
-						    <option value="{{$type->id}}">{{$type->name}}</option>
-						@endforeach	
+					@foreach($store_types as $type)
+					    <option value="{{$type->id}}">{{$type->name}}</option>
+					@endforeach	
 				</select>
 				<a href="javascript:document.form.submit();" class="search_jian">检索</a>
 				<a href="/export/orders" class="search_add_out">导出当前数据</a>
 		    </div>                                                       
 		</form>
-
-		
 		<p class="changguan">场馆：{{$store->title}}</p>
 		<table border="1" class="table_line">
 		    <tr>

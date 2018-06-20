@@ -16,7 +16,13 @@
 		</div>
 		<div class="searchbox">
 			<p>商家名称</p>
-			<input type="text" class="ordernum" placeholder="按名字检索">
+			<select>
+				@foreach($stores as $store)
+				    <option value="{{$store->id}}">{{$store->title}}</option>
+				@endforeach
+				                           
+			</select>
+			<!--<input type="text" class="ordernum" placeholder="按名字检索">-->
 		</div>
 		<div class="searchbox">
 			<p>价格区间</p>
@@ -37,16 +43,18 @@
 		      <th>确认状态</th>
 		      <th>确认时间</th>
 		    </tr>
-		    <tr>
-		      <td>1</td>
-		      <td>健身中心</td>
-		      <td>2018-12-12 12:12</td>
-		      <td>33</td>
-		      <td>33</td>
-		      <td>33</td>
-		      <td>未核销</td>
-		      <td>2018-12-12 12:12</td>
-		    </tr>
+		    @foreach($bills as $key => $bill)
+			    <tr>
+				    <td>{{$key+1}}</td>
+				    <td>{{$bill->store->title}}</td>
+				    <td>{{$bill->created_at}}</td>
+				    <td>33</td>
+				    <td>33</td>
+				    <td>33</td>
+				    <td>{{$bill->check->name}}</td>
+				    <td>2018-12-12 12:12</td>
+			    </tr>
+			@endforeach
 		</table>
 	</div>
 

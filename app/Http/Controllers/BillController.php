@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Bill;
 use App\Models\Store;
+use App\Models\Status;
 
 use Excel;
 
@@ -19,9 +20,11 @@ class BillController extends Controller
     public function index(Request $request)
     {
         session_start();
-        $stores = Store::orderBy('created_at','desc')->get();
-        dump($stores);
-        return view('bills.index');
+        $stores = Store::orderBy('created_at','asc')->get();//所有的店铺
+        $bills = Bill::orderBy('created_at','desc')->get();
+
+    
+        return view('bills.index',compact('stores','bills','status_list'));
     }
 
     /**
@@ -91,19 +94,42 @@ class BillController extends Controller
     }
 
     public function export_bills(Request $request){
-    	 $cellData = [
-            ['学号','姓名','成绩'],
-            ['10001','AAAAA','99'],
-            ['10002','BBBBB','92'],
-            ['10003','CCCCC','95'],
-            ['10004','DDDDD','89'],
-            ['10005','EEEEE','96'],
-        ];
-        Excel::create('学生成绩',function($excel) use ($cellData){
-            $excel->sheet('score', function($sheet) use ($cellData){
-                $sheet->rows($cellData);
-            });
-        })->export('xls');
+    	$time = date('Y-m-d H:i:sa');
+    	$bills_list = Bill::orderBy('created_at','desc')->get();
+    	foreach ($bills_list as $key => $bill) {
+    		$bills[$key]['id'] = $key;
+    		$bills[$key]['store'] = $bill->store->title;
+    		$bills[$key]['time'] = (string)$bill['created_at'];
+    		$bills[$key]['order_price'] = 33;
+    		$bills[$key]['d_price'] = 33;
+    		$bills[$key]['j_price'] = 33;
+    		$bills[$key]['status'] = $bill->check->name;
+    		$bills[$key]['q_time'] = (string)$bill['updated_at'];
+
+    	}
+    	array_unshift($bills,['序号','场馆','账单时间','订单金额','代收金额','结算金额','确认状态','确认时间']);
+
+    	$fw='A1:H'.count($bills);//居中的范围
+		Excel::create(iconv('UTF-8', 'GBK', '帐单列表'.$time),function($excel) use ($bills,$fw){
+                $f=$fw;
+				$excel->sheet('score', function($sheet) use ($bills,$f){
+	            $sheet->rows($bills);
+                $sheet->setWidth([               // 设置多个列  
+                'A' => 12,  
+                'B' => 10,
+                'C' => 20,
+                'D'=> 12,
+                'E'=> 20,
+                'F' => 15,  
+                'G' => 15,
+                'H' => 15,
+            ]);
+                $sheet->cells($f,function($cells) { //$f是范围。匿名函数设置居中对齐
+                   $cells->setAlignment('center');
+                });
+		    });
+		})->export('xls');
+    	
 
     }
 }

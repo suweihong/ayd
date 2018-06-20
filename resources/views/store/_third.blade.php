@@ -2,7 +2,7 @@
 	@if($types)
 		@if($sale == 0)
 			@foreach ($types as $type)
-				<a @if($type_id == $type->id) class="active" @endif href="{{route('fields.index')}}?type_id={{$type->id}}"><span class="masked">删除</span>{{$type->name}}</a>
+				<a @if($type_id == $type->id) class="active" @endif href="{{route('fields.index')}}?type_id={{$type->id}}">{{$type->name}}</a>
 			@endforeach
 		@elseif($sale == 1)
 			@foreach ($types as $type)

@@ -16,4 +16,10 @@ class Bill extends Model
     {
         return $this->belongsTo('App\Models\Store');
     }
+
+    //该账单的状态
+    public function check()
+    {
+    	return $this->belongsTo('App\Models\Check');
+    }
 }
