@@ -13,7 +13,9 @@ class Order extends Model
     //该订单的状态
     public function  status()
     {
-    	return $this->belongsTo('App\Models\Status');
+    	return $this->belongsToMany('App\Models\Status')
+                    ->wherePivot('deleted_at', null)
+        			->withTimestamps();
     }
 
     //该订单最新状态
@@ -40,5 +42,16 @@ class Order extends Model
     public function client()
     {
         return $this->belongsTo('App\Models\Client');
+    }
+    //该订单的支付方式
+    public function payment()
+    {
+    	return $this->belongsTo('App\Models\Payment');
+    }
+    //该订单的运动品类
+    public function type()
+    {
+    	return $this->belongsTo('App\Models\Type');
+
     }
 }
