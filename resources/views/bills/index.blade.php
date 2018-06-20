@@ -8,11 +8,11 @@
 		<h1 class="in_title">财务对账</h1>
 		<div class="searchbox">
 			<p>账单时间</p>
-			<input type="text" class="ordernum" value="8月4日">
+			<input type="text" readonly="readonly" class="demo-input ordernum laydate_1">
 		</div>
 		<div class="searchbox">
 			<p>确认时间</p>
-			<input type="text" class="ordernum" value="8月4日">
+			<input type="text" readonly="readonly" class="demo-input ordernum laydate_3">
 		</div>
 		<div class="searchbox">
 			<p>商家名称</p>
