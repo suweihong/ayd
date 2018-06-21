@@ -5,8 +5,6 @@
 @section('content')
 	<!-- <h1>按商家订单</h1> -->
 	<div class="con_right storemanage">
-
-		<!--<h1 class="in_title">订单查询</h1>-->
 		@include('_messages')
 		@include('store._first',['shadow'=>3,'store_id'=>$store->id])
 		<form action="/store/orders" method="get" name="form">
@@ -33,7 +31,6 @@
 		    </div>                                                       
 		</form>
 		<p class="changguan">场馆：{{$store->title}}</p>
-
 		<table border="1" class="table_line">
 		    <tr>
 		      <th>序号</th>

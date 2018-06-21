@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Bill;
 use App\Models\Store;
 use App\Models\Status;
+use App\Models\Orders;
 
 use Excel;
 
@@ -32,9 +33,10 @@ class BillController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    //添加账单
+    public function create(Request $request)
     {
-        //
+        
     }
 
     /**

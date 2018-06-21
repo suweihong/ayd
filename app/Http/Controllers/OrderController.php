@@ -60,10 +60,6 @@ class OrderController extends Controller
 	        		}
 
 	        	}
-	        		dump($status);
-		        	dump($type_id);
-		        	dump($pay_id);
-		        	dump($orders);
         	}else{  
 	        	$search = 2;
 	        	$orders = Order::orderBy('created_at','desc')->paginate(5);
