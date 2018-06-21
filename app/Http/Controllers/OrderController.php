@@ -45,22 +45,21 @@ class OrderController extends Controller
 	        		return back()->withInput()->with('warning','请填写时间区间');
 
 	        	}else{
+	        		//查询的日期区间
+	        		$date = explode(' - ',$date);
 	        		if($type_id == 0 && $pay_id == 0){
-	        			$orders = OrderStatus::where('order_id',$order_id)->where('status_id',$status)->whereBetween('created_at',['2018-6-10','2018-6-20'])->paginate(5);
+	        			$orders = OrderStatus::where('order_id',$order_id)->where('status_id',$status)->whereBetween('created_at',[$date[0],$date[1]])->paginate(5);
 	        		}elseif($type_id != 0 && $pay_id == 0){
 
-	        			$orders = OrderStatus::where('order_id',$order_id)->where('status_id',$status)->where('type_id',$type_id)->whereBetween('created_at',['2018-6-10','2018-6-20'])->paginate(5);
+	        			$orders = OrderStatus::where('order_id',$order_id)->where('status_id',$status)->where('type_id',$type_id)->whereBetween('created_at',[$date[0],$date[1]])->paginate(5);
 
 	        		}elseif ($type_id == 0 && $pay_id != 0) {
-	        			$orders = OrderStatus::where('order_id',$order_id)->where('status_id',$status)->where('pay_id',$pay_id)->whereBetween('created_at',['2018-6-10','2018-6-20'])->paginate(5);
+	        			$orders = OrderStatus::where('order_id',$order_id)->where('status_id',$status)->where('pay_id',$pay_id)->whereBetween('created_at',[$date[0],$date[1]])->paginate(5);
 	        		}elseif($type_id != 0 && $pay_id != 0){
-	        			$orders = OrderStatus::where('order_id',$order_id)->where('status_id',$status)->where('pay_id',$pay_id)->where('type_id',$type_id)->whereBetween('created_at',['2018-6-10','2018-6-20'])->paginate(5);
+	        			$orders = OrderStatus::where('order_id',$order_id)->where('status_id',$status)->where('pay_id',$pay_id)->where('type_id',$type_id)->whereBetween('created_at',[$date[0],$date[1]])->paginate(5);
 	        		}
 
 	        	}
-		        	dump($type_id);
-		        	dump($pay_id);
-		        	dump($orders);
         	}else{  
 	        	$search = 2;
 	        	$orders = Order::orderBy('created_at','desc')->paginate(5);

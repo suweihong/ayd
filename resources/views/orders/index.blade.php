@@ -15,11 +15,7 @@
 			</div>
 			<div class="searchbox">
 				<p>日期区间</p>
-<<<<<<< HEAD
-				<input type="text" readonly="readonly" class="demo-input ordernum laydate_2">
-=======
-				<input type="text" class="ordernum" value="{{old('date')}}" name="date">
->>>>>>> cbbdbca79150572d0799f36974a7324eef72961c
+				<input type="text" readonly="readonly" class="demo-input ordernum laydate_2" name="date">
 				<select class="orderstyle" name="status">
 					@foreach($status_list as $statu)
 						<option value="{{$statu->id}}">{{$statu->name}}</option>

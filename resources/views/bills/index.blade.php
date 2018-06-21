@@ -16,13 +16,11 @@
 		</div>
 		<div class="searchbox">
 			<p>商家名称</p>
-			<select>
+			<select class="ordernum">
 				@foreach($stores as $store)
 				    <option value="{{$store->id}}">{{$store->title}}</option>
-				@endforeach
-				                           
+				@endforeach	                           
 			</select>
-			<!--<input type="text" class="ordernum" placeholder="按名字检索">-->
 		</div>
 		<div class="searchbox">
 			<p>价格区间</p>
