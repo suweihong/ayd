@@ -962,24 +962,26 @@ h6 {
   margin: 20px 0px 10px 70px;
 }
 .content .storesale .tab_data .data_dtta {
-  width: 100px;
+  width: 150px;
   height: 30px;
   color: #333333;
   line-height: 30px;
-  background: #f1f4f7;
+  background: #cccccc;
   border-radius: 5px;
   text-align: center;
   font-size: 14px;
   display: inline-block;
   border-radius: 0;
   position: relative;
+  text-align: left;
+  padding-left: 30px;
 }
 .content .storesale .tab_data .data_dtta input {
   position: absolute;
   top: 0px;
   left: 0px;
   height: 30px;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.01);
   padding-left: 80px;
   width: 100px;
   border: none;
