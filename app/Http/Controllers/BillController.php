@@ -94,7 +94,7 @@ class BillController extends Controller
     }
 
     public function export_bills(Request $request){
-    	$time = date('Y-m-d H:i:sa');
+    	$time = date('Y-m-d H-i-s');
     	$bills_list = Bill::orderBy('created_at','desc')->get();
     	foreach ($bills_list as $key => $bill) {
     		$bills[$key]['id'] = $key;
@@ -115,14 +115,14 @@ class BillController extends Controller
 				$excel->sheet('score', function($sheet) use ($bills,$f){
 	            $sheet->rows($bills);
                 $sheet->setWidth([               // 设置多个列  
-                'A' => 12,  
-                'B' => 10,
+                'A' => 10,  
+                'B' => 15,
                 'C' => 20,
                 'D'=> 12,
                 'E'=> 20,
                 'F' => 15,  
                 'G' => 15,
-                'H' => 15,
+                'H' => 20,
             ]);
                 $sheet->cells($f,function($cells) { //$f是范围。匿名函数设置居中对齐
                    $cells->setAlignment('center');
