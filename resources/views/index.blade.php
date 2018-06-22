@@ -9,15 +9,15 @@
     	<h1 class="in_title">今日订单概览</h1>
 		<div class="in_box">
 			<div class="in_item">
-				<u class="in_item_u">565</u>
+				<u class="in_item_u">{{$num_x}}</u>
 				<p class="in_item_p">下单数量</p>
 			</div>
 			<div class="in_item">
-				<u class="in_item_u">332</u>
+				<u class="in_item_u">{{$num_h}}</u>
 				<p class="in_item_p">核销数量</p>
 			</div>
 			<div class="in_item">
-				<u class="in_item_u">0</u>
+				<u class="in_item_u">{{$num_t}}</u>
 				<p class="in_item_p">退单数量</p>
 			</div>
 		</div>

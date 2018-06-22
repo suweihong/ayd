@@ -26,7 +26,7 @@
 		<ul class="con_left">
 			<li class="menulist0"></li>
 	        <li class="menulist1"></li>
-	        <li class="menulist hover">
+	        <li  class="menulist hover click">
 	        	<img src="/img/pencil.png" class="menuimg">
 	            <a href="/" class="menutxt">系统概览</a>
 	        </li>
@@ -37,7 +37,7 @@
 		            <a href="javascript:;" class="menutxt">核心系统</a>
 		        </div>
 	            <ul class="menulist_u">
-	            	<li class="hover">
+	            	<li  class="hover click">
 			        	<img src="/img/you.png" class="menuimg">
 			            <a href="{{route('advertisements.index')}}" class="menutxt">广告管理</a>
 	            	</li>

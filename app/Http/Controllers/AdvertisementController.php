@@ -14,7 +14,7 @@ class AdvertisementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         session_start();
         // $advertisements = Advertisement::orderBy('created_at','desc')->get();
