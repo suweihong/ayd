@@ -398,7 +398,7 @@ h6 {
 .content .con_right .in_box .in_item {
   display: block;
   flex: 1;
-  margin: 40px 0;
+  margin: 40px 80px;
 }
 .content .con_right .in_box .in_item .in_item_u {
   font-size: 52px;
