@@ -8,18 +8,18 @@
 	<div class="con_rightbox">
     	<h1 class="in_title">今日订单概览</h1>
 		<div class="in_box">
-			<div class="in_item">
+			<a href="javascript:;" class="in_item">
 				<u class="in_item_u">{{$num_x}}</u>
 				<p class="in_item_p">下单数量</p>
-			</div>
-			<div class="in_item">
+			</a>
+			<a href="javascript:;" class="in_item">
 				<u class="in_item_u">{{$num_h}}</u>
 				<p class="in_item_p">核销数量</p>
-			</div>
-			<div class="in_item">
+			</a>
+			<a href="javascript:;" class="in_item">
 				<u class="in_item_u">{{$num_t}}</u>
 				<p class="in_item_p">退单数量</p>
-			</div>
+			</a>
 		</div>
 	</div>
 	<div class="con_rightbox">
@@ -30,14 +30,14 @@
     		<a class="in_title_date" href="javascript:;">本月</a>
     	</h1>
 		<div class="in_box">
-			<div class="in_item">
+			<a href="javascript:;" class="in_item">
 				<u class="in_item_u">8000</u>
 				<p class="in_item_p">销售总额</p>
-			</div>
-			<div class="in_item">
+			</a>
+			<a href="javascript:;" class="in_item">
 				<u class="in_item_u">80</u>
 				<p class="in_item_p">平均单价</p>
-			</div>
+			</a>
 		</div>
 	</div>
 	<div class="con_rightbox">

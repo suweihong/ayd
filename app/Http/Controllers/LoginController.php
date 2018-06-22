@@ -41,7 +41,7 @@ class LoginController extends Controller
             }
 
         }else{
-           dump($_SESSION['last_time']);
+          
             return view('login');
         }
 
@@ -72,8 +72,7 @@ class LoginController extends Controller
           setcookie(session_name(),session_id(),time()+$time,"/");
           $_SESSION['last_time']=$user->last_time;
 
-          dump($_SESSION['last_time']);
-
+         
 
         
           //消息动态 最近一个月的
