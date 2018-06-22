@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
 use App\Models\Complaint;
+use App\Models\Order;
 
 
 
@@ -64,11 +65,13 @@ class LoginController extends Controller
     public function index()
     {
         $user = Auth::user();
-          //店铺id 存到session
+          //最后一次登录时间 存到session
            session_start();
            $time=1*51840000;
           setcookie(session_name(),session_id(),time()+$time,"/");
           $_SESSION['last_time']=$user->last_time;
+
+          
     
           //消息动态 最近一个月的
           $today = date('Y-m-d H:i:s');

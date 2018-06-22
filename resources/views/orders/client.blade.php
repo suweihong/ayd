@@ -7,8 +7,20 @@
 	<div class="con_right storemanage"">
 		<h1 class="in_title">订单查询</h1>
 		<div class="search">
-			<input class="searchstyle" type="text" placeholder="订单号">
-			<input type="text" readonly="readonly" class="demo-input searchstyle laydate_2">
+			@if($store == 1)
+				<select class="searchstyle" name="store_id">
+					@foreach($stores as $store)
+						<option value="{{$store->id}}">{{$store->title}}</option>
+					@endforeach
+				</select>
+			@else
+				<select class="searchstyle" name="store_id">
+					@foreach($clients as $client)
+						<option value="{{$client->id}}">{{$client->nick_name}}</option>
+					@endforeach
+				</select>
+			@endif
+			<input type="text" readonly="readonly" class="demo-input searchstyle laydate_2" >
 			<select class="searchstyle searchstyle_w">
 				<option value="">羽毛球</option>
 				<option value="">足球</option>

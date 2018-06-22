@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Order extends Model
 {
     use SoftDeletes;
+    protected $dates = ['date'];
 
     //该订单的状态
     public function  status()

@@ -53,7 +53,6 @@
 				@endif
 				<td>{{$store->created_at}}</td>	
     			<td>
-
 					<a href="{{route('stores.edit',$store->id)}}">管理商家</a>
     			</td>
     		</tr>

@@ -12,7 +12,7 @@
 				<input type="hidden"  name="search" value="1">
 				<input type="hidden" name="store_id" value="{{$store->id}}">
 				<input class="searchstyle" type="text" placeholder="订单号" name="order_id" value="{{ old('order_id') }}">
-				<input type="text" readonly="readonly" class="demo-input searchstyle laydate_2">
+				<input type="text" readonly="readonly" class="demo-input searchstyle laydate_2" name="date">
 				<select class="searchstyle searchstyle_w" name="status">
 					@foreach($status_list as $status)
 					    <option value="{{$status->id}}">
@@ -27,7 +27,12 @@
 					@endforeach	
 				</select>
 				<a href="javascript:document.form.submit();" class="search_jian">检索</a>
-				<a href="/export/orders" class="search_add_out">导出当前数据</a>
+				@if($search == 1)
+					<a href="/export/orders?search=1" class="search_add_out">导出当前数据</a>
+
+				@else
+					<a href="/export/orders?store_id={{$store_id}}" class="search_add_out">导出当前数据</a>
+				@endif
 		    </div>                                                       
 		</form>
 		<p class="changguan">场馆：{{$store->title}}</p>
@@ -39,6 +44,8 @@
 		      <th>场馆</th>
 		      <th>购买信息</th>
 		      <th>购买时间</th>
+		      <th>状态</th>
+		      <th>订单管理</th>
 		    </tr>
 		    @foreach($orders as $k => $order)
 		        <tr>
@@ -48,10 +55,14 @@
 				    <td>{{$order->store->title}}【{{$order->type->name}}】</td>
 				    <td>{{$order->client->nick_name}}</td>
 				    <td>{{$order->created_at}}</td>
-				   
+				    <td>{{$order->new_status()->name}}</td>
+				    <td><a href="{{route('orders.show',$order->id)}}">查看详情</a></td>
 		       </tr>
 		    @endforeach
 		   
 		</table>
+		@if($search == 2)
+			{{ $orders->render() }}
+		@endif
 	</div>
 @stop

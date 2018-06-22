@@ -23,7 +23,6 @@ class EstimatesController extends Controller
                 $estimates = Estimate::orderBy('created_at','desc')->paginate(5);
             }elseif($check_id == 5){
                 $estimates = Estimate::where('check_id',5)->orWhere('check_id',6)->orderBy('created_at','desc')->paginate(5);
-
             }else{
                 $estimates = Estimate::where('check_id',$check_id)->orderBy('created_at','desc')->paginate(5);
             }

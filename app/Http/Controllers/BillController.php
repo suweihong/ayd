@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Bill;
 use App\Models\Store;
 use App\Models\Status;
-use App\Models\Orders;
+use App\Models\Order;
 
 use Excel;
 
@@ -21,6 +21,24 @@ class BillController extends Controller
     public function index(Request $request)
     {
         session_start();
+
+    
+//  	$start=date('Y-m-01',strtotime($time));//获取指定月份的第一天
+//     $end=date('Y-m-t',strtotime($time)); //获取指定月份的最后一天
+// dump($start);
+// dump($end);
+ 	// $orders = Order::all();
+ 	
+
+  //       $res = $orders->groupBy(date_format(date_create('created_at'),'Y-m'))->get();
+  //      dd($res);
+
+
+
+
+
+
+
         $stores = Store::orderBy('created_at','asc')->get();//所有的店铺
         $bills = Bill::orderBy('created_at','desc')->get();
 
@@ -36,7 +54,8 @@ class BillController extends Controller
     //添加账单
     public function create(Request $request)
     {
-        
+   
+
     }
 
     /**
@@ -47,7 +66,7 @@ class BillController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -58,7 +77,7 @@ class BillController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**

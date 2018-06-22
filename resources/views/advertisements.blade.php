@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="con_right advertisment">
-	<h1 class="in_title">消息动态</h1>
+	<h1 class="in_title">广告管理</h1>
 	<label class="title">主广告位</label>
 	<div class="in_pry1box">
 		<div class="in_pry1_item">

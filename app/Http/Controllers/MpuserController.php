@@ -98,16 +98,21 @@ class MpuserController extends Controller
     {
 
         //重置密码为12345
-        
         $mp_user = MpUser::find($id);
         $request->password = '123456';
         $res = $mp_user-> update([
                 'password' => Crypt::encrypt($request->password),
             ]);
         if($res){
-            return back()->with('success','管理员密码重置成功');
+            return response()->json([
+                                'errcode'=> '1',
+                                'errmsg'=> '管理员密码重置成功',
+                                ], 200);
         }else{
-            return back()->with('success','管理员密码重置失败');
+            return response()->json([
+                            'errcode'=> '2',
+                            'errmsg'=> '管理员密码重置失败',
+                            ], 200);
         }
     }
 

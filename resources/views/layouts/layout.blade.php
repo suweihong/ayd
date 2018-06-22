@@ -62,13 +62,13 @@
 			        	<img src="/img/you.png" class="menuimg">
 			            <a href="{{route('orders.index')}}" class="menutxt">所有订单</a>
 	            	</li>
-	            	<!--<li class="hover">
-			        	<img src="/img/you.png" class="menuimg">
-			            <a href="{{route('orders.create')}}" class="menutxt">按商家</a>
-	            	</li>-->
 	            	<li class="hover">
 			        	<img src="/img/you.png" class="menuimg">
-			            <a href="{{route('orders.edit',1)}}" class="menutxt">按用户</a>
+			            <a href="/client/orders?store=1" class="menutxt">按商家</a>
+	            	</li>
+	            	<li class="hover">
+			        	<img src="/img/you.png" class="menuimg">
+			            <a href="/client/orders" class="menutxt">按用户</a>
 	            	</li>
 	            	<li class="hover">
 			        	<img src="/img/you.png" class="menuimg">
