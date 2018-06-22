@@ -230,6 +230,9 @@ h6 {
 .content .con_left .hover:hover {
   background: #f1f4f7;
 }
+.content .con_left .click {
+  background: #f1f4f7;
+}
 .content .con_left .menulist {
   width: 100%;
   position: relative;
