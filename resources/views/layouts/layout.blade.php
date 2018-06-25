@@ -26,7 +26,7 @@
 		<ul class="con_left">
 			<li class="menulist0"></li>
 	        <li class="menulist1"></li>
-	        <li  class="menulist hover click">
+	        <li  class="menulist hover">
 	        	<img src="/img/pencil.png" class="menuimg">
 	            <a href="/" class="menutxt">系统概览</a>
 	        </li>
@@ -37,7 +37,7 @@
 		            <a href="javascript:;" class="menutxt">核心系统</a>
 		        </div>
 	            <ul class="menulist_u">
-	            	<li  class="hover click">
+	            	<li  class="hover">
 			        	<img src="/img/you.png" class="menuimg">
 			            <a href="{{route('advertisements.index')}}" class="menutxt">广告管理</a>
 	            	</li>
@@ -64,15 +64,11 @@
 	            	</li>
 	            	<li class="hover">
 			        	<img src="/img/you.png" class="menuimg">
-			            <a href="/client/orders?store=1" class="menutxt">按商家</a>
+			            <a href="/shop/orders" class="menutxt">按商家</a>
 	            	</li>
 	            	<li class="hover">
 			        	<img src="/img/you.png" class="menuimg">
 			            <a href="/client/orders" class="menutxt">按用户</a>
-	            	</li>
-	            	<li class="hover">
-			        	<img src="/img/you.png" class="menuimg">
-			            <a href="{{route('orders.show',1)}}" class="menutxt">订单详情</a>
 	            	</li>
 	            </ul>
 	        </li>

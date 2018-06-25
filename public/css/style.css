@@ -632,7 +632,18 @@ h6 {
   margin: 20px 5%;
 }
 .content .storemanage .search .searchstyle {
-  width: 160px;
+  width: 150px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 1px;
+  font-size: 14px;
+  padding-left: 10px;
+  border: 1px solid #afafaf;
+  outline: none;
+  margin-left: 20px;
+}
+.content .storemanage .search .searchstyle2 {
+  width: 180px;
   height: 30px;
   line-height: 30px;
   border-radius: 1px;
