@@ -62,7 +62,7 @@
 		   
 		</table>
 		@if($search == 2)
-			{{ $orders->render() }}
+			{{$orders->appends(['store_id'=>$store->id])->render()}}
 		@endif
 	</div>
 @stop

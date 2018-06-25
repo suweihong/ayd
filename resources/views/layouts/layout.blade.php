@@ -64,7 +64,7 @@
 	            	</li>
 	            	<li class="hover">
 			        	<img src="/img/you.png" class="menuimg">
-			            <a href="/client/orders?store=1" class="menutxt">按商家</a>
+			            <a href="/shop/orders" class="menutxt">按商家</a>
 	            	</li>
 	            	<li class="hover">
 			        	<img src="/img/you.png" class="menuimg">

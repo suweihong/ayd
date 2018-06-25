@@ -41,6 +41,12 @@
 			<a href="javascript:document.form.submit();" class="orderjian">检索</a>
 			@if($search == 1)
 				<a href="/export/orders?search=1" class="orderjian orderjian_r">导出当前数据</a>
+			@elseif($state == 100)
+				<a href="/export/orders?state=100" class="orderjian orderjian_r">导出当前数据</a>
+			@elseif($state == 1)
+				<a href="/export/orders?state=1" class="orderjian orderjian_r">导出当前数据</a>
+			@elseif($state == 2)
+				<a href="/export/orders?state=2" class="orderjian orderjian_r">导出当前数据</a>
 			@else
 				<a href="/export/orders" class="orderjian orderjian_r">导出当前数据</a>
 
@@ -49,14 +55,14 @@
 		
 		<table border="1" class="table_line">
 		    <tr>
-		      <th>序号</th>
-		      <th>订单号</th>
-		      <th>价格</th>
-		      <th>场馆</th>
-		      <th>购买信息</th>
-		      <th>购买时间</th>
-		      <th>状态</th>
-		      <th>订单管理</th>
+		    	<th>序号</th>
+		    	<th>订单号</th>
+		    	<th>价格</th>
+		    	<th>场馆</th>
+		    	<th>购买信息</th>
+		    	<th>购买时间</th>
+		    	<th>状态</th>
+		    	<th>订单管理</th>
 		    </tr>
 		
 			<?php foreach ($orders as $key => $order): ?>
@@ -73,8 +79,8 @@
 			<?php endforeach ?>
 		  
 		</table>
-		@if($search == 2)
-        	{{ $orders->render()}}
+		@if($search != 1)
+        	{{ $orders->appends(['state'=>$state])->render()}}
         @endif
 	</div>
 @stop

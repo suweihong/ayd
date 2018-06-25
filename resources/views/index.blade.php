@@ -8,15 +8,15 @@
 	<div class="con_rightbox">
     	<h1 class="in_title">今日订单概览</h1>
 		<div class="in_box">
-			<a href="javascript:;" class="in_item">
+			<a href="{{route('orders.index')}}?state=100" class="in_item">
 				<u class="in_item_u">{{$num_x}}</u>
 				<p class="in_item_p">下单数量</p>
 			</a>
-			<a href="javascript:;" class="in_item">
+			<a href="{{route('orders.index')}}?state=1" class="in_item">
 				<u class="in_item_u">{{$num_h}}</u>
 				<p class="in_item_p">核销数量</p>
 			</a>
-			<a href="javascript:;" class="in_item">
+			<a href="{{route('orders.index')}}?state=2" class="in_item">
 				<u class="in_item_u">{{$num_t}}</u>
 				<p class="in_item_p">退单数量</p>
 			</a>
