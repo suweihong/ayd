@@ -146,7 +146,7 @@ class OrderController extends Controller
     			$search = 2;
     			$orders = Order::where('store_id',$store_id)->orderBy('created_at','desc')->paginate(1);
     		}	
-        return view('orders.store',compact('orders','store','store_types','status_list','store_id','search'));
+        return view('orders.store',compact('orders','store','store_types','status_list','now','store_id','search'));
     }
 
 
@@ -167,8 +167,6 @@ class OrderController extends Controller
         $today_start = date('Y-m-d',$today);
         $today_end = date('Y-m-d',$today+60*60*24);
         $now = $today_start.' - '.$today_end;
-        dump($now);
-        // dd($request->date);
 
     	$search = $request->search;//是否为搜索
     	$date = $request->date; //时间区间
@@ -246,7 +244,7 @@ class OrderController extends Controller
     		$orders = Order::where('store_id',$store_id)->orderBy('created_at','desc')->paginate(1);
     	}
     	
-    	return view('orders.shop',compact('stores','store_types','orders','store','status_list','search','date','status_id','type_id'));
+    	return view('orders.shop',compact('stores','store_types','orders','store','status_list','now','search','date','status_id','type_id'));
 
     }
 

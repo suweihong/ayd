@@ -12,7 +12,7 @@
 				<input type="hidden"  name="search" value="1">
 				<input type="hidden" name="store_id" value="{{$store->id}}">
 				<input class="searchstyle" type="text" placeholder="订单号" name="order_id" value="{{ old('order_id') }}">
-				<input type="text" readonly="readonly" class="demo-input searchstyle laydate_2" name="date" value="">
+				<input type="text" readonly="readonly" class="demo-input searchstyle laydate_2" name="date" value="{{$now}}">
 				<select class="searchstyle searchstyle_w" name="status">
 					@foreach($status_list as $status)
 					    <option value="{{$status->id}}">

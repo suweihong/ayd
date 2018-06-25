@@ -16,7 +16,7 @@
 					@endforeach
 				</select>
 				
-				<input type="text" readonly="readonly" class="demo-input searchstyle laydate_2" name="date">
+				<input type="text" readonly="readonly" class="demo-input searchstyle2 laydate_2" name="date" value="{{$now}}">
 				<select class="searchstyle searchstyle_w" name="status_id">
 					@foreach($status_list as $status)
 					    <option value="{{$status->id}}">

@@ -15,12 +15,7 @@
 			</div>
 			<div class="searchbox">
 				<p>日期区间</p>
-<<<<<<< HEAD
-				<input type="text" readonly="readonly" class="demo-input ordernum laydate_2">
-				<input type="text" class="ordernum" value="{{old('date')}}" name="date">
-=======
 				<input type="text" readonly="readonly" class="demo-input ordernum laydate_2" name="date" value="{{$now}}">
->>>>>>> a6dfd7c477450b73c76ebcbde07529b958e9f84c
 				<select class="orderstyle" name="status">
 					@foreach($status_list as $statu)
 						<option value="{{$statu->id}}">{{$statu->name}}</option>
@@ -44,9 +39,6 @@
 				</select>
 			</div>
 			<a href="javascript:document.form.submit();" class="orderjian">检索</a>
-<<<<<<< HEAD
-			<a href="/export/orders" class="orderjian orderjian_r">导出当前数据</a>
-=======
 			@if($search == 1)
 				<a href="/export/orders?search=1" class="orderjian orderjian_r">导出当前数据</a>
 			@elseif($state == 100)
@@ -59,20 +51,10 @@
 				<a href="/export/orders" class="orderjian orderjian_r">导出当前数据</a>
 
 			@endif
->>>>>>> a6dfd7c477450b73c76ebcbde07529b958e9f84c
 		</form>
 		
 		<table border="1" class="table_line">
 		    <tr>
-<<<<<<< HEAD
-		      <th>序号</th>
-		      <th>订单号</th>
-		      <th>价格</th>
-		      <th>场馆</th>
-		      <th>购买信息</th>
-		      <th>购买时间</th>
-		      <th>状态</th>
-=======
 		    	<th>序号</th>
 		    	<th>订单号</th>
 		    	<th>价格</th>
@@ -81,7 +63,6 @@
 		    	<th>购买时间</th>
 		    	<th>状态</th>
 		    	<th>订单管理</th>
->>>>>>> a6dfd7c477450b73c76ebcbde07529b958e9f84c
 		    </tr>
 		
 			<?php foreach ($orders as $key => $order): ?>
@@ -109,12 +90,8 @@
 			<?php endforeach ?>
 		  
 		</table>
-<<<<<<< HEAD
-        {{ $orders->render()}}
-=======
 		@if($search != 1)
         	{{ $orders->appends(['state'=>$state])->render()}}
         @endif
->>>>>>> a6dfd7c477450b73c76ebcbde07529b958e9f84c
 	</div>
 @stop
