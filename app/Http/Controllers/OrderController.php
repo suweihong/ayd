@@ -34,8 +34,14 @@ class OrderController extends Controller
         $status = $request->status;
         $type_id = $request->type_id;
         $pay_id = $request->pay_id;
+
+        //默认 时间区间
+    	$today = strtotime(date('Y-m-d'));
+        $t_start = date('Y-m-d',$today);
+        $t_end = date('Y-m-d',$today+60*60*24);
+        $now = $t_start.' - '.$t_end;
+        dump($now);
         	//今日的 0点 到明天的0点
-        $today = strtotime(date('Y-m-d'));
         $today_start = date('Y-m-d H:i:s',$today);
         $today_end = date('Y-m-d H:i:s',$today+60*60*24);
         $state = $request->state;
@@ -87,7 +93,7 @@ class OrderController extends Controller
         	$orders = Order::orderBy('created_at','desc')->paginate(1);
      
 		}
-    	return view('orders.index',compact('orders','types','status_list','payment','search','state'));
+    	return view('orders.index',compact('orders','types','status_list','now','payment','search','state'));
    
     }
 
