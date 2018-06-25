@@ -15,7 +15,8 @@
 			</div>
 			<div class="searchbox">
 				<p>日期区间</p>
-				<input type="text" readonly="readonly" class="demo-input ordernum laydate_2" name="date">
+				<input type="text" readonly="readonly" class="demo-input ordernum laydate_2">
+				<input type="text" class="ordernum" value="{{old('date')}}" name="date">
 				<select class="orderstyle" name="status">
 					@foreach($status_list as $statu)
 						<option value="{{$statu->id}}">{{$statu->name}}</option>
@@ -39,12 +40,7 @@
 				</select>
 			</div>
 			<a href="javascript:document.form.submit();" class="orderjian">检索</a>
-			@if($search == 1)
-				<a href="/export/orders?search=1" class="orderjian orderjian_r">导出当前数据</a>
-			@else
-				<a href="/export/orders" class="orderjian orderjian_r">导出当前数据</a>
-
-			@endif
+			<a href="/export/orders" class="orderjian orderjian_r">导出当前数据</a>
 		</form>
 		
 		<table border="1" class="table_line">
@@ -56,25 +52,33 @@
 		      <th>购买信息</th>
 		      <th>购买时间</th>
 		      <th>状态</th>
-		      <th>订单管理</th>
 		    </tr>
 		
 			<?php foreach ($orders as $key => $order): ?>
 				<tr>
 				    <td>{{$key+1}}</td>
+				    @if($search == 2)
 				        <td>{{$order->id}}</td>
 				        <td>{{$order->total}}</td>
 				        <td>{{$order->store->title}}【{{$order->type->name}}】</td>
 				        <td>{{$order->client->nick_name}}</td>
-				        <td>{{$order->created_at}}</td>
-				  		<td>{{$order->new_status()->name}}</td>
-				    	<td><a href="{{route('orders.show',$order->id)}}">查看详情</a></td>
+				    @else
+                        <td>{{$order->order_id}}</td>
+                        <td>{{$order->order->total}}</td>
+                        <td>{{$order->order->store->title}}【{{$order->order->type->name}}】 </td>
+                        <td>{{$order->order->client->nick_name}}</td>
+				    @endif
+				   
+				    <td>{{$order->created_at}}</td>
+				    @if($search == 2)
+				         <td>{{$order->new_status()->name}}</td>
+				    @else
+				        <td>{{$order->status->name}}</td>
+				    @endif
 			    </tr>
 			<?php endforeach ?>
 		  
 		</table>
-		@if($search == 2)
-        	{{ $orders->render()}}
-        @endif
+        {{ $orders->render()}}
 	</div>
 @stop
