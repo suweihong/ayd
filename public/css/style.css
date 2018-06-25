@@ -1471,16 +1471,16 @@ h6 {
   color: #333;
 }
 .pagination li {
+  border: 1px solid #ccc;
   float: left;
   width: 20px;
   height: 20px;
-  color: #fff;
   margin-right: 10px;
   text-align: center;
   line-height: 20px;
 }
 .pagination .active {
-  background: #30a5ff;
+  background: #ccc;
 }
 #error_messages {
   width: 100%;
