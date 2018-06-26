@@ -145,6 +145,13 @@
 			})
 		};
 		laydate.render({
+			elem: '.laydate_serch',
+			range: true,
+			done: function(datas){
+				sessionStorage.setItem("data_serch",datas);
+	    	}
+		});
+		laydate.render({
 			elem: '.laydate_2',
 			range: true
 		});

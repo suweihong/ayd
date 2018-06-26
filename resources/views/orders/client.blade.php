@@ -7,23 +7,23 @@
 	<div class="con_right storemanage"">
 		<h1 class="in_title">订单查询 -- 按用户</h1>
 	
-		<form action="/client/orders" name="form">
+		<form action="/client/orders" name="form" id="form_serch">
 			<div class="search">
 				<input type="hidden" name="search" value="4">
-				<select class="searchstyle" name="client_id">
+				<select class="searchstyle" name="client_id" id="test_1">
 					@foreach($clients as $clien)
-						<option value="{{$clien->id}}">{{$clien->nick_name}}</option>
+						<option value="{{$clien->id}}" @if($clien->id==$_GET["client_id"]) selected="selected" @endif>{{$clien->nick_name}}</option>
 					@endforeach
 				</select>
-				<input type="text" readonly="readonly" class="demo-input searchstyle2 laydate_2" name="date" value="{{$now}}">
-				<select class="searchstyle searchstyle_w" name="status_id">
+				<input type="text" readonly="readonly" class="demo-input searchstyle2 laydate_serch" name="date" value="{{$now}}" id="test_2">
+				<select class="searchstyle searchstyle_w" name="status_id" id="test_3">
 					@foreach($status_list as $status)
 					    <option value="{{$status->id}}">
 					    	{{$status->name}}
 					    </option>
 					@endforeach	
 				</select>
-				<select class="searchstyle searchstyle_w" name="type_id">
+				<select class="searchstyle searchstyle_w" name="type_id" id="test_4">
 					<option value="0">全部</option>
 					@foreach($types as $type)
 						<option value="{{$type->id}}">{{$type->name}}</option>
