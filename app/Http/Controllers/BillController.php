@@ -38,37 +38,50 @@ class BillController extends Controller
     {
         $stores = Store::orderBy('created_at','asc')->get();//所有的店铺
         $start=date('Y-m-01 00:00:00',time());//获取指定月份的第一天
+        $s = date('Y-m-01',time());
         $end=date('Y-m-t 23:59:59',time()); //获取指定月份的最后一天
 
         $today_start = date('Y-m-d 00:00:00',time());//今天的开始时间
         $today = date('Y-m-d H:i:s',time()); //今天的时间
         $today_end = date('Y-m-d 23:59:59',time());//今天的结束时间
-        dump($today_start);
-        dump($today);
-        dump($today_end);
-        dump($start);
-        dump($end);
+        // dump($today_start);
+        // dump($today);
+        // dump($today_end);
+        // dump($start);
+        // dump($end);
+        // dump($s);
 
         $orders = Order::where('status_id','1')->where('updated_at','>=',$start)->where('updated_at','<=',$today)->get();
         $orders = $orders->groupBy('store_id');
-
-        foreach ($orders as $key => $order) {
-            $bills[$key]['total'] = $order->pluck('total')->sum();//订单金额  
-            $bills[$key]['collection'] = $order->pluck('collection')->sum();//代收金额
-            $bills[$key]['balance'] = $bills[$key]['total'] - $bills[$key]['collection'];//结算金额
+        if($orders->isEmpty()){
+            $bills = [];
+        }else{
+                foreach ($orders as $key => $order) {
+                $bills[$key]['total'] = $order->pluck('total')->sum();//订单金额  
+                $bills[$key]['collection'] = $order->pluck('collection')->sum();//代收金额
+                $bills[$key]['balance'] = $bills[$key]['total'] - $bills[$key]['collection'];//结算金额
+               }
         }
+        
     
 
         dump($orders);
         dump($bills);
        // if($today_start == $start){
        //      foreach ($stores as $key => $store) {
-       //          $bills = Bill::create([
-       //              'store_id' => $store->id;
-       //              'time' => 
+       //          $res = Bill::create([
+       //              'store_id' => $store->id,
+       //              'time' => $s.' 至 ',
        //          ]);
        //      }
        // }
+       // if($res){
+       //  dump(11);
+       // }else{
+       //  dump(22);
+       // }
+
+        //核销订单后 修改账单数据
 
     }
 
