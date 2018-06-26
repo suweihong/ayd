@@ -12,22 +12,22 @@
 				<input type="hidden" name="search" value="2">	
 				<select class="searchstyle" name="store_id">
 					@foreach($stores as $st)
-						<option value="{{$st->id}}">{{$st->title}}</option>
+						<option value="{{$st->id}}" @if($st->id == $store_id) selected="selected" @endif>{{$st->title}}</option>
 					@endforeach
 				</select>
 				
-				<input type="text" readonly="readonly" class="demo-input searchstyle2 laydate_2" name="date" value="{{$now}}">
+				<input type="text" readonly="readonly" class="demo-input searchstyle2 laydate_2" name="date" value="{{$date ?? $now}}">
 				<select class="searchstyle searchstyle_w" name="status_id">
 					@foreach($status_list as $status)
-					    <option value="{{$status->id}}">
+					    <option value="{{$status->id}}" @if($status->id == $status_id) selected="selected" @endif>
 					    	{{$status->name}}
 					    </option>
 					@endforeach	
 				</select>
 				<select class="searchstyle searchstyle_w" name="type_id">
 					<option value="0">全部</option>
-					@foreach($store_types as $type)
-						<option value="{{$type->id}}">{{$type->name}}</option>
+					@foreach($types as $type)
+						<option value="{{$type->id}}" @if($type->id == $type_id) selected="selected" @endif>{{$type->name}}</option>
 					@endforeach
 				</select>
 				<a href="javascript:document.form.submit();" class="search_jian">检索</a>

@@ -11,19 +11,19 @@
 			<div class="search">
 				<input type="hidden"  name="search" value="1">
 				<input type="hidden" name="store_id" value="{{$store->id}}">
-				<input class="searchstyle" type="text" placeholder="订单号" name="order_id" value="{{ old('order_id') }}">
-				<input type="text" readonly="readonly" class="demo-input searchstyle laydate_2" name="date" value="{{$now}}">
+				<input class="searchstyle" type="text" placeholder="订单号" name="order_id" value="{{$order_id}}">
+				<input type="text" readonly="readonly" class="demo-input searchstyle2 laydate_2" name="date" value="{{$now}}">
 				<select class="searchstyle searchstyle_w" name="status">
-					@foreach($status_list as $status)
-					    <option value="{{$status->id}}">
-					    	{{$status->name}}
+					@foreach($status_list as $st)
+					    <option value="{{$st->id}}" @if($st->id == $status) selected="selected" @endif>
+					    	{{$st->name}}
 					    </option>
 					@endforeach	
 				</select>
 				<select class="searchstyle searchstyle_w" name="type_id">
 					<option value="0">全部</option>
 					@foreach($store_types as $type)
-					    <option value="{{$type->id}}">{{$type->name}}</option>
+					    <option value="{{$type->id}}" @if($type->id == $type_id) selected="selected" @endif>{{$type->name}}</option>
 					@endforeach	
 				</select>
 				<a href="javascript:document.form.submit();" class="search_jian">检索</a>

@@ -15,7 +15,7 @@
 						<option value="{{$clien->id}}" @if($clien->id == $client_id) selected="selected" @endif>{{$clien->nick_name}}</option>
 					@endforeach
 				</select>
-				<input type="text" readonly="readonly" class="demo-input searchstyle2 laydate_serch" name="date" value="{{$now}}" id="test_2">
+				<input type="text" readonly="readonly" class="demo-input searchstyle2 laydate_serch" name="date" value="{{$date ?? $now}}" id="test_2">
 				<select class="searchstyle searchstyle_w" name="status_id" id="test_3">
 					@foreach($status_list as $status)
 					    <option value="{{$status->id}}" @if($status->id==$status_id) selected="selected" @endif>
