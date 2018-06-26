@@ -192,8 +192,7 @@ class OrderController extends Controller
     		$orders = Order::where('client_id',$client_id)->paginate(1);
     		
     	}
-    
-    	return view('orders.client',compact('clients','types','client','orders','status_list','now','date','status_id','type_id','search'));
+    	return view('orders.client',compact('clients','types','client','orders','status_list','now','date','status_id','type_id','search','client_id'));
        
        
     }

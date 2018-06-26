@@ -12,13 +12,13 @@
 				<input type="hidden" name="search" value="4">
 				<select class="searchstyle" name="client_id" id="test_1">
 					@foreach($clients as $clien)
-						<option value="{{$clien->id}}" @if($clien->id==$_GET["client_id"]) selected="selected" @endif>{{$clien->nick_name}}</option>
+						<option value="{{$clien->id}}" @if($clien->id == $client_id) selected="selected" @endif>{{$clien->nick_name}}</option>
 					@endforeach
 				</select>
 				<input type="text" readonly="readonly" class="demo-input searchstyle2 laydate_serch" name="date" value="{{$now}}" id="test_2">
 				<select class="searchstyle searchstyle_w" name="status_id" id="test_3">
 					@foreach($status_list as $status)
-					    <option value="{{$status->id}}">
+					    <option value="{{$status->id}}" @if($status->id==$status_id) selected="selected" @endif>
 					    	{{$status->name}}
 					    </option>
 					@endforeach	
@@ -26,7 +26,7 @@
 				<select class="searchstyle searchstyle_w" name="type_id" id="test_4">
 					<option value="0">全部</option>
 					@foreach($types as $type)
-						<option value="{{$type->id}}">{{$type->name}}</option>
+						<option value="{{$type->id}}" @if($type->id==$type_id) selected="selected" @endif>{{$type->name}}</option>
 					@endforeach
 				</select>
 				<a href="javascript:document.form.submit();" class="search_jian">检索</a>
