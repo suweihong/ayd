@@ -22,22 +22,14 @@ class BillController extends Controller
     {
         session_start();
 
-    
-//  	$start=date('Y-m-01',strtotime($time));//获取指定月份的第一天
-//     $end=date('Y-m-t',strtotime($time)); //获取指定月份的最后一天
+//  	$start=date('Y-m-01 00:00:00',time());//获取指定月份的第一天
+//     $end=date('Y-m-t 23:59:59',time()); //获取指定月份的最后一天
+
+//     $today_end = date('Y-m-d 23:59:59',time());//今天的结束时间
+//     dump($today_end);
 // dump($start);
-// dump($end);
- 	// $orders = Order::all();
- 	
-
-  //       $res = $orders->groupBy(date_format(date_create('created_at'),'Y-m'))->get();
-  //      dd($res);
-
-
-
-
-
-
+// dd($end);
+	
 
         $stores = Store::orderBy('created_at','asc')->get();//所有的店铺
         $bills = Bill::orderBy('created_at','desc')->get();
@@ -51,10 +43,24 @@ class BillController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    //添加账单
+    //添加账单 
     public function create(Request $request)
     {
-   
+        $start=date('Y-m-01 00:00:00',time());//获取指定月份的第一天
+        $end=date('Y-m-t 23:59:59',time()); //获取指定月份的最后一天
+
+        $today = date('Y-m-d H:i:s',time()); //今天的时间
+        $today_end = date('Y-m-d 23:59:59',time());//今天的结束时间
+        dump($today);
+        dump($today_end);
+    dump($start);
+    dump($end);
+
+    $orders = Order::where('status_id','1')->where('updated_at','>=',$start)->where('updated_at','<=',$today)->get();
+
+    $total = $orders->pluck('total')->sum();
+    dump($orders);
+    dump($total);
 
     }
 
@@ -64,6 +70,7 @@ class BillController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //添加账单
     public function store(Request $request)
     {
         

@@ -40,12 +40,12 @@ class OrderController extends Controller
         $t_start = date('Y-m-d',$today);
         $t_end = date('Y-m-d',$today+60*60*24);
         $now = $t_start.' - '.$t_end;
-        dump($now);
+        
         	//今日的 0点 到明天的0点
         $today_start = date('Y-m-d H:i:s',$today);
         $today_end = date('Y-m-d H:i:s',$today+60*60*24);
         $state = $request->state;
-      
+
     	if($search == 1){
         	$search = 1;
         	if(!$order_id){
@@ -218,7 +218,7 @@ class OrderController extends Controller
         $today_start = date('Y-m-d',$today);
         $today_end = date('Y-m-d',$today+60*60*24);
         $now = $today_start.' - '.$today_end;
-        dump($now);
+        
 
     	if($types->isEmpty()){
     		$store_types = [];
@@ -295,7 +295,7 @@ class OrderController extends Controller
     public function edit($id) 
     {
         session_start();
-        return view('orders.client');
+       
     }
 
     /**
@@ -307,7 +307,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dump(3333);
+        
     }
 
     /**
