@@ -21,7 +21,7 @@ class Store extends Model
     }
 
     //该店拥有的员工
-    public function staff()
+    public function staffs()
     {
     	return $this->hasMany('App\Models\Staff');
     }

@@ -105,7 +105,9 @@ class TypeController extends Controller
     public function destroy(Type $type)
     {
         $type->delete();  
-        session()->flash('success','删除成功');
-        return 1;
+        return response()->json([
+            'errcode' => '100',
+            'errmsg' => '删除成功'
+        ],200);
     }
 }

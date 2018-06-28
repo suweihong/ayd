@@ -9,10 +9,10 @@
 		<h1 class="in_title">商家管理</h1>
 		<div class="search">
 			<form name="form" action="{{route('stores.index')}}" method="get">
-				<input class="searchstyle" type="text" name="search_name" placeholder="按名称检索【足球】" value="{{ old('search_name') }}">
+				<input class="searchstyle" type="text" name="search_name" placeholder="按名称检索【足球】" value="{{$search_name}}">
 				<select class="searchstyle" name="store_type">
-					<option value="1" @if (old('province')) selected @endif>预约商家</option>
-					<option value="2">锁定商家</option>
+					<option value="1" @if($store_type == 1) selected="selected" @endif>预约商家</option>
+					<option value="2" @if($store_type == 2) selected="selected" @endif>锁定商家</option>
 				</select>
 				<a href="javascript:document.form.submit();" class="search_jian">检索</a>
 				<a href="{{route('stores.create')}}" class="search_add">新增</a>
@@ -50,12 +50,12 @@
 				@endif
 				<td>{{$store->created_at}}</td>	
     			<td>
-					<a href="{{route('stores.edit',$store->id)}}">管理商家{{$store->switch}}</a>
+					<a href="{{route('stores.edit',$store->id)}}">管理商家</a>
     			</td>
     		</tr>
 	   		@endforeach
 		</table>
-			{!! $stores->render() !!}
+			{!! $stores->appends(['search_name'=>$search_name,'store_type'=>$store_type])->render() !!}
 	</div>
 	<script type="text/javascript">
 		//改变店铺的状态

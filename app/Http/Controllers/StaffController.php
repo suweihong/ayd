@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Store;
+use App\Models\Staff;
 
 class StaffController extends Controller
 {
@@ -15,9 +16,12 @@ class StaffController extends Controller
     public function index(Request $request)
     {
         session_start();
-        $store_id = $_SESSION['store_id'];
+        // $store_id = $_SESSION['store_id'];
+     
+        $store_id = $request->store_id;
         $store = Store::find($store_id);
-        return view('store.staff',compact('store'));
+        $staffs = $store->staffs()->get();
+        return view('store.staff',compact('store','staffs'));
     }
 
     /**
@@ -81,8 +85,12 @@ class StaffController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Staff $staff)
     {
-        //
+        $staff->delete();
+        return response()->json([
+            'errcode' => '100',
+            'errmsg' => '删除成功'
+        ],200);
     }
 }

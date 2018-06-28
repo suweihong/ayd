@@ -20,14 +20,13 @@
 		    </thead>
 		     <tbody>
 		    	@foreach($types as $type)
-		    		<tr height='55'>
+		    		<tr height='55' id="{{$type->id}}" >
 		    			<td>{{$type->id}}</td>
 		    			<td>{{$type->name}}</td>
 		    			<td>{{$type->created_at}}</td>
 		    			<td>
 		   					<a href="{{route('stores.index')}}?type_id={{$type->id}}" >关联商家</a>
-							<button class="btn btn-info btn-sm" >编辑</button>
-							<button class="btn btn-danger btn-sm" onclick="btnClick({{$type->id}})">删除</button>
+		   					<a href="javascript:;" class="ben_notice" onclick="btnClick({{$type->id}})">删除</a>
 		    			</td>
 		    		</tr>
 		    	@endforeach
@@ -46,6 +45,9 @@
 		//删除运动品类
 	$('.message_del').click(function(){
 		$('.del_prompt').css('display','none') ;
+		setTimeout(() => {
+	  			$("#error_messages").slideUp()
+	  		}, 2000)
 		$.ajax({
 			url :'/types/'+ $('.message_del').attr('data_id'),
 			type : 'DELETE',
@@ -53,9 +55,19 @@
 				'_token': "{!! csrf_token() !!}",
 				},
 			success : function(data){
-				if(data){
-					location.reload();
-				}
+				$('#'+$('.message_del').attr('data_id')).remove()
+					$('#error_messages').show()
+					$('#error_messages .flash-message').remove()
+					var tt=data.errmsg
+					if(data.errcode==2){
+						var classn="alert-warning"
+					}else{
+						var classn="alert-success"
+					}
+					var html='<div class="flash-message">\
+						        <p class="alert '+classn+'">'+tt+'</p>\
+					      	</div>'
+					$('#error_messages').append(html)
 			}
 		})
 	})

@@ -65,7 +65,7 @@
 				<div class="form_name_n form_name_p1">
 					<span class="changlast">场馆简介</span>
 				</div>
-				<textarea rows="3" cols="20" class="form_name_txt" name="introduction" value="{{ old('introduction',$store->introduction) }}"></textarea>
+				<textarea rows="3" cols="20" class="form_name_txt" name="introduction">{{old('introduction',$store->introduction)}}</textarea>
 			</div>  
 			<a href="javascript:document.form.submit();" class="form_name_submit">更新场地信息</a>
 			<a href="{{ route('stores.index') }}" class="form_name_back">返回</a>

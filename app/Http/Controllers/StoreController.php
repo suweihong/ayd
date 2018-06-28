@@ -24,34 +24,28 @@ class StoreController extends Controller
         $store_type = $request->store_type; //店铺 锁定 或 正常
         $types_stores = [];//所有店铺的 运动品类
 
-        if($store_type){
-            if($search_name){
-                $type = Type::where('name',$search_name)->first();
+        if($search_name == '' && $store_type != ''){
+            return back()->with('warning','请填写完整的搜索内容');
+        }elseif($search_name != '' && $store_type != ''){
+
+                $type = Type::where('name',$search_name)->first();//获取该名称的 运动品类
                 if($type){
-                    $stores = $type->stores()->distinct('store_id')->paginate(10);
+                    $stores = $type->stores()->where('switch',$store_type)->distinct('store_id')->paginate(2);
                 }else{
                      session()->flash('warning','没有该运动品类');
                     return redirect('/stores');
                 }
-
-            }else{
-                $stores = Store::where('switch',$store_type)->orderBy('created_at','desc')->paginate(10);
-            }
-        }elseif($type_id){
-            $type = Type::find($type_id);
-            $stores = $type->stores()->paginate(10);
         }else{
             $stores = Store::orderBy('created_at','asc')->paginate(10);
         }
          foreach ($stores as $key => $store) {
                     $types = $store->types()->get();
-                   //$types_stores[$key] = $types;
                     foreach ($types as $k => $value) {
-          			$types_stores[$store->id][$value['id']] = $value;
-         }
-               }
-               
-        return view('store.index',compact('stores','types_stores'));
+          			   $types_stores[$store->id][$value['id']] = $value;
+                    }
+            }
+
+        return view('store.index',compact('stores','types_stores','search_name','store_type'));
 
     }
 
