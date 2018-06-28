@@ -32,17 +32,7 @@
     		<tr>
     			<td>{{$store->id}}</td>
     			<td>{{$store->title}}</td>
-    			@if($store->switch == 1)
-
-    				<td onclick="store_switch({{$store->id}},{{$store->switch}})">正常</td>
-    			@else
-    				<td onclick="store_switch({{$store->id}},{{$store->switch}})">锁定</td>
-{{-- 
-    				<td onclick="taclick(1)">正常</td>
-    			@else
-    				<td onclick="taclick(2)">锁定</td>
- --}}
-    			@endif
+    			<td onclick="store_switch({{$store->id}},{{$store->switch}})" id="{{$store->id}}">@if($store->switch == 1)正常 @else 锁定 @endif</td>
     			<td>
     			<?php foreach ($types_stores as $key => $types_store): ?>
     				@if($key == $store->id)
@@ -86,7 +76,7 @@
 				},
 				success : function(data){
 					if(data == 1){
-						alert(1)
+						
 					}
 				}
 			})
