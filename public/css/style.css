@@ -76,6 +76,9 @@ h6 {
   background: #000!important;
   color: #fff!important;
 }
+.color_red {
+  color: #ff0000;
+}
 .table_line {
   border: 1px solid #ccc;
   width: 90%;

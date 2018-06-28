@@ -33,9 +33,9 @@
     			<td>{{$store->id}}</td>
     			<td>{{$store->title}}</td>
     			@if($store->switch == 1)
-    				<td>正常</td>
+    				<td onclick="taclick(1)">正常</td>
     			@else
-    				<td>锁定</td>
+    				<td onclick="taclick(2)">锁定</td>
     			@endif
     			<td>
     			<?php foreach ($types_stores as $key => $types_store): ?>
@@ -61,11 +61,12 @@
 			{!! $stores->render() !!}
 	</div>
 	<script type="text/javascript">
-		$('td').each(function(){
-			if($(this).html()=='锁定'){
-				$(this).css('color','red');
+		function taclick(e){
+			if(e=='1'){
+				alert(e)
+				$(this).addClass('color_red');
 			}
-		})
+		}
 	</script>
 
 @stop
