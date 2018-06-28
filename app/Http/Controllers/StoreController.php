@@ -109,18 +109,14 @@ class StoreController extends Controller
     //修改店铺的 状态
     public function show(Request $request,$id)
     {
+
         $store_id = $request->store_id;
         $switch = $request->switch;
         $store = Store::find($store_id);
         if($switch == 1){
-            $store->update([
-                'switch' => 2,
-            ]);
-            return 2;
+           
+            return 2 ;
         }else{
-             $store->update([
-                'switch' => 1,
-            ]);
             return 1;
         }
     }

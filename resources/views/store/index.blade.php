@@ -33,15 +33,9 @@
     			<td>{{$store->id}}</td>
     			<td>{{$store->title}}</td>
     			@if($store->switch == 1)
-
-    				<td onclick="store_switch({{$store->id}},{{$store->switch}})">正常</td>
+    				<td onclick="store_switch({{$store->id}},{{$store->switch}})" id="{{$store->id}}">正常{{$store->switch}}</td>
     			@else
-    				<td onclick="store_switch({{$store->id}},{{$store->switch}})">锁定</td>
-{{-- 
-    				<td onclick="taclick(1)">正常</td>
-    			@else
-    				<td onclick="taclick(2)">锁定</td>
- --}}
+    				<td onclick="store_switch({{$store->id}},{{$store->switch}})" class="color_red" id="{{$store->id}}">锁定{{$store->switch}}</td>
     			@endif
     			<td>
     			<?php foreach ($types_stores as $key => $types_store): ?>
@@ -59,7 +53,7 @@
 				@endif
 				<td>{{$store->created_at}}</td>	
     			<td>
-					<a href="{{route('stores.edit',$store->id)}}">管理商家</a>
+					<a href="{{route('stores.edit',$store->id)}}">管理商家{{$store->switch}}</a>
     			</td>
     		</tr>
 	   		@endforeach
@@ -67,16 +61,8 @@
 			{!! $stores->render() !!}
 	</div>
 	<script type="text/javascript">
-		function taclick(e){
-			if(e=='1'){
-				alert(e)
-				$(this).addClass('color_red');
-			}
-		}
-
 		//改变店铺的状态
 		function store_switch(id,s){
-			
 			$.ajax({
 				'url' : '{{route("stores.show",1)}}',
 				'type' : 'GET',
@@ -85,8 +71,14 @@
 					'switch':s,
 				},
 				success : function(data){
+					console.log(data)
+					$('#'+id).toggleClass('color_red')
 					if(data == 1){
-						alert(1)
+						alert(data)
+						$('#'+id).html('正常')
+					}else{
+						alert(data)
+						$('#'+id).html('锁定')
 					}
 				}
 			})
