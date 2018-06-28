@@ -56,12 +56,12 @@ class ComplaintController extends Controller
         session_start();
         $complaint = Complaint::find($id);//反馈  投诉 信息
         $message = $complaint->messages()->orderBy('created_at','desc')->first(); // 回复的内容
-         // return response()->json([
-         //                    'complaint'=> $complaint,
-         //                    'message'=> $message,
-         //                    ], 200)
-         //                    ->setCallback($request->input('callback'));
-        return view('complaints.show',compact('complaint','type','message'));
+         return response()->json([
+                            'complaint'=> $complaint,
+                            'message'=> $message,
+                            ], 200)
+                            ->setCallback($request->input('callback'));
+        // return view('complaints.show',compact('complaint','type','message'));
     }
 
     /**

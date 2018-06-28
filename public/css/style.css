@@ -425,9 +425,16 @@ h6 {
   line-height: 30px;
   margin-top: 10px;
 }
+.content .con_right .in_boxt .in_box_line .btn_a {
+  width: 100%;
+  display: inline-block;
+}
 .content .con_right .in_boxt .in_box_line p {
   float: left;
   margin-left: 20px;
+}
+.content .con_right .in_boxt .in_box_line .btn_time {
+  color: #333;
 }
 .content .con_right .in_boxt .in_box_line .btn_n {
   width: 60px;
