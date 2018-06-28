@@ -11,6 +11,7 @@
 	<div class="in_pry1box">
 		<div class="in_pry1_item">
 			<div class="pic_pic">
+				<input type="file">
 				<img src="img/pic.jpg" width="100%">	
 			</div>
 			<input type="text" class="address" placeholder="请输入目标地址">
@@ -19,6 +20,7 @@
 		</div>
 		<div class="in_pry1_item">
 			<div class="pic_pic">
+				<input type="file">
 				<img src="img/pic.jpg" width="100%">	
 			</div>
 			<input type="text" class="address" placeholder="请输入目标地址">
@@ -27,6 +29,7 @@
 		</div>
 		<div class="in_pry1_item">
 			<div class="pic_pic">
+				<input type="file">
 				<img src="img/pic.jpg" width="100%">	
 			</div>
 			<input type="text" class="address" placeholder="请输入目标地址">
@@ -45,12 +48,14 @@
 				<div class="slowlists1">
 					<div class="in_pry1_item">
 						<div class="pic_pic">
+							<input type="file">
 							<img src="img/pic.jpg" width="100%">	
 						</div>
 						<input type="text" class="address" placeholder="请输入目标地址">
 					</div>
 					<div class="in_pry1_item">
 						<div class="pic_pic">
+							<input type="file">
 							<img src="img/pic.jpg" width="100%">	
 						</div>
 						<input type="text" class="address" placeholder="请输入目标地址">
@@ -60,12 +65,14 @@
 				<div class="slowlists2">
 					<div class="in_pry1_item">
 						<div class="pic_pic">
+							<input type="file">
 							<img src="img/pic.jpg" width="100%">	
 						</div>
 						<input type="text" class="address" placeholder="请输入目标地址">
 					</div>
 					<div class="in_pry1_item">
 						<div class="pic_pic">
+							<input type="file">
 							<img src="img/pic.jpg" width="100%">	
 						</div>
 						<input type="text" class="address" placeholder="请输入目标地址">

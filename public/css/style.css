@@ -473,6 +473,8 @@ h6 {
 .content .advertisment .in_pry1_item {
   flex: 1;
   padding: 20px 0;
+}
+.content .advertisment .in_pry1_item img {
   cursor: pointer;
 }
 .content .advertisment .in_pry1_item .pic_pic {
@@ -1489,11 +1491,13 @@ h6 {
 }
 .pagination {
   margin-left: 5%;
+  margin-top: 20px;
 }
 .pagination li:first-child,
 .pagination li:last-child {
   background-color: transparent;
   color: #333;
+  line-height: 18px;
 }
 .pagination li {
   border: 1px solid #ccc;
@@ -1504,8 +1508,12 @@ h6 {
   text-align: center;
   line-height: 20px;
 }
+.pagination li a {
+  color: #333;
+}
 .pagination .active {
-  background: #ccc;
+  background: #30a5ff;
+  color: #fff;
 }
 #error_messages {
   width: 100%;
