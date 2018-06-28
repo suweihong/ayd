@@ -110,9 +110,8 @@ class StoreController extends Controller
     public function show(Request $request,$id)
     {
         $store_id = $request->store_id;
-        $switch = $request->switch;
         $store = Store::find($store_id);
-        if($switch == 1){
+        if($store->switch == 1){
             $store->update([
                 'switch' => 2,
             ]);
