@@ -375,36 +375,40 @@ class OrderController extends Controller
     		//所有订单
     		$orders_list = Order::orderBy('created_at','desc')->get();
     	}
-		foreach ($orders_list as $key => $order) {
-	       $orders[$key]['id'] = $order['id'];
-	       $orders[$key]['price'] = $order['total'];
-	       $orders[$key]['store'] = $order->store->title.'【'.$order->type->name.'】';
-	       $orders[$key]['client'] = $order->client->nick_name ;
-	       $orders[$key]['time'] = (string)$order->created_at;
-	       $orders[$key]['status'] = $order->new_status()->name;
-	    }
 
+    	if($orders_list->isEmpty()){
+    		return back()->with('warning','搜索到的结果为空！');
+    	}else{
+    		foreach ($orders_list as $key => $order) {
+		       $orders[$key]['id'] = $order['id'];
+		       $orders[$key]['price'] = $order['total'];
+		       $orders[$key]['store'] = $order->store->title.'【'.$order->type->name.'】';
+		       $orders[$key]['client'] = $order->client->nick_name ;
+		       $orders[$key]['time'] = (string)$order->created_at;
+		       $orders[$key]['status'] = $order->new_status()->name;
+	   		 }
 
-        array_unshift($orders, ['订单号','价格','场馆','购买信息','下单时间','状态']);
+        	array_unshift($orders, ['订单号','价格','场馆','购买信息','下单时间','状态']);
 
-		$fw='A1:F'.count($orders);//居中的范围
-		Excel::create(iconv('UTF-8', 'GBK', '订单列表'.$time),function($excel) use ($orders,$fw){
-                $f=$fw;
-				$excel->sheet('score', function($sheet) use ($orders,$f){
-	            $sheet->rows($orders);
-                $sheet->setWidth([               // 设置多个列  
-                'A' => 12,  
-                'B' => 10,
-                'C' => 25,
-                'D'=> 12,
-                'E'=> 20,
-                'F' => 15,  
-            ]);
-                $sheet->cells($f,function($cells) { //$f是范围。匿名函数设置居中对齐
-                   $cells->setAlignment('center');
-                });
-		    });
-		})->export('xls');
-      	                   
+			$fw='A1:F'.count($orders);//居中的范围
+			Excel::create(iconv('UTF-8', 'GBK', '订单列表'.$time),function($excel) use ($orders,$fw){
+	                $f=$fw;
+					$excel->sheet('score', function($sheet) use ($orders,$f){
+		            $sheet->rows($orders);
+	                $sheet->setWidth([               // 设置多个列  
+	                'A' => 12,  
+	                'B' => 10,
+	                'C' => 25,
+	                'D'=> 12,
+	                'E'=> 20,
+	                'F' => 15,  
+	            ]);
+	                $sheet->cells($f,function($cells) { //$f是范围。匿名函数设置居中对齐
+	                   $cells->setAlignment('center');
+	                });
+			    });
+			})->export('xls');
+    	}
+		   	                   
     }
 }

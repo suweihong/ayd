@@ -5,6 +5,7 @@
 @section('content')
 
 	<div class="con_right storemanage"">
+		@include('_messages')
 		<h1 class="in_title">订单查询 -- 按商家</h1>
 
 		<form action="/shop/orders" name="form">
