@@ -98,8 +98,10 @@ class StaffController extends Controller
     }
 
     //获取微信 用户信息
-    public function get_information()
+    public function get_information(Request $request)
     {
-       return '添加成功！！！' ;
+        $store_id = $request->store_id;
+        dump($store_id);
+       // return '添加成功！！！' ;
     }
 }
