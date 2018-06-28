@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Bill extends Model
 {
 	use SoftDeletes;
-    protected $fillable = ['store_id','total','collection','balance','check_id','time'];
+    protected $fillable = ['store_id','total','collection','balance','check_id','time_start','time_end'];
      /**
      * 该账单所属商店
      */

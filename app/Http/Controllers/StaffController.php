@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Store;
 use App\Models\Staff;
 
+use QrCode;
+
 class StaffController extends Controller
 {
     /**
@@ -31,7 +33,8 @@ class StaffController extends Controller
      */
     public function create()
     {
-        //
+        dump(22);
+        // QrCode::format('png')->size(100)->generate('http://www.baidu.com');
     }
 
     /**
@@ -92,5 +95,11 @@ class StaffController extends Controller
             'errcode' => '100',
             'errmsg' => '删除成功'
         ],200);
+    }
+
+    //获取微信 用户信息
+    public function get_information()
+    {
+       return '添加成功！！！' ;
     }
 }

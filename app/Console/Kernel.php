@@ -5,6 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
+use App\Models\Bill;
 
 class Kernel extends ConsoleKernel
 {
@@ -29,13 +30,17 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-         $schedule->exec(  
-            $schedule->call(function () {  
-                DB::table('bill')->insert([
-                'store_id' => 1,
-             ]);
-            })->everyMinute()  
-        )->daily();  
+        
+        $schedule->call(function () {
+             Bill::create([
+                    'store_id' => 1,
+                    'time_start' => 1,
+                    'total' => 0,
+                    'collection' => 0,
+                    'balance'=> 0,
+                    'check_id' => 8,
+                    ]);
+        })->monthlyOn(1, '00:00:00');
 
     }
 

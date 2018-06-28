@@ -24,27 +24,27 @@ class BillController extends Controller
         $now = date('Y-m-d',time());//默认的日期
         $bill_date = $request->bill_date;
         $date = $request->date;
+        $date_start = date('Y-m-d 00:00:00',strtotime($date));//查询日期 开始的时间
+        $date_end = date('Y-m-d 23:59:59',strtotime($date));//查询日期结束的时间
         $store_id = $request->store_id;
         $balance_start = $request->balance_start;
         $balance_end = $request->balance_end;
-        
         $stores = Store::orderBy('created_at','asc')->get();//所有的店铺
-      
+
         if($request->search == 1){
             $search = 1;
-            $bill_month = date('Y-m-01',time($bill_date));//要查询的 账单时间是 哪个月
+            $bill_month = date('Y-m-01',strtotime($bill_date));//要查询的 账单时间是 哪个月
             if($store_id == 0){
-                $bills = Bill::where('time_start',$bill_month)->where('date',$date)->where('balance','>=',$balance_start)->where('balance','<=',$balance_end)->orderBy('balance','desc')->paginate(5);
+                $bills = Bill::where('time_start',$bill_month)->where('updated_at','>=',$date_start)->where('updated_at','<=',$date_end)->where('balance','>=',$balance_start)->where('balance','<=',$balance_end)->where('check_id',7)->orderBy('balance','desc')->paginate(5);
 
             }else{
-                $bills = Bill::where('time_start',$bill_month)->where('date',$date)->where('balance','>=',$balance_start)->where('balance','<=',$balance_end)->where('store_id',$store_id)->orderBy('balance','desc')->paginate(5);
+                $bills = Bill::where('time_start',$bill_month)->where('updated_at','>=',$date_start)->where('updated_at','<=',$date_end)->where('balance','>=',$balance_start)->where('balance','<=',$balance_end)->where('store_id',$store_id)->where('check_id',7)->orderBy('balance','desc')->paginate(5);
             }
             
         }else{
             $search = 2;
             $bills = Bill::orderBy('balance','desc')->paginate(5);//所有账单
         }
-       
     
         return view('bills.index',compact('stores','bills','status_list','now','bill_date','date','store_id','balance_start','balance_end','search'));
     }
@@ -57,57 +57,55 @@ class BillController extends Controller
     //添加账单 
     public function create(Request $request)
     {
-        $stores = Store::orderBy('created_at','asc')->get();//所有的店铺
-        $start=date('Y-m-01 00:00:00',time());//获取指定月份的第一天
-        $month_start = date('Y-m-01',time()); //本月的一号
-        $end=date('Y-m-t 23:59:59',time()); //获取指定月份的最后一天
+   
+    $start=date('Y-m-01 00:00:00',time());//获取指定月份的第一天
+    $month_start = date('Y-m-01',time()); //本月的一号
+    $last_start = date('Y-m-01', strtotime('-1 month'));//上个月的第一天
+    $last_end = date('Y-m-t', strtotime('-1 month'));//上个月的最后一天
 
-        $today_start = date('Y-m-d 00:00:00',time());//今天的开始时间
-        $today = date('Y-m-d H:i:s',time()); //今天的时间
-        $today_end = date('Y-m-d 23:59:59',time());//今天的结束时间
-        // dump($today_start);
-        // dump($today);
-        // dump($today_end);
-        // dump($start);
-        // dump($end);
-        // dump($s);
+    $now = date('Y-m-d H:i:s',time());//现在的时间
 
-        $orders = Order::where('status_id','1')->where('updated_at','>=',$start)->where('updated_at','<=',$today)->get();
-        $orders = $orders->groupBy('store_id');
-        if($orders->isEmpty()){
-            $bills = [];
-        }else{
-                foreach ($orders as $key => $order) {
-                $bills[$key]['total'] = $order->pluck('total')->sum();//订单金额  
-                $bills[$key]['collection'] = $order->pluck('collection')->sum();//代收金额
-                $bills[$key]['balance'] = $bills[$key]['total'] - $bills[$key]['collection'];//结算金额
-               }
-        }
-        
-    
 
-        dump($orders);
-        dump($bills);
-       // if($today_start == $start){
-       //      foreach ($stores as $key => $store) {
-       //          $res = Bill::create([
-       //              'store_id' => $store->id,
-       //              'time_start' => $month_start.' 至 今天',
-       //              'total' => 0,
-       //              'collection' => 0,
-       //              'balance'=> 0,
-       //              'check_id' => 8,
-       //          ]);
-       //      }
+                //每月一号添加账单
+       if($now == $start){
+            $stores = Store::orderBy('created_at','asc')->get();//所有的店铺
+            foreach ($stores as $key => $store) {
+                $res = Bill::create([
+                    'store_id' => $store->id,
+                    'time_start' => $month_start,
+                    'time_end' => '今天',
+                    'total' => 0,
+                    'collection' => 0,
+                    'balance'=> 0,
+                    'check_id' => 8,
+                ]);
+            }
+            $bills = Bill::where('time_start',$last_start)->get();
+            foreach ($bills as $key => $bill) {
+               $bill->update([
+                    'time_end' => $last_end,
+               ]);
+}
+
+       }
+       if($res){
+        dump(11);
+       }else{
+        dump(22);
+       }
+
+                    //核销订单后 修改账单数据
+       // if($request->exit = 1){
+            // $store_id = $request->store_id;
+            // $time_start = $month_start;
+            // $bill = Bill::where('store_id',$store_id)->where('time_start',$time_start)->first();
+            // $bill->update([
+            //     'total' => $bill->total + 1,
+            //     'collection' => $bill->collection + 1,
+            //     'balance' => $bill->balance + 1,    
+            // ]);
+            // dump($bill);
        // }
-       // if($res){
-       //  dump(11);
-       // }else{
-       //  dump(22);
-       // }
-
-        //核销订单后 修改账单数据
-
 
     }
 
@@ -175,15 +173,17 @@ class BillController extends Controller
         if($request->search == 1){
             $bill_date = $request->bill_date;
             $date = $request->date;
+            $date_start = date('Y-m-d 00:00:00',strtotime($date));//查询日期 开始的时间
+            $date_end = date('Y-m-d 23:59:59',strtotime($date));//查询日期结束的时间
             $store_id = $request->store_id;
             $balance_start = $request->balance_start;
             $balance_end = $request->balance_end;
             $bill_month = date('Y-m-01',time($bill_date));//要查询的 账单时间是 哪个月
             if($store_id == 0){
-                $bills_list = Bill::where('time_start',$bill_month)->where('date',$date)->where('balance','>=',$balance_start)->where('balance','<=',$balance_end)->orderBy('balance','desc')->get();
+                $bills_list = Bill::where('time_start',$bill_month)->where('updated_at','>=',$date_start)->where('updated_at','<=',$date_end)->where('balance','>=',$balance_start)->where('balance','<=',$balance_end)->where('check_id',7)->orderBy('balance','desc')->get();
 
             }else{
-                $bills_list = Bill::where('time_start',$bill_month)->where('date',$date)->where('balance','>=',$balance_start)->where('balance','<=',$balance_end)->where('store_id',$store_id)->orderBy('balance','desc')->get();
+                $bills_list = Bill::where('time_start',$bill_month)->where('updated_at','>=',$date_start)->where('updated_at','<=',$date_end)->where('balance','>=',$balance_start)->where('balance','<=',$balance_end)->where('store_id',$store_id)->where('check_id',7)->orderBy('balance','desc')->get();
             }
         }else{
             $bills_list = Bill::orderBy('balance','desc')->get();
@@ -217,9 +217,9 @@ class BillController extends Controller
                         $sheet->setWidth([               // 设置多个列  
                         'A' => 10,  
                         'B' => 15,
-                        'C' => 20,
-                        'D'=> 12,
-                        'E'=> 20,
+                        'C' => 25,
+                        'D'=> 15,
+                        'E'=> 15,
                         'F' => 15,  
                         'G' => 15,
                         'H' => 20,
