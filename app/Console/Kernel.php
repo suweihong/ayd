@@ -5,6 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
+
 class Kernel extends ConsoleKernel
 {
     /**
@@ -13,7 +14,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        \App\Console\Commands\Inspire::class,
+
+
     ];
 
     /**
@@ -26,6 +29,14 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+         $schedule->exec(  
+            $schedule->call(function () {  
+                DB::table('bill')->insert([
+                'store_id' => 1,
+             ]);
+            })->everyMinute()  
+        )->daily();  
+
     }
 
     /**

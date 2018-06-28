@@ -11,14 +11,14 @@
 			<input type="hidden" name="search" value="1">
 			<div class="searchbox">
 				<p>订单号</p>
-				<input type="text" class="ordernum" value="{{old('order_id')}}" name="order_id">
+				<input type="text" class="ordernum" value="{{$order_id}}" name="order_id">
 			</div>
 			<div class="searchbox">
 				<p>日期区间</p>
-				<input type="text" readonly="readonly" class="demo-input ordernum laydate_2" name="date" value="{{$now}}">
+				<input type="text" readonly="readonly" class="demo-input ordernum laydate_2" name="date" value="{{$date ?? $now}}">
 				<select class="orderstyle" name="status">
 					@foreach($status_list as $statu)
-						<option value="{{$statu->id}}">{{$statu->name}}</option>
+						<option value="{{$statu->id}}" @if($statu->id == $status) selected="selected" @endif>{{$statu->name}}</option>
 					@endforeach
 				</select>
 			</div>
@@ -27,14 +27,14 @@
 				<select class="orderstyle" name="type_id">
 					<option value="0">全部</option>
 					@foreach($types as $type)
-						<option value="{{$type->id}}">{{$type->name}}</option>
+						<option value="{{$type->id}}" @if($type->id == $type_id) selected="selected" @endif>{{$type->name}}</option>
 					@endforeach
 				</select>
 				<p class="fukuan1">付款类型</p>
 				<select class="orderstyle fukuan2" name="pay_id">
 					<option value="0">全部</option>
 					@foreach($payment as $pay)
-					    <option value="{{$pay->id}}">{{$pay->name}}</option>
+					    <option value="{{$pay->id}}" @if($pay->id == $pay_id) selected="selected" @endif>{{$pay->name}}</option>
 					@endforeach
 				</select>
 			</div>
@@ -65,29 +65,18 @@
 		    	<th>订单管理</th>
 		    </tr>
 		
-			<?php foreach ($orders as $key => $order): ?>
+			@foreach ($orders as $key => $order)
 				<tr>
 				    <td>{{$key+1}}</td>
-				    @if($search == 2)
 				        <td>{{$order->id}}</td>
 				        <td>{{$order->total}}</td>
 				        <td>{{$order->store->title}}【{{$order->type->name}}】</td>
 				        <td>{{$order->client->nick_name}}</td>
-				    @else
-                        <td>{{$order->order_id}}</td>
-                        <td>{{$order->order->total}}</td>
-                        <td>{{$order->order->store->title}}【{{$order->order->type->name}}】 </td>
-                        <td>{{$order->order->client->nick_name}}</td>
-				    @endif
-				   
 				    <td>{{$order->created_at}}</td>
-				    @if($search == 2)
 				         <td>{{$order->new_status()->name}}</td>
-				    @else
-				        <td>{{$order->status->name}}</td>
-				    @endif
+				    <td><a href="{{route('orders.show',$order->id)}}">查看详情</a></td>
 			    </tr>
-			<?php endforeach ?>
+			@endforeach 
 		  
 		</table>
 		@if($search != 1)

@@ -5,6 +5,7 @@
 @section('content')
 	<!-- <h1>按用户订单</h1> -->
 	<div class="con_right storemanage"">
+		@include('_messages')
 		<h1 class="in_title">订单查询 -- 按用户</h1>
 	
 		<form action="/client/orders" name="form">
@@ -15,8 +16,9 @@
 						<option value="{{$clien->id}}" @if($clien->id == $client_id) selected="selected" @endif>{{$clien->nick_name}}</option>
 					@endforeach
 				</select>
-				<input type="text" readonly="readonly" class="demo-input searchstyle2 laydate_2" name="date" value="{{$now}}">
-				<select class="searchstyle searchstyle_w" name="status_id">
+				
+				<input type="text" readonly="readonly" class="demo-input searchstyle2 laydate_2" name="date" value="{{$date ?? $now}}" id="test_2">
+				<select class="searchstyle searchstyle_w" name="status_id" id="test_3">
 					@foreach($status_list as $status)
 					    <option value="{{$status->id}}" @if($status->id==$status_id) selected="selected" @endif>
 					    	{{$status->name}}

@@ -25,20 +25,55 @@
 	<div class="con_rightbox">
     	<h1 class="in_title">
     		财务概况
-    		<a class="in_title_date" href="javascript:;">今日</a>
-    		<a class="in_title_date" href="javascript:;">昨日</a>
-    		<a class="in_title_date" href="javascript:;">本月</a>
+    		<a class="in_title_date" href="/?time=1">今日</a>
+    		<a class="in_title_date" href="/?time=2">昨日</a>
+    		<a class="in_title_date" href="/?time=3">本月</a>
     	</h1>
-		<div class="in_box">
-			<a href="javascript:;" class="in_item">
-				<u class="in_item_u">8000</u>
-				<p class="in_item_p">销售总额</p>
-			</a>
-			<a href="javascript:;" class="in_item">
-				<u class="in_item_u">80</u>
-				<p class="in_item_p">平均单价</p>
-			</a>
-		</div>
+    	@if($time == 1)
+			<div class="in_box">
+				<a href="javascript:;" class="in_item">
+					<u class="in_item_u">{{$t_total}}</u>
+					<p class="in_item_p">销售总额</p>
+				</a>
+				<a href="javascript:;" class="in_item">
+					<u class="in_item_u">{{$t_avg}}</u>
+					<p class="in_item_p">平均单价</p>
+				</a>
+			</div>
+		@elseif($time == 2)
+			<div class="in_box">
+				<a href="javascript:;" class="in_item">
+					<u class="in_item_u">{{$y_total}}</u>
+					<p class="in_item_p">销售总额</p>
+				</a>
+				<a href="javascript:;" class="in_item">
+					<u class="in_item_u">{{$y_avg}}</u>
+					<p class="in_item_p">平均单价</p>
+				</a>
+			</div>
+		@elseif($time == 3)
+			<div class="in_box">
+				<a href="javascript:;" class="in_item">
+					<u class="in_item_u">{{$m_total}}</u>
+					<p class="in_item_p">销售总额</p>
+				</a>
+				<a href="javascript:;" class="in_item">
+					<u class="in_item_u">{{$m_avg}}</u>
+					<p class="in_item_p">平均单价</p>
+				</a>
+			</div>
+		@else
+			<div class="in_box">
+				<a href="javascript:;" class="in_item">
+					<u class="in_item_u">{{$total}}</u>
+					<p class="in_item_p">销售总额</p>
+				</a>
+				<a href="javascript:;" class="in_item">
+					<u class="in_item_u">{{$total_avg}}</u>
+					<p class="in_item_p">平均单价</p>
+				</a>
+			</div>
+		@endif
 	</div>
 	<div class="con_rightbox">
     	<h1 class="in_title">消息动态</h1>

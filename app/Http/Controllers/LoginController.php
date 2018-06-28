@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Complaint;
 use App\Models\Order;
+use App\Models\Bill;
 
 
 
@@ -88,6 +89,38 @@ class LoginController extends Controller
               //今日退单数
           $num_t = Order::where('updated_at','>=',$today_start)->where('updated_at','<',$today_end)->where('status_id',2)->count();
 
-        return view('index',compact('complaints','num_x','num_h','num_t'));
+             //销售总额
+
+          $orders = Order::all()->pluck('total'); 
+          $total = $orders->sum();//默认销售总额
+          $total_avg = floor($orders->avg() * 100) / 100;//默认平均单价
+           
+          $today_start = date('Y-m-d 00:00:00',time());//今天的开始时间
+          $today_end = date('Y-m-d 23:59:59',time());//今天的结束时间 
+
+          $yday_start = date('Y-m-d 00:00:00',time()-24*60*60);//昨天开始的时间
+
+          $m_start=date('Y-m-01 00:00:00',time());//获取指定月份的第一天
+          $m_end=date('Y-m-t 23:59:59',time()); //获取指定月份的最后一天
+          $time = $request->time;
+          
+          if($time == 1){
+                   //今日销售
+              $orders = Order::where('created_at','>=',$today_start)->where('created_at','<=',$today_end)->pluck('total');
+              $t_total = $orders->sum();
+              $t_avg = floor($orders->avg()*100)/100;
+          }elseif ($time == 2) {
+                  //昨日销售
+              $orders = Order::where('created_at','>=',$yday_start)->where('created_at','<',$today_start)->pluck('total');
+              $y_total = $orders->sum();
+              $y_avg = floor($orders->avg()*100)/100;
+          }elseif ($time == 3){
+                 //本月销售
+              $orders = Order::where('created_at','>=',$m_start)->where('created_at','<=',$m_end)->pluck('total');
+              $m_total = $orders->sum();
+              $m_avg = floor($orders->avg()*100)/100;
+          }
+
+        return view('index',compact('complaints','num_x','num_h','num_t','total','total_avg','t_total','t_avg','time','y_total','y_avg','m_total','m_avg'));
     }
 }

@@ -71,7 +71,7 @@ class OrderController extends Controller
         			
         			$orders = Order::where('id',$order_id)->where('status_id',$status)->where('pay_id',$pay_id)->where('type_id',$type_id)->whereBetween('updated_at',[$date[0],$date[1]])->get();
         		}
-        		// $date = implode(' - ', $date);
+        		$date = implode(' - ', $date);
 
         		//查询的订单存入session
         		$time=1*51840000;
@@ -93,7 +93,7 @@ class OrderController extends Controller
         	$orders = Order::orderBy('created_at','desc')->paginate(1);
      
 		}
-    	return view('orders.index',compact('orders','types','status_list','now','payment','search','state'));
+    	return view('orders.index',compact('orders','types','status_list','now','payment','search','state','status','type_id','pay_id','order_id','date'));
    
     }
 
@@ -108,6 +108,18 @@ class OrderController extends Controller
     	$store_id = $request->store_id;//按店铺查找
     	$store = Store::find($store_id);
     	$types = $store->types()->get();
+
+    	$order_id = $request->order_id;
+    	$date = $request->date;
+    	$status = $request->status;
+    	$type_id = $request->type_id;
+
+    	//默认 时间区间
+    	$today = strtotime(date('Y-m-d'));
+        $today_start = date('Y-m-d',$today);
+        $today_end = date('Y-m-d',$today+60*60*24);
+        $now = $today_start.' - '.$today_end;
+
     	if($types->isEmpty()){
     		$store_types = [];
     	}else{
@@ -119,10 +131,6 @@ class OrderController extends Controller
     	if($request->search == 1){
     		//搜索
     		$search = 1;
-    		$order_id = $request->order_id;
-    		$date = $request->date;
-    		$status = $request->status;
-    		$type_id = $request->type_id;
     		if($order_id == '' || $date == ''){
     			return back()->withInput()->with('warning','请填写完整的搜索信息');
     		}else{
@@ -146,7 +154,8 @@ class OrderController extends Controller
     			$search = 2;
     			$orders = Order::where('store_id',$store_id)->orderBy('created_at','desc')->paginate(1);
     		}	
-        return view('orders.store',compact('orders','store','store_types','status_list','now','store_id','search'));
+    	
+        return view('orders.store',compact('orders','store','store_types','status_list','now','store_id','search','status','type_id','order_id'));
     }
 
 
@@ -209,7 +218,7 @@ class OrderController extends Controller
     	$status_id = $request->status_id;
     	$type_id = $request->type_id; //查询的体育品种
     	$store = Store::find($store_id);
-    	$types = $store->types()->get();
+    	$types = Type::all();
 
 
     	//默认 时间区间
@@ -219,13 +228,7 @@ class OrderController extends Controller
         $now = $today_start.' - '.$today_end;
         
 
-    	if($types->isEmpty()){
-    		$store_types = [];
-    	}else{
-    		 foreach ($types as $key => $type) {
-	    	 $store_types[$type->id] = $type;
-	        }
-    	}
+    	
     	if($search == 2){
     		//查询的日期区间
         	$date = explode(' - ',$date);
@@ -243,7 +246,7 @@ class OrderController extends Controller
     		$orders = Order::where('store_id',$store_id)->orderBy('created_at','desc')->paginate(1);
     	}
     	
-    	return view('orders.shop',compact('stores','store_types','orders','store','status_list','now','search','date','status_id','type_id'));
+    	return view('orders.shop',compact('stores','types','orders','store','status_list','now','search','date','status_id','type_id','store_id'));
 
     }
 
@@ -372,36 +375,40 @@ class OrderController extends Controller
     		//所有订单
     		$orders_list = Order::orderBy('created_at','desc')->get();
     	}
-		foreach ($orders_list as $key => $order) {
-	       $orders[$key]['id'] = $order['id'];
-	       $orders[$key]['price'] = $order['total'];
-	       $orders[$key]['store'] = $order->store->title.'【'.$order->type->name.'】';
-	       $orders[$key]['client'] = $order->client->nick_name ;
-	       $orders[$key]['time'] = (string)$order->created_at;
-	       $orders[$key]['status'] = $order->new_status()->name;
-	    }
 
+    	if($orders_list->isEmpty()){
+    		return back()->with('warning','搜索到的结果为空！');
+    	}else{
+    		foreach ($orders_list as $key => $order) {
+		       $orders[$key]['id'] = $order['id'];
+		       $orders[$key]['price'] = $order['total'];
+		       $orders[$key]['store'] = $order->store->title.'【'.$order->type->name.'】';
+		       $orders[$key]['client'] = $order->client->nick_name ;
+		       $orders[$key]['time'] = (string)$order->created_at;
+		       $orders[$key]['status'] = $order->new_status()->name;
+	   		 }
 
-        array_unshift($orders, ['订单号','价格','场馆','购买信息','下单时间','状态']);
+        	array_unshift($orders, ['订单号','价格','场馆','购买信息','下单时间','状态']);
 
-		$fw='A1:F'.count($orders);//居中的范围
-		Excel::create(iconv('UTF-8', 'GBK', '订单列表'.$time),function($excel) use ($orders,$fw){
-                $f=$fw;
-				$excel->sheet('score', function($sheet) use ($orders,$f){
-	            $sheet->rows($orders);
-                $sheet->setWidth([               // 设置多个列  
-                'A' => 12,  
-                'B' => 10,
-                'C' => 25,
-                'D'=> 12,
-                'E'=> 20,
-                'F' => 15,  
-            ]);
-                $sheet->cells($f,function($cells) { //$f是范围。匿名函数设置居中对齐
-                   $cells->setAlignment('center');
-                });
-		    });
-		})->export('xls');
-      	                   
+			$fw='A1:F'.count($orders);//居中的范围
+			Excel::create(iconv('UTF-8', 'GBK', '订单列表'.$time),function($excel) use ($orders,$fw){
+	                $f=$fw;
+					$excel->sheet('score', function($sheet) use ($orders,$f){
+		            $sheet->rows($orders);
+	                $sheet->setWidth([               // 设置多个列  
+	                'A' => 12,  
+	                'B' => 10,
+	                'C' => 25,
+	                'D'=> 12,
+	                'E'=> 20,
+	                'F' => 15,  
+	            ]);
+	                $sheet->cells($f,function($cells) { //$f是范围。匿名函数设置居中对齐
+	                   $cells->setAlignment('center');
+	                });
+			    });
+			})->export('xls');
+    	}
+		   	                   
     }
 }
