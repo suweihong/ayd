@@ -92,11 +92,15 @@
 	</div>
 </div>
 <script>
-	function li_msg(e){
-		$.ajax({
-			'url' : '/complaints/'+e,
-			'type' : 'GET',
-		})
-	}
+	function li_msg(id){
+			$.ajax({
+				'url' : '/types/'+1+'/complaints/'+id,
+				'type' : 'GET',
+				success : function(data){
+					
+				$res = response()->view('complaints.show',data.complaint,data.message);
+				}
+			})
+		}
 </script>
 @endsection

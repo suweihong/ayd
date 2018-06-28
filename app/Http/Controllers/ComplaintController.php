@@ -42,7 +42,7 @@ class ComplaintController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       dump(3333);
     }
 
     /**
@@ -72,7 +72,7 @@ class ComplaintController extends Controller
      */
     public function edit($id)
     {
-        //
+        dump($id);
     }
 
     /**
