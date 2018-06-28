@@ -25,7 +25,7 @@
 	<div class="con_rightbox">
     	<h1 class="in_title">
     		财务概况
-    		<a class="in_title_date" href="/?time=1">今日</a>
+    		<a class="in_title_date decration" href="/?time=1">今日</a>
     		<a class="in_title_date" href="/?time=2">昨日</a>
     		<a class="in_title_date" href="/?time=3">本月</a>
     	</h1>
