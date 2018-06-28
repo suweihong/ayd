@@ -33,7 +33,7 @@
     			<td>{{$store->id}}</td>
     			<td>{{$store->title}}</td>
 
-    			<td onclick="store_switch({{$store->id}})" id="{{$store->id}}" @if($store->switch == 2) class="color_red" @endif>@if($store->switch == 1)正常 @else 锁定 @endif</td>
+    			<td style="cursor: pointer;" onclick="store_switch({{$store->id}})" id="{{$store->id}}" @if($store->switch == 2) class="color_red" @endif>@if($store->switch == 1)正常 @else 锁定 @endif</td>
     			<td>
     			@foreach ($types_stores as $key => $types_store)
     				@if($key == $store->id)
@@ -68,11 +68,9 @@
 				},
 				success : function(data){
 					if(data == 1){
-						$('#'+id).html('正常')
-						$('#'+id).removeClass('color_red')
+						$('#'+id).html('正常').removeClass('color_red')
 					}else{
-						$('#'+id).html('锁定')
-						$('#'+id).addClass('color_red')
+						$('#'+id).html('锁定').addClass('color_red')
 
 					}
 				}
