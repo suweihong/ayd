@@ -69,9 +69,23 @@
 
 		//改变店铺的状态
 		function store_switch(id,s){
-			if(s == 1){
-				console.log($(this))
-			}
+			
+			$.ajax({
+				'url' : '{{route("stores.show",1)}}',
+				'type' : 'GET',
+				'data' : {
+					'store_id':id,
+					'switch':s,
+				},
+				success : function(data){
+					if(data == 1){
+
+					}else{
+
+					}
+				}
+			})
+			
 		}
 	</script>
 
