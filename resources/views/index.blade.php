@@ -79,7 +79,7 @@
     	<h1 class="in_title">消息动态</h1>
 		<ul class="in_boxt">
 			@foreach($complaints as $complaint)
-				<li  class="in_box_line">
+				<li  class="in_box_line" onclick="li_msg({{$complaint->id}})">
 					@if($complaint->check_id == 1)<p class="btn_y">已读</p>
 					@elseif($complaint->check_id == 2 && $complaint->client_id == '')<p class="btn_n">未读</p>
 					@else<p class="btn_request">投诉</p>
@@ -91,4 +91,9 @@
 		</ul>
 	</div>
 </div>
+<script>
+	function li_msg(e){
+		alert(e)
+	}
+</script>
 @endsection
