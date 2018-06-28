@@ -33,9 +33,15 @@
     			<td>{{$store->id}}</td>
     			<td>{{$store->title}}</td>
     			@if($store->switch == 1)
+
     				<td onclick="store_switch({{$store->id}},{{$store->switch}})">正常</td>
     			@else
     				<td onclick="store_switch({{$store->id}},{{$store->switch}})">锁定</td>
+{{-- 
+    				<td onclick="taclick(1)">正常</td>
+    			@else
+    				<td onclick="taclick(2)">锁定</td>
+ --}}
     			@endif
     			<td>
     			<?php foreach ($types_stores as $key => $types_store): ?>
@@ -61,11 +67,12 @@
 			{!! $stores->render() !!}
 	</div>
 	<script type="text/javascript">
-		$('td').each(function(){
-			if($(this).html()=='锁定'){
-				$(this).css('color','red');
+		function taclick(e){
+			if(e=='1'){
+				alert(e)
+				$(this).addClass('color_red');
 			}
-		})
+		}
 
 		//改变店铺的状态
 		function store_switch(id,s){
@@ -79,9 +86,7 @@
 				},
 				success : function(data){
 					if(data == 1){
-
-					}else{
-
+						alert(1)
 					}
 				}
 			})

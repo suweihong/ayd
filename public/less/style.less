@@ -68,6 +68,9 @@ h1,h2,h3,h4,h5,h6 {
 	background: #000!important;
 	color: #fff!important;
 }
+.color_red{
+	color: red
+}
 .table_line{
     border: 1px solid #ccc;
     width: 90%;
@@ -370,7 +373,9 @@ h1,h2,h3,h4,h5,h6 {
 		.in_pry1_item{
 			flex: 1;
 		    padding: 20px 0;
-		    cursor: pointer;
+		    img{
+		    	cursor: pointer;
+		    }
 		    .pic_pic{
 		      width: 200px;
 		      height: 114px;
@@ -1042,9 +1047,11 @@ h1,h2,h3,h4,h5,h6 {
 }
 .pagination{
 	margin-left: 5%;
+	margin-top: 20px;
 	li:first-child,li:last-child{
 		background-color:transparent;
 		color: #333;
+		line-height: 18px;
 	}
 	li{
 		border:1px solid #ccc;
@@ -1054,9 +1061,13 @@ h1,h2,h3,h4,h5,h6 {
 		margin-right: 10px;
 		text-align: center;
 		line-height: 20px;
+		a{
+			color: #333;
+		}
 	}
 	.active{
-		background: #ccc;
+		background: #30a5ff;
+		color: #fff;
 	}
 }
 #error_messages{
