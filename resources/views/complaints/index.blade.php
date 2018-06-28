@@ -24,7 +24,7 @@
 			    <th>处理状态</th>
 			    <th>反馈情况</th>
 		    </tr>
-			@foreach($complaints as $complaint)
+			@foreach($complaints as $key => $complaint)
 	    		<tr>
 	    			<td>{{$complaint->id}}</td>
 	    			@if($type == 1)
@@ -36,8 +36,9 @@
 	    			<td>{{$complaint->kind->name}}</td>
 	    			<td>{{$complaint->check->name}}</td>
 	    			<td>
-	    				<!-- <button class="btn btn-danger btn-sm" onclick="btnClick({{$complaint->id}})">删除</button> -->
-						<a href="{{route('complaints.show',[$type,$complaint->id])}}">查看详情</a>
+	    			{{-- 	<button class="btn btn-danger btn-sm" onclick="btnClick({{$complaint->id}})">删除</button> --}}
+						{{-- <a href="{{route('complaints.show',[$type,$complaint->id])}}">查看详情</a> --}}
+						<a href='javascript:;' onclick="li_msg({{$type}},{{$complaint->id}})">查看详情</a>
 	    			</td>
 	    		</tr>
 			@endforeach
@@ -52,6 +53,18 @@
 				$(this).css('color','red');
 			}
 		})
+
+		//查看详情
+		function li_msg(type,id){
+			$.ajax({
+				'url' : '/types/'+type+'/complaints/'+id,
+				'type' : 'GET',
+				success : function(data){
+					
+				$res = response()->view('complaints.show',data.complaint,data.message);
+				}
+			})
+		}
 		
 </script>
 

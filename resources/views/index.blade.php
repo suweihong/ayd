@@ -93,7 +93,10 @@
 </div>
 <script>
 	function li_msg(e){
-		alert(e)
+		$.ajax({
+			'url' : '/complaints/'+e,
+			'type' : 'GET',
+		})
 	}
 </script>
 @endsection

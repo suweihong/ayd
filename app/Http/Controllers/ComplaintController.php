@@ -17,9 +17,9 @@ class ComplaintController extends Controller
     {
         session_start();
        if($type == 1){
-        $complaints = Complaint::where('client_id',null)->paginate(10);
+        $complaints = Complaint::where('client_id',null)->paginate(1);
        }else{
-        $complaints = Complaint::where('mp_user_id',null)->paginate(10);
+        $complaints = Complaint::where('mp_user_id',null)->paginate(1);
        }
        return view('complaints.index',compact('complaints','type'));
     }
@@ -51,12 +51,17 @@ class ComplaintController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($type,$id)
+    public function show(Request $request,$type,$id)
     {
         session_start();
-        $complaint = Complaint::find($id);
-        $message = $complaint->messages()->orderBy('created_at','desc')->first();
-        return view('complaints.show',compact('complaint','type','message'));
+        $complaint = Complaint::find($id);//反馈  投诉 信息
+        $message = $complaint->messages()->orderBy('created_at','desc')->first(); // 回复的内容
+         return response()->json([
+                            'complaint'=> $complaint,
+                            'message'=> $message,
+                            ], 200)
+                            ->setCallback($request->input('callback'));
+        // return view('complaints.show',compact('complaint','type','message'));
     }
 
     /**
