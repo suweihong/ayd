@@ -38,7 +38,6 @@
 	    			<td>
 	    			{{-- 	<button class="btn btn-danger btn-sm" onclick="btnClick({{$complaint->id}})">删除</button> --}}
 						<a href="{{route('complaints.show',[$type,$complaint->id])}}">查看详情</a>
-					{{-- 	<a href='javascript:;' onclick="li_msg({{$type}},{{$complaint->id}})">查看详情</a> --}}
 	    			</td>
 	    		</tr>
 			@endforeach
@@ -53,18 +52,6 @@
 				$(this).css('color','red');
 			}
 		})
-
-		// //查看详情
-		// function li_msg(type,id){
-		// 	$.ajax({
-		// 		'url' : '/types/'+type+'/complaints/'+id,
-		// 		'type' : 'GET',
-		// 		success : function(data){
-					
-		// 		$res = response()->view('complaints.show',data.complaint,data.message);
-		// 		}
-		// 	})
-		// }
 		
 </script>
 

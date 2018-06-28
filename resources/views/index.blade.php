@@ -80,10 +80,13 @@
 		<ul class="in_boxt">
 			@foreach($complaints as $complaint)
 			<li class="in_box_line">
-				<a href="/types/1/complaints/1" class="btn_a">
-					@if($complaint->check_id == 1)<p class="btn_y">已读</p>
-					@elseif($complaint->check_id == 2 && $complaint->client_id == '')<p class="btn_n">未读</p>
-					@else<p class="btn_request">投诉</p>
+				<a @if($complaint->client_id == '') href="/types/1/complaints/{{$complaint->id}}" @elseif($complaint->mp_user_id == '') href="/types/2/complaints/{{$complaint->id}}" @endif  class="btn_a">
+					@if($complaint->check_id == 1)
+						<p class="btn_y">已读</p>
+					@elseif($complaint->check_id == 2 && $complaint->client_id == '')
+						<p class="btn_n">未读</p>
+					@else
+						<p class="btn_request">投诉</p>
 					@endif
 					<p>{{str_limit($complaint->content,$limit = 60, $end = '......')}}</p>
 					<p class="btn_time">{{$complaint->created_at->diffForHumans()}}</p>
@@ -93,16 +96,5 @@
 		</ul>
 	</div>
 </div>
-<script>
-	// function li_msg(id){
-	// 		$.ajax({
-	// 			'url' : '/types/'+1+'/complaints/'+id,
-	// 			'type' : 'GET',
-	// 			success : function(data){
-					
-	// 			$res = response()->view('complaints.show',data.complaint,data.message);
-	// 			}
-	// 		})
-	// 	}
-</script>
+
 @endsection
