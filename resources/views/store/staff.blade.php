@@ -24,7 +24,7 @@
 			<div class="mask_codebox">
 				{{-- <img src="img/erweima.jpg" alt=""> 
 				--}}
-				<div>{!! QrCode::size(150)->generate('http://192.168.50.42:8006/staff/information');!!}</div>
+				<div class="num_img">{!! QrCode::size(150)->generate('http://192.168.50.42:8006/staff/information');!!}</div>
 				<p>请使用微信扫描以上二维码完成绑定</p>
 				<a href="javascript:;" class="form_name_close">关闭</a>
 			</div>
