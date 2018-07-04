@@ -168,7 +168,7 @@ class ItemsController extends Controller
     public function tickets_list(Request $request)
     {
         session_start();
-        $store_id = $_SESSION['store_id'];
+        $store_id = $request->store_id;
         $store = Store::find($store_id);
 
 

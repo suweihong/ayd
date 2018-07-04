@@ -9,7 +9,7 @@
 	@include('_messages')
 	@include('store._first',['shadow'=>2,'store_id'=>$store->id])
 	@include('store._third',['shadow'=>2,'store'=>$store,'sale'=>2,'type_id'=>$type_id])
-	@include('store._fourth',['shadow'=>1,'store_id'=>$store->id,'switch'=>0,'now'=>$now,'type_id=>$type_id','date'=>1])
+	@include('store._fourth',['shadow'=>1,'store_id'=>$store->id,'switch'=>0,'now'=>$now,'type_id=>$type_id','date'=>1,'store_id'=>$store->id])
 	
 	<table class="table_btn">
 		<tr>
@@ -55,6 +55,7 @@
 				'_token' : '{{csrf_token()}}',
 				'arr' : arr,
 				'date' : sessionStorage.getItem("data"),
+				
 			},
 			success : function(data)
 			{

@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Support\Facades\Hash;
 
 use App\Models\MpUser;
 use App\Models\Store;
@@ -30,8 +29,9 @@ class MpuserController extends Controller
     public function create(Request $request)
     {
         session_start();
-        $store_id = $_SESSION['store_id'];
-       $store = Store::find($store_id);
+        // $store_id = $_SESSION['store_id'];
+        $store_id = $request->store_id;
+        $store = Store::find($store_id);
         return view('store.admin',compact('store'));
     }
 
@@ -43,25 +43,40 @@ class MpuserController extends Controller
      */
     public function store(Request $request)
     {
-
-        if(!$request->account || !$request->password){
+        $mp_user = MpUser::where('account',$request->account)->get();
+        if(!$mp_user->isEmpty()){
+            return back()->with('warning','管理员已经存在');
+        }else{
+            if(!$request->account || !$request->password){
         
             // session()->flash('warning','请填写完整内容');
             // return redirect('mpusers/create?store_id='.$store_id);
-            return back()->withInput()->with('warning','请填写完整内容');
-        }else{
-
-            $mp_user = MpUser::create([
-                'store_id' => $request->store_id,
-                'account' => $request->account,
-                'password' => Crypt::encrypt($request->password),
-                ]);
-            if($mp_user){             
-                 return back()->withInput()->with('warning','管理员设置成功');
+                return back()->withInput()->with('warning','请填写完整内容');
             }else{
-                 return back()->withInput()->with('warning','管理员设置成功');
+                $regex = "/^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0-9]))\\d{8}$/";
+                if(preg_match($regex,$request->account)){
+                    if(preg_match("/^[\d]{6}$/",$request->password)){
+                         $mp_user = MpUser::create([
+                            'store_id' => $request->store_id,
+                            'account' => $request->account,
+                            'password' => Hash::make($request->password),
+                        ]);
+                         if($mp_user){   
+                            return back()->withInput()->with('success','管理员设置成功');
+                         }else{
+                            return back()->withInput()->with('warning','管理员设置失败');
+                         }
+                    }else{
+                        return back()->withInput()->with('warning','请输入6位数字');
+                    }
+                }else{
+                    return back()->withInput()->with('warning','请输入正确的手机号');
+                }
+               
+               
             }
         }
+        
         
     }
 
@@ -98,22 +113,29 @@ class MpuserController extends Controller
     {
 
         //重置密码为12345
-        $mp_user = MpUser::find($id);
-        $request->password = '123456';
-        $res = $mp_user-> update([
-                'password' => Crypt::encrypt($request->password),
-            ]);
-        if($res){
-            return response()->json([
-                                'errcode'=> '1',
-                                'errmsg'=> '管理员密码重置成功',
-                                ], 200);
+        if($id == 'aaa'){
+             return response()->json([
+                                    'errcode'=> '2',
+                                    'errmsg'=> '请先设置管理员',
+                                    ], 200);
         }else{
-            return response()->json([
-                            'errcode'=> '2',
-                            'errmsg'=> '管理员密码重置失败',
-                            ], 200);
+            $mp_user = MpUser::find($id);
+            $res = $mp_user-> update([
+                    'password' => Hash::make('123456'),
+                ]);
+            if($res){
+                return response()->json([
+                                    'errcode'=> '1',
+                                    'errmsg'=> '管理员密码重置成功',
+                                    ], 200);
+            }else{
+                return response()->json([
+                                'errcode'=> '2',
+                                'errmsg'=> '管理员密码重置失败',
+                                ], 200);
+            }
         }
+        
     }
 
     /**

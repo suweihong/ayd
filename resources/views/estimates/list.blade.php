@@ -33,8 +33,8 @@
 					</div>
 					<div class="laiyuan">
 						<p class="source">评价来源</p>
-						<p>商家: <a href="javascript:;">{{$estimate->store->title}}</a></p>
-						<p>订单: <a href="javascript:;">123123</a></p>
+						<p>商家: <a href="{{route('estimates.index')}}?store_id={{$estimate->store->id}}">{{$estimate->store->title}}</a></p>
+						<p>订单: <a href="{{route('orders.show',$estimate->order_id)}}">{{$estimate->order_id}}</a></p>
 						<p class="evatime">评价时间:  {{$estimate->created_at}}</p>
 					</div>
 				</div>

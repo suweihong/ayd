@@ -7,7 +7,7 @@
 	<div class="con_right storesale">
 		@include('store._first',['shadow'=>2,'store_id'=>$store->id])
 		@include('store._third',['shadow'=>3,'store'=>$store,'sale'=>4,'type_id'=>$type_id])
-		@include('store._fourth',['shadow'=>2,'switch'=>1,'now'=>$now,'type_id'=>$type_id,'date'=>1])
+		@include('store._fourth',['shadow'=>2,'switch'=>1,'now'=>$now,'type_id'=>$type_id,'date'=>1,'store_id'=>$store->id])
 		<table class="table_btn">
 		    <tr>
 				<th class="none"></th>
@@ -19,7 +19,7 @@
 					@endif
 				<?php endforeach ?>
 			</tr>
-			<?php foreach ($prices as $key => $price): ?>
+			@foreach ($prices as $key => $price)
 				<tr>
 					<td>{{$key}}:00-{{$key+1}}:00</td>
 					@foreach($price as $value)
@@ -28,7 +28,7 @@
 						/></td>
 					@endforeach
 				</tr>
-			<?php endforeach ?>
+			@endforeach
 		</table>
 		<div class="swichbox">
 			<p class="swichi_p1"></p>

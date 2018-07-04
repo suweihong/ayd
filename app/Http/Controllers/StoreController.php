@@ -142,41 +142,48 @@ class StoreController extends Controller
      */
     public function update(Request $request, Store $store)
     {
-    
         $time = now();
         $store_imgs = [];
         $imgs = ['1223','43423','34534'];
 
-        if(!$request->title || !$request->address || !$request->map || !$request->phone || $request->introduce){
+        if(!$request->title || !$request->address || !$request->map || !$request->phone || !$request->introduction){
             return back()->withInput()->with('warning','请填写完整内容');
 
         }else{
              //修改店铺基本信息
-        $store->update([
-            // 'neighbourhood_id' => $request->neighbourhood_id,
-            'title' => $request->title,
-            'address' => $request->address,
-            'map_url' => $request->map,
-            'phone' => $request->phone,
-            'logo' => $request->logo,
-            'introduction' => $request->introduction,
-            ]);
+            $store->update([
+                // 'neighbourhood_id' => $request->neighbourhood_id,
+                'title' => $request->title,
+                'address' => $request->address,
+                'map_url' => $request->map,
+                'phone' => $request->phone,
+                'logo' => $request->logo,
+                'introduction' => $request->introduction,
+                ]);
 
-        //修改店内实拍图
-        foreach ($imgs as $key => $img) {
-           $store_imgs[$key]['store_id'] = $store->id;
-           $store_imgs[$key]['img'] = $img;
-           $store_imgs[$key]['created_at'] = $time;
-        }
-        $store_imgs = Store_img::insert($store_imgs);
+            //修改店内实拍图
+            $imgss = $store->imgs;
+            if(!$imgss->isEmpty()){
+                foreach($imgss as $img){
+                    $img->delete();
+                }
+            }
+            foreach ($imgs as $key => $img) {
+               $store_imgs[$key]['store_id'] = $store->id;
+               $store_imgs[$key]['img'] = $img;
+               $store_imgs[$key]['created_at'] = $time;
+            }
+       
+            $store_imgs = Store_img::insert($store_imgs);
 
-        if($store_imgs){
-           session()->flash('success','修改成功');
-           return redirect(route('stores.index'));
-        }else{
-           session()->flash('warning','修改失败');
-           return redirect(route('stores.edit',$store->id));
-        }
+            if($store_imgs){
+               session()->flash('success','修改成功');
+               return redirect(route('stores.index'));
+            }else{
+                session()->flash('warning','修改失败');
+                return redirect(route('stores.edit',$store->id));
+            }
+             
         }
 
        

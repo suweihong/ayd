@@ -19,7 +19,7 @@ class FieldsController extends Controller
     public function index(Request $request)
     {
         session_start();
-        $store_id = $_SESSION['store_id'];
+        $store_id = $request->store_id;
         $store = Store::find($store_id);
         $type_id = $request->type_id;
         $item_id = $request->item_id ?? 1;
@@ -76,7 +76,8 @@ class FieldsController extends Controller
     public function create(Request $request)
     {
         session_start();
-        $store_id = $_SESSION['store_id'];
+        // $store_id = $_SESSION['store_id'];
+        $store_id = $request->store_id;
         $store = Store::find($store_id);
 
         $type_id = $request->type_id;
@@ -176,7 +177,8 @@ class FieldsController extends Controller
     {
 
         session_start();
-        $store_id = $_SESSION['store_id'];
+        // $store_id = $_SESSION['store_id'];
+        $store_id = $request->store_id;
         $store = Store::find($store_id);
   
         $type_id = $request->type_id;
@@ -279,7 +281,7 @@ class FieldsController extends Controller
     public function show(Request $request,$id)
     {
         session_start();
-        $store_id = $_SESSION['store_id'];
+        $store_id = $request->store_id;
         $store = Store::find($store_id);
 
         $type_id = $request->type_id;
@@ -327,7 +329,7 @@ class FieldsController extends Controller
     public function switch_date(Request $request)
     {
         session_start();
-        $store_id = $_SESSION['store_id'];
+        $store_id = $request->store_id;
         $store = Store::find($store_id);
   
         $type_id = $request->type_id;
@@ -487,10 +489,11 @@ class FieldsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //删除场地
     public function destroy(Request $request,$id)
     {
         $place = Place::find($id);
-        $place -> delete();
+        $place->delete();
         return 1;
     }
 }
