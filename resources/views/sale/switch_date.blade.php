@@ -23,7 +23,7 @@
 				<tr>
 					<td>{{$key}}:00-{{$key+1}}:00</td>
 					@foreach($price as $value)
-						<td onclick="dateSwitchClick({{$value}},{{$value->id}})"><input type="text" id="{{$value->id}}" value="{{$value->price}}" maxlength="8" disabled="disabled" @if($value->switch == '')class="table_btn_num bsck_fff" @elseif($value->switch == 2) class="table_btn_num bsck_green"
+						<td onclick="dateSwitchClick({{$value}},{{$value->id}})"><input type="text" id="{{$value->id}}" value="{{$value->price}}" maxlength="8" disabled="disabled" @if($value->switch == '' || $value->switch == 3)class="table_btn_num bsck_fff" @elseif($value->switch == 2) class="table_btn_num bsck_green"
 						@elseif($value->switch == 1) class="table_btn_num bsck_black"  @endif
 						/></td>
 					@endforeach
@@ -52,7 +52,6 @@
 		}
 		//修改场地状态
 		function dateSwitchClick(field,id){
-			// console.log(type_id)
 			$.ajax({
 				url: '/fields/'+id+'/edit',
 				type: 'GET',
@@ -64,10 +63,11 @@
 					console.log(data);
 					if(data == ''){
 						$('#'+id).removeClass('bsck_black').addClass('bsck_fff')
-					}else if(data == 1){
+					}else if(data == 1 ){
 						$('#'+id).addClass('bsck_black').removeClass('bsck_fff')
 					}else{
-						location.href = "{{route('orders.show',1)}}";
+						alert(333);
+					// 	{{-- // location.href = "{{route('orders.show',1)}}";  --}}
 					}
 				}
 			})

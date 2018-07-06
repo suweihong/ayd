@@ -138,6 +138,7 @@ class ItemsController extends Controller
                 'price' => $request->price,
                 'intro' => $request->intro,
                 'rule' => $request->rule,
+                'item_id' => 2,
              ]);
             }
             
@@ -188,7 +189,7 @@ class ItemsController extends Controller
             }
         }
         //读取所有票卡
-        $tickets = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('date',null)->where('week',null)->orderBy('created_at','asc')->get();
+        $tickets = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('item_id',2)->orderBy('created_at','asc')->get();
         return view('sale.ticket',compact('store','type_id','types','tickets'));
     }
     public function edit($id)

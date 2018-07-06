@@ -14,6 +14,7 @@ use App\Models\OrderStatus;
 use App\Models\Payment;
 use App\Models\Store;
 use App\Models\Client;
+use App\Models\Bill;
 
 class OrderController extends Controller
 {
@@ -285,7 +286,7 @@ class OrderController extends Controller
         $orders = Order::find($id);
         $fields = $orders->fields()->get();
         dump($fields);
-        return view('orders.show',compact('orders'));
+        return view('orders.show',compact('orders','fields'));
     }
 
     /**
@@ -307,9 +308,58 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    //协助核销订单
+    public function update(Request $request, Order $order)
     {
-        
+        $month_start = date('Y-m-01',time()); //本月的一号
+
+        if($order->status_id == 1){
+            return response()->json([
+                'errcode' => '2',
+                'errmsg' => '该订单已经被核销,不能再进行此操作'
+            ],200);
+        }else{
+             if($order->status_id != 3){
+                //订单状态不是 已完成
+                 return response()->json([
+                    'errcode' => '2',
+                    'errmsg' => '该订单还未完成，不能进行此操作'
+                 ],200);
+            }else{
+
+                    //创建订单的最新状态
+                OrderStatus::create([
+                    'order_id' => $order->id,
+                    'status_id' => 1,
+                    'store_id' => $order->store_id,
+                ]);
+                    //修改订单的状态
+               $res = $order->update([
+                    'status_id' => '1',
+                ]); 
+                    //修改账单
+                $store_id = $order->store_id;
+                $bill = Bill::where('store_id',$store_id)->where('time_start',$month_start)->first();
+                $bill->update([
+                    'total' => $bill->total + $order->total,
+                    'collection' => $bill->collection + $order->collection,
+                    'balance' => $bill->balance + $order->balance,    
+                ]);
+
+                if($res){
+                    return response()->json([
+                        'errcode' => '1',
+                        'errmsg' => '订单核销成功'
+                    ],200);
+                }else{
+                   return response()->json([
+                        'errcode' => '2',
+                        'errmsg' => '订单核销失败'
+                    ],200);
+                }
+
+            }            
+        }
     }
 
     /**

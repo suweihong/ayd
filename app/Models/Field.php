@@ -10,7 +10,7 @@ class Field extends Model
 {
     //
     	use SoftDeletes;
-        protected $fillable = ['type_id','store_id','week','time','place_id','date','price','switch','name','rule','intro'];
+        protected $fillable = ['type_id','store_id','week','time','place_id','date','price','switch','name','rule','intro','item_id'];
 
     	//该商品所属类型
     	public function type()
@@ -27,14 +27,13 @@ class Field extends Model
     	//该商品所属的商家
     	public  function store()
     	{
-    		return $this->belongsToMany('App\Models\Store');
+    		return $this->belongsTo('App\Models\Store');
     		
     	}
 
         //该商品所属订单
-        public function orders()
+         public function order()
         {
-            return $this->belongsToMany('App\Models\Order');
+            return $this->belongsTo('App\Models\Order');
         }
-
 }

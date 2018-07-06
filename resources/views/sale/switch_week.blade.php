@@ -67,12 +67,13 @@
 				url: '/fields/'+id+'/edit',
 				type: 'GET',
 				success : function(data){
+					console.log(data)
 					if(data == ''){
 						$('#'+id).removeClass('bsck_black').addClass('bsck_fff')
 					}else if(data == 1){
 						$('#'+id).addClass('bsck_black').removeClass('bsck_fff')
 					}else{
-						location.href = "{{route('orders.show',1)}}";
+						location.href = "{{route('orders.show',1)}}"; 
 					}
 				}
 			})
