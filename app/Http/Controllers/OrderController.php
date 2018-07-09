@@ -285,7 +285,12 @@ class OrderController extends Controller
         session_start();
         $orders = Order::find($id);
         $fields = $orders->fields()->get();
-        dump($fields);
+        foreach ($fields as $key => $field) {
+           $time = $field->pivot->time;
+           $place_num = $field->pivot->place_num;
+           $field['time'] = $time;
+           $field['place_num'] = $place_num;
+        }
         return view('orders.show',compact('orders','fields'));
     }
 

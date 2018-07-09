@@ -8,7 +8,7 @@
 		<h1 class="in_title">订单详情</h1>
 		<p class="order_details">订单号：{{$orders->id}}</p>
 		<p class="order_details">场馆：{{$orders->store->title}}</p>
-		<p class="order_details">订单信息：{{$orders->date->format('Y年m月d日')}}@foreach($fields as $field)场地{{$field->place_num}}（13：00-14：00）@endforeach</p>
+		<p class="order_details">订单信息：{{$orders->date->format('Y年m月d日')}}@foreach($fields as $field)场地{{$field->place_num}}（{{$field->time}}：00-{{$field->time + 1}}：00）@endforeach</p>
 		<p class="order_details">购买人: {{$orders->client->nick_name}}</p>
 		<p class="order_details">联系电话：{{$orders->phone}}</p>
 		<p class="order_details">订单状态：{{$orders->new_status()->name}}</p>

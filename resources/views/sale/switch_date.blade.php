@@ -66,8 +66,7 @@
 					}else if(data == 1 ){
 						$('#'+id).addClass('bsck_black').removeClass('bsck_fff')
 					}else{
-						alert(333);
-					// 	{{-- // location.href = "{{route('orders.show',1)}}";  --}}
+					 location.href = "/orders/"+data;
 					}
 				}
 			})
