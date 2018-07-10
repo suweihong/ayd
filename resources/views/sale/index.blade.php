@@ -44,6 +44,7 @@
 					'_token':'{{csrf_token()}}',
 				},
 				success : function(data){
+					console.log(data)
 					$('#'+$('.message_del').attr('data_id')).remove()
 				}
 			})

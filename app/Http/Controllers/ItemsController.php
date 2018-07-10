@@ -35,7 +35,7 @@ class ItemsController extends Controller
                 $store_type->save();
                 $places = $store->places()->where('type_id',$request->type_id)->orderBy('id','asc')->get();
                if($places->isEmpty()){
-                    return back()->withInput()->with('warning','请先添加场地');
+                    return back()->withInput()->with('success','营业时间设置成功，您可添加场地');
                }else{
 
                     $new_start = (int)substr($request->start_time,0,strrpos($request->start_time,':')); 
@@ -64,6 +64,7 @@ class ItemsController extends Controller
                                $fields[$key][$ke][$k]['store_id'] = $store_id;
                                $fields[$key][$ke][$k]['type_id'] = $request->type_id;
                                 $fields[$key][$ke][$k]['price'] = 9999;
+                                $fields[$key][$ke][$k]['item_id'] = 1;
 
                            }
                         }
