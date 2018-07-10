@@ -19,7 +19,7 @@
 				</div>
 			@endforeach
 		</div>
-			{{ $estimates->render() }}
+			{{ $estimates->appends(['store_id'=>$store->id])->render() }}
 	</div>
 
 @stop

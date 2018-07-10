@@ -8,6 +8,9 @@ use App\Models\Store;
 use App\Models\Store_img;
 use App\Models\Type;
 
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+
 
 class StoreController extends Controller
 {
@@ -19,6 +22,17 @@ class StoreController extends Controller
     public function index(Request $request)
     {
         session_start();
+            //手动分页
+        $perPage = 10;//每页多少条数据
+        if ($request->has('page')) {
+            $current_page = $request->input('page');
+            $current_page = $current_page <= 0 ? 1 :$current_page;
+          }else {
+            $current_page = 1;
+          }
+        $offset = ( $current_page - 1 ) * $perPage;//偏移量
+
+
         $type_id = $request->type_id;//运动品类
         $search_name = $request->search_name; //搜索的名称
         $store_type = $request->store_type; //店铺 锁定 或 正常
@@ -30,14 +44,29 @@ class StoreController extends Controller
 
                 $type = Type::where('name',$search_name)->first();//获取该名称的 运动品类
                 if($type){
-                    $stores = $type->stores()->where('switch',$store_type)->distinct('store_id')->paginate(2);
+            
+                    $stores = $type->stores()->where('switch',$store_type)->get()->unique();
+                   
+
                 }else{
                      session()->flash('warning','没有该运动品类');
                     return redirect('/stores');
                 }
         }else{
-            $stores = Store::orderBy('created_at','asc')->paginate(10);
+
+            $stores = Store::orderBy('created_at','asc')->get();
         }
+
+                //分割集合
+        $item = $stores->slice($offset, $perPage);
+        $total = $stores->count();//统计
+        //分页类
+        $stores  = new LengthAwarePaginator($item, $total, $perPage,$current_page, [
+             'path' => Paginator::resolveCurrentPath(),
+             'pageName' => 'page',
+        ]);
+
+            //每家店的运动品类
          foreach ($stores as $key => $store) {
                     $types = $store->types()->get();
                     foreach ($types as $k => $value) {
@@ -45,6 +74,7 @@ class StoreController extends Controller
                     }
             }
 
+            
         return view('store.index',compact('stores','types_stores','search_name','store_type'));
 
     }

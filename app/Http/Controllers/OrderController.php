@@ -237,14 +237,14 @@ class OrderController extends Controller
     		if($date == ''){
     			return back()->withInput()->with('warning','请填写完整的搜索信息');
     		}elseif($type_id == 0){
-    			$orders = Order::where('store_id',$store_id)->where('status_id',$status_id)->whereBetween('updated_at',[$date[0],$date[1]])->paginate(1);
+    			$orders = Order::where('store_id',$store_id)->where('status_id',$status_id)->whereBetween('updated_at',[$date[0],$date[1]])->paginate(10);
     		}else{
-    			$orders = Order::where('store_id',$store_id)->where('status_id',$status_id)->where('type_id',$type_id)->whereBetween('updated_at',[$date[0],$date[1]])->paginate(1);
+    			$orders = Order::where('store_id',$store_id)->where('status_id',$status_id)->where('type_id',$type_id)->whereBetween('updated_at',[$date[0],$date[1]])->paginate(10);
     		}
     		$date = implode(' - ',$date);
     	}else{
     		$search = 3;
-    		$orders = Order::where('store_id',$store_id)->orderBy('created_at','desc')->paginate(1);
+    		$orders = Order::where('store_id',$store_id)->orderBy('created_at','desc')->paginate(10);
     	}
     	
     	return view('orders.shop',compact('stores','types','orders','store','status_list','now','search','date','status_id','type_id','store_id'));

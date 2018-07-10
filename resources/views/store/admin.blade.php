@@ -23,7 +23,7 @@
 
 				
 				@if($store->mp_user)	
-					<input type="password" class="form_name_ipt"  placeholder="******" name="password"  value="{{ old('password') }}">
+					<input type="password" class="form_name_ipt"  placeholder="******" name="password"  disabled="disabled" value="{{ old('password') }}">
 					<u style="color: #30a5ff;cursor: pointer;" onclick="rePassword({{$store->mp_user->id}})">重置为：1235456</u>
 				@else
 					<input type="password" class="form_name_ipt"  placeholder="请输入6位数字" name="password"  value="{{ old('password') }}">

@@ -33,6 +33,7 @@ class EstimatesController extends Controller
             //指定商家的 评价
             $store_id = $request->store_id;
             $store = Store::find($store_id);
+            dump($store_id);
             $estimate_list = $store->estimates;
             $estimates = $store->estimates()->orderBy('created_at','desc')->paginate(1);
 

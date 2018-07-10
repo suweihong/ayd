@@ -419,6 +419,7 @@ class FieldsController extends Controller
     //修改 场地 开关状态
     public function edit(Request $request,$id)
     {
+
         $now = date('Y-m-d 00:00:00',time());
         $date = $request->date;
         if($date){
@@ -438,6 +439,7 @@ class FieldsController extends Controller
             }else{
               $switch = 2;
               $order = $field->order()->where('order_date','>=',$now)->first();
+
               return $order->id;
               // $order = Order::find(1);
               // $field = $order->fields()->get();
@@ -461,6 +463,7 @@ class FieldsController extends Controller
                 'item_id' => 1,
                 ]);
             }
+
             return $switch;
           }else{
             $fields = Field::find($id);
@@ -472,6 +475,8 @@ class FieldsController extends Controller
                 $new_switch = '';
             }else{
                 $new_switch = 2;
+                $order = $fields->order()->where('order_date','>=',$now)->first();
+                return $order->id;
             }
             $fields->switch = $new_switch;
             $fields->save();
