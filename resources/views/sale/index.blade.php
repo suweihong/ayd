@@ -45,7 +45,8 @@
 				},
 				success : function(data){
 					console.log(data)
-					$('#'+$('.message_del').attr('data_id')).remove()
+					// $('#'+$('.message_del').attr('data_id')).remove()
+					location.reload();
 				}
 			})
 		})

@@ -9,7 +9,7 @@ use App\Models\Place;
 use App\Models\StoreType;
 use App\Models\Field;
 
-use App\Models\Order;
+
 
 
 class FieldsController extends Controller
@@ -492,9 +492,6 @@ class FieldsController extends Controller
               $order = $field->order()->where('order_date','>=',$now)->first();
 
               return $order->id;
-              // $order = Order::find(1);
-              // $field = $order->fields()->get();
-              // return $field;
              
             }
 
@@ -560,8 +557,8 @@ class FieldsController extends Controller
     public function destroy(Request $request,$id)
     {
       $place = Place::find($id);
-      $place->delete();
-      $place->fields()->delete();
+      $place->delete();//删除场地
+      $place->fields()->delete();//删除场地对应的商品
       return 1;
     }
 }

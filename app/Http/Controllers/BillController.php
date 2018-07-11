@@ -36,9 +36,11 @@ class BillController extends Controller
             $bill_month = date('Y-m-01',strtotime($bill_date));//要查询的 账单时间是 哪个月
             if($store_id == 0){
                 $bills = Bill::where('time_start',$bill_month)->where('updated_at','>=',$date_start)->where('updated_at','<=',$date_end)->where('balance','>=',$balance_start)->where('balance','<=',$balance_end)->where('check_id',7)->orderBy('balance','desc')->paginate(5);
-
+            
             }else{
+                
                 $bills = Bill::where('time_start',$bill_month)->where('updated_at','>=',$date_start)->where('updated_at','<=',$date_end)->where('balance','>=',$balance_start)->where('balance','<=',$balance_end)->where('store_id',$store_id)->where('check_id',7)->orderBy('balance','desc')->paginate(5);
+               
             }
             
         }else{

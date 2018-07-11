@@ -17,9 +17,9 @@ class ComplaintController extends Controller
     {
         session_start();
        if($type == 1){
-        $complaints = Complaint::where('client_id',null)->paginate(1);
+        $complaints = Complaint::where('client_id',null)->paginate(3);
        }else{
-        $complaints = Complaint::where('mp_user_id',null)->paginate(1);
+        $complaints = Complaint::where('mp_user_id',null)->paginate(3);
        }
        return view('complaints.index',compact('complaints','type'));
     }

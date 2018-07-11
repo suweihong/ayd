@@ -16,9 +16,9 @@
 		      <th>标题</th>
 		      <th>操作</th>
 		    </tr>
-		    @foreach($notices as $notice)
+		    @foreach($notices as $key=>$notice)
 				<tr>
-	    			<td>{{$notice->id}}</td>
+	    			<td>{{$key+1}}</td>
 	    			<td>{{$notice->title}}</td>
 	    			<td>
 	    				<a href="javascript:;" class="ben_notice" onclick="btnClick({{$notice->id}})">删除</a>
