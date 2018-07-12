@@ -91,7 +91,7 @@ class OrderController extends Controller
     	}else{  
         	$search = 2;
         	$state = 1000;
-        	$orders = Order::orderBy('created_at','desc')->paginate(1);
+        	$orders = Order::orderBy('created_at','desc')->paginate(5);
      
 		}
     	return view('orders.index',compact('orders','types','status_list','now','payment','search','state','status','type_id','pay_id','order_id','date'));

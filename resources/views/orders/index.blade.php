@@ -68,12 +68,17 @@
 			@foreach ($orders as $key => $order)
 				<tr>
 				    <td>{{$key+1}}</td>
-				        <td>{{$order->id}}</td>
-				        <td>{{$order->total}}</td>
-				        <td>{{$order->store->title}}【{{$order->type->name}}】</td>
-				        <td>{{$order->client->nick_name}}</td>
+				    <td>{{$order->id}}</td>
+				    <td>{{$order->total}}</td>
+				    <td>{{$order->store->title}}【{{$order->type->name}}】</td>
+				    @if($order->client)
+				    	<td>{{$order->client->nick_name}}</td>
+				    @else
+				    	<td></td>
+				    @endif
+				    
 				    <td>{{$order->created_at}}</td>
-				         <td>{{$order->new_status()->name}}</td>
+				    <td>{{$order->new_status()->name}}</td>
 				    <td><a href="{{route('orders.show',$order->id)}}">查看详情</a></td>
 			    </tr>
 			@endforeach 

@@ -16,7 +16,7 @@ class TypeController extends Controller
     public function index(Request $request)
     {
         session_start();
-        $types = Type::orderBy('created_at','asc')->paginate(10);
+        $types = Type::orderBy('created_at','asc')->paginate(5);
        return view('type.index',compact('types'));
     }
 
@@ -55,7 +55,7 @@ class TypeController extends Controller
                 Type::create([
                 'name' => $request->type,
             ]);
-                session()->flash('warning','添加成功');
+                session()->flash('success','添加成功');
                 return redirect('/types');
             }
             
