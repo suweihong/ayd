@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\Controller;
 use Excel;
@@ -317,6 +318,7 @@ class OrderController extends Controller
     public function update(Request $request, Order $order)
     {
         $month_start = date('Y-m-01',time()); //本月的一号
+        $store_id = $order->store_id;
 
         if($order->status_id == 1){
             return response()->json([
@@ -332,39 +334,77 @@ class OrderController extends Controller
                  ],200);
             }else{
 
+                  //核销订单
+                    
+                //开启事务
+                DB::beginTransaction();
                     //创建订单的最新状态
-                OrderStatus::create([
+                $order_status = OrderStatus::create([
                     'order_id' => $order->id,
                     'status_id' => 1,
                     'store_id' => $order->store_id,
                 ]);
+
+                if(!$order_status){
+                        DB::rollBack();
+                        return response()->json([
+                            'errcode' => 2,
+                            'errmsg' => '核销订单失败',
+                        ],200);
+                    }
+
                     //修改订单的状态
-               $res = $order->update([
+                $order_update = $order->update([
                     'status_id' => '1',
                 ]); 
+
+                if(!$order_update){
+                        DB::rollBack();
+                        return response()->json([
+                            'errcode' => 2,
+                            'errmsg' => '核销订单失败',
+                        ],200);
+                    }
                     //修改账单
-                $store_id = $order->store_id;
+               
                 $bill = Bill::where('store_id',$store_id)->where('time_start',$month_start)->first();
-                $bill->update([
+                $new_bill = $bill->update([
                     'total' => $bill->total + $order->total,
                     'collection' => $bill->collection + $order->collection,
                     'balance' => $bill->balance + $order->balance,    
                 ]);
+                if(!$new_bill){
+                        DB::rollBack();
+                        return response()->json([
+                           'errcode' => 2,
+                           'errmsg' => '核销订单失败', 
+                        ],200);
+                    }
 
-                if($res){
-                    return response()->json([
-                        'errcode' => '1',
-                        'errmsg' => '订单核销成功'
-                    ],200);
-                }else{
-                   return response()->json([
-                        'errcode' => '2',
-                        'errmsg' => '订单核销失败'
-                    ],200);
-                }
+               $fields = $order->fields()->get();//该订单包含的商品
+                        //修改商品的状态为 正常
+                    foreach ($fields as $key => $field) {
+                        $res = $field->update([
+                            'switch' => '',
+                        ]);
+                        if(!$res){
+                            DB::rollBack();
+                            return response()->json([
+                                'errcode' => 2,
+                                'errmsg' => '核销订单失败', 
+                            ],200);
+                        }
+                    }
+
+                    //提交事务
+                    DB::commit(); 
 
             }            
         }
+        return response()->json([
+                'errcode' => '1',
+                'errmsg' => '订单核销成功'
+             ],200);
     }
 
     /**

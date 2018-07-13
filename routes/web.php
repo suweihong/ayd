@@ -45,7 +45,6 @@ Route::resource('items','ItemsController');//添加运动场地和品类
 Route::get('/tickets/list','ItemsController@tickets_list');//票卡类列表
 Route::resource('estimates','EstimatesController');//评价
 Route::resource('fields','FieldsController');//商品
-Route::resource('tickets','TicketsController');//票卡类
 Route::get('/price/date','FieldsController@price_date'); //按日期配置价格的页面
 Route::post('/price/update','FieldsController@update_price');//修改场地价格
 Route::get('/switch/date','FieldsController@switch_date'); //按日期开关场地的页面

@@ -211,12 +211,12 @@ class ItemsController extends Controller
         $ticket = Field::find($id);
         if($ticket->switch == ''){
             $ticket->update([
-                'switch' => '1',
+                'switch' => '1',//停止销售
                 ]);
              return 1;
         }else{
             $ticket->update([
-                'switch' => '',
+                'switch' => '',//正常销售
                 ]);
             return 2;
         }
