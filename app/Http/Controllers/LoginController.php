@@ -64,11 +64,12 @@ class LoginController extends Controller
     {
           $user = Auth::user();
           //最后一次登录时间 存到session
-           session_start();
+          session_start();
+          $_SESSION['last_time']=$user->last_time;
+          isset($PHPSESSID)?session_id($PHPSESSID):$PHPSESSID = session_id();
            $time=1*51840000;
           setcookie(session_name(),session_id(),time()+$time,"/");
-          $_SESSION['last_time']=$user->last_time;
-        
+
           //消息动态 最近一个月的
           $today = date('Y-m-d H:i:s');
           $date = date('Y-m-d H:i:s',strtotime('today') - 2592000);

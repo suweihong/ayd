@@ -24,15 +24,15 @@
 			<table class="table_btn">
 			    <tr>
 					<th class="none"></th>
-					<?php foreach ($prices as $key => $price): ?>
+					@foreach ($prices as $key => $price)
 						@if($key == $start_time)
 							@foreach($price as $v)
 								<th>场地{{$loop->iteration}}{{$v->place_id}}</th>
 							@endforeach
 						@endif
-					<?php endforeach ?>
+					@endforeach
 				</tr>
-				<?php foreach ($prices as $key => $price): ?>
+				@foreach ($prices as $key => $price)
 					<tr>
 						<td>{{$key}}:00-{{$key+1}}:00</td>
 						@foreach($price as $value)
@@ -41,7 +41,7 @@
 							/></td>
 						@endforeach
 					</tr>
-				<?php endforeach ?>
+				@endforeach
 			</table>
 			<div class="swichbox">
 				<p class="swichi_p1"></p>

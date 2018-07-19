@@ -79,7 +79,6 @@ class FieldsController extends Controller
     public function create(Request $request)
     {
         session_start();
-        // $store_id = $_SESSION['store_id'];
         $store_id = $request->store_id;
         $store = Store::find($store_id);
 
