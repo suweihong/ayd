@@ -36,10 +36,6 @@ Route::get('shop/orders','OrderController@shop_orders');// 按商家查找
 Route::resource('stores','StoreController');//店铺
 Route::resource('mpusers','MpuserController');//店主
 Route::resource('staffs','StaffController');//店铺员工
-Route::any('staff/information','StaffController@serve');//获取微信 用户信息
-Route::group(['middleware' => ['wechat.oauth:default,snsapi_userinfo']], function () {
-    Route::any('/user','StaffController@serve');
-});
 Route::resource('types','TypeController');//体育品类
 Route::resource('items','ItemsController');//添加运动场地和品类
 Route::get('/tickets/list','ItemsController@tickets_list');//票卡类列表
