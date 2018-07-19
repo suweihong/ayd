@@ -11,6 +11,7 @@
 	<link href="/font/iconfont.css" type="text/css" media="screen" rel="stylesheet"/>
 	<script src="/js/laydate/laydate.js"></script>
 	<script src="/js/jquery-2.1.3.min.js"></script>
+	<script src="/js/ajaxfileupload.js"></script>
 	<script src="http://cdn.staticfile.org/webuploader/0.1.0/webuploader.min.js"></script>
 </head>
 <body>

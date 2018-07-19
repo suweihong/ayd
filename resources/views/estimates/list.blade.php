@@ -20,6 +20,7 @@
 						<span>{{$estimate->client->nick_name}} </span>
 						<span class="evaluatenum">{{$estimate->average}}分</span>
 						<p class="evalua">{{$estimate->content}}</p>
+						<div class="div_evalua_btn">
 						@if($estimate->check_id == 6)
 							<a href="javascript:;" class="pass">审核通过</a>
 						@elseif($estimate->check_id == 5)
@@ -30,6 +31,7 @@
 						@endif
 						<a href="javascript:;" class="delete" 
 						onclick="btnClick({{$estimate->id}})">删除</a>
+						</div>
 					</div>
 					<div class="laiyuan">
 						<p class="source">评价来源</p>
