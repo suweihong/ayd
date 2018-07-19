@@ -31,16 +31,17 @@ class EstimatesController extends Controller
 
         }else{
             //指定商家的 评价
-            $store_id = $_SESSION['store_id'];
+            $store_id = $request->store_id;
             $store = Store::find($store_id);
-            $estimate_list = $store->estimates();
-            $estimates = $estimate_list->orderBy('created_at','desc')->paginate(2);
+            dump($store_id);
+            $estimate_list = $store->estimates;
+            $estimates = $store->estimates()->orderBy('created_at','desc')->paginate(1);
 
-           $environment = $estimate_list->pluck('environment')->avg();
+           $environment = floor($estimate_list->pluck('environment')->avg() * 100)/100;
 
-           $service = $estimate_list->pluck('service')->avg();
+           $service = floor($estimate_list->pluck('service')->avg() * 100)/100;
 
-           $average = $estimate_list->pluck('average')->avg();
+           $average = floor($estimate_list->pluck('average')->avg() * 100)/100;
             return view('estimates.index',compact('store','estimates','environment','service','average'));
         }
 

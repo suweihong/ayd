@@ -26,7 +26,7 @@
 		    </tr>
 			@foreach($complaints as $key => $complaint)
 	    		<tr>
-	    			<td>{{$complaint->id}}</td>
+	    			<td>{{$key+1}}</td>
 	    			@if($type == 1)
 	    				<td>{{$complaint->store->title}}</td>
 	    			@else

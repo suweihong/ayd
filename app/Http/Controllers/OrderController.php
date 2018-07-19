@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\Controller;
 use Excel;
@@ -14,6 +15,7 @@ use App\Models\OrderStatus;
 use App\Models\Payment;
 use App\Models\Store;
 use App\Models\Client;
+use App\Models\Bill;
 
 class OrderController extends Controller
 {
@@ -90,7 +92,7 @@ class OrderController extends Controller
     	}else{  
         	$search = 2;
         	$state = 1000;
-        	$orders = Order::orderBy('created_at','desc')->paginate(1);
+        	$orders = Order::orderBy('created_at','desc')->paginate(5);
      
 		}
     	return view('orders.index',compact('orders','types','status_list','now','payment','search','state','status','type_id','pay_id','order_id','date'));
@@ -236,14 +238,14 @@ class OrderController extends Controller
     		if($date == ''){
     			return back()->withInput()->with('warning','请填写完整的搜索信息');
     		}elseif($type_id == 0){
-    			$orders = Order::where('store_id',$store_id)->where('status_id',$status_id)->whereBetween('updated_at',[$date[0],$date[1]])->paginate(1);
+    			$orders = Order::where('store_id',$store_id)->where('status_id',$status_id)->whereBetween('updated_at',[$date[0],$date[1]])->paginate(10);
     		}else{
-    			$orders = Order::where('store_id',$store_id)->where('status_id',$status_id)->where('type_id',$type_id)->whereBetween('updated_at',[$date[0],$date[1]])->paginate(1);
+    			$orders = Order::where('store_id',$store_id)->where('status_id',$status_id)->where('type_id',$type_id)->whereBetween('updated_at',[$date[0],$date[1]])->paginate(10);
     		}
     		$date = implode(' - ',$date);
     	}else{
     		$search = 3;
-    		$orders = Order::where('store_id',$store_id)->orderBy('created_at','desc')->paginate(1);
+    		$orders = Order::where('store_id',$store_id)->orderBy('created_at','desc')->paginate(10);
     	}
     	
     	return view('orders.shop',compact('stores','types','orders','store','status_list','now','search','date','status_id','type_id','store_id'));
@@ -284,8 +286,13 @@ class OrderController extends Controller
         session_start();
         $orders = Order::find($id);
         $fields = $orders->fields()->get();
-        dump($fields);
-        return view('orders.show',compact('orders'));
+        foreach ($fields as $key => $field) {
+           $time = $field->pivot->time;
+           $place_num = $field->pivot->place_num;
+           $field['time'] = $time;
+           $field['place_num'] = $place_num;
+        }
+        return view('orders.show',compact('orders','fields'));
     }
 
     /**
@@ -307,9 +314,97 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    //协助核销订单
+    public function update(Request $request, Order $order)
     {
-        
+        $month_start = date('Y-m-01',time()); //本月的一号
+        $store_id = $order->store_id;
+
+        if($order->status_id == 1){
+            return response()->json([
+                'errcode' => '2',
+                'errmsg' => '该订单已经被核销,不能再进行此操作'
+            ],200);
+        }else{
+             if($order->status_id != 3){
+                //订单状态不是 已完成
+                 return response()->json([
+                    'errcode' => '2',
+                    'errmsg' => '该订单还未完成，不能进行此操作'
+                 ],200);
+            }else{
+
+                  //核销订单
+                    
+                //开启事务
+                DB::beginTransaction();
+                    //创建订单的最新状态
+                $order_status = OrderStatus::create([
+                    'order_id' => $order->id,
+                    'status_id' => 1,
+                    'store_id' => $order->store_id,
+                ]);
+
+                if(!$order_status){
+                        DB::rollBack();
+                        return response()->json([
+                            'errcode' => 2,
+                            'errmsg' => '核销订单失败',
+                        ],200);
+                    }
+
+                    //修改订单的状态
+                $order_update = $order->update([
+                    'status_id' => '1',
+                ]); 
+
+                if(!$order_update){
+                        DB::rollBack();
+                        return response()->json([
+                            'errcode' => 2,
+                            'errmsg' => '核销订单失败',
+                        ],200);
+                    }
+                    //修改账单
+               
+                $bill = Bill::where('store_id',$store_id)->where('time_start',$month_start)->first();
+                $new_bill = $bill->update([
+                    'total' => $bill->total + $order->total,
+                    'collection' => $bill->collection + $order->collection,
+                    'balance' => $bill->balance + $order->balance,    
+                ]);
+                if(!$new_bill){
+                        DB::rollBack();
+                        return response()->json([
+                           'errcode' => 2,
+                           'errmsg' => '核销订单失败', 
+                        ],200);
+                    }
+
+               $fields = $order->fields()->get();//该订单包含的商品
+                        //修改商品的状态为 正常
+                    foreach ($fields as $key => $field) {
+                        $res = $field->update([
+                            'switch' => '',
+                        ]);
+                        if(!$res){
+                            DB::rollBack();
+                            return response()->json([
+                                'errcode' => 2,
+                                'errmsg' => '核销订单失败', 
+                            ],200);
+                        }
+                    }
+
+                    //提交事务
+                    DB::commit(); 
+
+            }            
+        }
+        return response()->json([
+                'errcode' => '1',
+                'errmsg' => '订单核销成功'
+             ],200);
     }
 
     /**

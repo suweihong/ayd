@@ -8,15 +8,15 @@
 	@include('_messages')
 	@include('store._first',['shadow'=>2,'store_id'=>$store->id])
 	@include('store._third',['shadow'=>2,'store'=>$store,'sale'=>1,'type_id'=>$type_id])
-	@include('store._fourth',['shadow'=>1,'store_id'=>$store->id,'switch'=>0,'now'=>$now,'type_id=>$type_id','date'=>2])
+	@include('store._fourth',['shadow'=>1,'store_id'=>$store->id,'switch'=>0,'now'=>$now,'type_id=>$type_id','date'=>2,'store_id'=>$store->id])
 	<div class="storesale_data">
-		<a @if($week == 1) class="active" @endif href="{{ route('fields.create') }}?week=1&type_id={{$type_id}}">星期一</a>
-		<a @if($week == 2) class="active" @endif href="{{route('fields.create')}}?week=2&type_id={{$type_id}}" >星期二</a>
-		<a @if($week == 3) class="active" @endif href="{{route('fields.create')}}?week=3&type_id={{$type_id}}">星期三</a>
-		<a @if($week == 4) class="active" @endif href="{{route('fields.create')}}?week=4&type_id={{$type_id}}">星期四</a>
-		<a @if($week == 5) class="active" @endif href="{{route('fields.create')}}?week=5&type_id={{$type_id}}">星期五</a>
-		<a @if($week == 6) class="active" @endif href="{{route('fields.create')}}?week=6&type_id={{$type_id}}">星期六</a>
-		<a @if($week == 7) class="active" @endif href="{{route('fields.create')}}?week=7&type_id={{$type_id}}">星期日</a>
+		<a @if($week == 1) class="active" @endif href="{{ route('fields.create') }}?week=1&type_id={{$type_id}}&store_id={{$store->id}}">星期一</a>
+		<a @if($week == 2) class="active" @endif href="{{route('fields.create')}}?week=2&type_id={{$type_id}}&store_id={{$store->id}}" >星期二</a>
+		<a @if($week == 3) class="active" @endif href="{{route('fields.create')}}?week=3&type_id={{$type_id}}&store_id={{$store->id}}">星期三</a>
+		<a @if($week == 4) class="active" @endif href="{{route('fields.create')}}?week=4&type_id={{$type_id}}&store_id={{$store->id}}">星期四</a>
+		<a @if($week == 5) class="active" @endif href="{{route('fields.create')}}?week=5&type_id={{$type_id}}&store_id={{$store->id}}">星期五</a>
+		<a @if($week == 6) class="active" @endif href="{{route('fields.create')}}?week=6&type_id={{$type_id}}&store_id={{$store->id}}">星期六</a>
+		<a @if($week == 7) class="active" @endif href="{{route('fields.create')}}?week=7&type_id={{$type_id}}&store_id={{$store->id}}">星期日</a>
 	</div>
 	<table class="table_btn">
 		<tr>

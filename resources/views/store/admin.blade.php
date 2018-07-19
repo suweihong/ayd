@@ -15,13 +15,20 @@
 				@if($store->mp_user)
 					<input type="text" class="form_name_ipt"  placeholder="奥方体育馆" name="account" value="{{ old('account',$store->mp_user->account) }}">
 				@else
-					<input type="text" class="form_name_ipt"  placeholder="请设置账号" name="account" value="{{ old('account') }}">
+					<input type="text" class="form_name_ipt"  placeholder="请设置账号（手机号）" name="account" value="{{ old('account') }}">
 				@endif
 			</div>
 			<div class="form_name">
 				<span class="form_name_n">密码</span>
-				<input type="password" class="form_name_ipt"  placeholder="**********" name="password"  value="{{ old('password') }}">	
+
+				
+				@if($store->mp_user)	
+					<input type="password" class="form_name_ipt"  placeholder="******" name="password"  disabled="disabled" value="{{ old('password') }}">
 					<u style="color: #30a5ff;cursor: pointer;" onclick="rePassword({{$store->mp_user->id}})">重置为：1235456</u>
+				@else
+					<input type="password" class="form_name_ipt"  placeholder="请输入6位数字" name="password"  value="{{ old('password') }}">
+					<u style="color: #30a5ff;cursor: pointer;" onclick="rePassword('aaa')">重置为：1235456</u>
+				@endif
 			</div>
 			<a href="javascript:document.form.submit();" class="form_name_submitn">保存</a>
 		</form>

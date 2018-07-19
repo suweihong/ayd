@@ -9,6 +9,9 @@ use App\Models\Place;
 use App\Models\StoreType;
 use App\Models\Field;
 
+
+
+
 class FieldsController extends Controller
 {
     /**
@@ -19,7 +22,7 @@ class FieldsController extends Controller
     public function index(Request $request)
     {
         session_start();
-        $store_id = $_SESSION['store_id'];
+        $store_id = $request->store_id;
         $store = Store::find($store_id);
         $type_id = $request->type_id;
         $item_id = $request->item_id ?? 1;
@@ -76,7 +79,8 @@ class FieldsController extends Controller
     public function create(Request $request)
     {
         session_start();
-        $store_id = $_SESSION['store_id'];
+        // $store_id = $_SESSION['store_id'];
+        $store_id = $request->store_id;
         $store = Store::find($store_id);
 
         $type_id = $request->type_id;
@@ -99,6 +103,7 @@ class FieldsController extends Controller
                             ->where('type_id',$type_id)
                             ->where('item_id','1')
                             ->first();
+
           //运动品类营业的  开始时间
         if($store_hours){
             $hours = $store_hours->hours;
@@ -107,11 +112,14 @@ class FieldsController extends Controller
         }else{
             $start_time = 0;
         }
+
             //读取所有价格
-            $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
+            $new_prices = Field::where('item_id',1)->where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
+            
 
-            $prices = $new_prices->groupBy('time')->sort();
+            $prices = $new_prices->groupBy('time')->sortBy('time');
 
+            
             return view('sale.price_week',compact('store','type_id','start_time','types','week','now','prices'));
 
     }
@@ -129,7 +137,7 @@ class FieldsController extends Controller
           foreach ($update_price as $key => $value) {
             $fields = Field::find($key);
             $time = $fields->time;
-            $date_fields = Field::where('place_id',$fields->place_id)->where('time',$time)->where('date',$request->date)->first();
+            $date_fields = Field::where('item_id',1)->where('place_id',$fields->place_id)->where('time',$time)->where('date',$request->date)->first();
             if($date_fields){
               $date_fields->update([
                   'price' => $value,
@@ -143,6 +151,7 @@ class FieldsController extends Controller
                 'date' => $request->date,
                 'price' => $value,
                 'switch' => 3,
+                'item_id' => 1,
                 ]);
             }
 
@@ -176,7 +185,8 @@ class FieldsController extends Controller
     {
 
         session_start();
-        $store_id = $_SESSION['store_id'];
+        // $store_id = $_SESSION['store_id'];
+        $store_id = $request->store_id;
         $store = Store::find($store_id);
   
         $type_id = $request->type_id;
@@ -224,14 +234,14 @@ class FieldsController extends Controller
         }
 
         //读取所有价格
-          $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('date',$date)->orderBy('place_id','asc')->get();
+          $new_prices = Field::where('item_id',1)->where('store_id',$store_id)->where('type_id',$type_id)->where('date',$date)->orderBy('place_id','asc')->get();
 
         if($new_prices->isEmpty()){
 
-            $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
+            $new_prices = Field::where('item_id',1)->where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
 
         }else{
-             $price_week = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
+             $price_week = Field::where('item_id',1)->where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
              //将 星期价格 替换为 日期的价格
             foreach ($price_week as $key => $value) {
                foreach ($new_prices as $k => $v) {
@@ -243,7 +253,7 @@ class FieldsController extends Controller
             }
             $new_prices = $price_week;
         }
-        $prices = $new_prices->groupBy('time')->sort();
+        $prices = $new_prices->groupBy('time')->sortBy('time');
 
         return view('sale.price_date',compact('store','type_id','start_time','types','now','prices','date'));
     }
@@ -257,14 +267,61 @@ class FieldsController extends Controller
     //添加场地
     public function store(Request $request)
     {
-        if($request->type_id == 0){
+        $store_id = $request->store_id;
+        $type_id = $request->type_id;
+        if($type_id == 0){
             return back()->with('warning','请先添加运动品类');
         }else{
-            Place::create([
-                'store_id' => $request->store_id,
-                'type_id' => $request->type_id,
-            ]);
-            return back();
+             //该店铺 该运动品类 的营业时间
+            $hours = StoreType::where('store_id',$store_id)
+                            ->where('type_id',$type_id)
+                            ->where('item_id','1')
+                            ->first();
+              //运动品类营业的  开始时间
+            if($hours){
+                $hours = $hours->hours;
+                if($hours){
+                  $store_hours = explode('-', $hours);
+                  $start_time = (int)substr($store_hours[0],0,strrpos($store_hours[0],':')); 
+                  $end_time = (int)substr($store_hours[1],0,strrpos($store_hours[1],':'));
+                 $place =  Place::create([
+                      'store_id' => $request->store_id,
+                      'type_id' => $request->type_id,
+                  ]);
+                 $new_hours = [];
+                  for ($i=$start_time; $i < $end_time; $i++) { 
+                      array_push($new_hours,$i);//添加元素
+                  }
+                  //添加  该场地 对应的 商品
+                  $fields = [];
+                  $weeks = [1,2,3,4,5,6,7];
+
+                        foreach ($new_hours as $ke => $new_hour) {
+                           foreach ($weeks as $k => $week) {
+                               $fields[$ke][$k]['place_id'] = $place->id;
+                               $fields[$ke][$k]['time'] = $new_hour;
+                               $fields[$ke][$k]['week'] = $week;
+                               $fields[$ke][$k]['store_id'] = $store_id;
+                               $fields[$ke][$k]['type_id'] = $request->type_id;
+                                $fields[$ke][$k]['price'] = 9999;
+                                $fields[$ke][$k]['item_id'] = 1;
+
+                           }
+                        }
+                        $new_fields = [];
+                      foreach ($fields as $key => $value) {
+                        foreach ($value as $k => $v) { 
+                          $new_fields[] = $v;
+                        }
+                     }
+                     
+                     $fields = Field::insert($new_fields);
+                     return back()->with('success','场地添加成功');
+                }else{
+                  return back()->with('warning','请先设置营业时间');
+                }
+                
+            }
         }
     }
 
@@ -279,7 +336,7 @@ class FieldsController extends Controller
     public function show(Request $request,$id)
     {
         session_start();
-        $store_id = $_SESSION['store_id'];
+        $store_id = $request->store_id;
         $store = Store::find($store_id);
 
         $type_id = $request->type_id;
@@ -315,9 +372,9 @@ class FieldsController extends Controller
             $start_time = 0;
         }
        //读取所有价格
-        $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
+        $new_prices = Field::where('item_id',1)->where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
 
-        $prices = $new_prices->groupBy('time')->sort();
+        $prices = $new_prices->groupBy('time')->sortBy('time');
 
 
         return view('sale.switch_week',compact('store','type_id','start_time','types','week','now','prices'));
@@ -327,7 +384,7 @@ class FieldsController extends Controller
     public function switch_date(Request $request)
     {
         session_start();
-        $store_id = $_SESSION['store_id'];
+        $store_id = $request->store_id;
         $store = Store::find($store_id);
   
         $type_id = $request->type_id;
@@ -376,14 +433,13 @@ class FieldsController extends Controller
         }
 
         //读取所有价格
-          $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('date',$date)->orderBy('place_id','asc')->get();
+          $new_prices = Field::where('item_id',1)->where('store_id',$store_id)->where('type_id',$type_id)->where('date',$date)->orderBy('place_id','asc')->get();
 
         if($new_prices->isEmpty()){
-
-            $new_prices = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
+            $new_prices = Field::where('item_id',1)->where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
 
         }else{
-             $price_week = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
+             $price_week = Field::where('item_id',1)->where('store_id',$store_id)->where('type_id',$type_id)->where('week',$week)->orderBy('place_id','asc')->get();
              //将 星期价格 替换为 日期的价格
             foreach ($price_week as $key => $value) {
                foreach ($new_prices as $k => $v) {
@@ -398,7 +454,8 @@ class FieldsController extends Controller
             }
             $new_prices = $price_week;
         }
-        $prices = $new_prices->groupBy('time')->sort();
+        $prices = $new_prices->groupBy('time')->sortBy('time');
+
 
        
         return view('sale.switch_date',compact('store','type_id','start_time','types','now','prices'));
@@ -413,32 +470,37 @@ class FieldsController extends Controller
     //修改 场地 开关状态
     public function edit(Request $request,$id)
     {
-       
 
+        $now = date('Y-m-d 00:00:00',time());
         $date = $request->date;
         if($date){
-            $field = $request->field;
-            $place_id = $field['place_id'];
-            $time = $field['time'];
-            $price = $field['price'];
-            $switch = $field['switch'];
-            $store_id = $field['store_id'];
-            $type_id = $field['type_id'];
-            
-            if(!$switch){
+            $field = Field::find($id);
+            $switch = $field->switch;
+            $place_id = $field->place_id;
+            $time = $field->time;
+            $price = $field->price;
+            $store_id = $field->store_id;
+            $type_id = $field->type_id;
+            $field_date = $field->date;
+
+            if($switch == 3 || $switch == ''){
               $switch = 1;
             }elseif($switch == 1){
               $switch = '';
             }else{
               $switch = 2;
+              $order = $field->order()->where('order_date','>=',$now)->first();
+
+              return $order->id;
+             
             }
-            // return $switch;
+
             //该日期的数据
-            $fields = Field::where('place_id',$place_id)->where('time',$time)->where('date',$date)->first();
+            $fields = Field::where('item_id',1)->where('place_id',$place_id)->where('time',$time)->where('date',$date)->first();
             if($fields){
               $fields->update(['switch' => $switch]);
             }else{
-              Field::create([
+               Field::create([
                 'place_id' => $place_id,
                 'time' => $time,
                 'date' => $date,
@@ -446,8 +508,10 @@ class FieldsController extends Controller
                 'switch' => $switch,
                 'type_id' => $type_id,
                 'store_id' => $store_id,
+                'item_id' => 1,
                 ]);
             }
+
             return $switch;
           }else{
             $fields = Field::find($id);
@@ -459,6 +523,8 @@ class FieldsController extends Controller
                 $new_switch = '';
             }else{
                 $new_switch = 2;
+                $order = $fields->order()->where('order_date','>=',$now)->first();
+                return $order->id;
             }
             $fields->switch = $new_switch;
             $fields->save();
@@ -487,10 +553,12 @@ class FieldsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //删除场地
     public function destroy(Request $request,$id)
     {
-        $place = Place::find($id);
-        $place -> delete();
-        return 1;
+      $place = Place::find($id);
+      $place->delete();//删除场地
+      $place->fields()->delete();//删除场地对应的商品
+      return 1;
     }
 }

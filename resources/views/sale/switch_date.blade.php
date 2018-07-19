@@ -7,7 +7,7 @@
 	<div class="con_right storesale">
 		@include('store._first',['shadow'=>2,'store_id'=>$store->id])
 		@include('store._third',['shadow'=>3,'store'=>$store,'sale'=>4,'type_id'=>$type_id])
-		@include('store._fourth',['shadow'=>2,'switch'=>1,'now'=>$now,'type_id'=>$type_id,'date'=>1])
+		@include('store._fourth',['shadow'=>2,'switch'=>1,'now'=>$now,'type_id'=>$type_id,'date'=>1,'store_id'=>$store->id])
 		<table class="table_btn">
 		    <tr>
 				<th class="none"></th>
@@ -19,16 +19,16 @@
 					@endif
 				<?php endforeach ?>
 			</tr>
-			<?php foreach ($prices as $key => $price): ?>
+			@foreach ($prices as $key => $price)
 				<tr>
 					<td>{{$key}}:00-{{$key+1}}:00</td>
 					@foreach($price as $value)
-						<td onclick="dateSwitchClick({{$value}},{{$value->id}})"><input type="text" id="{{$value->id}}" value="{{$value->price}}" maxlength="8" disabled="disabled" @if($value->switch == '')class="table_btn_num bsck_fff" @elseif($value->switch == 2) class="table_btn_num bsck_green"
+						<td onclick="dateSwitchClick({{$value}},{{$value->id}})"><input type="text" id="{{$value->id}}" value="{{$value->price}}" maxlength="8" disabled="disabled" @if($value->switch == '' || $value->switch == 3)class="table_btn_num bsck_fff" @elseif($value->switch == 2) class="table_btn_num bsck_green"
 						@elseif($value->switch == 1) class="table_btn_num bsck_black"  @endif
 						/></td>
 					@endforeach
 				</tr>
-			<?php endforeach ?>
+			@endforeach
 		</table>
 		<div class="swichbox">
 			<p class="swichi_p1"></p>
@@ -52,7 +52,6 @@
 		}
 		//修改场地状态
 		function dateSwitchClick(field,id){
-			// console.log(type_id)
 			$.ajax({
 				url: '/fields/'+id+'/edit',
 				type: 'GET',
@@ -64,10 +63,10 @@
 					console.log(data);
 					if(data == ''){
 						$('#'+id).removeClass('bsck_black').addClass('bsck_fff')
-					}else if(data == 1){
+					}else if(data == 1 ){
 						$('#'+id).addClass('bsck_black').removeClass('bsck_fff')
 					}else{
-						location.href = "{{route('orders.show',1)}}";
+					 location.href = "/orders/"+data;
 					}
 				}
 			})

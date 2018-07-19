@@ -44,7 +44,9 @@
 					'_token':'{{csrf_token()}}',
 				},
 				success : function(data){
-					$('#'+$('.message_del').attr('data_id')).remove()
+					console.log(data)
+					// $('#'+$('.message_del').attr('data_id')).remove()
+					location.reload();
 				}
 			})
 		})

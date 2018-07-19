@@ -67,7 +67,7 @@
 				</div>
 				<textarea rows="3" cols="20" class="form_name_txt" name="introduction">{{old('introduction',$store->introduction)}}</textarea>
 			</div>  
-			<a href="javascript:document.form.submit();" class="form_name_submit">更新场地信息</a>
+			<a href="javascript:document.form.submit();" class="form_name_submit">更店铺地信息</a>
 			<a href="{{ route('stores.index') }}" class="form_name_back">返回</a>
 		</form>
 	</div>

@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Store;
 use App\Models\Staff;
 
-use QrCode;
+use Log;
+use Overtrue\Socialite\User as SocialiteUser;
+
 
 class StaffController extends Controller
 {
@@ -33,10 +35,11 @@ class StaffController extends Controller
      */
     public function create()
     {
-        dump(22);
-        // QrCode::format('png')->size(100)->generate('http://www.baidu.com');
+        
+        session_start();
+        $store_id = $_SESSION['store_id'];
+        dump($store_id);
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -98,8 +101,23 @@ class StaffController extends Controller
     }
 
     //获取微信 用户信息
-    public function get_information()
-    {
-       return '添加成功！！！' ;
+    public function serve(Request $request)
+    { 
+        $user = [];
+        $user = new SocialiteUser([
+                'id' => array_get($user, 'openid'),
+                'name' => array_get($user, 'nickname'),
+                'nickname' => array_get($user, 'nickname'),
+                'avatar' => array_get($user, 'headimgurl'),
+                'email' => null,
+                'original' => [],
+                'provider' => 'WeChat',
+            ]);
+        session(['wechat.oauth_user.default' => $user]); // 同理，`default` 可以更换为您对应的其它配置名
+
+       $user = session('wechat.oauth_user'); // 拿到授权用户资料
+       dump(333);
+        dd($user);
+
     }
 }

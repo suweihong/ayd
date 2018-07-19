@@ -33,7 +33,7 @@ class LoginController extends Controller
                       $user->this_time = $this_time;
                       $user->save();
 
-                       session()->flash('success','登录成功');
+                       // session()->flash('success','登录成功');
                         return redirect('/');
                 }else{
                         session()->flash('warning','密码错误');
@@ -91,9 +91,6 @@ class LoginController extends Controller
           $orders = Order::all()->pluck('total'); 
           $total = $orders->sum();//默认销售总额
           $total_avg = floor($orders->avg() * 100) / 100;//默认平均单价
-           
-          $today_start = date('Y-m-d 00:00:00',time());//今天的开始时间
-          $today_end = date('Y-m-d 23:59:59',time());//今天的结束时间 
 
           $yday_start = date('Y-m-d 00:00:00',time()-24*60*60);//昨天开始的时间
 
@@ -103,7 +100,7 @@ class LoginController extends Controller
           
           if($time == 1){
                    //今日销售
-              $orders = Order::where('created_at','>=',$today_start)->where('created_at','<=',$today_end)->pluck('total');
+              $orders = Order::where('created_at','>=',$today_start)->where('created_at','<',$today_end)->pluck('total');
               $t_total = $orders->sum();
               $t_avg = floor($orders->avg()*100)/100;
           }elseif ($time == 2) {

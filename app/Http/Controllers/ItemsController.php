@@ -35,7 +35,7 @@ class ItemsController extends Controller
                 $store_type->save();
                 $places = $store->places()->where('type_id',$request->type_id)->orderBy('id','asc')->get();
                if($places->isEmpty()){
-                    return back()->withInput()->with('warning','请先添加场地');
+                    return back()->withInput()->with('success','营业时间设置成功，您可添加场地');
                }else{
 
                     $new_start = (int)substr($request->start_time,0,strrpos($request->start_time,':')); 
@@ -64,6 +64,7 @@ class ItemsController extends Controller
                                $fields[$key][$ke][$k]['store_id'] = $store_id;
                                $fields[$key][$ke][$k]['type_id'] = $request->type_id;
                                 $fields[$key][$ke][$k]['price'] = 9999;
+                                $fields[$key][$ke][$k]['item_id'] = 1;
 
                            }
                         }
@@ -138,6 +139,7 @@ class ItemsController extends Controller
                 'price' => $request->price,
                 'intro' => $request->intro,
                 'rule' => $request->rule,
+                'item_id' => 2,
              ]);
             }
             
@@ -168,7 +170,7 @@ class ItemsController extends Controller
     public function tickets_list(Request $request)
     {
         session_start();
-        $store_id = $_SESSION['store_id'];
+        $store_id = $request->store_id;
         $store = Store::find($store_id);
 
 
@@ -188,7 +190,7 @@ class ItemsController extends Controller
             }
         }
         //读取所有票卡
-        $tickets = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('date',null)->where('week',null)->orderBy('created_at','asc')->get();
+        $tickets = Field::where('store_id',$store_id)->where('type_id',$type_id)->where('item_id',2)->orderBy('created_at','asc')->get();
         return view('sale.ticket',compact('store','type_id','types','tickets'));
     }
     public function edit($id)
@@ -209,12 +211,12 @@ class ItemsController extends Controller
         $ticket = Field::find($id);
         if($ticket->switch == ''){
             $ticket->update([
-                'switch' => '1',
+                'switch' => '1',//停止销售
                 ]);
              return 1;
         }else{
             $ticket->update([
-                'switch' => '',
+                'switch' => '',//正常销售
                 ]);
             return 2;
         }

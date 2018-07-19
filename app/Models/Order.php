@@ -10,6 +10,7 @@ class Order extends Model
 {
     use SoftDeletes;
     protected $dates = ['date'];
+    protected $fillable = ['client_id','store_id','status_id','total','collection','balance','pay_id','phone','type_id','date'];
 
     //该订单的状态
     public function  status()
@@ -23,7 +24,7 @@ class Order extends Model
     public function new_status()
     {
     	return $this->status()
-    				->orderBy('id','desc')
+    				->orderBy('created_at','desc')
     				->first();
     }
 
@@ -36,8 +37,7 @@ class Order extends Model
     //获取该订单包括的商品
     public function fields()
     {
-    	return $this->belongsToMany('App\Models\Field')
-    				->withTimestamps();
+    	return $this->belongsToMany('App\Models\Field','field_order')->withPivot('place_num','time')->withTimestamps();
     }
     //该订单所属用户
     public function client()
