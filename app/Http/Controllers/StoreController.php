@@ -38,7 +38,11 @@ class StoreController extends Controller
         $store_type = $request->store_type; //店铺 锁定 或 正常
         $types_stores = [];//所有店铺的 运动品类
 
-        if($search_name == '' && $store_type != ''){
+        if($type_id){
+                //与该运动品类关联的店铺
+            $type = Type::find($type_id);
+            $stores = $type->stores()->orderBy('created_at','asc')->get()->unique();
+        }elseif($search_name == '' && $store_type != ''){
             return back()->with('warning','请填写完整的搜索内容');
         }elseif($search_name != '' && $store_type != ''){
 

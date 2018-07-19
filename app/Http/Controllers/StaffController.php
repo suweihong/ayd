@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Store;
 use App\Models\Staff;
 
-use Log;
-use Overtrue\Socialite\User as SocialiteUser;
+
 
 
 class StaffController extends Controller
@@ -100,24 +99,4 @@ class StaffController extends Controller
         ],200);
     }
 
-    //获取微信 用户信息
-    public function serve(Request $request)
-    { 
-        $user = [];
-        $user = new SocialiteUser([
-                'id' => array_get($user, 'openid'),
-                'name' => array_get($user, 'nickname'),
-                'nickname' => array_get($user, 'nickname'),
-                'avatar' => array_get($user, 'headimgurl'),
-                'email' => null,
-                'original' => [],
-                'provider' => 'WeChat',
-            ]);
-        session(['wechat.oauth_user.default' => $user]); // 同理，`default` 可以更换为您对应的其它配置名
-
-       $user = session('wechat.oauth_user'); // 拿到授权用户资料
-       dump(333);
-        dd($user);
-
-    }
 }
