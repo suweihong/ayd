@@ -99,4 +99,9 @@ class StaffController extends Controller
         ],200);
     }
 
+    public function information()
+    {
+        dump(666);
+    }
+
 }

@@ -36,7 +36,6 @@
 	    			<td>{{$complaint->kind->name}}</td>
 	    			<td>{{$complaint->check->name}}</td>
 	    			<td>
-	    			{{-- 	<button class="btn btn-danger btn-sm" onclick="btnClick({{$complaint->id}})">删除</button> --}}
 						<a href="{{route('complaints.show',[$type,$complaint->id])}}">查看详情</a>
 	    			</td>
 	    		</tr>

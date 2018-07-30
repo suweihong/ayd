@@ -175,7 +175,6 @@ class ItemsController extends Controller
 
 
         $type_id = $request->type_id;
-        // $item_id = $request->item_id ?? 1;
         $types = $store->types()->where('item_id',2)->orderBy('created_at','asc')->get();
         if(!$type_id){
             if(!$store->types()->get()->isEmpty()){

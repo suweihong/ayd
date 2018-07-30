@@ -18,7 +18,7 @@
 		</div>
 
 		<div class="store_divt">
-			<form method="post" action="{{ route('messages.store')}}"name='form'>
+			<form method="post" action="{{ route('messages.store')}}" name='form'>
 				@if($message)
 					<textarea class="texbox" name="reply_content" rows="10" cols="110">{{$message->content}}</textarea>
 				@else
@@ -28,7 +28,11 @@
 				
 				<input type="hidden" name="_token" value="{{csrf_token()}}">
 				<input type="hidden" name="id" value="{{$complaint->id}}">
-				<input type="hidden" name="mp_user_id" value="{{$complaint->mp_user_id}}">
+				@if($type == 1)
+					<input type="hidden" name="mp_user_id" value="{{$complaint->mp_user_id}}">
+				@else
+					<input type="hidden" name="client_id" value="{{$complaint->client_id}}">
+				@endif
 
 				<a class="btnorder_details" href="javascript:document.form.submit()" class="form_name_back">确认回复</a>
 			</form>

@@ -43,7 +43,6 @@ class AdvertisementController extends Controller
 
         $advertisement = Advertisement::create([
             'type' => $request->type,
-            'single' => $request->single,
             'img' => $request->img,
             'url' => $request->url,
             ]);
