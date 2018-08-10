@@ -31,7 +31,7 @@
 					    <option>净月区</option>
 					</select>  
 				<br>
-				<input type="text" class="form_name_address" name="address" placeholder="如xx街道xx号" value="{{ old('address',$store->address)}}" />
+				<input  type="text" class="form_name_address" name="address" placeholder="如xx街道xx号" value="{{ old('address',$store->address)}}" />
 				<br>
 				<input type="text" class="form_name_address" name='map' placeholder="地图名片地址" value="{{ old('map',$store->map_url)}}" />
 			</div> 
@@ -71,4 +71,5 @@
 			<a href="{{ route('stores.index') }}" class="form_name_back">返回</a>
 		</form>
 	</div>
+
 @stop

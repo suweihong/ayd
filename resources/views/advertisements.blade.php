@@ -10,7 +10,7 @@
 		<div class="in_pry1_item">
 			<div class="pic_pic">
 				<input type="file" class="addchuan file_main" id="file" style="display:none;" onchange="filechange(event)">
-				<img src=""  width="100%" id="img-change" class="file_mainImg">
+				<img src="img/pic.jpg"  width="100%" id="img-change" class="file_mainImg">
 				<!-- <input type="file" class="addchuan">
 				<img src="img/pic.jpg" width="100%"> -->	
 			</div>

@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Notifications\Notifiable;
+// use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Model
 {
-    use Notifiable;
+    // use Notifiable;
     // protected  $table = 'ayd_users';//这个就是你新表
 
     /**
@@ -24,7 +26,20 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    // protected $hidden = [
+    //     'password', 'remember_token',
+    // ];
+
+     use SoftDeletes;
+     //该用户的订单
+    public function orders()
+    {
+        return $this->hasMany('App\Models\Order');
+    }
+
+    //该用户拥有的评论
+    public function estimates()
+    {
+        return $this->hasMany('App\Models\Estimate');
+    }
 }

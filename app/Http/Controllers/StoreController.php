@@ -21,7 +21,7 @@ class StoreController extends Controller
      */
     public function index(Request $request)
     {
-        session_start();
+        // session_start();
             //手动分页
         $perPage = 10;//每页多少条数据
         if ($request->has('page')) {
@@ -90,7 +90,7 @@ class StoreController extends Controller
      */
     public function create()
     {
-        session_start();
+        // session_start();
        return view('store.create');
     }
 
@@ -160,7 +160,7 @@ class StoreController extends Controller
      */
     public function edit(Store $store)
     {
-        session_start();
+        // session_start();
         $time=1*51840000;
         setcookie(session_name(),session_id(),time()+$time,"/");
         $_SESSION['store_id']=$store->id;
@@ -234,4 +234,5 @@ class StoreController extends Controller
     {
        
     }
+
 }

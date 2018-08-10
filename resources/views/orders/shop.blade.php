@@ -58,8 +58,8 @@
 			        <td>{{$order->id}}</td>
 			        <td>{{$order->total}}</td>
 			        <td>{{$order->store->title}}【{{$order->type->name}}】</td>
-			        @if($order->client)
-			        	<td>{{$order->client->nick_name}}</td>
+			        @if($order->user)
+			        	<td>{{$order->user->nick_name}}</td>
 			        @else
 			        	<td></td>
 			        @endif

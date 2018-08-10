@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Estimate extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['id','store_id','client_id','content','enviroment','service','average','check_id'];
+    protected $fillable = ['id','store_id','user_id','content','enviroment','service','average','check_id'];
 
     //该评论所属店铺
     public function store()
@@ -18,9 +18,9 @@ class Estimate extends Model
     }
 
     //该评论所属用户
-    public function client()
+    public function user()
     {
-    	return $this->belongsTo('App\Models\Client');
+    	return $this->belongsTo('App\Models\User');
     }
 
 }

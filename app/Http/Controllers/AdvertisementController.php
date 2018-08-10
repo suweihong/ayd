@@ -16,9 +16,17 @@ class AdvertisementController extends Controller
      */
     public function index(Request $request)
     {
-        session_start();
-        // $advertisements = Advertisement::orderBy('created_at','desc')->get();
+        $type = $request->type;
+        // session_start();
+        // $ad_main = Advertisement::where('type',1)->orderBy('created_at','desc')->get();
+        // if($type == 2){
+        //     $ad = Advertisement::where('type',2)->orderBy('created_at','desc')->get();
+        // }else{
+        //     $ad = Advertisement::where('type',3)->orderBy('created_at','desc')->get();
+
+        // }
         return view('advertisements');
+        
     }
 
     /**
@@ -39,18 +47,76 @@ class AdvertisementController extends Controller
      */
     public function store(Request $request)
     {
-    
 
-        $advertisement = Advertisement::create([
-            'type' => $request->type,
-            'img' => $request->img,
-            'url' => $request->url,
-            ]);
-        if($advertisement){
-            return 1;
-        }else{
-            return 2;
+        $type = $request->type;
+        $imgs = $request->imgs;
+        $imgs = [
+            0 => [
+                'img' => '/img/adlist3.jpg',
+                'url' => 'http://wwww.baidu.com',
+            ],
+            1 => [
+                'img' => '/img/adlist4.jpg',
+                'url' => 'http://wwww.baidu.com',
+            ],
+            2 => [
+                'img' => '/img/adlist1.jpg',
+                'url' => 'http://wwww.baidu.com',
+            ],
+            3 => [
+                'img' => '/img/adlist2.jpg',
+                'url' => 'http://wwww.baidu.com',
+            ],
+        ];
+        $id = $request->id;//主广告位的图片id
+        $img = $request->img;//主广告位  单栏 的图片地址
+        $img = [
+                'img' => '/img/adlist3.jpg',
+                'url' => 'http://wwww.baidu.com',
+            ];
+        $url = $request->url;//主广告位的图片链接url
+        if($type == 1){
+            if(!$id){
+                $advertisement = Advertisement::create([
+                    'type' => $type,
+                    'img' => $img,
+                    'url' => $url,
+                 ]);
+            }else{
+                $advertisement = Advertisement::find($id);
+                $advertisement->update([
+                    'type' => $type,
+                    'img' => $img,
+                    'url' => $url,
+
+                ]);
+            }
+           
+        }else {
+            $ads = Advertisement::where('type',3)->orwhere('type',2)->get();
+            foreach ($ads as $key => $ad) {
+                $ad->delete();
+            }
+            if($type == 2){
+                foreach ($imgs as $ke => $i) {
+                    $advertisement = Advertisement::create([
+                    'type' => $type,
+                    'img' => $i['img'],
+                    'url' => $i['url'],
+                    ]);
+                }
+            }else{
+                $advertisement = Advertisement::create([
+                    'type' => $type,
+                    'img' => $img['img'],
+                    'url' => $img['url'],
+                    ]);
+            }
+            
+            
         }
+
+        
     }
 
     /**

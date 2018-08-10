@@ -18,7 +18,7 @@ class ItemsController extends Controller
     //店铺 每个运动品类的 营业时间
     public function index(Request $request)
     {
-        session_start();
+        // session_start();
         $store_id = $_SESSION['store_id'];
         $store = Store::find($store_id);
         if($request->start_time == '' || $request->end_time == ''){
@@ -101,7 +101,7 @@ class ItemsController extends Controller
    //添加销售项目的页面
     public function create(Request $request)
     {
-        session_start();
+        // session_start();
         $store_id = $request->store_id;
         $types = Type::all();
         return view('sale.create',compact('store_id','types'));
@@ -169,7 +169,7 @@ class ItemsController extends Controller
     //票卡类 列表
     public function tickets_list(Request $request)
     {
-        session_start();
+        // session_start();
         $store_id = $request->store_id;
         $store = Store::find($store_id);
 

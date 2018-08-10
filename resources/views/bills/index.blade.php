@@ -54,7 +54,11 @@
 		    @foreach($bills as $key => $bill)
 			    <tr>
 				    <td>{{$key+1}}</td>
-				    <td>{{$bill->store->title}}</td>
+				    @if($bill->store)
+				    	<td>{{$bill->store->title}}</td>
+				    @else
+				    	<td>{{$bill->store}}</td>
+				    @endif
 				    <td>{{$bill->time_start}} 至 {{$bill->time_end}}</td>
 				    <td>{{$bill->total}}</td>
 				    <td>{{$bill->collection}}</td>

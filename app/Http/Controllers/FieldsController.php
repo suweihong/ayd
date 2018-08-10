@@ -21,7 +21,7 @@ class FieldsController extends Controller
      */
     public function index(Request $request)
     {
-        session_start();
+        // session_start();
         $store_id = $request->store_id;
         $store = Store::find($store_id);
         $type_id = $request->type_id;
@@ -78,7 +78,7 @@ class FieldsController extends Controller
      //价格配置页 按星期
     public function create(Request $request)
     {
-        session_start();
+        // session_start();
         $store_id = $request->store_id;
         $store = Store::find($store_id);
 
@@ -183,7 +183,7 @@ class FieldsController extends Controller
     public function price_date(Request $request)
     {
 
-        session_start();
+        // session_start();
         // $store_id = $_SESSION['store_id'];
         $store_id = $request->store_id;
         $store = Store::find($store_id);
@@ -283,10 +283,11 @@ class FieldsController extends Controller
                   $store_hours = explode('-', $hours);
                   $start_time = (int)substr($store_hours[0],0,strrpos($store_hours[0],':')); 
                   $end_time = (int)substr($store_hours[1],0,strrpos($store_hours[1],':'));
-                 $place =  Place::create([
+                  $place =  Place::create([
                       'store_id' => $request->store_id,
                       'type_id' => $request->type_id,
                   ]);
+                  // dump($place->id);
                  $new_hours = [];
                   for ($i=$start_time; $i < $end_time; $i++) { 
                       array_push($new_hours,$i);//添加元素
@@ -295,15 +296,22 @@ class FieldsController extends Controller
                   $fields = [];
                   $weeks = [1,2,3,4,5,6,7];
 
+                  // $all_places = Place::where('store_id',$store_id)->where('type_id',$type_id)->get();
+                  // dump($all_places);
+
                         foreach ($new_hours as $ke => $new_hour) {
                            foreach ($weeks as $k => $week) {
+                            // foreach ($all_places as $kk => $all_place) {
                                $fields[$ke][$k]['place_id'] = $place->id;
+                               // $fields[$ke][$k]['place_num'] = $kk+1;
                                $fields[$ke][$k]['time'] = $new_hour;
                                $fields[$ke][$k]['week'] = $week;
                                $fields[$ke][$k]['store_id'] = $store_id;
                                $fields[$ke][$k]['type_id'] = $request->type_id;
-                                $fields[$ke][$k]['price'] = 9999;
-                                $fields[$ke][$k]['item_id'] = 1;
+                               $fields[$ke][$k]['price'] = 9999;
+                               $fields[$ke][$k]['item_id'] = 1;
+                            // }
+                               
 
                            }
                         }
@@ -313,11 +321,13 @@ class FieldsController extends Controller
                           $new_fields[] = $v;
                         }
                      }
-                     
+                     // dump($new_fields);
                      $fields = Field::insert($new_fields);
-                     return back()->with('success','场地添加成功');
+                     // dump(555);
+                     // return back()->with('success','场地添加成功');
                 }else{
-                  return back()->with('warning','请先设置营业时间');
+                  // dump(222);
+                  // return back()->with('warning','请先设置营业时间');
                 }
                 
             }
@@ -334,7 +344,7 @@ class FieldsController extends Controller
     //按星期开关场地
     public function show(Request $request,$id)
     {
-        session_start();
+        // session_start();
         $store_id = $request->store_id;
         $store = Store::find($store_id);
 
@@ -382,7 +392,7 @@ class FieldsController extends Controller
     //按日期开关场地
     public function switch_date(Request $request)
     {
-        session_start();
+        // session_start();
         $store_id = $request->store_id;
         $store = Store::find($store_id);
   
@@ -558,6 +568,7 @@ class FieldsController extends Controller
       $place = Place::find($id);
       $place->delete();//删除场地
       $place->fields()->delete();//删除场地对应的商品
+      
       return 1;
     }
 }

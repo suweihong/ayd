@@ -15,9 +15,9 @@ class ComplaintController extends Controller
      */
     public function index($type)
     {
-        session_start();
+        // session_start();
        if($type == 1){
-        $complaints = Complaint::where('client_id',null)->paginate(3);
+        $complaints = Complaint::where('user_id',null)->paginate(3);
        }else{
         $complaints = Complaint::where('mp_user_id',null)->paginate(3);
        }
@@ -53,7 +53,7 @@ class ComplaintController extends Controller
      */
     public function show(Request $request,$type,$id)
     {
-        session_start();
+        // session_start();
         $complaint = Complaint::find($id);//反馈  投诉 信息
         $message = $complaint->messages()->orderBy('created_at','desc')->first(); // 回复的内容
         return view('complaints.show',compact('complaint','type','message'));

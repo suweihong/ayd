@@ -15,7 +15,7 @@ class EstimatesController extends Controller
      */
     public function index(Request $request)
     {
-        session_start();
+        // session_start();
         if($request->check_id){
             $check_id = $request->check_id;
             //所有商家的评价

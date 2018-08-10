@@ -12,7 +12,7 @@
 			<h3>最近评价</h3>
 			@foreach($estimates as $estimate)
 				<div class="eavbox" style="font-size:20px">
-					<span>{{$estimate->client->nick_name}}</span>
+					<span>{{$estimate->user->nick_name}}</span>
 					<span style="color:#F00">{{$estimate->average}}分</span>
 					<p class="evalua">{{$estimate->content}}</p>
 					<p class="evatime">{{$estimate->created_at}}</p>

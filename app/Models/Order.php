@@ -10,7 +10,7 @@ class Order extends Model
 {
     use SoftDeletes;
     protected $dates = ['date'];
-    protected $fillable = ['client_id','store_id','status_id','total','collection','balance','pay_id','phone','type_id','date'];
+    protected $fillable = ['user_id','store_id','status_id','total','collection','balance','pay_id','phone','type_id','date'];
 
     //该订单的状态
     public function  status()
@@ -40,9 +40,9 @@ class Order extends Model
     	return $this->belongsToMany('App\Models\Field','field_order')->withPivot('place_num','time')->withTimestamps();
     }
     //该订单所属用户
-    public function client()
+    public function user()
     {
-        return $this->belongsTo('App\Models\Client');
+        return $this->belongsTo('App\Models\User');
     }
     //该订单的支付方式
     public function payment()

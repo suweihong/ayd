@@ -8,12 +8,12 @@
 		@include('_messages')
 		<h1 class="in_title">订单查询 -- 按用户</h1>
 	
-		<form action="/client/orders" name="form">
+		<form action="/user/orders" name="form">
 			<div class="search">
 				<input type="hidden" name="search" value="4">
-				<select class="searchstyle" name="client_id">
-					@foreach($clients as $clien)
-						<option value="{{$clien->id}}" @if($clien->id == $client_id) selected="selected" @endif>{{$clien->nick_name}}</option>
+				<select class="searchstyle" name="user_id">
+					@foreach($users as $clien)
+						<option value="{{$clien->id}}" @if($clien->id == $user_id) selected="selected" @endif>{{$clien->nick_name}}</option>
 					@endforeach
 				</select>
 				
@@ -33,14 +33,14 @@
 				</select>
 				<a href="javascript:document.form.submit();" class="search_jian">检索</a>
 				@if($search == 5)
-					<a href="/export/orders?client_id={{$client->id}}" class="search_add_out">导出当前数据</a>
+					<a href="/export/orders?user_id={{$user->id}}" class="search_add_out">导出当前数据</a>
 				@elseif($search == 4)
-					<a href="/export/orders?client_id={{$client->id}}&date={{$date}}&status_id={{$status_id}}&type_id={{$type_id}}&search=4" class="search_add_out">导出当前数据</a>
+					<a href="/export/orders?user_id={{$user->id}}&date={{$date}}&status_id={{$status_id}}&type_id={{$type_id}}&search=4" class="search_add_out">导出当前数据</a>
 				@endif
 			</div>
 		</form>
 		
-		<p class="changguan">用户：{{$client->nick_name}}</p>
+		<p class="changguan">用户：{{$user->nick_name}}</p>
 		<table border="1" class="table_line">
 		    <tr>
 		        <th>序号</th>
@@ -59,7 +59,7 @@
 				    <td>{{$order->id}}</td>
 				    <td>{{$order->total}}</td>
 				    <td>{{$order->store->title}}【{{$order->type->name}}】</td>
-				    <td>{{$order->client->nick_name}}</td>
+				    <td>{{$order->user->nick_name}}</td>
 				    <td>{{$order->created_at}}</td>
 				    <td>{{$order->new_status()->name}}</td>
 				    <td><a href="{{route('orders.show',$order->id)}}">查看详情</a></td>
@@ -67,6 +67,6 @@
 		    @endforeach
 		   
 		</table>
-		{{$orders->appends(['status_id'=>$status_id,'client_id'=>$client->id,'search'=>$search,'date'=>$date,'type_id'=>$type_id])->render()}}
+		{{$orders->appends(['status_id'=>$status_id,'user_id'=>$user->id,'search'=>$search,'date'=>$date,'type_id'=>$type_id])->render()}}
 	</div>
 @stop

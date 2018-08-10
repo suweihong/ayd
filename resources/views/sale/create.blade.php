@@ -19,7 +19,7 @@
 			 	<label>体育类型</label>
 				<select class="formr-control" name="type_id">
 				   	@foreach($types as $type)
-						<option value="{{$type->id}}">{{$type->name}}</option>
+						<option value="{{$type->id}}" >{{$type->name}}</option>
 					@endforeach
 				</select>
 			</div>

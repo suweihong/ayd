@@ -31,7 +31,7 @@
 				@if($type == 1)
 					<input type="hidden" name="mp_user_id" value="{{$complaint->mp_user_id}}">
 				@else
-					<input type="hidden" name="client_id" value="{{$complaint->client_id}}">
+					<input type="hidden" name="user_id" value="{{$complaint->user_id}}">
 				@endif
 
 				<a class="btnorder_details" href="javascript:document.form.submit()" class="form_name_back">确认回复</a>

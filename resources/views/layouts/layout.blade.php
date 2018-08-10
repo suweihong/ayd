@@ -70,7 +70,7 @@
 	            	</li>
 	            	<li class="hover">
 			        	<img src="/img/you.png" class="menuimg">
-			            <a href="/client/orders" class="menutxt">按用户</a>
+			            <a href="/user/orders" class="menutxt">按用户</a>
 	            	</li>
 	            </ul>
 	        </li>

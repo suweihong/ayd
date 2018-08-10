@@ -30,7 +30,7 @@
 	    			@if($type == 1)
 	    				<td>{{$complaint->store->title}}</td>
 	    			@else
-	    				<td>{{$complaint->client->nick_name}}</td>
+	    				<td>{{$complaint->user->nick_name}}</td>
 	    				<td>{{$complaint->store->title}}</td>
 	    			@endif
 	    			<td>{{$complaint->kind->name}}</td>

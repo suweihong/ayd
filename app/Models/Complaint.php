@@ -9,14 +9,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Complaint extends Model
 {
 		use SoftDeletes;
-        protected $fillable = ['kind_id','store_id','client_id','mp_user_id','check_id','environment','service','average'];
+        protected $fillable = ['kind_id','store_id','user_id','mp_user_id','check_id','environment','service','average'];
 
     /**
      * 该投诉所属用户。（反向关联）
      */
-    public function client()
+    public function user()
     {
-        return $this->belongsTo('App\Models\Client');
+        return $this->belongsTo('App\Models\User');
     }
 
       /**

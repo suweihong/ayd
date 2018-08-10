@@ -44,7 +44,7 @@ class MessageController extends Controller
         }else{
             Message::create([
                 'mp_user_id' => $request->mp_user_id,
-                'client_id' => $request->client_id,
+                'user_id' => $request->user_id,
                 'complaint_id' => $request->id,
                 'title' => '回复商家反馈',
                 'content' => $request->reply_content,             
