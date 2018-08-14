@@ -180,7 +180,7 @@ class StoreController extends Controller
         $store_imgs = [];
         $imgs = ['1223','43423','34534'];
 
-        if(!$request->title || !$request->address || !$request->map || !$request->phone || !$request->introduction){
+        if(!$request->title || !$request->address || !$request->map || !$request->phone || !$request->introduction || !$request->lng || !$request->lat){
             return back()->withInput()->with('warning','请填写完整内容');
 
         }else{
@@ -193,6 +193,8 @@ class StoreController extends Controller
                 'phone' => $request->phone,
                 'logo' => $request->logo,
                 'introduction' => $request->introduction,
+                'lng' => $request->lng,
+                'lat' => $request->lat,
                 ]);
 
             //修改店内实拍图
