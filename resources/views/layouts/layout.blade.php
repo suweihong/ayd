@@ -9,10 +9,14 @@
 	<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon"/>
 	<link href="/css/style.css" type="text/css" media="screen" rel="stylesheet"/>
 	<link href="/font/iconfont.css" type="text/css" media="screen" rel="stylesheet"/>
+	<link rel="stylesheet" href="/css/cropper.min.css">
 	<script src="/js/laydate/laydate.js"></script>
 	<script src="/js/jquery-2.1.3.min.js"></script>
 	<script src="/js/ajaxfileupload.js"></script>
 	<script src="http://cdn.staticfile.org/webuploader/0.1.0/webuploader.min.js"></script>
+	<script src="/js/cropper.min.js"></script>
+	<script type="text/javascript" src='/js/lrz.js'></script>
+	<script type="text/javascript" src='/js/exif.js'></script>
 </head>
 <body>
 	<div class="topper">
@@ -20,7 +24,7 @@
 			奥运动管理员平台
 		</div>
 		<div class="topper_r">
-			<a href="javascript:;">上次登录：{{$_SESSION['last_time']}}</a>
+			
 			<a href="/logout">退出登录</a>
 		</div>
 	</div>

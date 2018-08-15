@@ -18,8 +18,8 @@
 // Route::get('/home', 'HomeController@index')->name('home');
 
 //核心系统登录
-Route::any('login','LoginController@login')->name('login');
-Route::get('logout','LoginController@logout');
+// Route::any('login','LoginController@login')->name('login');
+// Route::get('logout','LoginController@logout');
 
 Route::get('/','LoginController@index')->middleware('auth');//首页
 Route::resource('advertisements','AdvertisementController'); //广告
