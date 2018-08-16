@@ -35,17 +35,35 @@
 			<br>
 		</div> 
 		<div class="form_name">
+				<span class="form_name_n">经度</span>
+				<input type="text" class="form_name_ipt" name="lng" placeholder="125.3942800" value="{{ old('lng') }}">
+			</div>
+			<div class="form_name">
+				<span class="form_name_n">纬度</span>
+				<input type="text" class="form_name_ipt" name="lat" placeholder="43.8038980" value="{{ old('lat') }}">
+			</div>
+		<div class="form_name">
 			<span class="form_name_n">联系电话 </span>
 			<input type="text" class="form_name_ipt" placeholder="" name="phone" value="{{ old('phone') }}" />
 		</div>
+		
 		<div class="form_name">
 			<div class="form_name_n form_name_p1">
 				<span>场馆简介 </span>
 			</div>
-			<textarea rows="3" cols="20" class="form_name_txt" name="introduction" value="{{ old('introduction') }}"></textarea>
+
+			<textarea name="introduction" rows="3" cols="20" class="form_name_txt" id="content" style="height:500px;width: 500px;">{{old('introduction')}}</textarea>
+			{{-- <textarea rows="3" cols="20" class="form_name_txt" name="introduction" value="{{ old('introduction') }}"></textarea> --}}
 		</div>  
 		<a href="javascript:document.form.submit();" class="form_name_submit" >新增</a>
 		<a href="{{ route('stores.index') }}" class="form_name_back">返回</a>
 	</form>
 </div>
+
+<script type="text/javascript">
+
+    var editor = new wangEditor("content"); 
+    editor.create()
+</script>
+
 @stop

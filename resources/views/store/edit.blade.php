@@ -97,11 +97,19 @@
 				<div class="form_name_n form_name_p1">
 					<span class="changlast">场馆简介</span>
 				</div>
-				<textarea rows="3" cols="20" class="form_name_txt" name="introduction">{{old('introduction',$store->introduction)}}</textarea>
+				
+					<textarea name="introduction" rows="3" cols="20" class="form_name_txt" id="content" style="height:500px;width: 500px;">{{old('introduction',$store->introduction)}}</textarea>
+				
 			</div>  
 			<a href="javascript:document.form.submit();" class="form_name_submit">更店铺地信息</a>
 			<a href="{{ route('stores.index') }}" class="form_name_back">返回</a>
 		</form>
 	</div>
+
+	<script type="text/javascript">
+
+    var editor = new wangEditor("content"); 
+    editor.create()
+</script>
 
 @stop

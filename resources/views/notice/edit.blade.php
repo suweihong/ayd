@@ -6,7 +6,7 @@
 		
 	@include('_messages')
 
-	<h1 class="in_title">添加公告</h1>
+	<h1 class="in_title">修改公告</h1>
 	<form method="post" class="store_base_msg" action="{{route('notices.update',$notice->id)}}" name="form">
 		<input type="hidden" name="_method" value="PUT">
     	<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -19,9 +19,8 @@
 			
 			<span class="form_name_n">公告内容：</span>
 		    <div>
-		    	<textarea name="content" id="content" style="height:500px;">
-		    		<p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
-		    	</textarea>
+		    	
+		    	<textarea name="content" id="content" style="height:500px;">{{old('content',$notice->content)}}</textarea>
 		    </div>
 
 		</div>

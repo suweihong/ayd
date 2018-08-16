@@ -103,13 +103,14 @@ class StoreController extends Controller
     public function store(Request $request)
     {
 
-        if(!$request->title || !$request->address || !$request->map || !$request->phone || !$request->introduction){
+
+        if(!$request->title || !$request->address || !$request->map || !$request->phone || !$request->introduction  || !$request->lng || !$request->lat ){
             return back()->withInput()->with('warning','请填写完整内容');
 
         }else{
             //添加店铺
              $store = Store::create([
-            // 'neighbourhood_id' => $request->neighbourhood_id,
+           
             'title' => $request->title,
             'address' => $request->address,
             'map_url' => $request->map,
@@ -175,19 +176,16 @@ class StoreController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Store $store)
-    {
-        
-        
-        // $store_imgs = [];
-        // $imgs = ['1223','43423','34534'];
+    { 
 
-        if(!$request->title || !$request->address || !$request->map || !$request->phone || !$request->introduction || !$request->lng || !$request->lat || !$request->time || !$request->place || !$request->wifi || !$request->bath || !$request->rent || !$request->sell ){
+        $request->logo = '/img/adlist3.jpg';
+        if(!$request->title || !$request->address || !$request->map || !$request->phone || $request->introduction == '<p><br></p>' || !$request->lng || !$request->lat || !$request->time || !$request->place || !$request->wifi || !$request->bath || !$request->rent || !$request->sell ){
             return back()->withInput()->with('warning','请填写完整内容');
 
         }else{
              //修改店铺基本信息
             $res = $store->update([
-                // 'neighbourhood_id' => $request->neighbourhood_id,
+
                 'title' => $request->title,
                 'address' => $request->address,
                 'map_url' => $request->map,
@@ -203,29 +201,6 @@ class StoreController extends Controller
                 'rent' => $request->rent, 
                 'sell' => $request->sell,
                 ]);
-
-            //修改店内实拍图
-            // $imgss = $store->imgs;
-            // if(!$imgss->isEmpty()){
-            //     foreach($imgss as $img){
-            //         $img->delete();
-            //     }
-            // }
-            // foreach ($imgs as $key => $img) {
-            //    $store_imgs[$key]['store_id'] = $store->id;
-            //    $store_imgs[$key]['img'] = $img;
-            //    $store_imgs[$key]['created_at'] = $time;
-            // }
-       
-            // $store_imgs = Store_img::insert($store_imgs);
-
-            // if($store_imgs){
-            //    session()->flash('success','修改成功');
-            //    return redirect(route('stores.index'));
-            // }else{
-            //     session()->flash('warning','修改失败');
-            //     return redirect(route('stores.edit',$store->id));
-            // }
 
             if($res){
                session()->flash('success','修改成功');

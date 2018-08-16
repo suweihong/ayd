@@ -16,7 +16,7 @@ class CheckLogin
     public function handle($request, Closure $next)
     {
         session_start();
-        if(!$_SESSION['ayduser']){
+        if(empty($_SESSION['ayduser'])){
             return redirect('/login');
         }
         return $next($request);

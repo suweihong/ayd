@@ -64,8 +64,8 @@ class LoginController extends Controller
       $user->last_time = $user->this_time;
       $user->save();
 
-      $_SESSION['ayduser']='';
-       // unset($_SESSION['ayduser']);
+      // $_SESSION['ayduser']='';
+       unset($_SESSION['ayduser']);
         // Auth::logout();
         return redirect('/login');
 

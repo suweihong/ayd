@@ -3101,7 +3101,7 @@ _e(function (E, $) {
 
     // 上传图片的配置
     // server地址
-    E.config.uploadImgUrl = '/wangEditor/upload2.php';
+    E.config.uploadImgUrl = 'http://call.aydsport.com/wangEditorUpload/index.php';
     // 超时时间
     E.config.uploadTimeout = 20 * 1000;
     // 用于存储上传回调事件

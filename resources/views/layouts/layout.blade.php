@@ -30,7 +30,7 @@
 			奥运动管理员平台
 		</div>
 		<div class="topper_r">
-			
+			<a href="javascript:;">上次登录：{{$_SESSION['last_time']}}</a>
 			<a href="/logout">退出登录</a>
 		</div>
 	</div>

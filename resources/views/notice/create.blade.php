@@ -14,11 +14,18 @@
 		<div class="form_name">
 			{{-- <h2>wangEditor example</h2> --}}
 			<span class="form_name_n">公告内容：</span>
-			{!! we_field('wangeditor', 'content', '') !!}
-			{!! we_config('wangeditor') !!}
+			<div>
+		    	<textarea name="content" id="content" style="height:500px;">{{old('content')}}</textarea>
+		    </div>
 		</div>
 		<a href="javascript:document.form.submit()" class="notice_submit">提交</a>
 		<a href="{{route('notices.index')}}" class="notice_back">返回</a>
 	</form>
 </div>
+
+<script type="text/javascript">
+
+    var editor = new wangEditor("content"); 
+    editor.create()
+</script>
 @stop

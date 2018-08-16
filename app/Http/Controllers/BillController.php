@@ -112,7 +112,10 @@ class BillController extends Controller
                 // ]);
                 $fields = $order->fields()->where('switch',2)->get();
                 foreach ($fields as $key => $field) {
-                    # code...
+                    // $field->update([
+                    //     'switch' => '',
+                    // ]);
+                    dump($field);
                 }
                 dump($fields);
             }
