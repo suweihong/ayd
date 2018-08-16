@@ -51,7 +51,7 @@
 					<img src="/img/pic.jpg" width="100%" name="logo" >
 				</div>
 			</div> 
-			<div class="form_name">
+			<div class="form_name" style="display:none">
 				<div class="form_name_n form_name_p1">
 					<span class="chang2">场馆实拍</span>
 				</div>
@@ -68,6 +68,30 @@
 			<div class="form_name">
 				<span class="form_name_n">联系电话 </span>
 				<input type="text" class="form_name_ipt" placeholder="" name="phone" value="{{ old('phone',$store->phone) }}" />
+			</div>
+			<div class="form_name">
+				<span class="form_name_n">营业时间 </span>
+				<input type="text" class="form_name_ipt" placeholder="9:00-20:00" name="time" value="{{ old('time',$store->time) }}" />
+			</div>
+			<div class="form_name">
+				<span class="form_name_n">场地设施 </span>
+				<input type="text" class="form_name_ipt" placeholder="地板、地胶" name="place" value="{{ old('place',$store->place) }}" />
+			</div>
+			<div class="form_name">
+				<span class="form_name_n">网络服务 </span>
+				<input type="text" class="form_name_ipt" placeholder="WiFi" name="wifi" value="{{ old('wifi',$store->wifi) }}" />
+			</div>
+			<div class="form_name">
+				<span class="form_name_n">洗浴设施 </span>
+				<input type="text" class="form_name_ipt" placeholder="有" name="bath" value="{{ old('bath',$store->bath) }}" />
+			</div>
+			<div class="form_name">
+				<span class="form_name_n">租借服务 </span>
+				<input type="text" class="form_name_ipt" placeholder="球具" name="rent" value="{{ old('rent',$store->rent) }}" />
+			</div>
+			<div class="form_name">
+				<span class="form_name_n">服务卖品 </span>
+				<input type="text" class="form_name_ipt" placeholder="水吧、球具" name="sell" value="{{ old('sell',$store->sell) }}" />
 			</div>
 			<div class="form_name">
 				<div class="form_name_n form_name_p1">

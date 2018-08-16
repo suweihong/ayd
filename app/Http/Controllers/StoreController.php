@@ -176,16 +176,17 @@ class StoreController extends Controller
      */
     public function update(Request $request, Store $store)
     {
-        $time = now();
-        $store_imgs = [];
-        $imgs = ['1223','43423','34534'];
+        
+        
+        // $store_imgs = [];
+        // $imgs = ['1223','43423','34534'];
 
-        if(!$request->title || !$request->address || !$request->map || !$request->phone || !$request->introduction || !$request->lng || !$request->lat){
+        if(!$request->title || !$request->address || !$request->map || !$request->phone || !$request->introduction || !$request->lng || !$request->lat || !$request->time || !$request->place || !$request->wifi || !$request->bath || !$request->rent || !$request->sell ){
             return back()->withInput()->with('warning','请填写完整内容');
 
         }else{
              //修改店铺基本信息
-            $store->update([
+            $res = $store->update([
                 // 'neighbourhood_id' => $request->neighbourhood_id,
                 'title' => $request->title,
                 'address' => $request->address,
@@ -195,24 +196,38 @@ class StoreController extends Controller
                 'introduction' => $request->introduction,
                 'lng' => $request->lng,
                 'lat' => $request->lat,
+                'time' => $request->time, 
+                'place' => $request->place, 
+                'wifi' => $request->wifi,
+                'bath' => $request->bath, 
+                'rent' => $request->rent, 
+                'sell' => $request->sell,
                 ]);
 
             //修改店内实拍图
-            $imgss = $store->imgs;
-            if(!$imgss->isEmpty()){
-                foreach($imgss as $img){
-                    $img->delete();
-                }
-            }
-            foreach ($imgs as $key => $img) {
-               $store_imgs[$key]['store_id'] = $store->id;
-               $store_imgs[$key]['img'] = $img;
-               $store_imgs[$key]['created_at'] = $time;
-            }
+            // $imgss = $store->imgs;
+            // if(!$imgss->isEmpty()){
+            //     foreach($imgss as $img){
+            //         $img->delete();
+            //     }
+            // }
+            // foreach ($imgs as $key => $img) {
+            //    $store_imgs[$key]['store_id'] = $store->id;
+            //    $store_imgs[$key]['img'] = $img;
+            //    $store_imgs[$key]['created_at'] = $time;
+            // }
        
-            $store_imgs = Store_img::insert($store_imgs);
+            // $store_imgs = Store_img::insert($store_imgs);
 
-            if($store_imgs){
+            // if($store_imgs){
+            //    session()->flash('success','修改成功');
+            //    return redirect(route('stores.index'));
+            // }else{
+            //     session()->flash('warning','修改失败');
+            //     return redirect(route('stores.edit',$store->id));
+            // }
+
+            if($res){
                session()->flash('success','修改成功');
                return redirect(route('stores.index'));
             }else{

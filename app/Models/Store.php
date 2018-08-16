@@ -11,7 +11,7 @@ class Store extends Model
     //
     	use SoftDeletes;
 
-        protected $fillable = ['id', 'neighbourhood_id','mp_user_id','balance','title','name','address','map_url','phone','switch','check_id','logo','introduction'];
+        protected $fillable = ['id', 'neighbourhood_id','mp_user_id','balance','title','name','address','map_url','phone','switch','check_id','logo','introduction','time','place','wifi','bath','sell','rent'];
 
 
     //该商店拥有的所有       商品

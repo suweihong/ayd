@@ -465,9 +465,10 @@ class FieldsController extends Controller
         }
         $prices = $new_prices->groupBy('time')->sortBy('time');
 
-
-       
-        return view('sale.switch_date',compact('store','type_id','start_time','types','now','prices'));
+        // dump($now);
+        $day7 = date('Y-m-d',time()+6*24*60*60);
+        // dump($day7);
+        return view('sale.switch_date',compact('store','type_id','start_time','types','now','prices','day7','date'));
     }
 
     /**
@@ -483,6 +484,7 @@ class FieldsController extends Controller
         $now = date('Y-m-d 00:00:00',time());
         $date = $request->date;
         if($date){
+              //按日期 修改状态
             $field = Field::find($id);
             $switch = $field->switch;
             $place_id = $field->place_id;
@@ -499,7 +501,8 @@ class FieldsController extends Controller
             }else{
               $switch = 2;
               $order = $field->order()->where('order_date','>=',$now)->first();
-
+              // $order = $field->order()->first();
+              //    return $order;
               return $order->id;
              
             }
@@ -523,7 +526,9 @@ class FieldsController extends Controller
 
             return $switch;
           }else{
+              //按星期 修改状态
             $fields = Field::find($id);
+
             $switch = $fields->switch;
 
             if($switch == ''){
@@ -532,7 +537,8 @@ class FieldsController extends Controller
                 $new_switch = '';
             }else{
                 $new_switch = 2;
-                $order = $fields->order()->where('order_date','>=',$now)->first();
+                $order = $fields->order()->where('order_date','>=',$now)->where('status_id',4)->first();
+                // $order = $fields->order()->first();
                 return $order->id;
             }
             $fields->switch = $new_switch;
