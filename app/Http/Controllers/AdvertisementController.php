@@ -17,7 +17,6 @@ class AdvertisementController extends Controller
     public function index(Request $request)
     {
         $type = $request->type;
-<<<<<<< HEAD
 
         // session_start();
 
@@ -28,8 +27,7 @@ class AdvertisementController extends Controller
         //     $ad = Advertisement::where('type',3)->orderBy('created_at','desc')->get();
 
         // }
-        return view('advertisements');
-=======
+
       
         $ads_main = Advertisement::where('type',1)->orderBy('created_at','desc')->get();
         if($type == 2){
@@ -39,7 +37,7 @@ class AdvertisementController extends Controller
 
         }
         return view('advertisements',compact('ads_main','ads'));
->>>>>>> 15e848f2960ace7615df0e64a9e43a329e9c4eb2
+
         
     }
 
