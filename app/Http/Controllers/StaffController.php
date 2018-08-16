@@ -18,7 +18,7 @@ class StaffController extends Controller
      */
     public function index(Request $request)
     {
-        session_start();
+        // session_start();
         // $store_id = $_SESSION['store_id'];
      
         $store_id = $request->store_id;
@@ -35,7 +35,7 @@ class StaffController extends Controller
     public function create()
     {
         
-        session_start();
+        // session_start();
         $store_id = $_SESSION['store_id'];
         dump($store_id);
     }
@@ -97,6 +97,11 @@ class StaffController extends Controller
             'errcode' => '100',
             'errmsg' => '删除成功'
         ],200);
+    }
+
+    public function information()
+    {
+        dump(666);
     }
 
 }

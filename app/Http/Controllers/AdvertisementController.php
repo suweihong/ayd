@@ -17,7 +17,9 @@ class AdvertisementController extends Controller
     public function index(Request $request)
     {
         $type = $request->type;
-        session_start();
+
+        // session_start();
+
         // $ad_main = Advertisement::where('type',1)->orderBy('created_at','desc')->get();
         // if($type == 2){
         //     $ad = Advertisement::where('type',2)->orderBy('created_at','desc')->get();

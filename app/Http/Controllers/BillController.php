@@ -20,7 +20,7 @@ class BillController extends Controller
      */
     public function index(Request $request)
     {
-        session_start();
+        // session_start();
         $now = date('Y-m-d',time());//默认的日期
         $bill_date = $request->bill_date;
         $date = $request->date;
@@ -59,6 +59,7 @@ class BillController extends Controller
     //添加账单 
     public function create(Request $request)
     {
+            //定时任务
    
     $start=date('Y-m-01 00:00:00',time());//获取指定月份的第一天
     $month_start = date('Y-m-01',time()); //本月的一号
@@ -87,14 +88,24 @@ class BillController extends Controller
                $bill->update([
                     'time_end' => $last_end,
                ]);
-}
+            }
 
        }
-       if($res){
-        dump(11);
-       }else{
-        dump(22);
-       }
+       // if($res){
+       //  dump(11);
+       // }else{
+       //  dump(22);
+       // }
+
+
+            //每天 修改 失效订单的状态
+        $day_start = date('m-d 00:00:00',time());//每天的0点
+        $now = date('Y-m-d H:i:s',time());//现在的时间
+        // if($now = $day_start){
+            $orders = Order::where('status_id',4)->get();
+            dump($orders);
+        // }
+
 
                     //核销订单后 修改账单数据
        // if($request->exit = 1){

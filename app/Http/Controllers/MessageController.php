@@ -36,7 +36,7 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-    
+       
         if($request->reply_content == ''){
 
             session()->flash('warning','请填写完整内容');
@@ -44,6 +44,7 @@ class MessageController extends Controller
         }else{
             Message::create([
                 'mp_user_id' => $request->mp_user_id,
+                'user_id' => $request->user_id,
                 'complaint_id' => $request->id,
                 'title' => '回复商家反馈',
                 'content' => $request->reply_content,             
@@ -57,7 +58,12 @@ class MessageController extends Controller
             ]);
 
             session()->flash('success','回复成功');
-            return redirect('/types/1/complaints');
+            if($request->mp_user_id){
+                 return redirect('/types/1/complaints');
+            }else{
+                 return redirect('/types/2/complaints');
+            }
+           
         }
     }
 

@@ -21,7 +21,7 @@ class StoreController extends Controller
      */
     public function index(Request $request)
     {
-        session_start();
+        // session_start();
             //手动分页
         $perPage = 10;//每页多少条数据
         if ($request->has('page')) {
@@ -38,7 +38,11 @@ class StoreController extends Controller
         $store_type = $request->store_type; //店铺 锁定 或 正常
         $types_stores = [];//所有店铺的 运动品类
 
-        if($search_name == '' && $store_type != ''){
+        if($type_id){
+                //与该运动品类关联的店铺
+            $type = Type::find($type_id);
+            $stores = $type->stores()->orderBy('created_at','asc')->get()->unique();
+        }elseif($search_name == '' && $store_type != ''){
             return back()->with('warning','请填写完整的搜索内容');
         }elseif($search_name != '' && $store_type != ''){
 
@@ -86,7 +90,7 @@ class StoreController extends Controller
      */
     public function create()
     {
-        session_start();
+        // session_start();
        return view('store.create');
     }
 
@@ -156,7 +160,7 @@ class StoreController extends Controller
      */
     public function edit(Store $store)
     {
-        session_start();
+        // session_start();
         $time=1*51840000;
         setcookie(session_name(),session_id(),time()+$time,"/");
         $_SESSION['store_id']=$store->id;
@@ -176,7 +180,7 @@ class StoreController extends Controller
         $store_imgs = [];
         $imgs = ['1223','43423','34534'];
 
-        if(!$request->title || !$request->address || !$request->map || !$request->phone || !$request->introduction){
+        if(!$request->title || !$request->address || !$request->map || !$request->phone || !$request->introduction || !$request->lng || !$request->lat){
             return back()->withInput()->with('warning','请填写完整内容');
 
         }else{
@@ -189,6 +193,8 @@ class StoreController extends Controller
                 'phone' => $request->phone,
                 'logo' => $request->logo,
                 'introduction' => $request->introduction,
+                'lng' => $request->lng,
+                'lat' => $request->lat,
                 ]);
 
             //修改店内实拍图
@@ -230,4 +236,5 @@ class StoreController extends Controller
     {
        
     }
+
 }

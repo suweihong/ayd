@@ -29,7 +29,7 @@
 				@endif
 			<?php endforeach ?>
 		</tr>
-		<?php foreach ($prices as $key => $price): ?>
+		@foreach ($prices as $key => $price)
 			<tr>
 				<td>{{$key}}:00-{{$key+1}}:00</td>
 				@foreach($price as $value)
@@ -38,7 +38,7 @@
 				</td>
 				@endforeach
 			</tr>
-		<?php endforeach ?>
+		@endforeach
 	</table>
 	<a href="javascript:;" class="updata_salenum" onclick="btnPrice()">更新销售数据</a>
 </div>

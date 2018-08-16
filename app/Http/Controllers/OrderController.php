@@ -14,7 +14,7 @@ use App\Models\Status;
 use App\Models\OrderStatus;
 use App\Models\Payment;
 use App\Models\Store;
-use App\Models\Client;
+use App\Models\User;
 use App\Models\Bill;
 
 class OrderController extends Controller
@@ -26,7 +26,7 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        session_start();
+        // session_start();
         $types = Type::all();
         $status_list = Status::all();
         $payment = Payment::all();
@@ -82,17 +82,17 @@ class OrderController extends Controller
         	}
     	}elseif($state == 100){
     		//今日下单数
-    		$orders = Order::where('created_at','>=',$today_start)->where('created_at','<',$today_end)->orderBy('created_at','desc')->paginate(1);
+    		$orders = Order::where('created_at','>=',$today_start)->where('created_at','<',$today_end)->where('status_id','!=',0)->orderBy('created_at','desc')->paginate(5);
     	}elseif($state == 1){
     		//今日核销数
-    		$orders = Order::where('updated_at','>=',$today_start)->where('updated_at','<',$today_end)->orderBy('updated_at','desc')->where('status_id',1)->paginate(1);
+    		$orders = Order::where('updated_at','>=',$today_start)->where('updated_at','<',$today_end)->orderBy('updated_at','desc')->where('status_id',1)->paginate(5);
     	}elseif($state == 2){
     		//今日退单数
-    		$orders = Order::where('updated_at','>=',$today_start)->where('updated_at','<',$today_end)->orderBy('updated_at','desc')->where('status_id',2)->paginate(1);
+    		$orders = Order::where('updated_at','>=',$today_start)->where('updated_at','<',$today_end)->orderBy('updated_at','desc')->where('status_id',2)->paginate(5);
     	}else{  
         	$search = 2;
         	$state = 1000;
-        	$orders = Order::orderBy('created_at','desc')->paginate(5);
+        	$orders = Order::orderBy('created_at','desc')->where('status_id','!=',0)->paginate(5);
      
 		}
     	return view('orders.index',compact('orders','types','status_list','now','payment','search','state','status','type_id','pay_id','order_id','date'));
@@ -105,7 +105,7 @@ class OrderController extends Controller
     //某店铺 的订单
     public function store_orders(Request $request)
     {
-    	session_start();
+    	// session_start();
     	$status_list = Status::all();//所有状态
     	$store_id = $request->store_id;//按店铺查找
     	$store = Store::find($store_id);
@@ -154,7 +154,7 @@ class OrderController extends Controller
     		}
     	}else{
     			$search = 2;
-    			$orders = Order::where('store_id',$store_id)->orderBy('created_at','desc')->paginate(1);
+    			$orders = Order::where('store_id',$store_id)->where('status_id','!=',0)->orderBy('created_at','desc')->paginate(5);
     		}	
     	
         return view('orders.store',compact('orders','store','store_types','status_list','now','store_id','search','status','type_id','order_id'));
@@ -163,14 +163,13 @@ class OrderController extends Controller
 
 
     //按  用户 查找订单
-    public function client_orders(Request $request)
+    public function user_orders(Request $request)
     {
-    	session_start();
-    	
-    	$clients = Client::all();
+    	// session_start();
+    	$users = User::all();
     	$status_list = Status::all();
-    	$client_id = $request->client_id ?? $clients[0]->id;
-    	$client = Client::find($client_id);
+    	$user_id = $request->user_id ?? $users[0]->id;
+    	$user = User::find($user_id);
     	$types = Type::all();
 
     	//默认 时间区间
@@ -191,19 +190,19 @@ class OrderController extends Controller
     		if($date == ''){
     			return back()->withInput()->with('warning','请填写完整的搜索信息');
     		}elseif($type_id == 0){
-    			$orders = Order::where('client_id',$client_id)->where('status_id',$status_id)->whereBetween('updated_at',[$date[0],$date[1]])->paginate(1);
+    			$orders = Order::where('user_id',$user_id)->where('status_id',$status_id)->whereBetween('updated_at',[$date[0],$date[1]])->paginate(1);
     		}else{
     		
-    			$orders = Order::where('client_id',$client_id)->where('status_id',$status_id)->where('type_id',$type_id)->whereBetween('updated_at',[$date[0],$date[1]])->paginate(1);
+    			$orders = Order::where('user_id',$user_id)->where('status_id',$status_id)->where('type_id',$type_id)->whereBetween('updated_at',[$date[0],$date[1]])->paginate(1);
     		}
     		$date = implode(' - ',$date);
     	}else{
     	
     		$search = 5;
-    		$orders = Order::where('client_id',$client_id)->paginate(1);
+    		$orders = Order::where('user_id',$user_id)->where('status_id','!=',0)->paginate(1);
     		
     	}
-    	return view('orders.client',compact('clients','types','client','orders','status_list','now','date','status_id','type_id','search','client_id'));
+    	return view('orders.user',compact('users','types','user','orders','status_list','now','date','status_id','type_id','search','user_id'));
        
        
     }
@@ -211,7 +210,7 @@ class OrderController extends Controller
     //按 商家  查 
     public function shop_orders(Request $request)
     {
-    	session_start();
+    	// session_start();
     	$stores = Store::all();
     	$status_list = Status::all();
     	$search = $request->search;//是否 为 查询
@@ -245,7 +244,7 @@ class OrderController extends Controller
     		$date = implode(' - ',$date);
     	}else{
     		$search = 3;
-    		$orders = Order::where('store_id',$store_id)->orderBy('created_at','desc')->paginate(10);
+    		$orders = Order::where('store_id',$store_id)->where('status_id','!=',0)->orderBy('created_at','desc')->paginate(10);
     	}
     	
     	return view('orders.shop',compact('stores','types','orders','store','status_list','now','search','date','status_id','type_id','store_id'));
@@ -259,7 +258,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        session_start();
+        // session_start();
         return view('orders.store');
     }
 
@@ -283,7 +282,7 @@ class OrderController extends Controller
     //订单详情
     public function show($id)
     {
-        session_start();
+        // session_start();
         $orders = Order::find($id);
         $fields = $orders->fields()->get();
         foreach ($fields as $key => $field) {
@@ -303,7 +302,7 @@ class OrderController extends Controller
      */
     public function edit($id) 
     {
-        session_start();
+        // session_start();
        
     }
 
@@ -326,7 +325,7 @@ class OrderController extends Controller
                 'errmsg' => '该订单已经被核销,不能再进行此操作'
             ],200);
         }else{
-             if($order->status_id != 3){
+             if($order->status_id != 4){
                 //订单状态不是 已完成
                  return response()->json([
                     'errcode' => '2',
@@ -431,7 +430,7 @@ class OrderController extends Controller
 
     	if($request->search == 1){
     		//搜索
-    		session_start();
+    		// session_start();
 	        $orders_list = $_SESSION['search_orders'];
     	}elseif($request->search == 2){
     		//按 商家  用户 查找
@@ -446,20 +445,20 @@ class OrderController extends Controller
     		// 按用户 搜索
     		$date = explode(' - ',$request->date); 
     		if($request->type_id == 0){
-    			$orders_list = Order::where('client_id',$request->client_id)->where('status_id',$request->status_id)->whereBetween('updated_at',[$date[0],$date[1]])->get();
+    			$orders_list = Order::where('user_id',$request->user_id)->where('status_id',$request->status_id)->whereBetween('updated_at',[$date[0],$date[1]])->get();
     		}else{
     		
-    			$orders_list = Order::where('client_id',$request->client_id)->where('status_id',$request->status_id)->where('type_id',$request->type_id)->whereBetween('updated_at',[$date[0],$date[1]])->get();
+    			$orders_list = Order::where('user_id',$request->user_id)->where('status_id',$request->status_id)->where('type_id',$request->type_id)->whereBetween('updated_at',[$date[0],$date[1]])->get();
     		}
-    	}elseif($request->client_id){
+    	}elseif($request->user_id){
     		//按 用户 查找订单
-    		$orders_list = Order::where('client_id',$request->client_id)->orderBy('created_at','desc')->get();
+    		$orders_list = Order::where('user_id',$request->user_id)->where('status_id','!=',0)->orderBy('created_at','desc')->get();
     	}elseif($request->store_id){
     		//某家 店铺 的订单
-    		$orders_list = Order::where('store_id',$request->store_id)->orderBy('created_at','desc')->get();
+    		$orders_list = Order::where('store_id',$request->store_id)->where('status_id','!=',0)->orderBy('created_at','desc')->get();
     	}elseif($state == 100){
     		//今日下单数
-    		$orders_list = Order::where('created_at','>=',$today_start)->where('created_at','<',$today_end)->get();
+    		$orders_list = Order::where('created_at','>=',$today_start)->where('status_id','!=',0)->where('created_at','<',$today_end)->get();
     	}elseif($state == 1){
     		//今日核销数
     		$orders_list = Order::where('updated_at','>=',$today_start)->where('updated_at','<',$today_end)->orderBy('updated_at','desc')->where('status_id',1)->get();
@@ -468,7 +467,7 @@ class OrderController extends Controller
     		$orders_list = Order::where('updated_at','>=',$today_start)->where('updated_at','<',$today_end)->orderBy('updated_at','desc')->where('status_id',2)->get();
     	}else{
     		//所有订单
-    		$orders_list = Order::orderBy('created_at','desc')->get();
+    		$orders_list = Order::where('status_id','!=',0)->orderBy('created_at','desc')->get();
     	}
 
     	if($orders_list->isEmpty()){
@@ -478,7 +477,7 @@ class OrderController extends Controller
 		       $orders[$key]['id'] = $order['id'];
 		       $orders[$key]['price'] = $order['total'];
 		       $orders[$key]['store'] = $order->store->title.'【'.$order->type->name.'】';
-		       $orders[$key]['client'] = $order->client->nick_name ;
+		       $orders[$key]['user'] = $order->user->nick_name ;
 		       $orders[$key]['time'] = (string)$order->created_at;
 		       $orders[$key]['status'] = $order->new_status()->name;
 	   		 }

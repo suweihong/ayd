@@ -17,7 +17,7 @@
 			@foreach($estimates as $estimate)
 				<div class="eavbox" id="{{$estimate->id}}">
 					<div class="xinxi">
-						<span>{{$estimate->client->nick_name}} </span>
+						<span>{{$estimate->user->nick_name}} </span>
 						<span class="evaluatenum">{{$estimate->average}}分</span>
 						<p class="evalua">{{$estimate->content}}</p>
 						<div class="div_evalua_btn">

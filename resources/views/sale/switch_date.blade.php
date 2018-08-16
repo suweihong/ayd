@@ -11,13 +11,13 @@
 		<table class="table_btn">
 		    <tr>
 				<th class="none"></th>
-				<?php foreach ($prices as $key => $price): ?>
+				@foreach ($prices as $key => $price)
 					@if($key == $start_time)
 						@foreach($price as $v)
 							<th>场地{{$loop->iteration}}{{$v->place_id}}</th>
 						@endforeach
 					@endif
-				<?php endforeach ?>
+				@endforeach
 			</tr>
 			@foreach ($prices as $key => $price)
 				<tr>

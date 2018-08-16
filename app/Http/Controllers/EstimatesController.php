@@ -15,7 +15,7 @@ class EstimatesController extends Controller
      */
     public function index(Request $request)
     {
-        session_start();
+        // session_start();
         if($request->check_id){
             $check_id = $request->check_id;
             //所有商家的评价
@@ -33,7 +33,6 @@ class EstimatesController extends Controller
             //指定商家的 评价
             $store_id = $request->store_id;
             $store = Store::find($store_id);
-            dump($store_id);
             $estimate_list = $store->estimates;
             $estimates = $store->estimates()->orderBy('created_at','desc')->paginate(1);
 
