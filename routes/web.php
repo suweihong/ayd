@@ -19,8 +19,10 @@
 
 
 //核心系统登录
+
 Route::any('login','LoginController@login');
 Route::get('logout','LoginController@logout');
+
 
 Route::group(['middleware'=>'check.login'],function(){
 	Route::get('/','LoginController@index');//首页

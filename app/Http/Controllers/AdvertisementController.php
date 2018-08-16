@@ -17,6 +17,17 @@ class AdvertisementController extends Controller
     public function index(Request $request)
     {
         $type = $request->type;
+
+        // session_start();
+
+        // $ad_main = Advertisement::where('type',1)->orderBy('created_at','desc')->get();
+        // if($type == 2){
+        //     $ad = Advertisement::where('type',2)->orderBy('created_at','desc')->get();
+        // }else{
+        //     $ad = Advertisement::where('type',3)->orderBy('created_at','desc')->get();
+
+        // }
+
       
         $ads_main = Advertisement::where('type',1)->orderBy('created_at','desc')->get();
         if($type == 2){
@@ -26,6 +37,7 @@ class AdvertisementController extends Controller
 
         }
         return view('advertisements',compact('ads_main','ads'));
+
         
     }
 
