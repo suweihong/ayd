@@ -18,10 +18,21 @@
 		<div class="form_name">
 			
 			<span class="form_name_n">公告内容：</span>
-			{!! we_field('wangeditor', 'content',$notice->content) !!}
-			{!! we_config('wangeditor') !!}
+		    <div>
+		    	<textarea name="content" id="content" style="height:500px;">
+		    		<p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
+		    	</textarea>
+		    </div>
+
 		</div>
 		<a href="javascript:document.form.submit()" class="notice_submit3">提交</a>
 	</form>
 </div>
+
+
+<script type="text/javascript">
+
+    var editor = new wangEditor("content"); 
+    editor.create()
+</script>
 @stop

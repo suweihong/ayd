@@ -88,6 +88,7 @@ class NoticeController extends Controller
      */
     public function update(Request $request, Message $notice)
     {
+        dd($request->content);
         if( $request->title == '' || $request->content == '<p><br></p>' ){
                 
             session()->flash('warning','请填写完整内容');
