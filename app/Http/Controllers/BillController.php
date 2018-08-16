@@ -99,11 +99,23 @@ class BillController extends Controller
 
 
             //每天 修改 失效订单的状态
-        $day_start = date('m-d 00:00:00',time());//每天的0点
+        $day_start = date('Y-m-d 00:00:00',time());//每天的0点
+        
         $now = date('Y-m-d H:i:s',time());//现在的时间
         // if($now = $day_start){
-            $orders = Order::where('status_id',4)->get();
-            dump($orders);
+            $orders = Order::where('status_id',4)->where('date','<',$day_start)->get();
+           
+            foreach($orders as $k=>$order){
+                dump($order->id);
+                // $order->update([
+                //     'status_id' => 3,
+                // ]);
+                $fields = $order->fields()->where('switch',2)->get();
+                foreach ($fields as $key => $field) {
+                    # code...
+                }
+                dump($fields);
+            }
         // }
 
 

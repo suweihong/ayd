@@ -23,7 +23,7 @@
 				<tr>
 					<td>{{$key}}:00-{{$key+1}}:00</td>
 					@foreach($price as $value)
-						<td onclick="dateSwitchClick({{$value}},{{$value->id}})"><input type="text" id="{{$value->id}}" value="{{$value->price}}" maxlength="8" disabled="disabled" @if($value->switch == '' || $value->switch == 3)class="table_btn_num bsck_fff" @elseif($value->switch == 2) class="table_btn_num bsck_green"
+						<td onclick="dateSwitchClick({{$value}},{{$value->id}})"><input type="text" id="{{$value->id}}" value="{{$value->price}}" maxlength="8" disabled="disabled" @if($value->switch == '' || $value->switch == 3)class="table_btn_num bsck_fff" @elseif($value->switch == 2) @if($day7 > $date ) class="table_btn_num bsck_green"@else class="table_btn_num bsck_fff" @endif
 						@elseif($value->switch == 1) class="table_btn_num bsck_black"  @endif
 						/></td>
 					@endforeach
@@ -66,6 +66,7 @@
 					}else if(data == 1 ){
 						$('#'+id).addClass('bsck_black').removeClass('bsck_fff')
 					}else{
+						console.log(data);
 					 location.href = "/orders/"+data;
 					}
 				}
